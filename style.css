@@ -190,6 +190,10 @@ pre code {
     padding: 8px;
 }
 
+li {
+    text-align: left;
+}
+
 li > p:first-child {
     margin-top: 4px;
     margin-bottom: 4px;
