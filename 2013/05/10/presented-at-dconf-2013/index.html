@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Presented at DConf 2013</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2013-05-10-presented-at-dconf-2013/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/03/31/progress-on-the-higgs-jit/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/05/15/turing-drawings-followup/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2013/05/10/presented-at-dconf-2013/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2013/05/10/presented-at-dconf-2013/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Presented at DConf 2013</h1>
+<div class="post_date">May 10th, 2013</div>
+</div>
+<p>Back in February, I <a href="http://pointersgonewild.com/2013/01/31/visiting-mozilla/">visited Mozilla</a> to present my research on dynamic language optimization and learn more about the architecture of the JIT compiler that powers Mozilla Firefox. The talk I gave at Mozilla was made <a href="https://air.mozilla.org/higgs-jit/">available online</a> and eventually linked on Reddit. This resulted in <a href="http://en.wikipedia.org/wiki/Andrei_Alexandrescu">Andrei Alexandrescu</a>, co-creator of the <a href="http://dlang.org/">D programming language</a> noticing my work and inviting me to present at <a href="http://dconf.org/talks/chevalier_boisvert.html">DConf 2013</a>. I accepted the invitation as this seemed like a great opportunity to get the word out about my research, network with programming language and compiler experts, and of course, to learn more about D. </p>
+<figure>
+<a href="img_20130503_162943.jpg">
+<img alt="D programming is serious business." src="img_20130503_162943.jpg">
+</a>
+<figcaption>D programming is serious business.</figcaption>
+</figure>
+<p>Last week, I had the pleasure of attending DConf. The conference was hosted at the Facebook HQ in Menlo Park, California. The talks gave me more insight into the D language and the philosophy behind its design. I was a little worried about my own talk, trying to fit 70 slides into 55 minutes and touching on many different subjects: dynamic languages, <a href="http://pointersgonewild.com/higgs/">Higgs</a>, my research, a small critique of D, and the potential use of a JIT compiler for D's <a href="http://giovanni.bajo.it/post/47209620364/compile-time-function-execution-in-d">Compile-Time Function Execution (CTFE)</a>. It seems I managed to thread it together pretty well in front of the audience, however; I ended up receiving several compliments. I agreed to have the talk filmed, and so a video should appear on YouTube in the next few days. In the meantime, the slides are available <a href="slides-maxime.pdf">here</a>. </p>
+<p>One of the things I touched on in my talk is the new approach I'm taking with the Higgs JIT. After running into some issues with tracing, I decided that a method JIT would make more sense, and so I spent a few days converting the Higgs JIT to be method-based instead; fortunately, this went surprisingly smoothly. I am planning on using a technique which should hopefully offer some of the same benefits as tracing, without the downsides. I call this technique context-driven block versioning. The idea is similar to that of procedure cloning, but done at a lower level (that of basic blocks). I plan on cloning/versioning block based on type information to remove much of the dispatch overhead. </p>
+<p>Higgs interfacing with xlib: </p>
+<figure>
+<a href="screenshot.jpg">
+<img alt="" src="screenshot.jpg">
+</a>
+</figure>
+<p>On a different front, Molly Everett is still helping me grow Higgs. She's completed the implementation of a Foreign Function Interface (FFI) and used this to create a user-friendly wrapper for the C stdio functions. We've updated the <a href="https://github.com/maximecb/Higgs/blob/master/README.md">README</a> file on github to explain how this API can be used. Our hope is to improve the FFI API itself and eventually provide wrappers for graphics and sound libraries. We'd also like to devise a procedure for people to request the inclusion of libraries and tests they wrote into Higgs using pull requests. </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

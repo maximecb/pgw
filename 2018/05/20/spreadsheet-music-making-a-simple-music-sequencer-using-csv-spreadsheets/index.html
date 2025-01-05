@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2018-05-20-spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2018/02/18/minimalism-in-programming/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2018/05/21/building-a-simple-self-driving-car-simulator/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets</h1>
+<div class="post_date">May 20th, 2018</div>
+</div>
+<p>On Friday night, I put together a little hack that I found quite amusing. It's a music sequencer that uses CSV spreadsheets to loop and sequence beats. It has the useful feature that you can save the spreadsheet, and it will periodically reload it, so that you can edit and jam with your sequences live. Best of all, it's around 100 lines of Python code, comments and all. I posted a video I recorded <a href="https://twitter.com/Love2Code/status/997840233730371584">on twitter</a>, and the reception was very positive, so I thought I would provide a short writeup, and make the <a href="https://gist.github.com/maximecb/f440c1db489177c1037ec4f158cf5e4f">source code available as a gist</a> for anyone interested. </p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/LQOFiC6YIvo?si=eyZUzDjkCJ3oX5U3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p> </p>
+<p>You might wonder why I wrote this program, besides the humorous and attention-grabbing aspects. Clearly, there are already a variety of sophisticated programs (DAWs, Digital Audio Workstations) such as Ableton Live out there which can do much more complex things. Part of the motivation is that I like to play with music programming, and by writing my own code to sequence music, I can write a program that will have exactly the workflow and features that I want. </p>
+<p>One of the things that I wanted to play with, here, was the ability to create melodies using only the notes in a given scale. Ableton Live Lite, or at least the version I have here, for all its powerful features, doesn't have a mode that will highlight a given scale (at least not without plug-ins). I think there is a lot of value in being able to write software with an interface that is fully customized for the things you want to play with, and in this case, writing a music sequencer is trivially easy, so why not? </p>
+<figure>
+<a href="img-4036.jpg">
+<img alt="Synth and mixer setup" src="img-4036.jpg">
+</a>
+<figcaption>Synth and mixer setup</figcaption>
+</figure>
+<p>The spreadsheet sequencer uses the <a href="https://mido.readthedocs.io/en/latest/">mido</a> package to send <a href="https://en.wikipedia.org/wiki/MIDI">MIDI</a> output to hardware synthesizers that I have at home, namely a Novation Bass Station II and an Arturia Drumbrute. These are directly connected to my Linux PC using USB. Note that you do not need to own hardware instruments to play with Python and MIDI. I play with hardware synths because I enjoy having physical knobs I can turn, but there are many <a href="http://www.vintagesynth.com/articles/5-free-software-synths-linux">free software programs</a> that will connect via the MIDI protocol, both synthesizers and samplers. </p>
+<p>It's also possible to use MIDI for input. There are devices called MIDI controllers which can connect to your computer via USB. These can be keyboard, or boards with physical knobs you can turn to adjust parameters as you jam live. You can try searching for MIDI controller on eBay if that's something that interests you. There are some used ones you can get for very cheap. </p>
+<p>To conclude, I will note that although I came up with the idea on my own, I <a href="http://cdm.link/2012/01/spreadsheet-as-music-tracker-sequencer-with-libreoffice-nee-openoffice/">wasn't the first</a> to think of using a spreadsheet program to sequence music. I hope that this post has encouraged you to explore your musical creativity, or just to program something fun :) </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

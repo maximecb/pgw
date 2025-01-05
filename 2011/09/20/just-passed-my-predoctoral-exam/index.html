@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Just Passed my Predoctoral Exam</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2011-09-20-just-passed-my-predoctoral-exam/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/09/11/predoctoral-exam/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/09/23/my-masters-research-just-in-time-specialization/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2011/09/20/just-passed-my-predoctoral-exam/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2011/09/20/just-passed-my-predoctoral-exam/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Just Passed my Predoctoral Exam</h1>
+<div class="post_date">September 20th, 2011</div>
+</div>
+<p>I just took (and passed :D) my predoctoral exam this morning. Surprisingly, practicing my oral presentation last week was more stressful than taking the exam today. Fortunately, things went rather smoothly. The judges seemed rather pleased overall, and I passed. A big administrative burden just got lifted off my back, and I should now be able to focus a little more on my research. Whew! </p>
+<p>The talk I gave was in French, but I am still <a href="predoc1.pdf">making the slides available</a> for those who might be interested (and able to read the romantic language). </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

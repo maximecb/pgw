@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Optimizing Global Value Numbering</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2011-10-07-optimizing-global-value-numbering/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/04/whats-next-for-tachyon/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/12/toying-with-microcontrollers-part-deux/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2011/10/07/optimizing-global-value-numbering/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2011/10/07/optimizing-global-value-numbering/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Optimizing Global Value Numbering</h1>
+<div class="post_date">October 7th, 2011</div>
+</div>
+<p>Among the few optimizations in the Tachyon front-end, there is a pass that does <a href="http://en.wikipedia.org/wiki/Global_value_numbering">Global Value Numbering (GVN)</a>. This optimization tries to identify and eliminate <a href="http://en.wikipedia.org/wiki/Static_single_assignment_form">SSA</a> instructions that are effectively computing the same value within a function. It does so by mapping instructions into a <a href="http://en.wikipedia.org/wiki/Hash_table">hash map</a> based on what operation they compute and their operands. Each instruction is mapped to a number, and because SSA temporaries are immutable, the instructions that map to the same number are computing the same result (provided, of course, that the said instructions have no side-effects). It's a little less trivial than it sounds, because a flow-based analysis then needs to be performed to establish which SSA temporaries must reach given locations in the <a href="http://en.wikipedia.org/wiki/Control_flow_graph">Control-Flow Graph (CFG)</a> in order to establish which instructions can be eliminated. </p>
+<p>Unfortunately, quick profiling revealed that GVN was actually the slowest pass of the Tachyon front-end, using about 18% of the total compilation time, or slightly more than half the time taken by all front-end passes combined. This is obviously unacceptable, and probably made GVN the least useful pass in terms of cost-benefits. I had assumed that it was the flow analysis part of GVN that was slowest, but further profiling revealed that most of the execution time in this analysis was taken by the hash function used for value numbering. It turned out that the problem was fairly obvious. I was using the strings representations of SSA instructions to compute their hash values. This seemed like a good idea at the time because of the inherent simplicity. </p>
+<p>To optimize GVN, I decided to change the hash function to use the numerical value of the first character of each instruction's opcode, the SSA temporary numbers, and the value of integer constants in computing the hash function. String constants and other constants are not used in the hash function. This is not perfect, but it worked well to improve performance. The time taken by GVN went from 18% to about 8% of the total compilation time. Only 6 lines or code or so needed to be changed. This illustrates very well how very small pieces of code can make a big difference in the final performance of a system. </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

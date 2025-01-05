@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Try my Web App: Melodique, a Procedural Melodic Phrase Generator</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2012-01-29-try-my-web-app-melodique-a-procedural-melodic-phrase-generator/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/01/21/algorithms-making-music/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/01/31/exporting-midi-files-using-data-uris/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Try my Web App: Melodique, a Procedural Melodic Phrase Generator</h1>
+<div class="post_date">January 29th, 2012</div>
+</div>
+<p>I just completed <a href="https://maximecb.github.io/Melodique/">Melodique</a>, a web app to procedurally generate melodic phrases. The tool randomly selects chords from a specified scale and then voices them using simple melodic patterns. There are many options the user can tweak to customize the process. The notes generated are displayed on a piano roll view rendered using the HTML5 canvas, and sound output can be produced using the Web Audio API (currently supported by Chrome only, but Safari should follow shortly). I coded my own simple <a href="http://en.wikipedia.org/wiki/Analog_modeling_synthesizer">virtual analog synthesizer</a> to produce the synthesized piano sounds. </p>
+<p>Programming this tool was a way for me to <a href="http://pointersgonewild.com/2012/01/21/algorithms-making-music/">learn and experiment with music theory</a>. One of the things I've been curious about was how I could go about randomly generating patterns that have a fairly high chance of sounding musical. The techniques used by Melodique are quite simple, chords are selected from a scale, and the choice of chords is biased more heavily towards degrees I, IV, V and vi. This is nothing revolutionary, but the tool may be useful for those learning about music theory, or simply looking for melody ideas (you can very rapidly generate and listen to many variations). </p>
+<p>You can try Melodique at the following address: <a href="https://maximecb.github.io/Melodique/">https://maximecb.github.io/Melodique/</a> </p>
+<p>I plan to continue experimenting with music. My next goal is to try using <a href="http://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> or a <a href="http://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">probabilistic state machine</a> of some sort to generate electronic music. I may also try using stochastic techniques to generate interesting sounding synthesizer patches. To be continued! </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

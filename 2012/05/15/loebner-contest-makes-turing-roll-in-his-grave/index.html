@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Loebner Contest makes Turing Roll in his Grave</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2012-05-15-loebner-contest-makes-turing-roll-in-his-grave/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/05/08/we-should-be-dna-sequencing-endangered-species/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/06/07/why-do-most-new-languages-fail/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2012/05/15/loebner-contest-makes-turing-roll-in-his-grave/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2012/05/15/loebner-contest-makes-turing-roll-in-his-grave/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Loebner Contest makes Turing Roll in his Grave</h1>
+<div class="post_date">May 15th, 2012</div>
+</div>
+<p>I got up early this morning to watch a live streaming of the <a href="http://www.loebner.net/Prizef/loebner-prize.html">Loebner Prize</a> contest, a formal enactment of a <a href="http://en.wikipedia.org/wiki/Turing_test">Turing test</a> where human judges must hold chat conversations with humans and chat bots simultaneously, and try to determine which one is the human and which one is the bot. Hosted at <a href="http://www.bletchleypark.org/">Bletchley Park</a> this year, the contest was divided into four rounds where a total of 14 entries were to be judged. </p>
+<p>Unfortunately, there were several technical issues. The Loebner website was poorly laid out and I had a hard time finding the live streaming URL to begin with. Once I got there, I found the web streaming interface was rather ineffective. Conversations between one judge, one human and one bot were divided into panels of four unlabeled windows where characters appeared as they were being typed, making it difficult at first glance to see what part of which conversation was happening where. </p>
+<figure>
+<a href="loebner.png">
+<img alt="" src="loebner.png">
+</a>
+</figure>
+<p>There were also connection and text formatting issues, with some text never appearing, connections being broken, and some chat bots never producing newlines, which gave them away pretty quickly. Apparently, the people behind the Loebner contest chose to design <a href="http://loebner.net/Prizef/2012_Contest/loebner-prize-2012.html">their own chat protocol</a>. Probably not a wise choice. They would likely have been much better served by a private <a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a> server. </p>
+<p>The bigger problem, of course, is that most of the entries were absolutely terrible. It seems that none of the judges were "fooled" for more than a minute. Most bots were completely unable to follow a conversation in any way. Some kept asking random questions over and over. Most couldn't answer any questions from the judges, to the point where some judges decided to simply ignore the bots. It's rather appalling to see that even today, in 2012, several of these bots do worse than plain old <a href="http://en.wikipedia.org/wiki/ELIZA">Eliza</a>. I'm fully aware that programming a competent chat bot is no easy feat, but it seems like this competition simply hasn't attracted the cream of the crop. </p>
+<p>After the thrill of watching <a href="http://www.pcworld.com/article/219900/ibm_watson_wins_jeopardy_humans_rally_back.html">Watson</a> spank humanity's ass on Jeoparty, I'm convinced that with modern technology we could do much better than this, if only someone just tried. I wish that the people at <a href="http://www.cyc.com/">Cycorp</a> would try and program a chat bot and show us what they can do with that fancy knowledge base and <a href="http://en.wikipedia.org/wiki/Natural_language_processing">NLP</a> software of theirs. I guess the truth is that there is too little market value for good chat bots, and the people who have the knowledge to implement a serious contender are busy doing something that earns them money. Turing is rolling in his grave right now. </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

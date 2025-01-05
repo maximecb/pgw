@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Higgs has a Garbage Collector</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2013-01-22-higgs-has-a-garbage-collector/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/01/03/more-fun-with-turing-machines/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/01/31/visiting-mozilla/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2013/01/22/higgs-has-a-garbage-collector/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2013/01/22/higgs-has-a-garbage-collector/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Higgs has a Garbage Collector</h1>
+<div class="post_date">January 22nd, 2013</div>
+</div>
+<p>I just completed the implementation of a garbage collector (GC) for the <a href="http://pointersgonewild.com/higgs/">Higgs</a> JavaScript VM. This brings me much closer to the completion of my interpreter. The GC itself is an almost direct port of the code I wrote for <a href="http://pointersgonewild.com/2011/12/17/tachyon-has-a-garbage-collector/">Tachyon</a>. It's a stop-the-world copying semi-space collector. This design has the advantage of being very simple and easy to maintain at only a few hundred lines of heavily commented code. </p>
+<p>Since GC bugs are vicious creatures, I decided to try and catch these early on. For this, I ported over the Tachyon GC unit tests, and wrote some new ones. This, of course, isn't an ironclad guarantee, but it's already helped me expose and fix several bugs. I consider the GC to be fairly stable at this point. I dreaded doing this work, but putting off the implementation of the GC would likely have meant more integration pains as Higgs is sure to grow in complexity over time with the addition of a Tracing JIT and additional optimizations. </p>
+<p>In the next week or so, I will be adding the few features which are missing from the Higgs interpreter, such as support for the arguments object. Once this is done, I'll move on to the implementation of a profiling system and a tracing JIT for Higgs (which I'm quite excited about). </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

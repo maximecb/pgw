@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Exporting MIDI Files using Data URIs</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2012-01-31-exporting-midi-files-using-data-uris/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/02/09/venturing-into-electronic-music/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2012/01/31/exporting-midi-files-using-data-uris/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2012/01/31/exporting-midi-files-using-data-uris/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Exporting MIDI Files using Data URIs</h1>
+<div class="post_date">January 31th, 2012</div>
+</div>
+<p>I made <a href="http://www.reddit.com/r/javascript/comments/p1wmc/melodique_procedural_musical_phrase_generator/">a post on Reddit</a> about my <a href="http://pointersgonewild.com/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/">Melodique</a> melodic phrase generation tool. Three people told me that they'd like for the tool to have the ability to export <a href="http://en.wikipedia.org/wiki/MIDI">MIDI</a> files, as this would allow loading the generated content into music editing software. It turns out there's a <a href="http://www.w3.org/TR/file-writer-api/">file writer W3C API</a> in the works that would make implementing this fairly easy, but unfortunately, no browsers seem to support it at this time, not even dear Chrome. </p>
+<p>The solution I found was to use <a href="http://en.wikipedia.org/wiki/Data_URI_scheme">data URIs</a> to encode the files. They're simply URIs containing uncompressed <a href="http://en.wikipedia.org/wiki/Base64">base64</a> encoded file data. These are easily generated from JavaScript code. This should work nicely in most browsers out there. There's often a limit of 30-60KB, but this isn't an issue for my short MIDI files, which are often under 400 bytes. </p>
+<p>Implementing basic support for exporting MIDI files took me about 4-5 hours in total. Fortunately, there's <a href="http://www.sonicspot.com/guide/midifiles.html">great resources out there</a> documenting the format, which, although peculiar, isn't that hard to implement. </p>
+<p>On another note, I started reading <a href="http://www.amazon.com/Virtual-Music-Computer-Synthesis-Musical/dp/0262532611">Virtual Music</a>, a book about computer-generated music which I'd bought a couple months ago. It's been an interesting read so far. I particularly liked the humorous prose about the nature of music and composition: </p>
+<blockquote>
+<p>Is music a craft Or is it an art? Does it come from mere training or spring form the heart? </p>
+<p>Did the études of Chopin reveal his soul's mood? Or was Frédéric Chopin Just some slick "pattern dude"? </p>
+</blockquote>
+<p>An interesting read for those interested in this topic :) </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

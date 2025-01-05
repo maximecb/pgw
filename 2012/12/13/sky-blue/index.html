@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sky Blue</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2012-12-13-sky-blue/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/12/08/higgs-my-new-tracing-jit-for-javascript/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/12/18/higgs-has-exceptions/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2012/12/13/sky-blue/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2012/12/13/sky-blue/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Sky Blue</h1>
+<div class="post_date">December 13th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="photo0110.jpg">
+</div>
+<p>A few days ago, I stumbled upon a fascinating piece of information while reading the Wikipedia article about <a href="http://en.wikipedia.org/wiki/Melatonin">melatonin</a>. I was taught in high school that there were two main types of photoreceptors in human retinas: rods and cones. What I didn't know is that there's actually a third kind of photoreceptor: light sensitive ganglion cells containing the pigment <a href="http://en.wikipedia.org/wiki/Melanopsin">melanopsin</a>. These melanopsin-containing cells, which were only <a href="http://webvision.med.utah.edu/book/part-ii-anatomy-and-physiology-of-the-retina/elanopsin-ganglion-cells-a-bit-of-fly-in-the-mammalian-eye/">recently discovered</a> (~2000), comprise approximately 2% of ganglion cells and are concentrated in the inner retina. </p>
+<p>What's fascinating is that this third type of photoreceptor doesn't actually contribute anything to visual information, it's instead used by our brain to get information about light intensity. This information is used to control reflexes such as contraction of the iris in the presence of bright light, but also to regulate day and night cycles (the <a href="http://en.wikipedia.org/wiki/Circadian_rhythm">circadian rythm</a>). What was particularly interesting to me is that the response of melanopsin to light peaks right in betweeen 480nm and 490nm. What color is that? It's blue. Not just any blue though, it's a pale blue. Very much like the color of the sky. </p>
+<figure>
+<a href="spectrum1.png">
+<img alt="" src="spectrum1.png">
+</a>
+</figure>
+<p>Have you noticed how birds seems to sing more in nice weather and how squirrels seem to come out when the sun is shining? This is probably not so surprising if the part of the brain responsible for controlling the day/night cycle of these animals is very much tuned to these animals being able to see the color of the sky. I can personally say that I've always found sunny days, and particularly the sight of blue skies, to have a calming and uplifting effect. My mood is very much affected by the passing seasons. </p>
+<p>The classical treatment recommendation for those of us who suffer from <a href="http://en.wikipedia.org/wiki/Seasonal_affective_disorder">Seasonal Affective Disorder (SAD)</a> is daily exposure to a full spectrum light, often as bright as 10000 lux. What if it wasn't so much the brightness of the light as the sight of this sky blue color that was actually important for your mood, though? There's less light in the winter, but the sky is also more often obstructed, and the days are much shorter. Melanopsin has a very narrow response curve, and so a more targeted blue light therapy might be more effective. </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

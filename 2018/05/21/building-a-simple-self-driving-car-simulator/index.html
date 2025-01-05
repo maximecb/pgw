@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Building a Simple Self-Driving Car Simulator</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2018-05-21-building-a-simple-self-driving-car-simulator/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2018/12/17/a-small-dose-of-optimism/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2018/05/21/building-a-simple-self-driving-car-simulator/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2018/05/21/building-a-simple-self-driving-car-simulator/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Building a Simple Self-Driving Car Simulator</h1>
+<div class="post_date">May 21st, 2018</div>
+</div>
+<p>As part of my new job, I've been working with Professor Liam Paull and his students on building a simulator for <a href="http://duckietown.org/">Duckietown</a>. This is a university course being taught at ETH Zurich, the University of Montreal, TTIC/UChicago and other institutions, where students learn about self-driving cars and robotics by building their own small-scale model which can drive around in the miniature Duckietown universe, complete with turns, intersections, traffic signs, and other moving vehicles. </p>
+<p>The course has, so far, been focused on traditional robotics methods using computer vision and PID controllers to drive the robots. However, students and professors are becoming increasingly interested in using deep learning (and reinforcement learning in particular). Since reinforcement learning needs a lot of data, it's much more practical to do it in simulation than with physical robots. This has been one of the main motivations for building a simulator. </p>
+<p>The simulator I'm building works as an OpenAI Gym environment, which makes it easy to use for reinforcement learning. It's written in pure Python and uses OpenGL (pyglet) to produce graphics. I chose Python because this is the language most used by the deep learning community, and I wanted for students to be able to modify the simulator easily. The simulator performs many forms of <a href="https://blog.openai.com/spam-detection-in-the-physical-world/">domain randomization</a>: it randomly varies colors, the camera angle and field of view, etc. This feature is meant to help neural networks learn to deal with variability, so that trained networks will hopefully work not just in simulation, but also in the real world as well. </p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/b_T-QpdXbes?si=70RjtUKm1xsKohpz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p> </p>
+<p>Because Duckietown is a toy universe that is essentially two-dimensional, I've designed a <a href="https://github.com/duckietown/gym-duckietown/blob/master/gym_duckietown/maps/udem1.yaml">YAML map format</a> which can be easily hand-edited to create custom new environments. It essentially describes a set of tiles, and where to place 3D models relative to those tiles. I've also made some simplifying assumptions with regard to physics (the agent essentially moves along a 2D plane). </p>
+<p>While working on this simulator, I'm also experimenting with sim-to-real transfer, that is, getting policies trained in simulation to work with a real robot. This is a work in progress, but we are close to having this working reliably. The video below shows some promising results: </p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/Jo4rLRZ6a64?si=ilUw8_vSAeBSwNqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p> </p>
+<p>If you're interested in playing with this, the source code is <a href="https://github.com/duckietown/gym-duckietown">available on GitHub</a>. Feedback and contributions are welcome. If you run into any issues, please report them, as I'd like to make the simulator as easy to use as possible. </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>

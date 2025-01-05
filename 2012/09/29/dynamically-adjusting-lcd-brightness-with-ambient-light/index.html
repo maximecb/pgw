@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dynamically Adjusting LCD Brightness with Ambient Light</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+
+  <!-- TODO: keywords, other header contents -->
+
+</head>
+
+<body>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        navigator.clipboard.writeText("open site/2012-09-29-dynamically-adjusting-lcd-brightness-with-ambient-light/index.md");
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/09/25/some-glues-dont-mix-with-electronics/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/10/24/debugging-by-the-seat-of-the-pants/";
+    }
+
+    // Shift + P
+    if (e.shiftKey && e.key.toUpperCase() === 'P') {
+        if (!window.location.hostname.includes('pointersgonewild')) {
+            window.location.href = 'https://pointersgonewild.com/' + "2012/09/29/dynamically-adjusting-lcd-brightness-with-ambient-light/";
+        }
+    }
+});
+
+
+
+/*
+// We don't want people directly linking to the github pages subdomain
+// Redirect to pointersgonewild.com
+if (window.location.hostname.includes('github')) {
+    window.location.replace('https://pointersgonewild.com/' + '2012/09/29/dynamically-adjusting-lcd-brightness-with-ambient-light/');
+}
+*/
+
+
+
+
+
+</script>
+
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="/">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="/">Blog</a>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+  </nav>
+</div>
+
+<div class="contents"><div class="page_title">
+<h1>Dynamically Adjusting LCD Brightness with Ambient Light</h1>
+<div class="post_date">September 29th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="dscn0302.jpg">
+</div>
+<p>The <a href="http://pointersgonewild.com/2012/09/23/the-avr-alarm-clock-is-complete/">AVR Alarm Clock</a> has been working reliably for the last few days. My girlfriend, however, pointed out an annoying flaw: the LCD display is extremely bright, probably uncomfortably bright for night time, it would assuredly light up our bedroom with its blinding blue glow. I could make the backlight dimmer by adding a simple resistor, but this would make it harder to read in the daytime. Realistically, I'd like the backlight to be very dim at night time, and near full brightness during the day. </p>
+<p>The bad news is, the generic <a href="http://en.wikipedia.org/wiki/Hitachi_HD44780_LCD_controller">HD44780</a> LCD I used doesn't have any built-in mechanism to dynamically adjust brightness. Some other affordable LCDs, like the <a href="https://www.sparkfun.com/products/10168">Nokia 5110</a>, allow you to directly control the backlight using <a href="http://en.wikipedia.org/wiki/Pulse-width_modulation">Pulse Width Modulation (PWM)</a>, but not mine. Fortunately, the LCD backlight uses different power pins from the controller logic, and so, it's very easy to gate the backlight power using a small transistor or mosfet, allowing PWM control of the backlight brightness. I designed a small board to distribute power to the LCD and implement this functionality. </p>
+<figure>
+<a href="lcd_power.jpg">
+<img alt="" src="lcd_power.jpg">
+</a>
+</figure>
+<figure>
+<a href="lcd_power.png">
+<img alt="" src="lcd_power.png">
+</a>
+</figure>
+<p>This simple circuit allows easy control of the backlight brightness using a PWM output. I could simply use the time of day to decide how bright the LCD backlight should be. There are issues with this, however. The sun doesn't rise and set at the same time every day, and furthermore, the time of day says nothing about whether the lights are on or off. I decided to take this to the next level and build a light sensor for the AVR clock, so that it could dynamically react to ambient light levels. </p>
+<p>I already had several <a href="http://en.wikipedia.org/wiki/Photoresistor">photoresistors</a> on hand. The ones I have produce a resistance reading that varies all the way from ~1KOhms to ~2MOhms (sunlight vs almost complete darkness). This value can be converted to a variable voltage using a simple <a href="http://en.wikipedia.org/wiki/Voltage_divider">voltage divider</a> configuration, the voltage can then be read using an <a href="http://en.wikipedia.org/wiki/Analog-to-digital_converter">Analog to Digital Converter (ADC)</a> input. There is just one problem: the input impedance would be much too high for the ADC to get accurate readings in low light conditions, and unfortunately, low light is where we need the most precision. </p>
+<figure>
+<a href="light_sensor.png">
+<img alt="" src="light_sensor.png">
+</a>
+</figure>
+<p>The solution to this problem is to amplify the current from the photoresistor's voltage divider so as to produce a lower impedance output. This could be done with an op-amp chip, but luckily, breadboard prototyping has shown that a simpler and cheaper solution works just fine. I connected a 2N3904 transistor along with a 5K resistor in a <a href="http://en.wikipedia.org/wiki/Common_collector">common collector</a> amplifier configuration. This allows precise light readings even when all the lights are off in my living room. </p>
+<figure>
+<a href="dscn0305.jpg">
+<img alt="I promise this isn't a bomb" src="dscn0305.jpg">
+</a>
+<figcaption>I promise this isn't a bomb</figcaption>
+</figure>
+<p>I installed the photoresistor in the back-left corner of the top of the alarm clock's casing to prevent the clock's own LEDs from interfering with the light sensor. A few additions to the code and I had the backlight brightness automatically adjusting to ambient light. I made it so that the adjustment is slow and gradual so that moving obstacles (e.g.: people) don't result in sudden jumps in brightness. </p>
+<p>All modifications to the code are <a href="https://github.com/maximecb/AVR-Alarm-Clock">available on github</a> :) </p>
+</div> <!-- contents -->
+</div> <!-- container -->
+
+<div class="copyright">
+Copyright &copy; 2011 &ndash; Present Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</body>
+</html>
