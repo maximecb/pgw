@@ -16,7 +16,9 @@
 /* Make the contents just slightly narrower than the top link bar */
 .contents {
     padding: 0 0.5rem;
+    /* It's widely recommended to hyphenate text when justified */
     text-align: justify;
+    hyphens: auto;
 }
 
 /* Increase the font size for regular text a little bit */
