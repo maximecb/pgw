@@ -73,13 +73,13 @@ if (window.location.hostname.includes('github')) {
 <h1>Method Call Syntax in a JS-like Language</h1>
 <div class="post_date">November 23rd, 2016</div>
 </div>
-<p>As a side-project, I'm working on a small JavaScript-like programming language called Plush. Like JavaScript, this language is going to have objects and method calls. In this blog post, I'm going to discuss some seemingly trivial aspects of method call syntax and semantics which illustrate why programming language design is difficult, and solicit your feedback as to potential solutions. </p>
-<p>Like JavaScript, plush has object literals which can be defined with the curly brace syntax. It will also have function objects, which are in fact closures. In JavaScript, you can assign a function to an object property, and it becomes callable as a method, like so: </p>
+<p>As a side-project, I'm working on a small JavaScript-like programming language called Plush. Like JavaScript, this language is going to have objects and method calls. In this blog post, I'm going to discuss some seemingly trivial aspects of method call syntax and semantics which illustrate why programming language design is difficult, and solicit your feedback as to potential solutions.</p>
+<p>Like JavaScript, plush has object literals which can be defined with the curly brace syntax. It will also have function objects, which are in fact closures. In JavaScript, you can assign a function to an object property, and it becomes callable as a method, like so:</p>
 <pre><code>o = {}; // empty object
 o.m = function (x) {...};
 o.m(2); // call the function in property m as a method
 </code></pre>
-<p>This all seems fine and dandy, but there are some issues with the way JavaScript implements this. The first is that method call syntax introduces some "hidden" semantics. When you call a JS function as a method, there is a hidden <code>this</code> argument (a reference to the object the method is called on) which gets passed to functions. This is invisible to the programmer. Hence: </p>
+<p>This all seems fine and dandy, but there are some issues with the way JavaScript implements this. The first is that method call syntax introduces some "hidden" semantics. When you call a JS function as a method, there is a hidden <code>this</code> argument (a reference to the object the method is called on) which gets passed to functions. This is invisible to the programmer. Hence:</p>
 <pre><code>// The statement below:
 o.m(2);
 
@@ -91,14 +91,14 @@ f(2);
 f = o.m;
 f.call(o, 2);
 </code></pre>
-<p>The passing of the hidden <code>this</code> argument is a little bit annoying because it breaks the programmer's intuition in a small way. JS syntax makes method calls look like regular function calls, but there is a difference. Sure, it's not a big deal, but I ran into this issue while implementing IO functions in Plush. I wanted to implement some C++ "host" functions which would allow the language to interface with the outside, as such: </p>
+<p>The passing of the hidden <code>this</code> argument is a little bit annoying because it breaks the programmer's intuition in a small way. JS syntax makes method calls look like regular function calls, but there is a difference. Sure, it's not a big deal, but I ran into this issue while implementing IO functions in Plush. I wanted to implement some C++ "host" functions which would allow the language to interface with the outside, as such:</p>
 <pre><code>io = import &quot;core.io&quot;; // import the IO module
 
 io.print(&quot;hello world!&quot;); // here 'print' is a host function written in C++
 </code></pre>
-<p>Maybe you see where this is going. If I implement method calls as JavaScript does, then every function, including host functions, need to take a hidden <code>this</code> argument, even if they don't need it. I can work around this by making a special case where host functions called as methods behave differently, but then I potentially have to add an extra dynamic check at every function call. This gets annoying. I can work around this issue by wrapping my C++ host functions into plush functions which handle the unneeded <code>this</code> argument. </p>
-<p>The second issue I ran into involves the way the <code>this</code> argument is handled. JavaScript has this problem where if you declare a closure inside a method, you can't directly access the parent function's <code>this</code> argument, as described in <a href="https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/">this blog post</a>. This annoying quirk of the language was "solved" by the introduction of Function.prototype.bind. The JS workaround seemed like an ugly kludge to me, and so I thought "why not just do it like Python"? Why not make the <code>this</code> argument explicit. Make programmers declare and name the <code>this</code> value, in the same way that Python forces you to declare the <code>self</code> argument in methods. </p>
-<p>Upon first examination, making the programmer explicitly declare the <code>this</code> argument seems like a fairy good idea. However, it does have the annoying consequence that an argument that was previously hidden is now a positional argument. Consider the following scenario: </p>
+<p>Maybe you see where this is going. If I implement method calls as JavaScript does, then every function, including host functions, need to take a hidden <code>this</code> argument, even if they don't need it. I can work around this by making a special case where host functions called as methods behave differently, but then I potentially have to add an extra dynamic check at every function call. This gets annoying. I can work around this issue by wrapping my C++ host functions into plush functions which handle the unneeded <code>this</code> argument.</p>
+<p>The second issue I ran into involves the way the <code>this</code> argument is handled. JavaScript has this problem where if you declare a closure inside a method, you can't directly access the parent function's <code>this</code> argument, as described in <a href="https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/">this blog post</a>. This annoying quirk of the language was "solved" by the introduction of Function.prototype.bind. The JS workaround seemed like an ugly kludge to me, and so I thought "why not just do it like Python"? Why not make the <code>this</code> argument explicit. Make programmers declare and name the <code>this</code> value, in the same way that Python forces you to declare the <code>self</code> argument in methods.</p>
+<p>Upon first examination, making the programmer explicitly declare the <code>this</code> argument seems like a fairy good idea. However, it does have the annoying consequence that an argument that was previously hidden is now a positional argument. Consider the following scenario:</p>
 <pre><code>// An IO module is imported, this produces an object containing IO functions
 io = import &quot;core.io&quot;;
 
@@ -111,7 +111,7 @@ io.print(2);
 // ERROR: we are not passing a `this` argument value
 print(2);
 </code></pre>
-<p>In the case of modules, it's clear that the <code>print</code> function shouldn't even need a <code>this</code> argument value. I pondered this problem, and had the idea that possibly, method calls could have a different syntax from property accesses. The "arrow syntax" would make explicit the passing of the <code>this</code> argument: </p>
+<p>In the case of modules, it's clear that the <code>print</code> function shouldn't even need a <code>this</code> argument value. I pondered this problem, and had the idea that possibly, method calls could have a different syntax from property accesses. The "arrow syntax" would make explicit the passing of the <code>this</code> argument:</p>
 <pre><code>// Call of the method m of object o
 // The &quot;arrow syntax&quot; is specifically for method calls, passes a `this` argument
 o-&gt;m(2);
@@ -128,7 +128,7 @@ io.print(2);
 print = io.print;
 print(2);
 </code></pre>
-<p>The solution I came up with is not perfect, it raises some potential problems. For one, with a special arrow syntax for method calls, it becomes possible to call object properties using both regular function calls, and arrow style method calls which pass a <code>this</code> argument. Experience tells me that if both styles are possible, people are going to use both, which could be messy. For example, what do you do if you have a set of methods which do not need a <code>this</code> argument? Do you declare one anyway? Would you end up with a mix of regular function calls and method calls on the same object? </p>
+<p>The solution I came up with is not perfect, it raises some potential problems. For one, with a special arrow syntax for method calls, it becomes possible to call object properties using both regular function calls, and arrow style method calls which pass a <code>this</code> argument. Experience tells me that if both styles are possible, people are going to use both, which could be messy. For example, what do you do if you have a set of methods which do not need a <code>this</code> argument? Do you declare one anyway? Would you end up with a mix of regular function calls and method calls on the same object?</p>
 </div> <!-- contents -->
 </div> <!-- container -->
 

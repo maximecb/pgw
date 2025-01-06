@@ -73,15 +73,15 @@ if (window.location.hostname.includes('github')) {
 <h1>Exporting MIDI Files using Data URIs</h1>
 <div class="post_date">January 31th, 2012</div>
 </div>
-<p>I made <a href="http://www.reddit.com/r/javascript/comments/p1wmc/melodique_procedural_musical_phrase_generator/">a post on Reddit</a> about my <a href="http://pointersgonewild.com/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/">Melodique</a> melodic phrase generation tool. Three people told me that they'd like for the tool to have the ability to export <a href="http://en.wikipedia.org/wiki/MIDI">MIDI</a> files, as this would allow loading the generated content into music editing software. It turns out there's a <a href="http://www.w3.org/TR/file-writer-api/">file writer W3C API</a> in the works that would make implementing this fairly easy, but unfortunately, no browsers seem to support it at this time, not even dear Chrome. </p>
-<p>The solution I found was to use <a href="http://en.wikipedia.org/wiki/Data_URI_scheme">data URIs</a> to encode the files. They're simply URIs containing uncompressed <a href="http://en.wikipedia.org/wiki/Base64">base64</a> encoded file data. These are easily generated from JavaScript code. This should work nicely in most browsers out there. There's often a limit of 30-60KB, but this isn't an issue for my short MIDI files, which are often under 400 bytes. </p>
-<p>Implementing basic support for exporting MIDI files took me about 4-5 hours in total. Fortunately, there's <a href="http://www.sonicspot.com/guide/midifiles.html">great resources out there</a> documenting the format, which, although peculiar, isn't that hard to implement. </p>
-<p>On another note, I started reading <a href="http://www.amazon.com/Virtual-Music-Computer-Synthesis-Musical/dp/0262532611">Virtual Music</a>, a book about computer-generated music which I'd bought a couple months ago. It's been an interesting read so far. I particularly liked the humorous prose about the nature of music and composition: </p>
+<p>I made <a href="http://www.reddit.com/r/javascript/comments/p1wmc/melodique_procedural_musical_phrase_generator/">a post on Reddit</a> about my <a href="http://pointersgonewild.com/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/">Melodique</a> melodic phrase generation tool. Three people told me that they'd like for the tool to have the ability to export <a href="http://en.wikipedia.org/wiki/MIDI">MIDI</a> files, as this would allow loading the generated content into music editing software. It turns out there's a <a href="http://www.w3.org/TR/file-writer-api/">file writer W3C API</a> in the works that would make implementing this fairly easy, but unfortunately, no browsers seem to support it at this time, not even dear Chrome.</p>
+<p>The solution I found was to use <a href="http://en.wikipedia.org/wiki/Data_URI_scheme">data URIs</a> to encode the files. They're simply URIs containing uncompressed <a href="http://en.wikipedia.org/wiki/Base64">base64</a> encoded file data. These are easily generated from JavaScript code. This should work nicely in most browsers out there. There's often a limit of 30-60KB, but this isn't an issue for my short MIDI files, which are often under 400 bytes.</p>
+<p>Implementing basic support for exporting MIDI files took me about 4-5 hours in total. Fortunately, there's <a href="http://www.sonicspot.com/guide/midifiles.html">great resources out there</a> documenting the format, which, although peculiar, isn't that hard to implement.</p>
+<p>On another note, I started reading <a href="http://www.amazon.com/Virtual-Music-Computer-Synthesis-Musical/dp/0262532611">Virtual Music</a>, a book about computer-generated music which I'd bought a couple months ago. It's been an interesting read so far. I particularly liked the humorous prose about the nature of music and composition:</p>
 <blockquote>
-<p>Is music a craft Or is it an art? Does it come from mere training or spring form the heart? </p>
-<p>Did the études of Chopin reveal his soul's mood? Or was Frédéric Chopin Just some slick "pattern dude"? </p>
+<p>Is music a craft Or is it an art? Does it come from mere training or spring form the heart?</p>
+<p>Did the études of Chopin reveal his soul's mood? Or was Frédéric Chopin Just some slick "pattern dude"?</p>
 </blockquote>
-<p>An interesting read for those interested in this topic :) </p>
+<p>An interesting read for those interested in this topic :)</p>
 </div> <!-- contents -->
 </div> <!-- container -->
 

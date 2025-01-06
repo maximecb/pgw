@@ -73,101 +73,101 @@ if (window.location.hostname.includes('github')) {
 <h1>What I'd like to Know about JavaScript Programs</h1>
 <div class="post_date">October 31th, 2011</div>
 </div>
-<p>The final goal of my thesis is to find ways make programs written in dynamic programming languages (like JavaScript) run faster. One way to do this is to exploit regularities in the behavior of the said programs. Dynamic languages appear to make it possible to redefine (almost) everything while a program is running. Programmers, can, for example, redefine global variables (including function bindings), add and remove properties to objects, or even call the (in)famous <code>eval</code> function to redefine the value of local variables. This makes analysis and optimization of such programs difficult. </p>
-<p>It makes sense to think however, that the dynamic features of JavaScript are not used in an unrestricted way. Programs are implementations of algorithms. They manipulate structured data in a way that makes sense to programmers. As such, the programs themselves should exhibit some predictable, regular structure in their behavior. An optimizing Just-In-Time (JIT) compiler can exploit this in multiple ways, such as predicting what a program will do next based on past behavior, and restricting the generality of the code it generates based on the extend of the dynamic behaviors exhibited by programs. </p>
-<p>At the beginning of my Ph.D., I worked with Marc Feeley on instrumenting the WebKit JavaScript interpreter (JavaScriptCore) to gather some information about the dynamic behavior of programs. The goal was to eventually use this information to better guide our attempts at optimizing JavaScript code. This effort showed promising results, but was unfortunately abandoned mid-way because of technical difficulties: JavaScriptCore is very hard to instrument thoroughly. There are many things we simply couldn't do. There was much data we didn't have access to. </p>
-<p>Thanks to a combined effort by Marc Feeley and Bruno Dufour, we now have a system that allows us to re-write JavaScript souce code directly in order to instrument it. Combined with a web proxy system, we believe that we may finally be able to get the information we want. This tool will (hopefully) be working reasonably soon, and so I have decided to begin gathering a list of metrics to profile in real-world JavaScript applications. These will be useful in guiding my optimization efforts. </p>
-<p>I would like to know: </p>
+<p>The final goal of my thesis is to find ways make programs written in dynamic programming languages (like JavaScript) run faster. One way to do this is to exploit regularities in the behavior of the said programs. Dynamic languages appear to make it possible to redefine (almost) everything while a program is running. Programmers, can, for example, redefine global variables (including function bindings), add and remove properties to objects, or even call the (in)famous <code>eval</code> function to redefine the value of local variables. This makes analysis and optimization of such programs difficult.</p>
+<p>It makes sense to think however, that the dynamic features of JavaScript are not used in an unrestricted way. Programs are implementations of algorithms. They manipulate structured data in a way that makes sense to programmers. As such, the programs themselves should exhibit some predictable, regular structure in their behavior. An optimizing Just-In-Time (JIT) compiler can exploit this in multiple ways, such as predicting what a program will do next based on past behavior, and restricting the generality of the code it generates based on the extend of the dynamic behaviors exhibited by programs.</p>
+<p>At the beginning of my Ph.D., I worked with Marc Feeley on instrumenting the WebKit JavaScript interpreter (JavaScriptCore) to gather some information about the dynamic behavior of programs. The goal was to eventually use this information to better guide our attempts at optimizing JavaScript code. This effort showed promising results, but was unfortunately abandoned mid-way because of technical difficulties: JavaScriptCore is very hard to instrument thoroughly. There are many things we simply couldn't do. There was much data we didn't have access to.</p>
+<p>Thanks to a combined effort by Marc Feeley and Bruno Dufour, we now have a system that allows us to re-write JavaScript souce code directly in order to instrument it. Combined with a web proxy system, we believe that we may finally be able to get the information we want. This tool will (hopefully) be working reasonably soon, and so I have decided to begin gathering a list of metrics to profile in real-world JavaScript applications. These will be useful in guiding my optimization efforts.</p>
+<p>I would like to know:</p>
 <ol start="1">
 <li>
-<p>What is the distribution of the length (in lines of code) of JS functions? </p>
+<p>What is the distribution of the length (in lines of code) of JS functions?</p>
 </li>
 <li>
-<p>How often are program and library functions executed? </p>
+<p>How often are program and library functions executed?</p>
 </li>
 <li>
-<p>What proportion of functions are never executed? </p>
+<p>What proportion of functions are never executed?</p>
 </li>
 <li>
-<p>What proportion are executed only once? </p>
+<p>What proportion are executed only once?</p>
 </li>
 <li>
-<p>More than K times (with K ~ 10 to 100)? </p>
+<p>More than K times (with K ~ 10 to 100)?</p>
 </li>
 <li>
-<p>What proportion of functions have loops? </p>
+<p>What proportion of functions have loops?</p>
 </li>
 <li>
-<p>What is the average loop nesting depth, for functions that have loops? </p>
+<p>What is the average loop nesting depth, for functions that have loops?</p>
 </li>
 <li>
-<p>What is the distribution of the number of loop iterations? </p>
+<p>What is the distribution of the number of loop iterations?</p>
 </li>
 <li>
-<p>What types are low-level operations usually applied to? </p>
+<p>What types are low-level operations usually applied to?</p>
 </li>
 <li>
-<p>What is the percentage of multiplications/additions on int64 int32, int30, uint32, floating-point values? </p>
+<p>What is the percentage of multiplications/additions on int64 int32, int30, uint32, floating-point values?</p>
 </li>
 <li>
-<p>How often is the addition operator used for arithmetic vs. string concatenation? </p>
+<p>How often is the addition operator used for arithmetic vs. string concatenation?</p>
 </li>
 <li>
-<p>How often are bitwise operators applied to non-integer values? </p>
+<p>How often are bitwise operators applied to non-integer values?</p>
 </li>
 <li>
-<p>The percentage of branches always going the same way. </p>
+<p>The percentage of branches always going the same way.</p>
 </li>
 <li>
-<p>How stable are the types of variables? </p>
+<p>How stable are the types of variables?</p>
 </li>
 <li>
-<p>How stable are function arguments, function return types? </p>
+<p>How stable are function arguments, function return types?</p>
 </li>
 <li>
-<p>How stable are function return types, for a given fixed input type string? </p>
+<p>How stable are function return types, for a given fixed input type string?</p>
 </li>
 <li>
-<p>How stable are local variable types? What if argument types are fixed? </p>
+<p>How stable are local variable types? What if argument types are fixed?</p>
 </li>
 <li>
-<p>How stable are global variable and closure variable types? </p>
+<p>How stable are global variable and closure variable types?</p>
 </li>
 <li>
-<p>How often do global variable types change? </p>
+<p>How often do global variable types change?</p>
 </li>
 <li>
-<p>How often are global functions redefined (if ever?) </p>
+<p>How often are global functions redefined (if ever?)</p>
 </li>
 <li>
-<p>How are objects typically used? </p>
+<p>How are objects typically used?</p>
 </li>
 <li>
-<p>How many objects are allocated per function call, on average? </p>
+<p>How many objects are allocated per function call, on average?</p>
 </li>
 <li>
-<p>How many fields do objects end up having? </p>
+<p>How many fields do objects end up having?</p>
 </li>
 <li>
-<p>What proportion of allocated objects do not escape their allocating function? </p>
+<p>What proportion of allocated objects do not escape their allocating function?</p>
 </li>
 <li>
-<p>What proportion property accesses use dynamically generated string as keys? </p>
+<p>What proportion property accesses use dynamically generated string as keys?</p>
 </li>
 <li>
-<p>The frequencies of object property read/write/deletes per allocated object. </p>
+<p>The frequencies of object property read/write/deletes per allocated object.</p>
 </li>
 <li>
-<p>How is <code>eval</code> typically used? </p>
+<p>How is <code>eval</code> typically used?</p>
 </li>
 <li>
-<p>The frequency of <code>eval</code> calls. </p>
+<p>The frequency of <code>eval</code> calls.</p>
 </li>
 <li>
-<p>The frequency of <code>eval</code> calls redefining local/global variables. </p>
+<p>The frequency of <code>eval</code> calls redefining local/global variables.</p>
 </li>
 </ol>
-<p>I should specify that when I say "type" I don't just mean what would be returned by the JavaScript "typeof" operator. I mean the low-level type (number, array, object, function, string, boolean, null, undefined, etc.) as well as other information we may find useful in an optimizing compiler, such as whether a given value is a specific constant, whether numbers are integers, floating-point, and information about the types of properties, in the case of objects. The goal is to capture information about the nature of values which may be useful to an optimizing compiler. </p>
+<p>I should specify that when I say "type" I don't just mean what would be returned by the JavaScript "typeof" operator. I mean the low-level type (number, array, object, function, string, boolean, null, undefined, etc.) as well as other information we may find useful in an optimizing compiler, such as whether a given value is a specific constant, whether numbers are integers, floating-point, and information about the types of properties, in the case of objects. The goal is to capture information about the nature of values which may be useful to an optimizing compiler.</p>
 </div> <!-- contents -->
 </div> <!-- container -->
 

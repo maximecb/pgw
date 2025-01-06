@@ -73,28 +73,28 @@ if (window.location.hostname.includes('github')) {
 <h1>Venturing into Electronic Music</h1>
 <div class="post_date">February 9th, 2012</div>
 </div>
-<p>I mentioned in previous posts that I'm fiddling with procedural techniques to <a href="http://en.wikipedia.org/wiki/Algorithmic_composition">generate music</a>. I've already made some progress in implementing my own sound synthesis system and even generating very <a href="http://pointersgonewild.com/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/">short musical phrases</a> using the most basic music theory concepts. I'm now trying to take this to the next step and hopefully generate pieces of music I'll actually enjoy. I'm aiming for something simple, which could probably be described as minimalist techno/dance music. </p>
-<p>This kind of music will require at the very least two synthesizer programs (a lead and a bass) as well as a drum kit. Luckily, it's pretty easy to find free drum samples all around the web, and it turned out to be very simple to write some JavaScript code for a little sampler that does the job for my basic drum kit. Coming up with synthesizer patches I like is unfortunately trickier, but I've been making decent progress in that direction. I decided to try and randomly generate a simple bass riff and a random synthesizer patch to play that riff at the same time. Here's a <a href="http://www.cs.mcgill.ca/~mcheva/evertechno/examples/2012-02-09.mp3">short audio fragment I generated</a> last night using this method. </p>
-<p>One of the main lessons I've learned so far is that generating coherent music is rather complex. Music theory does provide some hints as to what kinds of things may sound good together, but it leaves much left unsaid. People have often told me that "music is very mathematical", but one thing's for sure: none of the music theory books I've read were written by mathematicians. The explanations are very abstract. I found many discussions of <a href="http://www.8notes.com/school/theory/common_chord_progressions.asp">chord progressions</a>, but I've never found any clear hints on how to turn a chord progression into a melody (notes you play on an actual instrument!), I'm mostly figuring that out by myself through experimentation. </p>
-<p>At the moment, I'm thinking my music generation system will be rule-based. I'll attempt to enumerate rules for what I find sounds good together, and have the system apply these when generating music. It's still tricky to think about how I can fit this into an actual algorithm, because music has multiple levels of structure which interact with each other: </p>
+<p>I mentioned in previous posts that I'm fiddling with procedural techniques to <a href="http://en.wikipedia.org/wiki/Algorithmic_composition">generate music</a>. I've already made some progress in implementing my own sound synthesis system and even generating very <a href="http://pointersgonewild.com/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/">short musical phrases</a> using the most basic music theory concepts. I'm now trying to take this to the next step and hopefully generate pieces of music I'll actually enjoy. I'm aiming for something simple, which could probably be described as minimalist techno/dance music.</p>
+<p>This kind of music will require at the very least two synthesizer programs (a lead and a bass) as well as a drum kit. Luckily, it's pretty easy to find free drum samples all around the web, and it turned out to be very simple to write some JavaScript code for a little sampler that does the job for my basic drum kit. Coming up with synthesizer patches I like is unfortunately trickier, but I've been making decent progress in that direction. I decided to try and randomly generate a simple bass riff and a random synthesizer patch to play that riff at the same time. Here's a <a href="http://www.cs.mcgill.ca/~mcheva/evertechno/examples/2012-02-09.mp3">short audio fragment I generated</a> last night using this method.</p>
+<p>One of the main lessons I've learned so far is that generating coherent music is rather complex. Music theory does provide some hints as to what kinds of things may sound good together, but it leaves much left unsaid. People have often told me that "music is very mathematical", but one thing's for sure: none of the music theory books I've read were written by mathematicians. The explanations are very abstract. I found many discussions of <a href="http://www.8notes.com/school/theory/common_chord_progressions.asp">chord progressions</a>, but I've never found any clear hints on how to turn a chord progression into a melody (notes you play on an actual instrument!), I'm mostly figuring that out by myself through experimentation.</p>
+<p>At the moment, I'm thinking my music generation system will be rule-based. I'll attempt to enumerate rules for what I find sounds good together, and have the system apply these when generating music. It's still tricky to think about how I can fit this into an actual algorithm, because music has multiple levels of structure which interact with each other:</p>
 <ul>
 <li>
-<p>Simultaneous and nearby notes have to be consonant </p>
+<p>Simultaneous and nearby notes have to be consonant</p>
 </li>
 <li>
-<p>Different musical parts (lead, bass, drum) have to sound consonant and coherent </p>
+<p>Different musical parts (lead, bass, drum) have to sound consonant and coherent</p>
 </li>
 <li>
-<p>Low-level repetition/variation in melodic phrases </p>
+<p>Low-level repetition/variation in melodic phrases</p>
 </li>
 <li>
-<p>Medium-level repetition/variation in the alternation of musical phrases </p>
+<p>Medium-level repetition/variation in the alternation of musical phrases</p>
 </li>
 <li>
-<p>High-level repetition/variation in song structure </p>
+<p>High-level repetition/variation in song structure</p>
 </li>
 </ul>
-<p>It will be difficult to fit all of these considerations (and more) into a coherent whole that's still easy to maintain and expand on. As usual, I'm going to experiment with simple things and try to build on. The only way to make sense of all this is to experiment. </p>
+<p>It will be difficult to fit all of these considerations (and more) into a coherent whole that's still easy to maintain and expand on. As usual, I'm going to experiment with simple things and try to build on. The only way to make sense of all this is to experiment.</p>
 </div> <!-- contents -->
 </div> <!-- container -->
 

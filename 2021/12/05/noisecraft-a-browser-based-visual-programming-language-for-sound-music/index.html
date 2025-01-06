@@ -76,75 +76,75 @@ if (window.location.hostname.includes('github')) {
 <div class="cover_image">
 <img src="screenshot.png">
 </div>
-<p>I've recently resumed work on a side-project I started <a href="https://pointersgonewild.com/2019/10/06/zupiter-a-web-based-modular-synthesizer/">back in 2019</a> to create a browser-based visual programming language for sound synthesis and music. I was initially hoping to make this a commercial SaaS product, but <a href="https://pointersgonewild.com/2019/10/19/balancing-fun-stress-and-profit/">I got discouraged</a> when I realized that running and promoting a business could easily become a second job on top of my full-time day job, and suck all the fun out of the project. Thankfully, about six months ago, my motivation to work on the project came back. I decided to build an improved version of this software and make it open source. </p>
-<p><a href="https://noisecraft.app/">NoiseCraft</a> is a node-based visual programming language, loosely inspired by Max/MSP and PureData. The main goal of this project is to provide a way for people to explore musical ideas, and to enable people to share these ideas easily. It's designed to be easy to use and approachable for beginners. There's only one type, every connection has a floating-point value that changes over time. It runs in a browser and uses the Web Audio and Web MIDI APIs. This means you don't need to install anything, and you can share links to your projects just as easily as you can in Google Docs. The user interface is minimalistic and designed to be as simple as possible to facilitate learning. No cryptic shortcuts, no submenus, no esoteric terminology. </p>
-<p>I want to set realistic expectations. This is something I've been working on in my spare time. It's not trying to be Ableton Live or Reason. It's definitely not perfect and you could run into bugs. It's designed with desktop and laptop computers in mind. It might eventually work on tablets, but for the moment, it probably doesn't (unless you connect a keyboard and mouse to your tablet). It's been tested in Chrome and Edge. However, it doesn't yet work in Firefox because we're <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1572644">waiting for a bug to get fixed</a>. It also doesn't yet work in Safari. However, despite its limitations, NoiseCraft has many interesting features: </p>
+<p>I've recently resumed work on a side-project I started <a href="https://pointersgonewild.com/2019/10/06/zupiter-a-web-based-modular-synthesizer/">back in 2019</a> to create a browser-based visual programming language for sound synthesis and music. I was initially hoping to make this a commercial SaaS product, but <a href="https://pointersgonewild.com/2019/10/19/balancing-fun-stress-and-profit/">I got discouraged</a> when I realized that running and promoting a business could easily become a second job on top of my full-time day job, and suck all the fun out of the project. Thankfully, about six months ago, my motivation to work on the project came back. I decided to build an improved version of this software and make it open source.</p>
+<p><a href="https://noisecraft.app/">NoiseCraft</a> is a node-based visual programming language, loosely inspired by Max/MSP and PureData. The main goal of this project is to provide a way for people to explore musical ideas, and to enable people to share these ideas easily. It's designed to be easy to use and approachable for beginners. There's only one type, every connection has a floating-point value that changes over time. It runs in a browser and uses the Web Audio and Web MIDI APIs. This means you don't need to install anything, and you can share links to your projects just as easily as you can in Google Docs. The user interface is minimalistic and designed to be as simple as possible to facilitate learning. No cryptic shortcuts, no submenus, no esoteric terminology.</p>
+<p>I want to set realistic expectations. This is something I've been working on in my spare time. It's not trying to be Ableton Live or Reason. It's definitely not perfect and you could run into bugs. It's designed with desktop and laptop computers in mind. It might eventually work on tablets, but for the moment, it probably doesn't (unless you connect a keyboard and mouse to your tablet). It's been tested in Chrome and Edge. However, it doesn't yet work in Firefox because we're <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1572644">waiting for a bug to get fixed</a>. It also doesn't yet work in Safari. However, despite its limitations, NoiseCraft has many interesting features:</p>
 <ul>
 <li>
-<p>Easy to use sequencer node with multiple patterns </p>
+<p>Easy to use sequencer node with multiple patterns</p>
 </li>
 <li>
-<p>Audio is now rendered in a background thread to avoid glitches </p>
+<p>Audio is now rendered in a background thread to avoid glitches</p>
 </li>
 <li>
-<p>You can copy and paste, even between different browser tabs </p>
+<p>You can copy and paste, even between different browser tabs</p>
 </li>
 <li>
-<p>Colorful, curved edges that are easier to follow visually </p>
+<p>Colorful, curved edges that are easier to follow visually</p>
 </li>
 <li>
-<p>Undo and redo </p>
+<p>Undo and redo</p>
 </li>
 <li>
-<p>Projects can be shared in the cloud in a few clicks </p>
+<p>Projects can be shared in the cloud in a few clicks</p>
 </li>
 <li>
-<p>Projects can also be saved to local files to a simple JSON format </p>
+<p>Projects can also be saved to local files to a simple JSON format</p>
 </li>
 <li>
-<p>Ability to play notes from MIDI keyboards and devices </p>
+<p>Ability to play notes from MIDI keyboards and devices</p>
 </li>
 <li>
-<p>Ability to map virtual knobs to knobs/sliders/mod/pitch bend on MIDI devices </p>
+<p>Ability to map virtual knobs to knobs/sliders/mod/pitch bend on MIDI devices</p>
 </li>
 <li>
-<p>New clock divider and sample-and-hold nodes </p>
+<p>New clock divider and sample-and-hold nodes</p>
 </li>
 </ul>
-<p>I started this project to improve my understanding of synths and sound synthesis. NoiseCraft is ideally suited to explore the possibilities of additive, subtractive and FM synthesis. Most nodes are simple building blocks with a low level of granularity so that it's easy to understand how things work. By connecting oscillators, filters, delays and other basic components you can create your own synth or groovebox. I've linked some fun example projects below to showcase various possibilities: </p>
+<p>I started this project to improve my understanding of synths and sound synthesis. NoiseCraft is ideally suited to explore the possibilities of additive, subtractive and FM synthesis. Most nodes are simple building blocks with a low level of granularity so that it's easy to understand how things work. By connecting oscillators, filters, delays and other basic components you can create your own synth or groovebox. I've linked some fun example projects below to showcase various possibilities:</p>
 <ul>
 <li>
-<p><a href="https://noisecraft.app/101">Detuned saw, sub osc, ping-pong echo & distortion</a> </p>
+<p><a href="https://noisecraft.app/101">Detuned saw, sub osc, ping-pong echo & distortion</a></p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/59">Kaïser Clicker Clicker's FM</a> (FM synthesis example) </p>
+<p><a href="https://noisecraft.app/59">Kaïser Clicker Clicker's FM</a> (FM synthesis example)</p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/46">Triple oscillator + delay + overdrive pedal</a> (playable with a MIDI keyboard) </p>
+<p><a href="https://noisecraft.app/46">Triple oscillator + delay + overdrive pedal</a> (playable with a MIDI keyboard)</p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/47">The little acid machine that could</a> (my attempt at an acid sound) </p>
+<p><a href="https://noisecraft.app/47">The little acid machine that could</a> (my attempt at an acid sound)</p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/50">Noise Machine / Relaxing Ocean Sounds</a> </p>
+<p><a href="https://noisecraft.app/50">Noise Machine / Relaxing Ocean Sounds</a></p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/23">Polyclocks v.1.0</a> (polyrhythm) </p>
+<p><a href="https://noisecraft.app/23">Polyclocks v.1.0</a> (polyrhythm)</p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/26">Long Gate & Retrigger</a> </p>
+<p><a href="https://noisecraft.app/26">Long Gate & Retrigger</a></p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/51">Da Wubs</a> (dubstep style wub-wub) </p>
+<p><a href="https://noisecraft.app/51">Da Wubs</a> (dubstep style wub-wub)</p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/60">andyS' DTMF synth</a> </p>
+<p><a href="https://noisecraft.app/60">andyS' DTMF synth</a></p>
 </li>
 <li>
-<p><a href="https://noisecraft.app/56">(a or not b)'s subtractive synthesizer v1.0</a> </p>
+<p><a href="https://noisecraft.app/56">(a or not b)'s subtractive synthesizer v1.0</a></p>
 </li>
 </ul>
-<p>Many more examples can be found on NoiseCraft's <a href="https://noisecraft.app/browse">browse</a> page and some instructions are provided in the <a href="https://noisecraft.app/help">help</a> page. With this project, I hope to create a community for the open sharing of musical ideas. If this is something that interests you, I'm also hoping to find skilled, like-minded collaborators to help me improve the software. I'll keep gradually improving it on my own, but there's a limit to what a single programmer can do in their spare time. NoiseCraft could use testing, bug fixes and various improvements. Constructive feedback as well as contributions to the help page and documentation are also welcome. If you report bugs, please try to provide details on how to reproduce the issue and please be kind. The project is available <a href="https://github.com/maximecb/noisecraft">on GitHub</a> :) </p>
+<p>Many more examples can be found on NoiseCraft's <a href="https://noisecraft.app/browse">browse</a> page and some instructions are provided in the <a href="https://noisecraft.app/help">help</a> page. With this project, I hope to create a community for the open sharing of musical ideas. If this is something that interests you, I'm also hoping to find skilled, like-minded collaborators to help me improve the software. I'll keep gradually improving it on my own, but there's a limit to what a single programmer can do in their spare time. NoiseCraft could use testing, bug fixes and various improvements. Constructive feedback as well as contributions to the help page and documentation are also welcome. If you report bugs, please try to provide details on how to reproduce the issue and please be kind. The project is available <a href="https://github.com/maximecb/noisecraft">on GitHub</a> :)</p>
 </div> <!-- contents -->
 </div> <!-- container -->
 

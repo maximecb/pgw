@@ -73,18 +73,18 @@ if (window.location.hostname.includes('github')) {
 <h1>D's Garbage Collector Problem</h1>
 <div class="post_date">September 10th, 2014</div>
 </div>
-<p>One of the biggest issues with <a href="http://pointersgonewild.com/higgs/">Higgs</a>, the JIT compiler I'm working on, is that the compilation times are too slow. The performance of the compiled machine code that Higgs produces is now fairly good. Still below that of V8 and SpiderMonkey, but getting closer, and orders of magnitude above what you would get from an interpreter. Unfortunately, in most benchmarks, the total execution time is now dominated by the time it takes for Higgs to compile JavaScript all the way down to x86 machine code. </p>
-<p>This is a problem that I haven't really tackled. For one, <a href="http://pointersgonewild.com/2014/04/10/positive-results-for-higgs/">my PhD research</a> is hugely focused on the performance of the compiled code, and my advisor is always pushing me to get better results in that area. Another issue is that, quite frankly, I don't really know why Higgs is so slow to compile code. I've been relatively careful to avoid unnecessary overhead when implementing it, and my attempts at profiling have been rather unfruitful. There are no obvious low-hanging fruits. From what I'm seeing, every step in the compilation pipeline is fairly slow. </p>
-<p>I did find one thing that stood out. My implementation of a liveness analysis scales poorly with function size. It allocates a huge bit matrix (vector of bit sets) for liveness computation. This grows quadratically with the function size, which means that in some cases, obscene amounts of memory are required, and this data structure doesn't fit in the cache. Seeing this, I did the obvious thing and rewrote the liveness analysis to use simple lists as sets of live values. The results were rather perplexing: the liveness analysis was now faster, but the rest of the compilation process had slowed down so that overall, the total compilation time was slower than before. No fair. </p>
-<p>I had an inkling of what might be wrong. Turns out it's a <a href="http://dlang.org/">D</a> garbage collector issue I've already run into and <a href="https://www.youtube.com/watch?v=FGgFMZhnXvU&feature=youtu.be&t=32m36s">talked about in my DConf 2014 talk</a>. </p>
-<p>To assess performance, I wrote a <code>test.js</code> program which assigns to a global variable and then reads from it 60000 times: </p>
+<p>One of the biggest issues with <a href="http://pointersgonewild.com/higgs/">Higgs</a>, the JIT compiler I'm working on, is that the compilation times are too slow. The performance of the compiled machine code that Higgs produces is now fairly good. Still below that of V8 and SpiderMonkey, but getting closer, and orders of magnitude above what you would get from an interpreter. Unfortunately, in most benchmarks, the total execution time is now dominated by the time it takes for Higgs to compile JavaScript all the way down to x86 machine code.</p>
+<p>This is a problem that I haven't really tackled. For one, <a href="http://pointersgonewild.com/2014/04/10/positive-results-for-higgs/">my PhD research</a> is hugely focused on the performance of the compiled code, and my advisor is always pushing me to get better results in that area. Another issue is that, quite frankly, I don't really know why Higgs is so slow to compile code. I've been relatively careful to avoid unnecessary overhead when implementing it, and my attempts at profiling have been rather unfruitful. There are no obvious low-hanging fruits. From what I'm seeing, every step in the compilation pipeline is fairly slow.</p>
+<p>I did find one thing that stood out. My implementation of a liveness analysis scales poorly with function size. It allocates a huge bit matrix (vector of bit sets) for liveness computation. This grows quadratically with the function size, which means that in some cases, obscene amounts of memory are required, and this data structure doesn't fit in the cache. Seeing this, I did the obvious thing and rewrote the liveness analysis to use simple lists as sets of live values. The results were rather perplexing: the liveness analysis was now faster, but the rest of the compilation process had slowed down so that overall, the total compilation time was slower than before. No fair.</p>
+<p>I had an inkling of what might be wrong. Turns out it's a <a href="http://dlang.org/">D</a> garbage collector issue I've already run into and <a href="https://www.youtube.com/watch?v=FGgFMZhnXvU&feature=youtu.be&t=32m36s">talked about in my DConf 2014 talk</a>.</p>
+<p>To assess performance, I wrote a <code>test.js</code> program which assigns to a global variable and then reads from it 60000 times:</p>
 <pre><code>a = 0;
 a;
 a;
 ...
 a;
 </code></pre>
-<p>The sad news is, compiling this program is unreasonably slow: </p>
+<p>The sad news is, compiling this program is unreasonably slow:</p>
 <pre><code>./higgs --perf\_stats --nostdlib test.js
 
 comp time (ms): 4504
@@ -93,11 +93,11 @@ total time (ms): 4507
 code size (bytes): 633036
 peak mem usage (KB): 443608
 </code></pre>
-<p>But now, if I add the following line to the beginning of the <code>main()</code> function: </p>
+<p>But now, if I add the following line to the beginning of the <code>main()</code> function:</p>
 <pre><code>// Reserve 1GB for the D GC
 GC.reserve(1024 \* 1024 \* 1024);
 </code></pre>
-<p>The results become very different. Preallocating a large chunk of memory for the D heap reduces the compilation time by 66%: </p>
+<p>The results become very different. Preallocating a large chunk of memory for the D heap reduces the compilation time by 66%:</p>
 <pre><code>./higgs --perf\_stats --nostdlib test.js
 
 comp time (ms): 1570
@@ -106,11 +106,11 @@ total time (ms): 1572
 code size (bytes): 633036
 peak mem usage (KB): 760828
 </code></pre>
-<p>And now if we both preallocate memory and disable the GC with the following: </p>
+<p>And now if we both preallocate memory and disable the GC with the following:</p>
 <pre><code>GC.reserve(512 \* 1024 \* 1024);
 GC.disable();
 </code></pre>
-<p>Then we get: </p>
+<p>Then we get:</p>
 <pre><code>./higgs --perf\_stats --nostdlib test.js
 
 comp time (ms): 968
@@ -119,13 +119,13 @@ total time (ms): 971
 code size (bytes): 633036
 peak mem usage (KB): 798372
 </code></pre>
-<p>This is both interesting and perplexing. It tells us that originally, <i>the D GC overhead took over 75% of the total execution time</i>. By reserving memory, we can reduce the number of garbage collections and eliminate most of this overhead. What's probably happening is that my test program almost fills the heap, but doesn't cause it to expand. Then, we have a situation where the GC is "thrashing", and getting repeatedly triggered every few allocations. </p>
-<p>So, always preallocate memory then? Unfortunately, I found out through experimentation that choosing the amount of memory to preallocate requires magic voodoo. Sometimes preallocating less memory yields better performance. What seems clear is that the D GC needs better heuristics to decide when to expand the heap to avoid thrashing. This would be much more effective than me trying to guess how much memory to reserve to get around the problem. </p>
-<p>There might be another issue here as well. I suspect that D memory allocation itself is quite slow and could be further optimized. It would also be beneficial to optimize GC algorithm (potentially using multithreading) to make collections faster. In any case, it seems very clear to me that something needs to be done about GC performance in D. As it is, this performance issue stands out like a sore thumb. </p>
-<p>System programmers like myself care very much about performance, but in the current situation, it seems I can't improve Higgs compilation times without refactoring my code to avoid memory allocations at all costs. Doing so would take quite a bit of my time, and invariably make the said code much less maintainable. The point of this post isn't to point fingers and yell at people, but to highlight a very real and fundamental problem which, in my opinion, will scare away many potential D programming language adopters. </p>
+<p>This is both interesting and perplexing. It tells us that originally, <i>the D GC overhead took over 75% of the total execution time</i>. By reserving memory, we can reduce the number of garbage collections and eliminate most of this overhead. What's probably happening is that my test program almost fills the heap, but doesn't cause it to expand. Then, we have a situation where the GC is "thrashing", and getting repeatedly triggered every few allocations.</p>
+<p>So, always preallocate memory then? Unfortunately, I found out through experimentation that choosing the amount of memory to preallocate requires magic voodoo. Sometimes preallocating less memory yields better performance. What seems clear is that the D GC needs better heuristics to decide when to expand the heap to avoid thrashing. This would be much more effective than me trying to guess how much memory to reserve to get around the problem.</p>
+<p>There might be another issue here as well. I suspect that D memory allocation itself is quite slow and could be further optimized. It would also be beneficial to optimize GC algorithm (potentially using multithreading) to make collections faster. In any case, it seems very clear to me that something needs to be done about GC performance in D. As it is, this performance issue stands out like a sore thumb.</p>
+<p>System programmers like myself care very much about performance, but in the current situation, it seems I can't improve Higgs compilation times without refactoring my code to avoid memory allocations at all costs. Doing so would take quite a bit of my time, and invariably make the said code much less maintainable. The point of this post isn't to point fingers and yell at people, but to highlight a very real and fundamental problem which, in my opinion, will scare away many potential D programming language adopters.</p>
 <h2>Update: September 10, 7:39 PM</h2>
-<p>This post got much more attention than I expected. It made the front page on Hacker News and <a href="http://www.reddit.com/r/programming">r/programming</a>. There have been over 11000 views at the time of this writing. Andrei Alexandrescu, co-creator of D, <a href="http://www.reddit.com/r/programming/comments/2g03af/ds_garbage_collector_problem/ckent8c">posted on reddit</a> to say that he's decided to rewrite the GC. I apologize for the bad publicity I may have caused D, but I am glad that the problem has been recognized and that something will be done about it. With a brand new GC, the D programming language will be much more competitive. </p>
-<p>For those who are curious, or may want to help, here is a link to the <a href="https://github.com/D-Programming-Language/druntime/tree/master/src/gc">source code of the D GC</a>. If you're interested in contributing and helping to fix this problem, you should head to the <a href="http://forum.dlang.org/">D forums</a> and get in touch with the community, or try contacting Andrei directly. Even if you don't have time to contribute, your feedback may be useful in the design of a better GC. </p>
+<p>This post got much more attention than I expected. It made the front page on Hacker News and <a href="http://www.reddit.com/r/programming">r/programming</a>. There have been over 11000 views at the time of this writing. Andrei Alexandrescu, co-creator of D, <a href="http://www.reddit.com/r/programming/comments/2g03af/ds_garbage_collector_problem/ckent8c">posted on reddit</a> to say that he's decided to rewrite the GC. I apologize for the bad publicity I may have caused D, but I am glad that the problem has been recognized and that something will be done about it. With a brand new GC, the D programming language will be much more competitive.</p>
+<p>For those who are curious, or may want to help, here is a link to the <a href="https://github.com/D-Programming-Language/druntime/tree/master/src/gc">source code of the D GC</a>. If you're interested in contributing and helping to fix this problem, you should head to the <a href="http://forum.dlang.org/">D forums</a> and get in touch with the community, or try contacting Andrei directly. Even if you don't have time to contribute, your feedback may be useful in the design of a better GC.</p>
 </div> <!-- contents -->
 </div> <!-- container -->
 
