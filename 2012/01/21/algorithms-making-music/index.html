@@ -95,22 +95,22 @@ document.addEventListener('keydown', (e) => {
 <p><a href="http://www.amazon.com/BasicSynth-Daniel-Mitchell/dp/0557022126">BasicSynth</a></p>
 </li>
 </ul>
-<p>Learning about synthesizers and sound synthesis was interesting as it gave me some understanding of how to create sounds and give them different textures. I ended up acquiring a <a href="http://www.vintagesynth.com/korg/microkorg.php">microKORG</a> synthesizer and installing <a href="http://lmms.sourceforge.net/">synthesis software</a> so I could play with this first-hand. Music theory is more directly related to the question of how to build music. People have been studying what makes music music for centuries. Music theory books don't provide a magic recipe for songmaking, but they do provide some hints as to what kinds of pitches and musical structures tend to work well together.</p>
+<p>Learning about synthesizers and sound synthesis was interesting as it gave me some understanding of how to create sounds and give them different textures. I ended up acquiring a microKORG synthesizer and installing the LMMS DAW so I could play with this first-hand. Music theory is more directly related to the question of how to build music. People have been studying what makes music music for centuries. Music theory books don't provide a magic recipe for songmaking, but they do provide some hints as to what kinds of pitches and musical structures tend to work well together.</p>
 <p>I thought it would be interesting to attempt building software that can compose music on its own. If it was possible to infuse enough musical knowledge in a piece of software, it ought to be possible to get something that sounds musical out of it. There are obviously issues when it comes to making software be "creative", but I still found the concept was interesting. What if you could at least use software to assist you in musical creation? Can't think of a melody for your song? Generate random melodies and sample them. Use them as a starting point and modify them until you get something you like. This is computer-assisted musical composition.</p>
-<p>A year ago, Dimitry Zolotaryov and I created a web application called <a href="http://evotune.appspot.com/">EvoTune</a> for a <a href="www.yearonelabs.com/google-hackathon-recap/">Google Hackathon</a> event. The idea was simple: create software that can generate random drum loops using samples and a pattern sequencer. The software has elementary concepts about the structure of drum loops, but it relies on users voting for the best sounding patterns, which are then mated in a genetic algorithm sort of way. We found that EvoTune worked quite well in practice and produced usable drum loops.</p>
+<p>A year ago, Dimitry Zolotaryov and I created a web application called EvoTune for a Google hackathon event. The idea was simple: create software that can generate random drum loops using samples and a pattern sequencer. The software has elementary concepts about the structure of drum loops, but it relies on users voting for the best sounding patterns, which are then mated in a genetic algorithm sort of way. We found that EvoTune worked quite well in practice and produced usable drum loops.</p>
 <p>I decided to embark on something a little more ambitious and try to create melodies using pitched instruments instead of drum samples. For the past few weeks, I've been building code for a virtual synthesizer and sequencer. I also wrote some code to generate chords and musical scales. I have a simple <a href="http://en.wikipedia.org/wiki/Analog_modeling_synthesizer">virtual analog synthesizer</a> going that can be used to synthesize piano-like sounds. Below are some samples of my early experiments with procedural melody generation:</p>
 <ul>
 <li>
-<p><a href="http://www.cs.mcgill.ca/~mcheva/melodique/examples/2012-01-21/sample-cmajor1.mp3">Sample 1</a> (C major)</p>
+<p><a href="sample-cmajor1.mp3">Sample 1</a> (C major)</p>
 </li>
 <li>
-<p><a href="http://www.cs.mcgill.ca/~mcheva/melodique/examples/2012-01-21/sample-cmajor2.mp3">Sample 2</a> (C major)</p>
+<p><a href="sample-cmajor2.mp3">Sample 2</a> (C major)</p>
 </li>
 <li>
-<p><a href="http://www.cs.mcgill.ca/~mcheva/melodique/examples/2012-01-21/sample-aminor.mp3">Sample 3</a> (A minor)</p>
+<p><a href="sample-aminor.mp3">Sample 3</a> (A minor)</p>
 </li>
 <li>
-<p><a href="http://www.cs.mcgill.ca/~mcheva/melodique/examples/2012-01-21/sample-gminor.mp3">Sample 4</a> (G minor)</p>
+<p><a href="sample-gminor.mp3">Sample 4</a> (G minor)</p>
 </li>
 </ul>
 <p>I'm thinking of possibly creating a GUI for my software (which is actually written in JavaScript) and package it as a web application almost as-is. I was thinking some musicians might find it interesting to be able to generate random melodic phrases based on chord progressions.</p>
