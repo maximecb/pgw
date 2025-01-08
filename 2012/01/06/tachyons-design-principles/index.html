@@ -69,7 +69,7 @@ document.addEventListener('keydown', (e) => {
 <p>The design principles outlined below are based on these design goals:</p>
 <ol start="1">
 <li>
-<p>As much of Tachyon's code as possible should be written in pure JavaScript. Where low-level facilities are needed or when performance demands require it, Tachyon's <a href="http://www.iro.umontreal.ca/~dufour/pubs/dls2011.pdf">extended JavaScript dialect</a> should be used. Use of C code should be restricted, as much as possible, to low-level OS/platform/API interfaces. This will help keep the implementation minimalist and self-consistent. It should also help Tachyon optimize itself. This has motivated the implementation of <a href="http://pointersgonewild.com/2011/12/17/tachyon-has-a-garbage-collector/">Tachyon's garbage collector</a> in extended JavaScript.</p>
+<p>As much of Tachyon's code as possible should be written in pure JavaScript. Where low-level facilities are needed or when performance demands require it, Tachyon's <a href="dls2011.pdf">extended JavaScript dialect</a> should be used. Use of C code should be restricted, as much as possible, to low-level OS/platform/API interfaces. This will help keep the implementation minimalist and self-consistent. It should also help Tachyon optimize itself. This has motivated the implementation of <a href="http://pointersgonewild.com/2011/12/17/tachyon-has-a-garbage-collector/">Tachyon's garbage collector</a> in extended JavaScript.</p>
 </li>
 <li>
 <p>Tachyon should be designed with ease of code analysis and optimization in mind. The Tachyon frontend should use a platform-neutral Intermediate Representation (IR) that is easy to traverse and transform.</p>
