@@ -227,12 +227,12 @@ jmp for_test(19337);
 </code></pre>
 <p>The machine code above is far from optimal. It contains redundant moves and overflow checks which are not yet optimized away. I'm also fully aware that V8 is a moving target in terms of performance: the V8 team is <a href="http://ariya.ofilabs.com/2014/08/javascript-and-v8-turbofan.html">already working on a better optimizing compiler</a>, and they will no doubt improve upon the current situation. Still, it's nice to see that all the work I've put into basic block versioning is paying off. In the general case, Higgs doesn't beat V8, and things are likely to remain that way, but in this specific instance, Higgs is able to generate better quality machine code than a commercial compiler which has tens of man-years of engineering behind it. It's a small victory, but I find it very encouraging nonetheless.</p>
 <p>The tests I performed were done with V8 version 3.29.66 (current SVN trunk revision), and the <a href="https://github.com/maximecb/Higgs/tree/6ef9e608abdd41ac07d32a5c86c4456ab8505859">current version</a> of my development branch. If someone has a recent version of the SpiderMonkey shell built, I'd be curious to see the generated code and performance results for this microbenchmark. I wouldn't be surprised if SpiderMonkey did better than V8 and Higgs, considering it sports a powerful <a href="http://rfrn.org/~shu/drafts/ti.pdf">hybrid type inference engine</a>.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

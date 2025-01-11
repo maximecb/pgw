@@ -78,12 +78,12 @@ document.addEventListener('keydown', (e) => {
 <p>I'm also in the process of building a <a href="https://github.com/maximecb/uvm/tree/main/ncc">toy C compiler</a> that targets UVM. It's currently lacking several features, but it already supports macros and enough C to be able to write something like a simple paint program, a snake game, and a few other simple graphics programs. UVM provides a frame buffer API that's really easy to use. Just two function calls and you can <a href="https://github.com/maximecb/uvm/blob/7217a3a5e7d4959dbab117d58365ff0b6c814108/ncc/examples/ball.c#L77">plot pixels</a> into a window, which makes the system fun to develop for as you can write a simple 2D game in something like <a href="https://github.com/maximecb/uvm/blob/main/ncc/examples/snake.c">200 lines of C code</a> without any boilerplate.</p>
 <p>So here it is, UVM is currently in very early stages, and I don't expect everyone to understand the purpose of this project, but I would really like to connect with people who share the vision, and find potential collaborators. If you'd like to know more, I recorded a <a href="https://www.youtube.com/watch?v=q9-o45B_qsA">short video demo</a> and wrote a decent amount of documentation <a href="https://github.com/maximecb/uvm">on GitHub</a>, including some notes to explain the various <a href="https://github.com/maximecb/uvm/blob/main/doc/design.md">technical decisions</a> made in the design of UVM. There's also automatically-generated documentation for the <a href="https://github.com/maximecb/uvm/blob/main/doc/syscalls.md">system calls</a> that UVM exposes to software running on the VM. I'm also happy to answer any questions and to accept pull requests to improve the documentation.</p>
 <p>In terms of what's coming next, I want to improve the C compiler and I'd like to add an audio API. I could use some input on how to best design a simple file IO and networking API. Longer-term, I would also like to design a simple and safe parallelism model for UVM. Probably something based on actors, with or without the possibility of sharing memory, but parallel computation is not my area of expertise. I could honestly use some input. If UVM is something that's interesting to you, feel free to reach out via GitHub <a href="https://github.com/maximecb/uvm/issues">issues</a> and <a href="https://github.com/maximecb/uvm/discussions">discussions</a> or <a href="https://twitter.com/Love2Code">via twitter</a>.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

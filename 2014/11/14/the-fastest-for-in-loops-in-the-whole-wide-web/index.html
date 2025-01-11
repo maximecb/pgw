@@ -84,12 +84,12 @@ document.addEventListener('keydown', (e) => {
 <p>The faster for-in loop satisfied my original goal. The fasta benchmark now runs several times faster on Higgs. The performance we get is no longer abhorrent. However, we still aren't beating the other engines on that benchmark, we're about 3 times slower now. There's another detail that hinders performance in this specific benchmark. In the body of the for-in loops, properties are being <a href="https://github.com/maximecb/Higgs/blob/master/source/benchmarks/sunspider/string-fasta.js#L68">accessed with dynamic keys</a> that are only known at execution time. Higgs currently deals with that by doing a D runtime call. Clearly, again, the other engines have some better way of handling this particular case than I do.</p>
 <p>I've been working hard in the last two weeks to try and fix every obvious performance issue I could find. Among other things, I implemented <a href="http://blog.cdleary.com/2012/01/string-representation-in-spidermonkey/">ropes</a> to make string concatenation faster. Now, I made for-in loops faster. In the end though, each optimization I make is just a drop in the bucket. To compete effectively on every benchmark, there are many individual things to optimize. Everything must be made fast. The people at Google and Mozilla have had years to optimize their engines specifically so that they would perform well on the well-known sets of benchmarks. They've gone as far as implementing memoization of sine values based on the knowledge that <a href="https://github.com/maximecb/Higgs/blob/master/source/benchmarks/sunspider/3d-morph.js">this one benchmark</a> calls the sine functions with the same angle values repeatedly.</p>
 <p>What I wish conference reviewers would understand is just how high they're raising the bar by asking little me to compare the performance of Higgs to that of commercial implementations. More than two years of work went into my JIT compiler, and I'm just barely starting to have performance numbers I can be proud of. You'll notice though that I'm not comparing the performance of Higgs on benchmarks to that of <a href="http://en.wikipedia.org/wiki/SpiderMonkey_(software)#IonMonkey">IonMonkey</a>, <a href="http://blog.chromium.org/2010/12/new-crankshaft-for-v8.html">Crankshaft</a> or <a href="http://ariya.ofilabs.com/2014/08/javascript-and-v8-turbofan.html">TurboFan</a>. I simply don't think I can match the tens of man-years of (over)engineering and that went into it. It would take me several years to get anywhere close, and by then, V8 would be even faster than it is now. I've got the fastest for-in loop for the moment, but it takes a lot more than that to have a competitive JavaScript implementation.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

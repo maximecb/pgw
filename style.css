@@ -25,36 +25,17 @@ body {
     hyphens: auto;
 }
 
-/* On larger screens at least this size, limit the page width */
-@media (min-width: 1000px) {
-    .container {
-        max-width: 820px;
-    }
-}
-
-/* For mobile devices */
-@media only screen and (max-device-width: 480px) {
-    :root {
-        /* Increase the base font size */
-        font-size: 32px;
-
-        /* Don't auto-adjust font sizes on mobile */
-        /*text-size-adjust: none;*/
-
-        --top_bar_gap: 0.5rem;
-    }
-}
-
-/* Increase the font size for regular text a little bit */
-:where(p, li) {
-    font-size: 1.0625rem;
-}
-
 .copyright {
     text-align: center;
     font-size: 0.85rem;
     color: #555;
     margin: 18px;
+    max-width: 95%;
+}
+
+/* Increase the font size for regular text a little bit */
+:where(p, li) {
+    font-size: 1.0625rem;
 }
 
 /* Top bar container */
@@ -250,4 +231,37 @@ figure img {
 figure figcaption {
     text-align: center;
     margin-top: 6px;
+}
+
+/* On larger screens at least this size, limit the page width */
+@media (min-width: 1000px) {
+    .container {
+        max-width: 820px;
+    }
+}
+
+/* For mobile devices */
+@media only screen and (max-device-width: 480px) {
+    :root {
+        /* Increase the base font size */
+        font-size: 32px;
+
+        /* Don't auto-adjust font sizes on mobile */
+        /*text-size-adjust: none;*/
+
+        --top_bar_gap: 0.5rem;
+    }
+
+    /* Make the copyright notice a bit smaller on mobile */
+    .copyright {
+        font-size: 0.75rem;
+    }
+
+    /*
+    Remove the max image height on mobile.
+    Only use the relative max-width
+    */
+    figure img {
+        max-height: unset;
+    }
 }

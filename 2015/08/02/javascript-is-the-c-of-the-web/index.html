@@ -77,12 +77,12 @@ document.addEventListener('keydown', (e) => {
 <p>Personally, I'm a big fan of simplicity and minimalism in programming language design. I think that smaller languages have the potential to be easier to implement, optimize, teach, debug and understand. The bigger your language, the more semantic warts will pop out and the more behavioral inconsistencies are going to occur between different VM implementations. If JavaScript is really <a href="http://www.hanselman.com/blog/JavaScriptisAssemblyLanguagefortheWebPart2MadnessorjustInsanity.aspx">"the assembly language of the web"</a>, then why does it need all these high-level features? The logical thing to do would have been to freeze as much of the JS semantics as possible, and focus on improving support for JS as a compiler target. I believe that the answer as to why JS keeps growing is largely <a href="https://en.wikipedia.org/wiki/Design_by_committee">design by committee</a>.</p>
 <p>Of course I'm biased. I implemented my own JavaScript JIT compiler and the fact is, I'm too busy to keep up with all these new additions. Still, it seems to me that in the web world, nobody takes the time to pause, breathe and think things out for even a moment. Case in point: Mozilla made a lot of noise with <a href="https://en.wikipedia.org/wiki/Asm.js">asm.js</a>, a standard for compiling native code to JS that was allegedly better than <a href="https://en.wikipedia.org/wiki/Google_Native_Client">Google's Native Client</a>. I think asm.js is still new enough that developers haven't really had any time to adopt it, it's only been used in tech demos, but Mozilla and Google are already working on <a href="https://en.wikipedia.org/wiki/WebAssembly">WebAssembly</a>, which in all likelyhood will make asm.js irrelevant. Think about that for a second: asm.js, which is still very new (2013, it's only two years old), is already mostly irrelevant, before anyone even had time to adopt it.</p>
 <p>WebAssembly is essentially what Brendan Eich told us we didn't really want or need: a bytecode format for the web. A somewhat more neutral platform for all compilers to target. As a compiler implementer, it still seems to me like it's a bit of an unfortunate compromise: a way to retrofit a web-bytecode into JavaScript VMs. It's going to take programs encoded as <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Trees (ASTs)</a> as input, whereas GCC, clang, and other real-world compilers usually generate <a href="https://en.wikipedia.org/wiki/Control_flow_graph">Control Flow Graphs (CFGs)</a> at the output stage, not ASTs. Forcing compilers to convert CFGs back into ASTs seems like a decision made to simplify the job of WebAssembly VM implementers, at the expense of everyone else.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

@@ -73,12 +73,12 @@ document.addEventListener('keydown', (e) => {
 <p>There are many nice tutorials out there to help you learn WebGL, which is essentially a simplified OpenGL API with less room for confusion. I was able to quickly write my own shaders for basic point/ambient lighting and vertex coloring. The next step, I figured, would be to work on tools to make procedural content generation easier. With that goal in mind, I started reading up on <a href="http://en.wikipedia.org/wiki/Constructive_solid_geometry">Constructive Solid Geometry (CSG)</a>.</p>
 <p>CSG is a technique to build 3D shapes out of combinations of simple primitives and operations such as addition, subtraction and intersection. It's fairly tricky to implement, but I find the math and algorithms involved to be fairly interesting. I found <a href="https://web.archive.org/web/20190819183728/http://mattn.ufoai.org/files/MAPFiles.pdf">this document</a> to be particularly useful in helping me to implement the generation of CSG primitives. Specifically, it's possible to fully specify a brush (<a href="http://en.wikipedia.org/wiki/Convex_polytope">convex polytope</a>) in space by its bounding planes. To render this brush, however, you need to compute its vertices and sort the said vertices in either clockwise or counterclockwise order for each face.</p>
 <p>So far, I've been able to generate cubes, convex prisms and pyramids with any number of sides. The algorithm I implemented unfortunately scales fairly poorly, however, as it tests each possible combination of 3 bounding planes for intersection to find the vertices of a given brush, which has expected O(n^3) running time. This slows down to a crawl as soon as a brush has 50 faces or more. I'm considering perhaps manually computing the vertices ahead of time in my brush generation process instead. For now, I will probably look into the computation of CSG operations and see what representation makes more sense from that point of view.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

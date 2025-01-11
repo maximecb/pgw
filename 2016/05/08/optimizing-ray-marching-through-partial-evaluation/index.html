@@ -76,12 +76,12 @@ document.addEventListener('keydown', (e) => {
 <p>The work that's been done on applying partial evaluation to ray tracing, in my opinion, doesn't go far enough. The authors have essentially partially evaluated the ray tracing algorithm and specialized it in function of the objects present in a given 3D scene. What I think would be very useful, is to specialize the evaluation of SDFs in function of the camera position. What if, for instance, you could mathematically prove that certain objects in your scene are not present in the left half of the <a href="https://en.wikipedia.org/wiki/Viewing_frustum">view frustum</a>. That is, what if you could prove that most of the objects in your scene are not visible on the left half of the screen?</p>
 <p>It seems like it would be relatively straightforward to recursively subdivide the image and view frustum into multiple quadrants and determine which objects will definitely not be visible in each. I know it can be done, in fact, directly by using the definition of SDFs, without very fancy tricks. If you could do this, then you could generate a separate, optimized SDF for smaller fractions of the image to be rendered. What I'm essentially proposing is to generate optimized pieces of shader code on the fly for smaller areas of the screen, which can be evaluated much faster than the SDF for an entire scene.</p>
 <p>I don't know how viable it is to compile and run fresh shader code every time the camera moves on a GPU, but I believe it might actually be possible, using this kind of optimization, to render SDFs on a multicore desktop CPU at decent frame rates.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

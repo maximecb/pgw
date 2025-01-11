@@ -77,12 +77,12 @@ document.addEventListener('keydown', (e) => {
 <p>The numbers above show the speedups I measured on some of the SunSpider benchmarks, going from very simple to medium-sized programs. If you're familiar with these benchmarks, you might feel that these times are ridiculously slow either way. You should keep in mind that this is still very preliminary work (I did say the JIT was a <code>prototype</code>) and that these values were measured using the linux <code>time</code> utility, and so include initialization time. Higgs is also self-hosted, meaning that it lazily compiles parts of its own standard library when you run a program. As such, Higgs will probably always be at a disadvantage when it comes to very short running programs.</p>
 <p>At this point, the tracelet JIT compiler is about 800 lines of D code (excluding the x86-64 assembler). It's very much a prototype and a platform for me to experiment with, meaning I will probably refactor the design in many ways. I'm already thinking of several improvements I can make over the course of the next week which should bring more significant speedups. The main thing I will be doing is trying to extend tracelets in a trace-like manner, which should tremendously help with loops.</p>
 <p>As I said earlier, I designed the Higgs interpreter to be simple and easy to maintain. This decision was partly motivated by my belief that interpreter speed should be largely irrelevant in a system where a JIT compiler is also available. I could have tried hard to make the Higgs interpreter faster, at the cost of tasteless <a href="http://en.wikipedia.org/wiki/Kludge">kludges</a> and largely increased code complexity, but I don't think it would have been worth it, especially now that I've shown that 4 days of work can yield a simple JIT compiler producing 500% speedups. Next week, I'd like to have at least 1000% speedups over the interpreter, which I believe is easily achievable.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

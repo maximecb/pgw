@@ -69,12 +69,12 @@ document.addEventListener('keydown', (e) => {
 <p>I recently implemented a prototype analysis that is partially flow-sensitive. The results were fairy promising, at least on simple programs. The analysis was able to successfully infer the types of most variables and object fields, and seemed to run at an acceptable speed. Another nice thing is that the analysis can be run incrementally, and doesn't need to analyze parts of programs that can be shown never to run. The main weakness so far, however, is that my analysis is still relatively weak when it comes to inferring that properties must definitely exist on objects. It also doesn't benefit very much from aliasing information that seems obvious when looking at the source code of the programs being analyzed... And my instinct tells me that if it's so plain and obvious, there should be a way to design an analysis that can infer it.</p>
 <p>Following a discussion with professor Bruno Dufour, I've decided to implement a second prototype of my analysis that will be fully flow-sensitive, and based on the <a href="http://en.wikipedia.org/wiki/Pointer_analysis">points-to analysis</a> paradigm. Such analyses are typically more costly in terms of execution time and memory usage, but I'm hoping to find simplifying assumptions that can help make the performance acceptable. In any case, a flow-sensitive analysis should provide me with some sort of upper bound on the precision of the type information that can be inferred <a href="http://en.wikipedia.org/wiki/Static_program_analysis">statically</a>, and give me more insight into how to design more precise and efficient analyses in the future.</p>
 <p>In other news, I've started working on Tachyon's Garbage Collector (GC). This will be a simple stop-and-copy semi-space collector using <a href="http://en.wikipedia.org/wiki/Cheney's_algorithm">Cheney's algorithm</a>. I'm implementing the GC itself in Tachyon's extended JavaScript dialect, as opposed to writing it in C, as I feel this will integrate better with the rest of the system. So far, I've written code to traverse objects in memory and to traverse the stack from top to bottom. The main component missing is traversal of compiled functions, which I should be implementing this week. I'm hoping all this won't be too buggy once I integrate it all together. Rumors are GCs are very hard to debug. I'll be finding out soon enough.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

@@ -81,12 +81,12 @@ document.addEventListener('keydown', (e) => {
 <p>At this point, you might wonder why one would want to design a programming language without variadic functions. One reason is that they are superfluous, and it might be best, in the spirit of clarity and simplicity, not to include them. Another is that removing variadic functions would help simplify the implementation of the said language. JavaScript VMs, for example, must implement more complex calling conventions to support the efficient passing of a variable number of arguments and the <code>apply</code> function.</p>
 <p>In addition to this, JavaScript provides the <a href="https://developer.mozilla.org/en/JavaScript/Reference/Functions_and_function_scope/arguments">arguments object</a> primarily to support variadic functions. The arguments object makes optimization of JavaScript programs more difficult and its efficient implementation significantly complexifies JavaScript VMs. Much of this complexity could be avoided in a language which did not provide variadic functions and instead simply encouraged passing explicit lists of arguments when desired.</p>
 <p>I believe that most languages, especially the ones that feature native support for lists or arrays, could do away with variadic functions. LISP derivatives could too, if their primitive operators were implemented in terms of variadic macros that unfold into applications of binary primitive operators. That is, it would be possible to design a LISP language in which functions are not variadic, but macros can be.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

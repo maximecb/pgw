@@ -85,12 +85,12 @@ document.addEventListener('keydown', (e) => {
 </code></pre>
 <p>Realistically, it would be fairly easy to implement a specialized AST transformation for assertions which replaces assert function calls by inlined code of the form above. However, Tachyon also has a logging system that has calls such as "log.debug(string_expr)" which only print in debug mode. For performance reasons, those should ideally also be expressed as macros. Hence, I came to the conclusion that it would make sense to implement some kind of macro system in Tachyon.</p>
 <p>Right now, I'm trying to decide whether I want something simple like C's macro system, which does text-based replacement, or a system operating at the AST level where macros are pseudo-functions where the argument variables are replaced by the argument expressions. One annoying detail, though, is that as long as Tachyon runs under V8, I will have to implement the same macro system into both Tachyon and V8 if I want the code to work the same in both.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

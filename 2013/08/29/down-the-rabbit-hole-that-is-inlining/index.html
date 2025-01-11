@@ -79,12 +79,12 @@ jo ADD_OVER(169);
 mov r8, rbx;
 </code></pre>
 <p>On my Core 2 Quad 2.4GHz, the loop executes in 3.2s, which puts it at around 625M iterations per second, or less than 4 CPU cycles per iteration, not bad! This microbenchmark is obviously a near-ideal test case, and I can't claim performance gains anywhere near 1000% on more realistic benchmarks, but every benchmark I tested so far benefits from inlining. There's still many simple things I can do to improve the speed of the generated code. For one, the heuristics I use to choose what to inline are fairly naive at the moment. Still, all of this is very good progress towards the paper I'm working on.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

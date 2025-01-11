@@ -69,12 +69,12 @@ document.addEventListener('keydown', (e) => {
 <p>Since my interpreter uses an intermediate representation built on basic blocks and sequences of instructions, I had to compile <code>finally</code> blocks in-line at every point where they would be run, which meant handling a multitude of corner cases. I believe this complexity reveals that <code>finally</code> blocks are a fundamentally "unnatural" language feature. I say unnatural because the control flow involved is convoluted and unintuitive to programmers. Preventing a return statement from executing seems like the kind of black magic that simply shouldn't be possible.</p>
 <p>I'm quite happy to have exception support as I believe it will make debugging the Higgs runtime and standard libraries (both written in extended JS) much easier. Now that this is done, I will be moving towards one of the biggest pieces of the puzzle: implementing a garbage collector for Higgs. Since the focus of my research isn't garbage collection, I will implement a simple and minimalist stop-the-world copying GC. Having previously implemented a <a href="http://pointersgonewild.com/2012/01/12/about-tachyons-garbage-collector/">similar GC</a> for Tachyon, I anticipate that I should be able to complete this task within approximately two weeks. The task will be sped up by the automatic generation of code to visit heap-allocated objects.</p>
 <p>In case anyone reading this blog is interested, I could use some help on various fronts, one of which is the completion of the <a href="https://github.com/maximecb/Higgs/blob/master/source/stdlib/math.js">math library</a>. I'm missing functions such as <code>Math.ceil</code>, <code>Math.log</code>,<code>Math.exp</code> and full floating-point support in <code>Math.pow</code>. I'm also in need of code to parse and format floating-point values as strings. All of this code would be written in JavaScript. Lastly, I'm looking for a simple JavaScript FFT (fourier transform) benchmark.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

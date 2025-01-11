@@ -71,12 +71,12 @@ document.addEventListener('keydown', (e) => {
 <p>Then, there's the issue of JIT compilation. I very much like JIT compilers because that's where my expertise lies, I've written <a href="https://github.com/higgsjs/Higgs">my own JIT</a> as part of my PhD thesis. Still, I have to keep an open mind and ask myself what's best for my language. JIT compilers are fundamentally more powerful in terms of optimization capabilities than AOT (Ahead-Of-Time or static) compilers, because they can adapt the way they optimize code based on the behavior of running programs. They're great for dynamic languages.</p>
 <p>Unfortunately, it seems that the world, at the moment at least, is stepping away from JIT compilation. In order to support mobile platforms or compile to WebAssembly, it seems to me that JIT compilation is impractical. Why? Because it requires generating machine code on the fly. At the moment, it's unrealistic to just plop a custom binary with self-modifying machine code on the Apple or Android app stores.</p>
 <p>I'm thinking I might just design my language so that it compiles to plain old C. This would make it possible to leverage the C compilers that already exist for every platform out there. Rest assured though, this language will be dynamically typed ;)</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

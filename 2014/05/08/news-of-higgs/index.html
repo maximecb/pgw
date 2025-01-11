@@ -85,12 +85,12 @@ document.addEventListener('keydown', (e) => {
 <p>This led me to discover that the D garbage collector, which is used by the type analysis, is very inefficient, and performs much worse when there is more data allocated. Higgs has its own heap for JS code, but sometimes needs to perform allocations when interacting with the host runtime (written in D). These allocations were much slower than I expected. With a <a href="http://forum.dlang.org/thread/ustyltiooelhlijcjxma@forum.dlang.org?page=1">simple change</a>, I was able to eliminate most of them. I also decided to pre-allocate memory for the D garbage collector in order to reduce collection frequency. To my surprise, this yielded a 4x performance improvement on several benchmarks.</p>
 <h2>The Next Phase</h2>
 <p>It seems i've been able to convince my PhD advisor (<a href="http://www.iro.umontreal.ca/~feeley/">Marc Feeley</a>) that the next phase of my research, after the current paper is submitted, should focus on extending basic block versioning to add object/field type analysis capabilities. In my opinion, the right way to do this is to implement a system of typed <a href="https://developers.google.com/v8/design#prop_access">hidden classes</a> (or shapes, as the Mozilla people call them). This should make it possible to eliminate many more type tests, and accelerate property accesses as well as method calls. As an added bonus, a proper implementation of hidden classes will provide a better foundation to efficiently implement <a href="http://stackoverflow.com/questions/17764795/create-getter-and-setter-in-javascript">getters and setters</a> in Higgs.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

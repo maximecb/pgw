@@ -70,12 +70,12 @@ document.addEventListener('keydown', (e) => {
 <p>The dynamically typed approach approach might be to write code to handle the new schema before it's even introduced, then run some code to translate from the old schema format to the new (all on-the-fly), and watch the system adapt, translating your records without a pause. Once all records are translated, you can then remove the code that deals with the old schema. I think the great advantage here is that a dynamic language allows you more wiggle room to make things temporarily inconsistent and refactor the system in an incremental manner. With dynamic languages, you can have two record formats for the same data at the same time, and code that has typing errors won't cause the system to fail so long as it's not executed. It's a more organic approach to the problem, and I think that programming live systems might actually be inherently organic in nature.</p>
 <p>Now, I stated early in this post that I believe type systems and type inference are actually quite helpful. You could actually make the argument that organically modifying massive online systems on-the-fly without type checking is about as safe as riding a dirt bike through a Serbian minefield or playing Russian roulette everyday for a year. My answer would be that type inference isn't fundamentally incompatible with dynamic typing. The <a href="http://www.cs.colorado.edu/~bec/courses/csci5535-s09/slides/ML_Type_Inference_and_Unification.pdf">unification-based</a> type inference algorithms that Haskell and ML use don't apply to dynamic languages, because they're trying to solve a system of constraints where every variable has one single type, but unification <a href="http://dl.acm.org/citation.cfm?id=2254094">isn't the only type inference algorithm</a> in existence. It's quite possible to create a dynamic language VM that does type inference, and warns you about possible type errors. The difference is that the dynamic language VM will let you have temporary type errors, so long as you know you can make things eventually consistent.</p>
 <p>What if you were modifying a live system, and introduced some crash bug? If you were working on a large production system, this could have terrible consequences. I would argue that if we're going to modify live systems, we probably need to introduce live debugging tools. Things such as the ability to snapshot the system before introducing code changes, recording traces and being able to backtrack execution some large number of steps should a crash occur. It may also be interesting to be able to install monitoring on new pieces of code to keep track of what these specific pieces of code are doing after their introduction. Ultimately, however, with live systems, we should be prepared to have programmers directly intervening at the moment of a crash to repair the system on-the-fly and resume its execution. With the ability to backtrack execution and examine the live heap, this might actually turn out to be a rather comfortable way of debugging programs.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

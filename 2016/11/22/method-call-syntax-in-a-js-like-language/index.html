@@ -120,12 +120,12 @@ print = io.print;
 print(2);
 </code></pre>
 <p>The solution I came up with is not perfect, it raises some potential problems. For one, with a special arrow syntax for method calls, it becomes possible to call object properties using both regular function calls, and arrow style method calls which pass a <code>this</code> argument. Experience tells me that if both styles are possible, people are going to use both, which could be messy. For example, what do you do if you have a set of methods which do not need a <code>this</code> argument? Do you declare one anyway? Would you end up with a mix of regular function calls and method calls on the same object?</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

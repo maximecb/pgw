@@ -70,12 +70,12 @@ document.addEventListener('keydown', (e) => {
 <p>You may be interested to know what the performance impact of this is. Some tests are slightly faster now, but at this point, most benchmarks run slightly slower with inlining enabled. This is because Higgs doesn't yet do much specialization and optimization after inlining, but also because inlining doesn't get used much. I'll need to implement at least basic support for OSR (e.g.: support for replacing the topmost function on the stack) in order to make it so functions with long-running loops can benefit from inlining at all. I'll also need to implement some support for constant propagation and type specialization in order to get more performance benefits from inlined calls. Simply eliminating some amount of call overhead turns out to be insufficient.</p>
 <p>In other news, Tom (<a href="https://github.com/thejsjunky">thejsjunky</a>) is working on enhancing our <a href="http://en.wikipedia.org/wiki/Foreign_function_interface">Foreign Function Interface (FFI)</a> library to maximize its user-friendliness. He's also implementing a test harness to make it easier to add new tests to Higgs. It's very important to me that Higgs be robust and well tested. I'd like to make it easy for people to submit failed test cases when they file a bug report on GitHub. I'd also like to encourage people to contribute new libraries and FFI bindings they wrote through pull requests. My goal is that Higgs will eventually be very much of a "batteries included" JS implementation which makes it easy for people to start hacking immediately. Tom and I even have modest hopes that we may be able to compete with CPython on some fronts by the time I present at <a href="https://thestrangeloop.com/sessions/fast-and-dynamic">Strange Loop</a> in September.</p>
 <p>Andrei Alexandrescu has been posting talks from DConf 2013 on Reddit at a rate of two or three per week. A video of my talk should become available next week and will be linked on this blog as well as on my twitter feed. Stay tuned :)</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

@@ -76,12 +76,12 @@ document.addEventListener('keydown', (e) => {
 <p>Higgs clearly doesn't beat TraceMonkey across the board, but it does perform better on half of the above benchmarks, sometimes by a wide margin. What seems clear after some analysis is that TraceMonkey does very well in benchmarks with short, obvious loops, but poorly in benchmarks with more complex control-flow. This should at least highlight the fact that basic block versioning is not the same thing as tracing, and can, in fact, deal with situations to which tracing is less suitable.</p>
 <p>Fortunately for me, TraceMonkey is not a moving target in terms of performance, and this week, I've been working on helping Higgs catch up. I've added string optimizations such as <a href="http://blog.cdleary.com/2012/01/string-representation-in-spidermonkey/">ropes</a> and precaching of one-character strings. I've also been working on eliminating bottlenecks in the runtime and standard libraries. Tomorrow, I'll be optimizing the inefficient way in which Higgs handles for-in loops (property enumerations), which are extensively used in the fasta benchmark.</p>
 <p>It's very motivating to have a goal. You can be sure that the next paper I submit will be showing Higgs beating TraceMonkey on most of these benchmarks. I'm going to keep improving the performance, keep improving our results, and keep amassing more and more evidence that basic block versioning is a worthwhile JIT compiler architecture. I'm going to push Higgs <a href="https://www.youtube.com/watch?v=sT1bp9ujQEE">to the limit</a>.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

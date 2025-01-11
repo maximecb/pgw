@@ -70,12 +70,12 @@ document.addEventListener('keydown', (e) => {
 <p>Functional programming buffs may begin to see the fundamental problem here. The 3-address IR works with mutable, "impure" values. It's a very literal IR, aimed at running code on a <a href="http://en.wikipedia.org/wiki/Virtual_machine">Virtual Machine</a> (VM) in which we have virtual <a href="http://en.wikipedia.org/wiki/Register_file">registers</a> that have actual concrete addresses. The information we want for optimization, on the other hand, is rather symbolic. We want to work with values that flow from one operation to the next, and are ideally immutable, so that we can be able to perform algebraic substitutions and other simplifications, in the mathematical sense. Fortunately for us, this problem has already been solved in the compiler world. There is an IR out there called SSA, which stands for <a href="http://en.wikipedia.org/wiki/Static_single_assignment_form">Static Single Assignment form</a> and it has some very nice properties which make working with it much more enjoyable.</p>
 <p>I've already worked with SSA, in the <a href="http://pointersgonewild.com/2011/08/27/the-tachyon-javascript-compiler/">Tachyon</a> compiler, and found it rather pleasant to use. I thought I was simplifying things, reducing overhead by going with a more literal IR, but I've now concluded that this was a mistake. I decided to bite the bullet and begin the tedious work of refactoring Higgs to use an SSA-based IR instead. This is a big piece of work because the IR is probably the most central component of Higgs. The interpreter, the JIT, and the analyses all work with the IR. So far, I'm working on the biggest piece of the puzzle, the ~2500 lines of code that build the IR from the AST. The code I've refactored so far makes a lot more sense, probably because it decouples the problem of extracting the core language semantics out of the AST from the problem of assigning stack slots to values in a semi-efficient manner, resulting in overall simpler code.</p>
 <p>Fortunately, even though I'm making pretty fundamental changes to the IR, I don't anticipate that porting the intepreter itself will be very difficult. The execution model will remain the same, the core operations will remain the same, the JavaScript runtime won't change very much if at all. This is the scary kind of refactoring that might make people shy away from doing it, but I figure I'll be able to generate much cleaner and effective code in the end. I'm doing this work now to fix a problem while it's still small, instead of relying on several inefficient and increasingly complex workarounds. I hope to have the refactoring complete around the end of this month or the beginning of July. In the meantime, the master branch of Higgs remains working, and has inlining enabled by default.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

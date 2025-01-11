@@ -78,12 +78,12 @@ document.addEventListener('keydown', (e) => {
 <p>Beyond having the ability to assign types to everything, it seems to me that a typed VM design must inherently take on more responsibilities than an untyped VM design. In order to maintain typing constraints while offering decent performance, the typed VM is forced to take the responsibility of implementing a sophisticated JIT compiler that will understand and enforce all these constraints. This is because the running program can't be trusted to implement its own JIT compiler as this can't be proven safe. Furthermore, if the typed VM wants to support garbage collection, it also has to take on the responsibility of implementing its own GC, because once again, the running program can't be trusted to manage its own memory while respecting typing constraints.</p>
 <p>An untyped VM design can be much more minimalistic. It has to enforce a small set of hard constraints, such as making sure that pointer dereferences respect valid address bounds so that the running program can't crash the host VM, but it doesn't really need to care about the types of values or enforcing typing constraints. For performance, it can implement a very barebones JIT compiler based on <a href="https://en.wikipedia.org/wiki/Binary_translation#Dynamic_binary_translation">dynamic binary translation</a>, but it doesn't have to care about optimizing type checks, and it can even allow the running program to manage its own memory and implement its own garbage collector.</p>
 <p>In summary, I think there's a strong case to be made that an untyped VM design can easily be much smaller and more minimalistic than a typed VM design. A simpler untyped VM has two major strengths. The first is that it doesn't place as many restrictions on running programs. Programs can implement their own control flow structures, their own GC, or even their own JIT. The second is that a smaller, simpler VM is much easier to port, reimplement and maintain. If you think about the amount of effort that would be required to build a new Java VM from scratch and make it perform well, you quickly realize that such an undertaking is only possible for a massive corporation. There is still no official RISC-V support by the JVM, and it's easy to understand why.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

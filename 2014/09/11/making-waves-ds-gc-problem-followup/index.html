@@ -143,12 +143,12 @@ document.addEventListener('keydown', (e) => {
 </ol>
 <p>What's clear is that the D garbage collector <i>scales very poorly</i>. In fact, I'd say that the scaling is often pathological. Twice the allocations may mean the total collection time quadruples: a quadratic growth. This means that there's a ceiling on the number of objects the GC can be expected to reasonably manage. There's a ceiling on the scale of applications using the GC. If you go beyond this ceiling, your application will slow down to a crawl. You want to write a multithreaded web server in D? You're probably going to <i>have to</i> manage memory manually. Java doesn't suffer from this weakness, so why should D?</p>
 <p>Higgs is a program written in what I believe to be a reasonably efficient style. There aren't many layers of abstraction in the implementation. It doesn't create what I would deem to be an unreasonable number of allocations for what it does. I'm sure that if I put forth the engineering effort, I could reduce my reliance on the GC and improve performance. In fact, I already have. However, improving the D GC is something that will clearly benefit all users of the language. A future compiler update might improve the performance of some D programs by an order of magnitude. Working towards fixing poor GC performance is much more helpful than blaming those who are affected by it.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

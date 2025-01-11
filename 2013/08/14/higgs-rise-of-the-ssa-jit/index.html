@@ -82,12 +82,12 @@ document.addEventListener('keydown', (e) => {
 </ul>
 <p>In terms of metrics, I already started generating stats such as the number of dynamic type tests executed. The hope here is that the code replication/specialization scheme will help reduce this number significantly. Other metrics will include execution time, compilation time and volume of machine code generated (in bytes). I'm going to need to write a script to extract all these stats and produce averages and tables. On the reliability front, I have to say I've spent several days of work fixing bugs. I feel like Higgs is always becoming more robust and complete, but in the medium and long term, it would really benefit from <a href="http://en.wikipedia.org/wiki/Fuzz_testing">fuzz testing</a>. If anyone is interested, I could definitely use help in the fuzz-testing and debugging area, as well as in profiling to find performance bottlenecks.</p>
 <p>In other news, my collaborator Molly Everett has improved the Higgs <a href="https://github.com/maximecb/Higgs/blob/master/source/lib/ffi.js">FFI library</a> further and started to implement a <a href="https://github.com/maximecb/Higgs/blob/master/source/lib/console.js">console library</a> to provide facilities similar to what the console.log function provides in web browsers. I decided to port some simple <a href="https://github.com/maximecb/Higgs/blob/master/source/lib/csv.js">CSV parsing code</a> I wrote a while back and made it tie into our <a href="https://github.com/maximecb/Higgs/blob/master/README.md#libraries">stdio bindings</a> just to dogfood our current infrastructure a little bit. At this point, Higgs could conceivably be used to do some useful processing on text files. Tom is already talking about trying to write SDL 2.0 bindings for Higgs, which would undoubtedly be very useful (and fun to play with).</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

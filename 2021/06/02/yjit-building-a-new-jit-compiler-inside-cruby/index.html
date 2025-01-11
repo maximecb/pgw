@@ -122,12 +122,12 @@ mov eax,[ebx, &lt;cached ivar offset&gt;] # load the ivar value
 <p>Matz has stated in his recent talk at Euruko 2021 that Ruby would <a href="https://www.youtube.com/watch?v=ZcbTlNvNGbs&t=4610s">remain conservative with language additions</a> in the near future. We believe that this is a wise decision as rapid language changes can make it difficult for JIT implementations to get off the ground and stay up to date. It makes some sense, in our opinion, for Ruby to focus on internal changes that will make the language more robust and deliver competitive performance in the future.</p>
 <p>I believe that, through incremental, targeted changes, CRuby can be gradually re-engineered so that it can eventually have a true high-performance JIT compiler. Doing so must necessarily involve both JIT compiler experts and the Ruby Core developers. One key area of potential improvement would be the inclusion of object shapes. There are other things that could help us, such as rewriting some C methods in pure Ruby, such as Array#each and Fixnum#times, so that JIT compilers can inline through them. I may expand on such things in a future blog post. What would also be greatly helpful to JIT implementers is to have some commitment to stabilizing the internal Ruby bytecode format, or at least, to not add extra complexity and special cases to existing bytecode instructions. Currently, CRuby implements <i>11 kinds</i> of method dispatch, which, as you can imagine, makes optimization and inlining very challenging.</p>
 <p>If you’re interested in contributing or simply trying YJIT, it is <a href="https://github.com/Shopify/yjit">available on GitHub</a> under the same license as CRuby. The caveat of course is that we are at an early stage in this project and it’s very possible that you could run into bugs, or that you may not find the current performance particularly impressive. If you do want to help, YJIT could use more testing. Tracking down small regression tests for bugs is very valuable to us. We could also use more, larger benchmarks that better reflect real-world Ruby usage.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

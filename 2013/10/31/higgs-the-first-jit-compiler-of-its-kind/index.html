@@ -70,12 +70,12 @@ document.addEventListener('keydown', (e) => {
 <p>The next iteration of Higgs will try to solve this problem by moving away from method-based compilation. The new Higgs JIT will <a href="http://en.wikipedia.org/wiki/Lazy_evaluation">lazily</a> and incrementally compile functions one basic block at a time. Parts of functions that are not executed will never be compiled. I intend to push this approach further, and inline function calls incrementally as well, which means that in many cases, only small parts of functions will actually be inlined. There is significant potential for compilation time savings. There is also the potential for making better inlining and optimization decisions, through smart use of profiling during incremental compilation. Basic blocks, when first compiled, can be made to collect profiling information. These same blocks can then trigger recompilation later to produce more efficient code.</p>
 <p>Won't incremental compilation result in a horrible mess of machine code, you ask? I devised a scheme where blocks can be recompiled, garbage collected and relocated so as to make the machine code more efficient. I won't get into all the details just yet, but I've started examining the technical challenges and I'm quite convinced this is possible. Not only is it possible, it will mesh with basic block versioning in very interesting ways, and open up many possibilities. As far as I know, Higgs is going to be the first compiler to feature incremental lazy compilation of functions and incremental inlining (if anyone has references to prior art, please let me know). Even if Higgs isn't the first at this though, the combination of lazy incremental compilation and basic block versioning will make it a truly unique beast.</p>
 <p>A special thanks to Marc Feeley, Paul Khuong, Luke Wagner, Benjamin Cerat, Molly Everett and Erinn Di Staulo for helping me review my CC 2014 paper prior to submission.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

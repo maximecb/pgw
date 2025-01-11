@@ -103,12 +103,12 @@ document.addEventListener('keydown', (e) => {
 <p>Now, I said that some language features, such as <code>eval</code>, make type inference difficult. You might be wondering what kind of unholy sacrifices we'd have to make when designing a dynamic language that is amenable to type analysis. The answer, I believe, is that we wouldn't have to sacrifice much. In its most common form, <code>eval</code> is problematic because it can access any variable in the program: it's simply too unpredictable for type analysis, because it could do almost anything to a program's state. There is a simple fix for this: don't let <code>eval</code> write to program variables! Our new language could simply let <code>eval</code> execute in a restricted environment passed as argument. This is safer, and eliminates the problem without getting rid of the useful construct that is <code>eval</code>.</p>
 <p>Other design compromises might have to be made to make type analysis more effective. I've suggested in the past, for example, that it would be easier to infer types in JavaScript if the language had <a href="http://pointersgonewild.com/2012/04/02/inefficient-numerical-operators/">both integer and floating point types</a>. Throwing an exception when missing object fields are accessed (instead of producing the <code>undefined</code> value) would help type analysis as well. Such compromises are actually quite sensible: they make type inference easier without reducing expressiveness or getting in the way of programmers. In fact, throwing exceptions early, for example, actually helps debug programs more effectively!</p>
 <p>I believe that often, there is a "right" time for ideas to become mainstream. The time for this idea will come soon. There is a niche to be filled, there is a part of programming language design space we haven't really explored, and we have the technology to make it all happen. I don't know that I have time to create such a programming language myself, but I'm already seeing <a href="http://www.edofic.com/2012/11/cool-monday-hindley-milner-on-dynamic.html">hints</a> that <a href="http://whiley.org/2012/10/31/formalising-flow-typing-with-union-intersection-and-negation-types/">others</a> are thinking along the same lines that I am. The statically type inferred, high performance dynamic language will happen eventually, and probably sooner than you think.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

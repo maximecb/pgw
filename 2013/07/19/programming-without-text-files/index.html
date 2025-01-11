@@ -108,12 +108,12 @@ document.addEventListener('keydown', (e) => {
 <p>What would this buy us, besides having a language that is potentially more LISP-like? For one, if such a language were to have macros, they could have an even more seamless integration into the language than what LISP allows. These constructs could have their own customized visual representations. They could also have additional semantic information attached for better integration with your IDE and compiler. Imagine being able to design a calculus-oriented DSL which is visually represented using mathematical notation, has associated error-detection and autocompletion in your IDE for quick editing and is automatically optimized based on rules you've made known to the compiler. Imagine being able to request the AST for a function so that you can transform and instrument it on the fly. Now imagine being able to visually format source code any way you want, without having to worry about tabs, spaces, curly braces, commenting styles or the width of other people's displays.</p>
 <p>In my mind, it's quite clear that there is much to gain by editing and storing source code using a data format that more directly represents its actual semantics. One of the bigger obstacles for this to work, however, is that of designing suitable editing software. People are relatively comfortable writing source code as text, but editing ASTs seems like it would be more tedious at first glance. It should be possible to make the editing easier and faster by having the editor produce accurate auto-completion suggestions. Since the editor has direct access to the AST, it would become possible for it to make better auto-completion suggestions based on knowledge of language semantics. Another possibility that opens up for speeding up editing is that of building your own pattern-based shortcuts. For example, you could have your own collection of macros (code generator functions or patterns of source trees with holes in them) to be expanded at the touch of a few keys.</p>
 <p>What about tool support? As it stands, many programming languages, even among the most popular ones, have rather poor tool support. Part of the difficulty comes from the fact that tools need to parse and generate source code. If you take a languages like C and C++, for example, it can actually be difficult to find a parser that supports the complete grammar. If you want to write a tool that does code transformations, you also have to worry about issues like preserving comments, which is sometimes difficult, especially if the parser you chose has no support for this. If source code were represented in a more uniform data structure, it might actually be easier to write tools that parse, analyze, and generate code. It would also become easier to add metadata to existing source code. In the end, I believe that transitioning to this kind of programming model would enable significant gains that would largely outweigh the disadvantages.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

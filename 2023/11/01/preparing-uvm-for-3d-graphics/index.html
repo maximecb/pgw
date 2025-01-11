@@ -75,12 +75,12 @@ document.addEventListener('keydown', (e) => {
 <p>To represent 3D vectors and 4x4 matrices, I created typedefs for floating-point arrays. In order to be able to use these comfortably in my C code, I also needed to add support in NCC for stack-allocating array variables. Without that, every array variable would need to be a global. This was a bit tricky to do because UVM doesn't allow you to directly take the address of something on the stack (like a stack-allocated array) for performance reasons, and so if you want to take the address of things on the stack, the compiler needs to manage a separate stack for the things you take the address of. Once I got that working, I was able to put all the pieces together, and render a glorious <a href="https://github.com/maximecb/uvm/blob/main/ncc/examples/3dcube.c">3D rotating wireframe cube</a>.</p>
 <p>In terms of future plans, I’d like to add a simple asynchronous TCP networking API to UVM. That will make it possible to write something like a simple web server running on top of UVM, or maybe something like a custom bulletin board or a chat that can run without a web browser. I’m also thinking that it might be fun to create something like a little 64KB demoscene competition. In that spirit, I added some demos implementing demoscene fire and <a href="https://github.com/maximecb/uvm/blob/main/ncc/examples/plasma.c">plasma</a> effects based on Lode Vandevenne's <a href="https://lodev.org/cgtutor/">excellent tutorials</a>.</p>
 <p>If you think that UVM sounds like a cool project and you’d like to contribute, there are some <a href="https://github.com/maximecb/uvm/issues">open issues</a> on GitHub. I can use feedback on various design issues. I also really welcome bug reports, and new example programs to showcase what’s possible with UVM. All of the examples are licensed as CC0 (public domain) so that anyone can freely reuse the code and remix them. I would love to see new cool demoscene effects, games and audio/music programs, or anything fun, creative or useful you can come up with. If you find any of this interesting, feel free to reach out via <a href="https://github.com/maximecb/uvm/issues">GitHub issues</a> and <a href="https://github.com/maximecb/uvm/discussions">discussions</a> or via <a href="https://x.com/love2code">twitter/X</a>.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

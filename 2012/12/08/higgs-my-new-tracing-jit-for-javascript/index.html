@@ -77,12 +77,12 @@ document.addEventListener('keydown', (e) => {
 <p>There is one fairly obvious downside to my interpreter design: it's fairly slow. I chose to go with a design that's simple, straightforward and easy to build on. I also chose low-level opcodes, which means that a simple JS operator can cause the interpreter to execute several function calls and many instructions. The common wisdom in the tracing JIT world is that you need a fast interpreter because you're going to fall back to interpreted code often. I decided to make a different bet. My tracing JIT compiler will eventually compile and <a href="http://personals.ac.upc.edu/vmoya/docs/bala.pdf">link</a> any piece of code that is run a sufficient number of times. This means that in the limit, the interpreter's speed becomes irrelevant because any piece of code that is still being repeatedly run will have been compiled.</p>
 <p>The practical implication of this is that Higgs probably won't win against any JIT on the SunSpider benchmarks, some of which only run for a few milliseconds. Major browser vendors have poured millions upon millions of dollars and countless man-hours into optimizing every part of their JS engines for these benchmarks, and there's probably little hope I could single-handedly win in that race anyways. Instead, I intend to aim at optimizing longer-running programs, and focus specifically on aspects of JS code mainstream JITs have more difficulty tackling. I can imagine a compiler like Higgs being very effective at optimizing server-side JS code, for example.</p>
 <p>At this point, you might be wondering what makes Higgs an academic research project. There have, after all, been several papers published about tracing JITs. The concept is no longer new, and Mozilla actually seems to be moving back to a <a href="https://wiki.mozilla.org/Platform/Features/IonMonkey">method-based JIT</a> for Firefox. What makes Higgs interesting is the special sauce I will be adding to the mix. The third component of Higgs will be a type monitoring system that aims to extract near-perfect type information out of running programs. When compiling traces, the JIT compiler will make use of this oracle to produce highly optimized code with much fewer guards than would otherwise be possible. I aim to begin development of this very important part of Higgs as soon as next month. Stay tuned!</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>

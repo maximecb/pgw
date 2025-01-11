@@ -85,12 +85,12 @@ document.addEventListener('keydown', (e) => {
 <p>At the moment, I think that the design of UVM's memory address space seems to satisfy most of the needs I can anticipate, except for one. In the future, it seems like it would be useful to be able to share memory between different processes. The question is: how do you do that in a VM that doesn't have mmap? If you can't directly map a chunk in your memory space to be shared memory, then how do you share memory at all? There are at least three possible answers to that question. The first would be to not support shared memory, the second would be to add support for an mmap-like primitive later on (not impossible), and the last would be to share memory using a different mechanism.</p>
 <p>Ideally, if UVM supports shared memory in the future, I'd like to be able to provide strong guarantees. For example, I'd like to be able to guarantee that all reads/writes to shared memory are atomic. I think it might also be useful to be able to get a lock on a chunk of shared memory, or to implement something like transactional memory (but only within that specific shared chunk). I don't know how well that works with mmap, because we're talking about much stronger guarantees than what is normally provided by hardware. It seems it could be possible, however, to allocate shared memory blocks with a unique ID, and to provide special primitives to access these shared memory blocks. Here we're essentially talking about a 4th memory space that would have to be accessed trough a special kind of "fat pointer".</p>
 <p>In conclusion, at the moment, UVM doesn't have pages, mmap or shared memory. The design is pretty simple and it works well. I can see a path towards adding mmap support in the future if it turns out to be necessary, but I don't think that it will be. There are still some quirks that I think I may need to fix. One odd property in UVM is that address zero in the heap is a valid address, and accessing it doesn't fault. However, C, Rust and other languages tend to rely on address zero being invalid. As such, it might make sense to add that restriction to UVM as well, to be more in line with established practice. Another quirk is that at the moment, the heap can be resized to have any requested size. It might make sense to only allow the heap to have a size that is a multiple of some arbitrary "page size", such as 4KiB or 16KiB, if only to allow future optimizations.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
 </div> <!-- contents -->
 </div> <!-- container -->
-
-<div class="copyright">
-Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
-</div>
 
 </body>
 </html>
