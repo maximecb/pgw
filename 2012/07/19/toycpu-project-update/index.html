@@ -67,7 +67,7 @@ document.addEventListener('keydown', (e) => {
 <div class="cover_image">
 <img src="toycpu01.png">
 </div>
-<p>Motivated by the positive response I got, I've been working on <a href="http://pointersgonewild.com/2012/07/13/designing-a-toy-cpu/">toyCPU</a> (my assembly teaching platform) quite intensely in the last few days. The core design of the system is mostly finished and I have a basic implementation working, able to compile and run assembly programs, and produce graphical output.</p>
+<p>Motivated by the positive response I got, I've been working on <a href="/2012/07/13/designing-a-toy-cpu/">toyCPU</a> (my assembly teaching platform) quite intensely in the last few days. The core design of the system is mostly finished and I have a basic implementation working, able to compile and run assembly programs, and produce graphical output.</p>
 <p>I designed a simple <a href="http://en.wikipedia.org/wiki/Reduced_instruction_set_computing">RISC</a>-y assembly language, which currently comprises 30 <a href="http://en.wikipedia.org/wiki/Opcode">opcodes</a>. There are 12 general-purpose registers (r0..r12) and 3 special-purpose registers (rsp, rip, flags), with one extra register reserved for future usage. All registers are 16-bit and all are usable by instructions that take register operands. You may assign or add to the instruction pointer, for example. Instructions can also take 16-bit constants as input operands. The system RAM is made of 64K 16-bit words. This makes it very easy to address memory or visualize the memory space (no alignment issues).</p>
 <figure>
 <a href="toycpu1.png">

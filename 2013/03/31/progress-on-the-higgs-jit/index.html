@@ -64,7 +64,7 @@ document.addEventListener('keydown', (e) => {
 <h1>Progress on the Higgs JIT</h1>
 <div class="post_date">March 31th, 2013</div>
 </div>
-<p>I've been busy working on various aspects of the new <a href="http://pointersgonewild.com/2013/03/04/a-simple-jit-compiler/">Higgs JIT compiler</a> in the last month or so. Among other things, I decided to expand it into a proper <a href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">tracing JIT compiler</a> complete with support for side-exit traces (or sub-traces as I like to call them). This brought some performance improvements. I'm also happy to report that the JIT compiler appears quite stable and is enabled by default. At this point, the Higgs JIT is still quite simple and primitive compared to commercial JavaScript VMs, but nevertheless provides marked speedups relative to the interpreter on every benchmark I tested it on.</p>
+<p>I've been busy working on various aspects of the new <a href="/2013/03/04/a-simple-jit-compiler/">Higgs JIT compiler</a> in the last month or so. Among other things, I decided to expand it into a proper <a href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">tracing JIT compiler</a> complete with support for side-exit traces (or sub-traces as I like to call them). This brought some performance improvements. I'm also happy to report that the JIT compiler appears quite stable and is enabled by default. At this point, the Higgs JIT is still quite simple and primitive compared to commercial JavaScript VMs, but nevertheless provides marked speedups relative to the interpreter on every benchmark I tested it on.</p>
 <figure>
 <a href="nums.png">
 <img alt="Speedups over the interpreter" src="nums.png">
