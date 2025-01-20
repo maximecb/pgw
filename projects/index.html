@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ page_title }}</title>
-  <link rel="stylesheet" href="{{ css_path }}">
+  <title>Projects I've Worked On</title>
+  <link rel="stylesheet" href="../style.css">
   <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   <!-- Social media card -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="{{ page_title }}">
-  <meta property="og:description" content="{{ page_title }}">
-  {{ meta_img_tag }}
+  <meta property="og:title" content="Projects I've Worked On">
+  <meta property="og:description" content="Projects I've Worked On">
+  
   <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -30,17 +30,17 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open {{ md_path }}");
+        navigator.clipboard.writeText("open site/projects/index.md");
     }
 
     // Shift + left arrow
     if (e.shiftKey && event.keyCode === 37) {
-        window.location.href = "{{ prev_path }}";
+        window.location.href = "../projects/";
     }
 
     // Shift + right arrow
     if (e.shiftKey && event.keyCode === 39) {
-        window.location.href = "{{ next_path }}";
+        window.location.href = "../projects/";
     }
 });
 </script>
@@ -50,16 +50,16 @@ document.addEventListener('keydown', (e) => {
 
 <div class="top_bar">
   <div class="pgw">
-    <a href="{{ index_path }}">Pointers Gone Wild</a>
+    <a href="..">Pointers Gone Wild</a>
   </div>
   <nav>
-    <a href="{{ about_path }}">About</a>
+    <a href="../about/">About</a>
     <a href="https://github.com/maximecb">GitHub</a>
     <a href="https://x.com/love2code">x.com</a>
 
     <!--
-    <a href="{{ about_path }}">About</a>
-    <a href="{{ about_path }}">Projects</a>
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
     <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/github_icon.svg" alt="GitHub account"/></a>
     <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/x_icon.svg" alt="x.com account"/></a>
     <a href="/feed.xml"><img style="width: 1.2rem;" src="/rss_icon.svg" alt="RSS feed"/></a>
@@ -68,3 +68,25 @@ document.addEventListener('keydown', (e) => {
 </div>
 
 <div class="contents">
+<div class="page_title">
+<h1>Projects I've Worked On</h1>
+</div>
+<p></p>
+<h2>YJIT</h2>
+<hr>
+<h2>NoiseCraft</h2>
+<hr>
+<h2>Duckietown</h2>
+<hr>
+<h2>MiniGrid</h2>
+<hr>
+<h2>RenderMax</h2>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
