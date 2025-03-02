@@ -77,7 +77,7 @@ document.addEventListener('keydown', (e) => {
 </div>
 <p>After watching a documentary <a href="http://www.turingfilm.com/">about Alan Turing</a>, I started thinking about <a href="http://en.wikipedia.org/wiki/Universal_Turing_machine">Turing machines</a> again. They're a very useful tool for computer science proofs and an elegantly simple computational model. Beyond this, however, Turing machines seem relatively useless in terms of "real-world" applications. Any computable function can be computed by a Turing machine, but you probably wouldn't want to use one as a compilation target: it would be too inefficient.</p>
 <p>One possible application for Turing machines is to use them as programs to generate data <a href="http://en.wikipedia.org/wiki/Procedural_generation">procedurally</a>. Their simplicity makes it possible, for example, to create working programs randomly. Generating a random stream of x86 instructions that doesn't crash could be tricky, but with a Turing machine, it's quite easy. I decided to try something like this to produce so-called <a href="http://en.wikipedia.org/wiki/Generative_art">generative art</a>. The program I wrote generates random Turing machines that operate on a two-dimensional grid instead of a one-dimensional tape. The symbols written on the grid can be interpreted as colors, and voilà: we have procedural drawings.</p>
-<p>I prototyped this in JavaScript and named the project Turing Drawings. This is available <a href="https://github.com/maximecb/Turing-Drawings">on GitHub</a> if you're interested in seeing the source code. Better yet, I put a live demo up on <a href="http://maximecb.github.io/Turing-Drawings/">GitHub pages</a> (first time trying gh-pages, works great!) and I started collecting a list of interesting patterns produced by Turing Drawings:</p>
+<p>I prototyped this in JavaScript and named the project Turing Drawings. This is available <a href="https://github.com/maximecb/Turing-Drawings">on GitHub</a> if you're interested in seeing the source code. Better yet, I put a live demo up on <a href="http://maximecb.github.io/Turing-Drawings/">GitHub pages</a> (first time trying gh-pages, works great!) and I started collecting a list of interesting patterns produced by Turing Drawings:</p>
 <ul>
 <li>
 <p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,0,1,2,3,1,0,1,1,0,2,2,1,3,2,2,0,1,3,0,2,0,1,2,2,2,2,0,0,1,3,3,1,3,2,2,0">Scan</a></p>
@@ -108,16 +108,16 @@ document.addEventListener('keydown', (e) => {
 </li>
 </ul>
 <p>Last night, by chance, I randomly generated something that looked very much like the <a href="http://en.wikipedia.org/wiki/Sierpinski_triangle">Sierpinski fractal</a>, but unfortunately lost the encoding for that one. If you happen to find fractal patterns, be sure to let me know!</p>
-<p>EDIT: seems the people on <a href="http://www.reddit.com/r/compsci/comments/15qkuk/turing_drawings_pointers_gone_wild/">reddit.com/r/compsci</a> have gotten pretty excited about this. I'm surprised at how much of a positive response I got. Here are some of the nicest patterns they've found:</p>
+<p>EDIT: seems the people on <a href="http://www.reddit.com/r/compsci/comments/15qkuk/turing_drawings_pointers_gone_wild/">reddit.com/r/compsci</a> have gotten pretty excited about this. I'm surprised at how much of a positive response I got. Here are some of the nicest patterns they've found:</p>
 <ul>
 <li>
 <p><a href="http://maximecb.github.io/Turing-Drawings/#5,4,4,2,1,1,3,2,4,3,1,2,2,3,1,2,1,3,2,0,2,2,3,2,3,0,2,3,2,4,2,2,0,2,0,1,1,0,2,3,0,1,2,1,2,3,3,3,2,0,1,1,3,2,2,0,2,2,3,3,2,0">Sierpinski-esque</a> fractal (thanks trq)</p>
 </li>
 <li>
-<p>More <a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,2,0,1,2,2,3,1,1,3,2,2,0,1,3,2,1,1,3,1,1,3,2,1,0,1,2,3,2,3,0,2,0,1,2,0">Sierpinski</a>  (thanks moyix)</p>
+<p>More <a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,2,0,1,2,2,3,1,1,3,2,2,0,1,3,2,1,1,3,1,1,3,2,1,0,1,2,3,2,3,0,2,0,1,2,0">Sierpinski</a>  (thanks moyix)</p>
 </li>
 <li>
-<p><a href="http://maximecb.github.io/Turing-Drawings/#6,4,5,2,3,2,2,3,1,3,2,2,2,3,4,1,2,3,3,0,5,1,2,1,3,2,5,3,0,0,2,3,3,1,3,3,3,3,4,1,2,3,1,1,2,3,3,3,3,0,5,3,1,2,2,3,1,2,0,5,3,1,3,3,0,2,2,1,1,2,2,3,3,0">Sierpinski over two</a>  (thanks Peter)</p>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#6,4,5,2,3,2,2,3,1,3,2,2,2,3,4,1,2,3,3,0,5,1,2,1,3,2,5,3,0,0,2,3,3,1,3,3,3,3,4,1,2,3,1,1,2,3,3,3,3,0,5,3,1,2,2,3,1,2,0,5,3,1,3,3,0,2,2,1,1,2,2,3,3,0">Sierpinski over two</a>  (thanks Peter)</p>
 </li>
 <li>
 <p><a href="http://maximecb.github.io/Turing-Drawings/#3,3,0,2,2,2,1,0,2,2,2,1,1,3,0,1,3,1,2,0,1,1,0,0,2,3,1,2,3">Sierpinski in black</a> (thanks sssh)</p>
