@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2016-03-23-sense-from-chaos-crossing-the-semantic-gap/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-03-23-sense-from-chaos-crossing-the-semantic-gap/index.md");
+        }
     }
 
     // Shift + left arrow

@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2016-01-07-exercise-depression-and-the-energy-hypothesis/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-01-07-exercise-depression-and-the-energy-hypothesis/index.md");
+        }
     }
 
     // Shift + left arrow

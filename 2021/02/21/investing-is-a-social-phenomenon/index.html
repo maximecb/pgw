@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2021-02-21-investing-is-a-social-phenomenon/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2021-02-21-investing-is-a-social-phenomenon/index.md");
+        }
     }
 
     // Shift + left arrow

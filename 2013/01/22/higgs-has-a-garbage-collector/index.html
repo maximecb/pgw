@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2013-01-22-higgs-has-a-garbage-collector/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-01-22-higgs-has-a-garbage-collector/index.md");
+        }
     }
 
     // Shift + left arrow

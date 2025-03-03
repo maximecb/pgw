@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2015-02-08-my-thesis-a-clearer-picture/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-02-08-my-thesis-a-clearer-picture/index.md");
+        }
     }
 
     // Shift + left arrow

@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2011-08-29-artificial-life-in-your-web-browser/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-08-29-artificial-life-in-your-web-browser/index.md");
+        }
     }
 
     // Shift + left arrow

@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2019-11-02-they-might-never-tell-you-its-broken/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2019-11-02-they-might-never-tell-you-its-broken/index.md");
+        }
     }
 
     // Shift + left arrow

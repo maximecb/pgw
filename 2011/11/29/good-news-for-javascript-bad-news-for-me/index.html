@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2011-11-29-good-news-for-javascript-bad-news-for-me/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-11-29-good-news-for-javascript-bad-news-for-me/index.md");
+        }
     }
 
     // Shift + left arrow

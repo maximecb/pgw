@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2018-05-20-spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2018-05-20-spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/index.md");
+        }
     }
 
     // Shift + left arrow

@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2015-05-10-the-ai-breakthrough-that-wont-happen/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-05-10-the-ai-breakthrough-that-wont-happen/index.md");
+        }
     }
 
     // Shift + left arrow

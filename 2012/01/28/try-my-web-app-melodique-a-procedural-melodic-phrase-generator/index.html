@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2012-01-29-try-my-web-app-melodique-a-procedural-melodic-phrase-generator/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-01-29-try-my-web-app-melodique-a-procedural-melodic-phrase-generator/index.md");
+        }
     }
 
     // Shift + left arrow

@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2012-06-07-why-do-most-new-languages-fail/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-06-07-why-do-most-new-languages-fail/index.md");
+        }
     }
 
     // Shift + left arrow

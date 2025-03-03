@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2021-06-02-yjit-building-a-new-jit-compiler-inside-cruby/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2021-06-02-yjit-building-a-new-jit-compiler-inside-cruby/index.md");
+        }
     }
 
     // Shift + left arrow

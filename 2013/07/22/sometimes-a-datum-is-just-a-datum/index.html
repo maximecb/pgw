@@ -30,7 +30,9 @@ document.addEventListener('keydown', (e) => {
 
     // Ctrl + C
     if (ctrlDown && e.key.toUpperCase() === 'C') {
-        navigator.clipboard.writeText("open site/2013-07-22-sometimes-a-datum-is-just-a-datum/index.md");
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-07-22-sometimes-a-datum-is-just-a-datum/index.md");
+        }
     }
 
     // Shift + left arrow
