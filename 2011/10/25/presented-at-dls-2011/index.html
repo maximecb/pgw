@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Presented at DLS 2011</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Presented at DLS 2011">
+  <meta property="og:description" content="Presented at DLS 2011">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-10-25-presented-at-dls-2011/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/12/toying-with-microcontrollers-part-deux/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/31/code-compactness-and-optimization-levels/";
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/github_icon.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/x_icon.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/rss_icon.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Presented at DLS 2011</h1>
+<div class="post_date">October 25th, 2011</div>
+</div>
+<p>Today is the second day I'm attending the <a href="http://splashcon.org/2011/">SPLASH 2011 conference</a> in Portland, Oregon. This is a conference about many topics related to programming languages, virtual machines, program analysis and profiling, multi-core implementations, etc. The main reason I'm attending is that I'm actually a presenter. I gave my talk about Tachyon at the <a href="http://www.dynamic-languages-symposium.org/dls-11/">Dynamic Language Symposium (DLS) 2011</a> earlier today. I was fairly nervous, there were probably about 80 people in the room, but I think it went pretty well. Marc Feeley, my advisor, and Bruno Dufour gave me some good advice on how to make my presentation better and avoid getting out of breath or choking while presenting, which I believe helped. The audience seemed interested, and I got good feedback.</p>
+<p>I've been able to make some contacts with researchers and industry people (and it's not over yet, 3 more days to go). It was suggested I join the es-discuss (ECMAScript) mailing list and mention Tachyon on there, perhaps get some contributions. I also met up with my M.Sc. advisor, Prof. Laurie Hendren. Apparently, McVM, my M.Sc. project, is still being actively worked on, extended, and doing well at McGill. I'd say I'm having a pretty good time. As usual, going to conferences stimulates my creative thinking. I already have more ideas than I know what to do with...</p>
+<p>What if...</p>
+<ul>
+<li>
+<p>A compiler could cache snippets of compiled code to speed up compilation</p>
+</li>
+<li>
+<p>Tachyon's register allocator could precompile specialized allocators for each instruction type using run-time code generation</p>
+</li>
+<li>
+<p>Tachyon's assembler could also be optimized by precompiling instruction assembling functions</p>
+</li>
+<li>
+<p>On-stack replacement could be done purely using tail calls</p>
+</li>
+<li>
+<p>Tachyon could be made to compile faster by generating more compact code by default (I will probably do this!)</p>
+</li>
+<li>
+<p>Profiling hooks to detect hot functions and loops costed nothing, since they're removed by code patching or reoptimization</p>
+</li>
+<li>
+<p>Foreign Function Interfaces (FFIs) could be auto-generated from libraries using an elfdump style tool (based on discussions with labmate Erick Lavoie)</p>
+</li>
+</ul>
+<p>Sometimes, getting so many ideas at once can be scary, frustrating, even depressing, because I know I won't be able to try them all out, and these are only a fractions of the ideas I have for Tachyon. I also realize that I have much more work to do before Tachyon really is feature-complete. My research work is still in its infancy. At least though, I know I have interesting things to do, I just have to pick which ones I'll be doing!</p>
+<p>I'm making the <a href="dls-talk.pdf">Tachyon DLS 2011</a> slides available online for those who are interested.</p>
+<p>The corresponding paper, <a href="/2012/01/06/tachyons-design-principles/dls2011.pdf">Bootstrapping a Self-Hosted Research Virtual Machine for JavaScript</a>, is also available online. Cite us and you'll have my eternal* gratitude.</p>
+<p>* For up to 25 years.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
