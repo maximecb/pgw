@@ -79,7 +79,7 @@ document.addEventListener('keydown', (e) => {
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non urna ultricies, maximus urna eget, dapibus justo. Aliquam elementum velit velit, sed luctus ante fringilla vitae. Sed vestibulum, risus et mattis ultricies, nibh sem vulputate risus, in placerat urna orci eget erat. Sed ultrices tellus sit amet libero faucibus, non aliquet diam iaculis. Sed fermentum, nisi eget dictum dictum, lectus sapien sollicitudin libero, in placerat magna quam ut urna. Nunc urna odio, faucibus a pretium vel, dignissim a turpis. Pellentesque congue faucibus nisl, sit amet finibus ipsum interdum sed.</p>
 <h2>Code Blocks</h2>
 <p>This is a little inline code snippet <code>x = y + foo()</code> inside of a paragraph. References to individual variables look like <code>x</code>, <code>y</code> and <code>foo</code>. A function call looks like <code>foobar(1, 2)</code>.</p>
-<p>This is a larger multiline code block:</p>
+<p>This is a larger multiline code block with assembly code:</p>
 <pre><code>mov r8, 0;
 IF_TRUE(2EF9)(7):
 cmp r8d, 2000000000;
@@ -104,7 +104,98 @@ mov r8, rbx;
 &lt;/html&gt;
 </code></pre>
 <p>This is a code block containing a very long identifier which requires scrolling horizontally:</p>
-<pre><code>very_very_ridiculously_long_identifier_that_requires_a_scrollbar_because_it_wont_fit_in_the_code_box_width();
+<pre><code>very_very_ridiculously_long_identifier_that_requires_a_scrollbar_because_it_wont_fit_in_the_code_block_width();
+</code></pre>
+<p>Machine code dump:</p>
+<pre><code>— Optimized code —
+optimization_id = 0
+source_position = 0
+kind = OPTIMIZED_FUNCTION
+stack_slots = 2
+Instructions (size = 346)
+0xc579e565ae0 0 55 push rbp
+0xc579e565ae1 1 4889e5 REX.W movq rbp,rsp
+0xc579e565ae4 4 56 push rsi
+0xc579e565ae5 5 57 push rdi
+0xc579e565ae6 6 4883ec10 REX.W subq rsp,0x10
+0xc579e565aea 10 488b45f8 REX.W movq rax,[rbp-0x8]
+0xc579e565aee 14 488945e0 REX.W movq [rbp-0x20],rax
+0xc579e565af2 18 488bf0 REX.W movq rsi,rax
+0xc579e565af5 21 493ba540070000 REX.W cmpq rsp,[r13+0x740]
+0xc579e565afc 28 7305 jnc 35 (0xc579e565b03)
+0xc579e565afe 30 e8bdd5fcff call StackCheck (0xc579e5330c0)
+0xc579e565b03 35 33c0 xorl rax,rax
+0xc579e565b05 37 48bb681c51f000110000 REX.W movq rbx,0x1100f0511c68 ;; property cell
+0xc579e565b0f 47 4d8b55b0 REX.W movq r10,[r13-0x50]
+0xc579e565b13 51 4c3913 REX.W cmpq [rbx],r10
+</code></pre>
+<p>A C struct:</p>
+<pre><code>struct Car
+{
+    char makeModel[128]; // String for the car's make and model
+    struct Wheel
+    {
+        double direction; // Wheel direction angle
+        double rotation;  // Current angle of rotation
+    } wheels[4];
+} car;
+</code></pre>
+<p>JS object literal:</p>
+<pre><code>// Car object literal
+var car =
+{
+    makeModel: 'make and model string',
+    wheels: [
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+    ]
+}
+</code></pre>
+<p>Small C program:</p>
+<pre><code>// Integer hash function with a good distribution
+// Based on:
+// https://github.com/skeeto/hash-prospector
+uint32_t hash_u32(uint32_t x)
+{
+    x = x ^ (x &gt;&gt; 16);
+    x = x * 0x7feb352d;
+    x = x ^ (x &gt;&gt; 15);
+    x = x * (0x846ca68b);
+    x = x ^ (x &gt;&gt; 16);
+    return x;
+}
+
+int main()
+{
+    // For comparison against GCC
+    assert(hash_u32(0) == 0);
+    assert(hash_u32(1) == 1753845952);
+    assert(hash_u32(2) == 3507691905);
+    assert(hash_u32(3) == 1408362973);
+
+    uint32_t sum = 0;
+
+    for (uint32_t i = 0; i &lt; 30; ++i)
+    {
+        uint32_t r = hash_u32(i) % 20;
+
+        #ifndef TEST
+        printf(&quot;%u\n&quot;, r);
+        #endif
+
+        sum = sum + r;
+    }
+
+    #ifndef TEST
+    printf(&quot;sum = %u\n&quot;, sum);
+    #endif
+
+    assert(sum == 271);
+
+    return 0;
+}
 </code></pre>
 <h2>Itemized Lists</h2>
 <p>This is a plain unordered list:</p>
