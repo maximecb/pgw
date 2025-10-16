@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About Tachyon's Garbage Collector</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="About Tachyon's Garbage Collector">
+  <meta property="og:description" content="About Tachyon's Garbage Collector">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-01-12-about-tachyons-garbage-collector/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/01/12/263/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/01/21/algorithms-making-music/";
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/github_icon.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/x_icon.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/rss_icon.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>About Tachyon's Garbage Collector</h1>
+<div class="post_date">January 12th, 2012</div>
+</div>
+<p>Whew, I spent about a week debugging Tachyon's Garbage Collector (GC) using various tools and unit tests. It was hell (memory corruption bugs of doom!), but I think the system is pretty robust now.</p>
+<p>My thesis advisor Marc Feeley asked me to make a few slides to present <a href="/2011/12/17/tachyon-has-a-garbage-collector/">Tachyon's GC</a> to the rest of our research group. You can <a href="tachyon_gc.pdf">download these here</a> if you'd like to see them. This was made fairly quickly and so isn't of the highest quality, but it may be of interest to those who crave technical details. I managed to integrate two memes in there as I felt it was needed.</p>
+<p>I'm currently working on the second version of my <a href="/2011/12/11/type-analysis-for-javascript/">JavaScript type analysis</a>, which is going to be fully flow and path sensitive. This is progressing fairly well and I anticipate I should be able to get some basic results by next Wednesday or so.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
