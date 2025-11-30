@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hello world!</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hello world!">
+  <meta property="og:description" content="Hello world!">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-08-27-hello-world/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/08/27/hello-world/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/08/27/the-tachyon-javascript-compiler/";
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/github_icon.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/x_icon.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/rss_icon.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Hello world!</h1>
+<div class="post_date">August 27th, 2011</div>
+</div>
+<p>First post on this blog! In my next post, I will be describing my research, and more specifically the Tachyon JavaScript compiler.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Presented at ECOOP</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Presented at ECOOP">
+  <meta property="og:description" content="Presented at ECOOP">
+  <meta property="og:image" content="https://pointersgonewild.com/2015/07/10/presented-at-ecoop/dscn1213_sqr.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-07-10-presented-at-ecoop/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/06/22/typed-shapes-paper-submitted/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/07/27/feels-like-censorship/";
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/github_icon.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/x_icon.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/rss_icon.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Presented at ECOOP</h1>
+<div class="post_date">July 10th, 2015</div>
+</div>
+<div class="cover_image">
+<img src="dscn1213_sqr.jpg">
+</div>
+<p>This week I am in Prague, at the European Conference on Object Oriented Programming (<a href="http://2015.ecoop.org/">ECOOP</a>) to present my research on Basic Block Versioning. Getting to ECOOP was fairly stressful. I was flying overnight but can never manage to sleep on airplanes. Sleep-deprived, I had to run like mad in an attempt to make an impossible connection in Paris. The Charles de Gaulle airport is organized in a way that I had to wait for two shuttle buses and go through security twice. Fortunately, the Paris-Prague flight was slightly delayed, and I barely made the connection, but my checked luggage did not.</p>
+<p>I presented my paper Wednesday afternoon. The talk went very smoothly and the audience questions were rather friendly. The paper is now <a href="http://drops.dagstuhl.de/opus/volltexte/2015/5219/">available online</a> from the publisher if you're interested in reading it. I was very happy to see that my talk and all others were filmed. The video is not yet available, but I have uploaded <a href="ecoop-slides.pdf">the slides</a>. In addition to giving a talk, I also presented <a href="maxime_poster_a0.pdf">a poster</a> explaining the main aspects of my paper. I was pleasantly surprised when they informed me that I had won the distinguished poster award.</p>
+<p>There are many interesting people here, including VM engineers from Mozilla and Google, Brendan Eich and Bjarne Stroustrup. I had the privilege of visiting touristic sites, sharing a meal and discussing VM design with <a href="http://cfbolz.de/">Carl Friedrich Bolz</a> (of PyPy fame) and <a href="http://www.ccs.neu.edu/home/samth/">Sam Tobin-Hochstadt</a>. My main regret is that I've had a very difficult time adapting to the local time zone. I'm sleeping poorly at night and crashing every afternoon. This has resulted in me missing many interesting talks. I'm looking forward to the recorded videos being uploaded. The VM and language design talks from the Curry On conference are of particular interest to me.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

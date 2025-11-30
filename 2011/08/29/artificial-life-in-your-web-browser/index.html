@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Artificial Life in your Web Browser!</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Artificial Life in your Web Browser!">
+  <meta property="og:description" content="Artificial Life in your Web Browser!">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-08-29-artificial-life-in-your-web-browser/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/08/27/the-tachyon-javascript-compiler/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/09/11/predoctoral-exam/";
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/github_icon.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/x_icon.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/rss_icon.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Artificial Life in your Web Browser!</h1>
+<div class="post_date">August 29th, 2011</div>
+</div>
+<p>I've made a YouTube blog post about <a href="http://www.youtube.com/watch?v=FBAFusm_lW4">artificial intelligence</a> before, it's been a long-time interest of mine. In that post, I believe I mentioned an <a href="http://maximecb.github.io/Gradient">artificial life simulation</a> program I'd written. It's a simulated 2D world in which little "ants" live. The ants are controlled by randomly connected neural network, and they can choose an action at every time step, such as turning left or right, moving forward, eating food, drinking water, or reproducing.</p>
+<p>The ants need both food and water to gain energy and survive. They can choose to spend some of that energy to create a baby (another ant with a mutated version of the parent's brain). The interesting thing is that although the ants are initially very dumb, they eventually evolve to seek food and reproduce on their own. There is nothing forcing them to do either of those things, but only the ants that succeed at it can stay alive. I think this has some interesting philosophical implications about real-world lifeforms. It's also, perhaps, an interesting "proof" that natural selection really works (you can see it happen right before your eyes!).</p>
+<p>I ported said program to JavaScript, and you can run it in a web browser. If you're interested in trying it, <a href="http://maximecb.github.io/Gradient">click this link</a>. You can click "fast mode" to let the simulation run as fast as possible. You can then later click "real-time" to slow it down and observe the behavior of individual ants. I recommend running this in the latest Google Chrome as other browsers may be too slow.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

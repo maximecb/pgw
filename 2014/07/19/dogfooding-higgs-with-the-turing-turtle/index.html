@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dogfooding Higgs with the Turing Turtle</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Dogfooding Higgs with the Turing Turtle">
+  <meta property="og:description" content="Dogfooding Higgs with the Turing Turtle">
+  <meta property="og:image" content="https://pointersgonewild.com/2014/07/19/dogfooding-higgs-with-the-turing-turtle/turing-turtle-12.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-07-19-dogfooding-higgs-with-the-turing-turtle/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/07/17/my-paper-was-rejected-again/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/09/09/ds-garbage-collector-problem/";
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/github_icon.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/x_icon.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/rss_icon.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Dogfooding Higgs with the Turing Turtle</h1>
+<div class="post_date">July 19th, 2014</div>
+</div>
+<div class="cover_image">
+<img src="turing-turtle-12.png">
+</div>
+<p>A while back, I wrote <a href="/2012/12/31/turing-drawings/">Turing Drawings</a>, a JavaScript web app which uses randomly generated Turing machines to produce animated drawings on an <a href="http://www.w3schools.com/html/html5_canvas.asp">HTML5 canvas</a> element. The web app, due to its addictive nature, ended up being featured a few times on Reddit and Hacker News, and <a href="/2013/05/15/turing-drawings-followup/">was even forked</a> by developers who added interesting new features to it. Since then, I've been pretty busy working on Higgs and my PhD thesis, and I haven't taken the time to work on fun little hobby projects of the sort. That is, until last night.</p>
+<p>Thanks to the fine work of <a href="https://github.com/mollymorphic">mollymorphic</a>, Higgs now has a <a href="https://github.com/maximecb/Higgs/blob/master/source/lib/draw.js">2D drawing library</a> based on X11 with functionality resembling that of the canvas element. I decided to dogfood Higgs and its drawing library by writing a new program inspired from Turing Drawings. This program, which I've named Turing Turtle, uses randomly generated Turing machines to control a <a href="http://en.wikipedia.org/wiki/Turtle_graphics">turtle-style</a> plotter. The machine has an internal tape used for storage, and can perform a number of output actions, such as moving forward, turning left or right, as well as changing the current drawing color. This can produce a variety of interesting drawings, as shown below (click to enlarge):</p>
+<figure>
+<a href="turing-turtle-14.png">
+<img alt="turing turtle 14" src="turing-turtle-14.png">
+</a>
+<figcaption>turing turtle 14</figcaption>
+</figure>
+<figure>
+<a href="turing-turtle-20.png">
+<img alt="turing turtle 20" src="turing-turtle-20.png">
+</a>
+<figcaption>turing turtle 20</figcaption>
+</figure>
+<figure>
+<a href="turing-turtle-16.png">
+<img alt="turing turtle 16" src="turing-turtle-16.png">
+</a>
+<figcaption>turing turtle 16</figcaption>
+</figure>
+<p>I've uploaded an <a href="http://imgur.com/a/Cjsnx">album with many of these drawings</a> on imgur. I find that randomly generated Turing machines are a simple and effective way to drive generative processes in which you'd like to see repeating patterns emerge. If you'd like to try Turing Turtle for yourself, I've added <a href="https://github.com/higgsjs/Higgs/blob/master/examples/turing-turtle.js">the program</a> to the examples directory of the Higgs repository. You can use the arrow keys to generate new drawings, restart the current drawing as well as increase and decrease the plotter speed. It's a very fun little program to play with.</p>
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2025 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
