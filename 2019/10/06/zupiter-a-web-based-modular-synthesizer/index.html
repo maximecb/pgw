@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zupiter: a Web-Based Modular Synthesizer</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Zupiter: a Web-Based Modular Synthesizer">
+  <meta property="og:description" content="Zupiter: a Web-Based Modular Synthesizer">
+  <meta property="og:image" content="https://pointersgonewild.com/2019/10/06/zupiter-a-web-based-modular-synthesizer/screen-shot-2019-10-04-at-9.25.07-pm.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2019-10-06-zupiter-a-web-based-modular-synthesizer/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2019/06/10/the-end-of-online-anonymity/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2019/10/19/balancing-fun-stress-and-profit/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Zupiter: a Web-Based Modular Synthesizer</h1>
+<div class="post_date">October 6th, 2019</div>
+</div>
+<div class="cover_image">
+<img src="screen-shot-2019-10-04-at-9.25.07-pm.png">
+</div>
+<p>When I was a kid, I thought I didn't like music, other people really enjoyed it, but I just didn't get it. This all changed when I was 12, and I first saw the movie "Hackers". You can think whatever you want of that movie, whether you think it's a classic or everything that's wrong with Hollywood, it had a mind-blowing soundtrack featuring several pioneering electronic music artists such as <a href="https://www.youtube.com/watch?v=FIQdgbgEGd4">The Prodigy,</a> <a href="https://www.youtube.com/watch?v=bV-hSgL1R74">Orbital</a> and <a href="https://www.youtube.com/watch?v=feWNvGpWHLM&feature=youtu.be&t=160">Underworld</a>. Ever since I was exposed to this, I've been in love with electronic music.</p>
+<p>In my mid-twenties, after I'd learned how to program, I started to wonder if there was a way that I could combine my passion for programming with my love of electronic music. I started reading books about sound synthesis, composition, etc. I wrote a web-based music app, <a href="/2012/04/23/musictoy-music-made-simple/">MusicToy</a>, back in 2012. This app originally used the Mozilla Audio Data API (this was before the Web Audio API was made available). The app is super simple, but that was the point, I wanted to create something that was beginner-friendly, and could allow anyone to create a fun pattern, without having any knowledge of music theory.</p>
+<p>Today, I'd like to present to you <a href="https://z.musictools.live/#72">Zupiter</a>, a browser-based web app I've working on in my spare time for the past 8 months. It's a modular synthesizer that runs in a web browser. You can use it to build a custom synthesizer using a visual programming language inspired by Pure Data and Max/MSP.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/609k3_Z-16o?si=jAofV9qc7BmMnzRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>The app is written entirely in JavaScript and makes use of both the <a href="https://www.html5rocks.com/en/tutorials/webaudio/intro/">web audio</a> and web <a href="https://www.w3.org/TR/webmidi/">MIDI APIs</a>. You can play notes using your computer keyboard (A to L keys), using a built in sequencer node, or you can connect an external MIDI keyboard or sequencer to your computer and use that to play a synthesizer you created in Zupiter. The app also makes it possible to map physical knobs on an external <a href="https://en.wikipedia.org/wiki/MIDI_controller">MIDI controller</a> to virtual knobs in the app, just by double-clicking on a virtual knob and then wiggling the knob you want to map on your device.</p>
+<p>I created the app because I wanted to have a powerful tool that would allow me to experiment and understand exactly how specific sounds are made. I also created it because, to my knowledge, there is nothing else quite like it. Yes, there are already other browser-based music apps, but to my knowledge, at this time, no other browser-based music app offers this degree of flexibility and power.</p>
+<p>Using Zupiter, you can build your own synth from your browser, without spending any money or installing any software. You can then share what you just created with friends instantly, by going to the Share tab. Your friends can then hear what you just made, modify it, and share a new version of it, also without installing any software on their machine. My hope is that Zupiter will lower the bar to entry, and get more people excited about making music.</p>
+<p>If you're curious about trying Zupiter, but a little confused about how it works, here are some examples to get you started:</p>
+<ul>
+<li>
+<p><a href="https://z.musictools.live/#59">Triple-oscillator synth with overdrive</a> (press Play, then hit A-L keys to make sound, responds to MIDI sustain pedal)</p>
+</li>
+<li>
+<p><a href="https://z.musictools.live/#73">Techno sequencer patterns with delay</a></p>
+</li>
+<li>
+<p><a href="https://z.musictools.live/#95">My attempt at emulating a 303-like acid sound</a></p>
+</li>
+<li>
+<p><a href="https://z.musictools.live/#83">Drm - cute wind-like path by pfig</a></p>
+</li>
+<li>
+<p><a href="https://z.musictools.live/#31">Most basic example using MIDI input</a> (also playable with A-L keys)</p>
+</li>
+</ul>
+<p>Zupiter isn't perfect, it's only been tested in Chrome and Firefox, and it's very possible you may encounter some bugs, but I'm really excited and curious to see what you can make with it, and I encourage you to share what you create. If you're confused as to how it works, there is a Help tab in the app with some basic examples and instructions, and I've created a <a href="https://www.reddit.com/r/musictools">subreddit</a> where you can ask any questions. Your feedback is more than welcome!</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

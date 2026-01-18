@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Building a Copying GC for the Plush Programming Language</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building a Copying GC for the Plush Programming Language">
+  <meta property="og:description" content="Building a Copying GC for the Plush Programming Language">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-11-29-building-a-copying-gc-for-the-plush-programming-language/amigaball.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-11-29-building-a-copying-gc-for-the-plush-programming-language/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2025-10-12-optimizing-the-plush-interpreter-for-faster-raytracing/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-11-29-building-a-copying-gc-for-the-plush-programming-language/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Building a Copying GC for the Plush Programming Language</h1>
+<div class="post_date">November 29th, 2025</div>
+</div>
+<div class="cover_image">
+<img src="amigaball.jpg">
+</div>
+<p>This is the fourth post in a series about <a href="https://github.com/maximecb/plush">Plush</a>, a dynamically-typed programming language I've been building in my spare time. The language draws inspiration from Lox/JavaScript, and I created it as a platform to experiment and have fun with sound and graphics programming. It's very easy to just open a window and draw some pixels with very little boilerplate.</p>
+<p>One of the key features of this language is that it has actor-based parallelism, which makes it relatively easy, even for beginners, to write multithreaded programs without having to think about locks and memory safety. I took some care to implement the Virtual Machine (VM) in such a way that internally, there is no global VM lock, meaning that independent actors only need to synchronize with each other when they are sending and receiving messages, but otherwise, they can execute fully independently.</p>
+<p>One of the trickier aspects of the Plush VM design is that this is a garbage collected language, and actors can send messages (meaning heap-allocated objects) to one another. So, from the beginning, there was a design question of how I could make it so that these messages, which can be entire subgraphs of objects with cycles in them, could be sent from one actor to another, with dead objects being garbage-collected, and at the same time keep all of this efficient.</p>
+<p>In an actor-based system, you don't want two actors holding a mutable reference to the same object. That means if you send an object from one actor to another, you either need to copy it, or you need to freeze the object (make it immutable). I wanted to avoid needing to freeze objects before sending messages because I felt it added complexity to the system and would mean the programmer would need to keep track of what is and isn't frozen. If you want to send a subgraph of objects to another actor, but you want to keep a local copy, then you first need to deepcopy these objects, and then deepfreeze your subgraph. It's conceptually much simpler if you can just send the root of the subgraph as a message, and the host VM copies everything for you behind the scenes. Furthermore, there's an issue with requiring messages to be immutable. The assumption there is that immutable objects can be safely shared between actors, but if you do that, then it means you need a VM-wide garbage collection to periodically synchronize with all your actors. Supporting this kind of immutable object sharing isn't inherently a bad idea, but it does inevitably add complexity to the system.</p>
+<p>In Plush, when you send a message, the VM silently copies the subgraph of objects referenced in the message. That does open up more questions with regards to memory management though. For one thing, if I want to send a message from actor A to B, then I need to copy the message into a memory space (an allocator) that is owned by B. However, I'd like to avoid a situation where B needs to take a lock on its own memory allocator every time it wants to allocate anything, because that would greatly slow down allocations. The solution I came up with is to give each actor two allocators. An actor has an internal private allocator that it can allocate objects from without ever needing to take a lock, and a mailbox allocator which is used to send messages to it.</p>
+<p>The double allocator design has the key benefit that each actor can do its own private allocations without locking, which maximizes allocation performance. I decided to go with a bump allocator and a <a href="https://en.wikipedia.org/wiki/Cheney%27s_algorithm">copying GC</a> design. This keeps things simple and means that allocating memory is very fast. There was just one problem: I kept putting off implementing the garbage collector because I was dreading it. Past experience has taught me that implementing a GC can be very error-prone. There are often lots of sneaky bugs that show up, and you can end up needing to refactor key parts of your VM.</p>
+<p>You can write many cool programs even without a GC. There are lots of programs that never allocate much memory during their execution. However, not having a GC does eventually become limiting. I tried to write code to train a neural network to do <a href="https://en.wikipedia.org/wiki/Beat_detection">beat detection</a> in Plush, and that program allocated a lot of matrices. I could only run it for a few minutes or so before it would crash, even on my desktop with 128GB of RAM. I was running into the limits of Alloc-Until-You-Crash Technology (TM). Still, I kept procrastinating on the GC, until my friend <a href="https://github.com/Maaarcocr">Marco jumped in</a> two weeks ago and offered to help. Collaborating with someone on the feature made it much easier to find the motivation to tackle this challenge.</p>
+<p>The good news is, it took Marco and I just over two weeks and we got the GC about 90% complete. There were some segmentation faults to debug, but it seems like we fixed most of the issues fairly quickly. Based on past experience, I went ahead and wrote a number of adversarial test programs to try and stress test the GC and surface bugs. That strategy proved effective. Turns out it's sometimes not that stressful to do hard things if you break them up into many small steps.</p>
+<p>For fun, with the help of LLMs, I wrote a program that is <a href="https://x.com/Love2Code/status/1993486656347980260">a tribute</a> to the classic <a href="https://www.youtube.com/watch?v=ws3DJF7MbMU&t=753s">Amiga Boing Ball demo</a>. The 3D animation runs seamlessly at 60 frames per second on my MacBook Air M1. It performs GC about once per second, and the pause isn't noticeable. Even though it's only flat-shaded polygons, I feel pretty proud that the Plush interpreter is fast enough to do 3D graphics in real-time.</p>
+<p>There are still a few missing bits in the garbage collector. Namely, if you send many large objects to an actor and its message queue gets backlogged, you could fill the message allocator and cause the program to panic. There needs to be logic in place so that actors wait and retry if the receiver's allocator gets full. There also needs to be logic for the message allocator to grow in size when necessary. However, all the essentials are in place, and it's now possible to run long-running programs on Plush.</p>
+<p>If you would like to contribute, one issue I've noticed is that collections can be fairly slow once you get past 300K objects, which I don't think should be the case. There is a test program that <a href="https://github.com/maximecb/plush/blob/main/tests/gc_list_extend.psh">grows a linked list</a> which demonstrates the problematic slowdown. I suspect that this might have to do with Rust hashmap slowness, or that there may be some quadratic behavior somewhere. We could use some help profiling and investigating that issue. I'm also looking for contributors to write <a href="https://github.com/maximecb/plush/issues/4">fun demo programs</a> using Plush. We now have the ability to do both graphics and audio output, so it would be possible to write a simple music tracker, for example, or some kind of procedural infinite dungeon of some kind. Infinite Wolfenstein, anyone?</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

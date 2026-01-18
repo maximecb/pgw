@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>An Inexpensive Robot Platform</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="An Inexpensive Robot Platform">
+  <meta property="og:description" content="An Inexpensive Robot Platform">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-06-22-an-inexpensive-robot-platform/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/06/07/why-do-most-new-languages-fail/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/07/10/radical-intro-to-programming/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>An Inexpensive Robot Platform</h1>
+<div class="post_date">June 22nd, 2012</div>
+</div>
+<p>I've been meaning to try building my own small mobile robot for some time. Unfortunately, hobby robotics can get pretty expensive. A simple 4-wheeled robot platform can easily cost 60 to 80 dollars, and that only gets you something big enough to carry batteries, a microcontroller and other small devices. I had this idea that it would perhaps be cheaper to build a robot based on a remote controlled car. RC cars come in a variety of sizes, can handle rough terrain, go pretty fast, and best of all, are often fairly cheap. I was able to find exactly what I needed at the Salvation Army: a used RC truck without the remote control and battery (who needs that?) for the modest sum of $1.99.</p>
+<figure>
+<a href="dscn0035.jpg">
+<img alt="" src="dscn0035.jpg">
+</a>
+</figure>
+<p>For those who want to tinker with microcontrollers, eBay is full of bargains. There are now lots of sellers selling AVR (Atmel) microcontroller boards and Arduino-compatible modules of all kinds at very low prices. For this project, I purchased the following:</p>
+<ul>
+<li>
+<p><a href="http://www.atmel.com/Images/doc8160.pdf">ATmega64A</a> microcontroller board ($18 shipped)</p>
+</li>
+<li>
+<p><a href="http://www.fischl.de/usbasp/">USPasp</a> In-System Programmer for AVR MCUs ($4)</p>
+</li>
+<li>
+<p>H-bridge motor controller module ($7)</p>
+</li>
+<li>
+<p>Bluetooth to RS232 TTL module ($9)</p>
+</li>
+<li>
+<p>4x <a href="http://www.micropik.com/PDF/HCSR04.pdf">HC-SR04</a> ultrasonic rangefinders ($10)</p>
+</li>
+<li>
+<p>1800mAh Lithium-ion battery and charger ($11)</p>
+</li>
+<li>
+<p>40x 30cm 1p-1p dupont cables ($3)</p>
+</li>
+</ul>
+<p>I also used various components I had on hand, such as small prototyping boards, a 5V power regulator, capacitors, resistors, a <a href="http://www.onsemi.com/pub_link/Collateral/ULN2803-D.PDF">ULN2803</a> transistor array, LEDs, a piezo buzzer, single and dual row pin headers, wires, shrink wrap and 2.1mm male and female power jacks: total value less than $10.</p>
+<figure>
+<a href="wrdscn0040.jpg">
+<img alt="" src="wrdscn0040.jpg">
+</a>
+</figure>
+<p>Since I use Linux as my development platform, I went with <a href="http://www.nongnu.org/avr-libc/">avr-gcc</a> and <a href="http://www.nongnu.org/avrdude/">avrdude</a> to program the microcontroller. I've had absolutely zero issues so far. Luckily, Ubuntu has preconfigured avr-gcc, avr-libc and avrdude packages in its software repository, which made it very easy to get my setup going.</p>
+<p>One thing I would caution newbies about is that AVR chips out of the factory (including the one on my board) run at 1 MHz using their internal oscillator by default. You need to update the MCU's <a href="http://www.engbedded.com/fusecalc/">fuse values</a> in order to change this. Before you set the fuse values, the USBasp programmer has a "slow sck" jumper that needs to be enabled. If you don't set this jumper, it will refuse to program the microcontroller or set its fuse values. If you've never used AVR MCUs, I highly recommend <a href="http://www.ladyada.net/learn/avr/">ladyada's tutorials</a>.</p>
+<figure>
+<a href="sam_0025.jpg">
+<img alt="" src="sam_0025.jpg">
+</a>
+</figure>
+<p>Fortunately, my robot build went very smoothly. I found the components very easy to interface with. The H-bridge controller simply requires two <a href="http://arduino.cc/it/Tutorial/PWM">PWM</a> outputs per motor (one for each direction of rotation). The bluetooth module connects directly to the MCU's TX and RX UART ports and creates a serial connection I can <a href="http://zizzle-brewbot.blogspot.ca/2011/04/ttl-bluetooth-transceiver-with-linux.html">interact with using a terminal program</a>. The <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ultrasonic-rangefinder-with-avr-mcus-%E2%80%93-avr-tutorial/">ultrasonic distance sensors</a> use a two-wire interface where an input is used to trigger an ultrasonic pulse and an output goes low once the echo is received.</p>
+<p>I wanted to add LEDs on the roof of the truck as well as a buzzer module inside so I could present status/debug info in an intuitive way. The LEDs, with a power consumption of 8mA, could have realistically been driven directly from MCU output pins, but the buzzer couldn't, and I wanted to allow switching other devices which consumed more power. My solution to this was to solder a simple module with an ULN2803 driver chip, resistors and some pin headers.  The pin headers allow me to use color-coded dupont cables to connect everything (power and IOs), making for easy prototyping.</p>
+<figure>
+<a href="dscn0015.jpg">
+<img alt="" src="dscn0015.jpg">
+</a>
+</figure>
+<figure>
+<a href="dscn0017.jpg">
+<img alt="" src="dscn0017.jpg">
+</a>
+</figure>
+<p>To power all of this, I soldered together a power distribution module. This module hosts some filtering capacitors, a 5V power regulator and various connectors. There is a two-row pin header to distribute regulated 5V to most of the modules, as well as an unregulated 12V output for the motor driver module. I put a 2.1mm female jack in an open back compartment of the truck so that I can plug the lithium-ion battery into there, or an external power supply for testing.</p>
+<figure>
+<a href="dscn0042.jpg">
+<img alt="" src="dscn0042.jpg">
+</a>
+</figure>
+<figure>
+<a href="dscn0036.jpg">
+<img alt="" src="dscn0036.jpg">
+</a>
+</figure>
+<p>All of the modules are held inside the top part (plastic housing) of the truck using velcro. Because it's still highly inconvenient to remove the cover to program the chip, I soldered an extension for the ISP header of the microcontroller board, and glued it in an accessible location.</p>
+<figure>
+<a href="dscn0032.jpg">
+<img alt="" src="dscn0032.jpg">
+</a>
+</figure>
+<p>This robot doesn't really have much in the way of AI thus far (it only takes commands and reports distance readings over Bluetooth), but I've decided to make the <a href="https://github.com/maximecb/AVR-Robot-Platform">source code available on github</a>. This code should be helpful in understanding how to interface with the components I've used. Possible improvements to be made include the ability to reprogram the MCU through bluetooth.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

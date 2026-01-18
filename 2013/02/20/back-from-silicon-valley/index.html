@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Back from Silicon Valley</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Back from Silicon Valley">
+  <meta property="og:description" content="Back from Silicon Valley">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-02-20-back-from-silicon-valley/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/01/31/visiting-mozilla/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/03/04/a-simple-jit-compiler/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Back from Silicon Valley</h1>
+<div class="post_date">February 20th, 2013</div>
+</div>
+<figure>
+<a href="dscn0859.jpg">
+<img alt="How Mozilla sees itself" src="dscn0859.jpg">
+</a>
+<figcaption>How Mozilla sees itself</figcaption>
+</figure>
+<p>I'm back to Canada after a <a href="/2013/01/31/visiting-mozilla/">two week visit</a> to the Mozilla offices in Mountain View. The visit started with a presentation of Higgs and my PhD research work, which was made available online <a href="https://air.mozilla.org/higgs-jit/">on Air Mozilla</a>. Then, over the next two weeks, I had several one on one meetings with several members of the JS engine and research teams at Mozilla. The Mozilla people were all extremely friendly and forthcoming. Because of Mozilla's open culture, I was able to get answers to just about any question I might want to ask about their work. I was also invited to give a talk at Apple and briefly meet with the JavaScriptCore team. This trip was a great opportunity to discuss and refine my research ideas, as well as to gain specific insights into the workings of production JavaScript JIT compilers.</p>
+<figure>
+<a href="dscn0850.jpg">
+<img alt="Speaking at Apple" src="dscn0850.jpg">
+</a>
+<figcaption>Speaking at Apple</figcaption>
+</figure>
+<p>There were also unexpected benefits to my visit. The presentation I gave at Mozilla, which was made available online, garnered some attention on twitter and reddit. As a result, I received invitations to meet from <a href="http://alexgaynor.net/">Alex Gaynor</a> of the PyPy project and from <a href="https://twitter.com/ariyahidayat">Ariya Hidayat</a> of the Esprima parser project (both of which I promptly accepted). I was also invited by Andrei Alexandrescu himself to talk about Higgs and my experience using the D programming language at <a href="http://dconf.org/schedule/chevalier_boisvert.html">DConf 2013</a>. Finally, I had the pleasant surprise of getting pull requests on the <a href="https://github.com/maximecb/Higgs">Higgs github repository</a>.</p>
+<figure>
+<a href="dscn0606.jpg">
+<img alt="A taste of America" src="dscn0606.jpg">
+</a>
+<figcaption>A taste of America</figcaption>
+</figure>
+<p>Being in the Silicon Valley area, I also took the opportunity to visit San Francisco on the weekends. I went to an outdoor pub with some friends and got invited to a barbecue party where I was introduced to the infamous <a href="http://cardsagainsthumanity.com/">Cards Against Humanity</a>. San Francisco is a charming city with its own highly liberal hippie subculture. It has cute little boutiques and cafés, streetfood, and beautiful parks. Public transportation seems rather good, at least in the city itself (I can't speak so highly of the suburbs).</p>
+<figure>
+<a href="dscn0867.jpg">
+<img alt="San Francisco" src="dscn0867.jpg">
+</a>
+<figcaption>San Francisco</figcaption>
+</figure>
+<p>The bay area, and San Francisco, are truly different from what I'm used to. It seems everyone is involved with technology, or with a startup, in one way or another. Everyone has a smartphone and Apple TV. People use apps on their phones to summon cabs. The rents are very high and almost everybody has housemates (even couples). Because so many people are in tech, the online communities of the bay area are also more active than elsewhere. Getting to experience Silicon Valley was an interesting experience, and makes me understand why so many tech companies choose to establish themselves in the area: nowhere else are people this excited about tech.</p>
+<p>At this point, you might be wondering what I've done with my research during this trip, besides talking to many people. For one, I started looking more seriously into the area of trace compilation. The Mozilla people have let me know that they had multiple issues with their TraceMonkey JIT, which eventually led to its retirement. One of these issues was trace explosion: the generation of too many independent traces. Another was constant fallback to the interpreter. What I want to do with Higgs, is implement something closer to <a href="http://impact.crhc.illinois.edu/shared/report/phd-thesis-rick-hank.pdf">region-based compilation</a>, and attempt to solve some of these tracing problems.</p>
+<p>In terms of code, I started planning the implementation of a simple backend and tracing JIT for Higgs, so that I can begin experimenting with these concepts. I already made some minor refactorings that will be necessary for this JIT to be possible. I also took the time to fix many (dozens of) bugs that were preventing Higgs from running SunSpider and V8 benchmarks. The good news is that Higgs is now much more standards compliant than before, and even better tested. I updated the lists of supported features and supported benchmarks on the Higgs page to reflect this.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

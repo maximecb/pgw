@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pointers Gone Wild</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Pointers Gone Wild">
+  <meta property="og:description" content="Pointers Gone Wild">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open ");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (false) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="about/">About</a>
+    <a href="about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<h2 class="index_h2">Featured</h2>
+<div class="post_link"><a class="title" href="2022/01/19/the-internet-changed-my-life/">The Internet Changed My Life</a><div class="date">2022-01-19</div></div>
+<div class="post_link"><a class="title" href="2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/">NoiseCraft: a Browser-Based Visual Programming Language for Sound &amp; Music</a><div class="date">2021-12-05</div></div>
+<div class="post_link"><a class="title" href="2021/06/02/yjit-building-a-new-jit-compiler-inside-cruby/">YJIT: Building a New JIT Compiler Inside CRuby</a><div class="date">2021-06-02</div></div>
+<div class="post_link"><a class="title" href="2019/11/02/they-might-never-tell-you-its-broken/">They Might Never Tell You It's Broken</a><div class="date">2019-11-02</div></div>
+<div class="post_link"><a class="title" href="2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/">(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets</a><div class="date">2018-05-20</div></div>
+<div class="post_link"><a class="title" href="2018/02/18/minimalism-in-programming/">Minimalism in Programming</a><div class="date">2018-02-18</div></div>
+<div class="post_link"><a class="title" href="2014/09/09/ds-garbage-collector-problem/">D's Garbage Collector Problem</a><div class="date">2014-09-10</div></div>
+<div class="post_link"><a class="title" href="2012/12/31/turing-drawings/">Turing Drawings</a><div class="date">2012-12-31</div></div>
+<h2 class="index_h2">Archive</h2>
+<div class="post_link"><a class="title" href="2025-11-29-building-a-copying-gc-for-the-plush-programming-language/">Building a Copying GC for the Plush Programming Language</a><div class="date">2025-11-29</div></div>
+<div class="post_link"><a class="title" href="2025-10-12-optimizing-the-plush-interpreter-for-faster-raytracing/">Optimizing the Plush Interpreter for Faster Raytracing</a><div class="date">2025-10-12</div></div>
+<div class="post_link"><a class="title" href="2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/">Out-Fibbing CPython with the Plush Interpreter</a><div class="date">2025-08-06</div></div>
+<div class="post_link"><a class="title" href="2025-08-03-creating-a-toy-language-with-actor-based-parallelism/">Creating a Toy Programming Language with Actor-Based Parallelism</a><div class="date">2025-08-03</div></div>
+<div class="post_link"><a class="title" href="2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/">AI Safety in the Presence of Multiple ASI Systems</a><div class="date">2025-07-04</div></div>
+<div class="post_link"><a class="title" href="2025-04-12-yes-we-do-want-humanoid-robots/">Yes, We Do Want Humanoid Robots</a><div class="date">2025-04-12</div></div>
+<div class="post_link"><a class="title" href="2025-03-06-my-low-tech-attempt-to-automate-spellchecking/">My Low-Tech Attempt to Automate Spellchecking</a><div class="date">2025-03-06</div></div>
+<div class="post_link"><a class="title" href="2025-01-10-so-i-rolled-my-own-static-site-generator/">So I Rolled My Own Static Site Generator</a><div class="date">2025-01-10</div></div>
+<div class="post_link"><a class="title" href="2024/04/20/the-alternative-implementation-problem/">The Alternative Implementation Problem</a><div class="date">2024-04-20</div></div>
+<div class="post_link"><a class="title" href="2024/04/07/the-race-to-make-humans-obsolete/">The Race to Make Humans Obsolete</a><div class="date">2024-04-07</div></div>
+<div class="post_link"><a class="title" href="2023-12-24-toxic-by-design-human-scale-vs-asymmetric-social-media/">Human-Scale vs Asymmetric Social Media</a><div class="date">2023-12-24</div></div>
+<div class="post_link"><a class="title" href="2023/11/01/preparing-uvm-for-3d-graphics/">Preparing UVM for 3D Graphics</a><div class="date">2023-11-01</div></div>
+<div class="post_link"><a class="title" href="2023/05/29/software-bugs-that-cause-real-world-harm/">Software Bugs That Cause Real-World Harm</a><div class="date">2023-05-29</div></div>
+<div class="post_link"><a class="title" href="2023/03/12/memory-pages-mmap-and-linear-address-spaces/">Memory, Pages, mmap, and Linear Address Spaces</a><div class="date">2023-03-12</div></div>
+<div class="post_link"><a class="title" href="2023/02/24/building-a-minimalistic-virtual-machine/">Building a Minimalistic Virtual Machine</a><div class="date">2023-02-24</div></div>
+<div class="post_link"><a class="title" href="2022/06/08/typed-vs-untyped-virtual-machines/">Typed vs Untyped Virtual Machines</a><div class="date">2022-06-08</div></div>
+<div class="post_link"><a class="title" href="2022/05/23/minimalism-in-programming-language-design/">Minimalism in Programming Language Design</a><div class="date">2022-05-23</div></div>
+<div class="post_link"><a class="title" href="2022/03/05/democracy-dictatorships-and-access-to-information/">Democracy, Dictatorships and Access to Information</a><div class="date">2022-03-06</div></div>
+<div class="post_link"><a class="title" href="2022/02/18/noisecraft-project-update/">NoiseCraft Project Update</a><div class="date">2022-02-18</div></div>
+<div class="post_link"><a class="title" href="2022/02/11/code-that-doesnt-rot/">Code that Doesn't Rot</a><div class="date">2022-02-11</div></div>
+<div class="post_link"><a class="title" href="2022/01/19/the-internet-changed-my-life/">The Internet Changed My Life</a><div class="date">2022-01-19</div></div>
+<div class="post_link"><a class="title" href="2022/01/08/whats-could-you-use-tesla-bot-for/">What's Could You Use Tesla Bot For?</a><div class="date">2022-01-08</div></div>
+<div class="post_link"><a class="title" href="2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/">NoiseCraft: a Browser-Based Visual Programming Language for Sound &amp; Music</a><div class="date">2021-12-05</div></div>
+<div class="post_link"><a class="title" href="2021/06/02/yjit-building-a-new-jit-compiler-inside-cruby/">YJIT: Building a New JIT Compiler Inside CRuby</a><div class="date">2021-06-02</div></div>
+<div class="post_link"><a class="title" href="2021/02/21/investing-is-a-social-phenomenon/">Investing is a Social Phenomenon</a><div class="date">2021-02-21</div></div>
+<div class="post_link"><a class="title" href="2021/02/07/on-insurmountable-technical-obstacles/">On Insurmountable Technical Obstacles</a><div class="date">2021-02-07</div></div>
+<div class="post_link"><a class="title" href="2020/12/01/combatting-pessimism-3-keys-to-innovation/">Combatting Pessimism: 3 Keys to Innovation</a><div class="date">2020-12-01</div></div>
+<div class="post_link"><a class="title" href="2020/09/22/the-need-for-stable-foundations-in-software-development/">The Need for Stable Foundations in Software Development</a><div class="date">2020-09-22</div></div>
+<div class="post_link"><a class="title" href="2020/01/03/maybe-planets-are-overrated/">Maybe Planets are Overrated?</a><div class="date">2020-01-03</div></div>
+<div class="post_link"><a class="title" href="2019/11/05/its-been-done-before/">It's Been Done Before</a><div class="date">2019-11-05</div></div>
+<div class="post_link"><a class="title" href="2019/11/02/they-might-never-tell-you-its-broken/">They Might Never Tell You It's Broken</a><div class="date">2019-11-02</div></div>
+<div class="post_link"><a class="title" href="2019/10/19/balancing-fun-stress-and-profit/">Balancing Fun, Stress and Profit</a><div class="date">2019-10-19</div></div>
+<div class="post_link"><a class="title" href="2019/10/06/zupiter-a-web-based-modular-synthesizer/">Zupiter: a Web-Based Modular Synthesizer</a><div class="date">2019-10-06</div></div>
+<div class="post_link"><a class="title" href="2019/06/10/the-end-of-online-anonymity/">The End of Online Anonymity</a><div class="date">2019-06-10</div></div>
+<div class="post_link"><a class="title" href="2019/01/29/miniworld-a-vizdoom-alternative-for-openai-gym/">MiniWorld: A VizDoom Alternative for OpenAI Gym</a><div class="date">2019-01-29</div></div>
+<div class="post_link"><a class="title" href="2018/12/17/a-small-dose-of-optimism/">A Small Dose of Optimism</a><div class="date">2018-12-17</div></div>
+<div class="post_link"><a class="title" href="2018/05/21/building-a-simple-self-driving-car-simulator/">Building a Simple Self-Driving Car Simulator</a><div class="date">2018-05-21</div></div>
+<div class="post_link"><a class="title" href="2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/">(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets</a><div class="date">2018-05-20</div></div>
+<div class="post_link"><a class="title" href="2018/02/18/minimalism-in-programming/">Minimalism in Programming</a><div class="date">2018-02-18</div></div>
+<div class="post_link"><a class="title" href="2018/01/28/my-new-job-in-rl-robotics-research/">My new Job in RL &amp; Robotics Research</a><div class="date">2018-01-28</div></div>
+<div class="post_link"><a class="title" href="2017/12/04/we-all-live-in-a-bubble/">We All Live in a Bubble</a><div class="date">2017-12-04</div></div>
+<div class="post_link"><a class="title" href="2017/10/20/the-ai-risk-isnt-what-you-think/">The AI Risk Isn't What You Think</a><div class="date">2017-10-20</div></div>
+<div class="post_link"><a class="title" href="2017/06/11/zetas-jitterpreter/">Zeta's JITterpreter</a><div class="date">2017-06-12</div></div>
+<div class="post_link"><a class="title" href="2017/04/29/zetavm-my-new-compiler-project/">ZetaVM, my new compiler project</a><div class="date">2017-04-29</div></div>
+<div class="post_link"><a class="title" href="2017/01/14/technodiversity/">Technodiversity</a><div class="date">2017-01-14</div></div>
+<div class="post_link"><a class="title" href="2016/12/22/the-brains-registers/">The Brain's Registers</a><div class="date">2016-12-22</div></div>
+<div class="post_link"><a class="title" href="2016/11/22/method-call-syntax-in-a-js-like-language/">Method Call Syntax in a JS-like Language</a><div class="date">2016-11-23</div></div>
+<div class="post_link"><a class="title" href="2016/11/18/so-ive-been-using-gedit-this-whole-time/">So, I've been using gedit this whole time</a><div class="date">2016-11-18</div></div>
+<div class="post_link"><a class="title" href="2016/09/24/esp8266/">My Experience with the ESP8266 - Making an LED Strip I can Control from my Shell</a><div class="date">2016-09-25</div></div>
+<div class="post_link"><a class="title" href="2016/09/20/silicon-valley-six-months-later/">Silicon Valley, Six Months Later</a><div class="date">2016-09-21</div></div>
+<div class="post_link"><a class="title" href="2016/05/08/optimizing-ray-marching-through-partial-evaluation/">Optimizing Ray Marching through Partial Evaluation</a><div class="date">2016-05-09</div></div>
+<div class="post_link"><a class="title" href="2016/03/23/sense-from-chaos-crossing-the-semantic-gap/">Sense from Chaos - Crossing the Semantic Gap</a><div class="date">2016-03-23</div></div>
+<div class="post_link"><a class="title" href="2016/02/24/moving-to-the-valley/">Moving to the Valley</a><div class="date">2016-02-24</div></div>
+<div class="post_link"><a class="title" href="2016/02/04/building-a-small-scale-prototype/">Building a Small-Scale Prototype</a><div class="date">2016-02-04</div></div>
+<div class="post_link"><a class="title" href="2016/01/07/exercise-depression-and-the-energy-hypothesis/">Exercise, Depression and the Energy Hypothesis</a><div class="date">2016-01-07</div></div>
+<div class="post_link"><a class="title" href="2015/11/28/musings-on-aot-jit-and-language-design/">Musings on AOT, JIT and Language Design</a><div class="date">2015-11-28</div></div>
+<div class="post_link"><a class="title" href="2015/11/25/have-static-languages-won/">Have Static Languages Won?</a><div class="date">2015-11-25</div></div>
+<div class="post_link"><a class="title" href="2015/11/15/why-i-chose-industry-over-a-postdoc/">Why I Chose Industry Over a Postdoc</a><div class="date">2015-11-15</div></div>
+<div class="post_link"><a class="title" href="2015/11/08/the-robotic-revolution/">The Robotic Revolution</a><div class="date">2015-11-08</div></div>
+<div class="post_link"><a class="title" href="2015/10/06/theres-too-many-programming-languages/">There's Too Many Programming Languages!</a><div class="date">2015-10-06</div></div>
+<div class="post_link"><a class="title" href="2015/09/24/basic-block-versioning-my-best-result-yet/">Basic Block Versioning - My Best Result Yet</a><div class="date">2015-09-24</div></div>
+<div class="post_link"><a class="title" href="2015/09/15/all-hope-is-not-lost-for-flying-cars/">All Hope is Not Lost for Flying Cars</a><div class="date">2015-09-15</div></div>
+<div class="post_link"><a class="title" href="2015/09/12/why-you-should-be-a-little-scared-of-machine-learning/">Why You Should be a Little Scared of Machine Learning</a><div class="date">2015-09-12</div></div>
+<div class="post_link"><a class="title" href="2015/08/20/what-killed-smalltalk/">What Killed Smalltalk?</a><div class="date">2015-08-20</div></div>
+<div class="post_link"><a class="title" href="2015/08/02/javascript-is-the-c-of-the-web/">JavaScript is the C++ of the Web</a><div class="date">2015-08-02</div></div>
+<div class="post_link"><a class="title" href="2015/07/30/all-possible-thoughts/">All Possible Thoughts</a><div class="date">2015-07-30</div></div>
+<div class="post_link"><a class="title" href="2015/07/27/feels-like-censorship/">Feels like Censorship</a><div class="date">2015-07-27</div></div>
+<div class="post_link"><a class="title" href="2015/07/10/presented-at-ecoop/">Presented at ECOOP</a><div class="date">2015-07-10</div></div>
+<div class="post_link"><a class="title" href="2015/06/22/typed-shapes-paper-submitted/">Typed Shapes Paper Submitted</a><div class="date">2015-06-22</div></div>
+<div class="post_link"><a class="title" href="2015/05/25/maybe-we-ought-to-have-numerical-coprocessors/">Maybe we ought to have Numerical Coprocessors?</a><div class="date">2015-05-25</div></div>
+<div class="post_link"><a class="title" href="2015/05/10/the-ai-breakthrough-that-wont-happen/">The AI Breakthrough that Won't Happen</a><div class="date">2015-05-10</div></div>
+<div class="post_link"><a class="title" href="2015/05/07/the-smart-web-is-coming/">The Smart Web is Coming</a><div class="date">2015-05-07</div></div>
+<div class="post_link"><a class="title" href="2015/04/16/the-problem-with-html/">The Problem with HTML</a><div class="date">2015-04-16</div></div>
+<div class="post_link"><a class="title" href="2015/04/15/what-is-intelligence/">What is Intelligence?</a><div class="date">2015-04-15</div></div>
+<div class="post_link"><a class="title" href="2015/03/18/basic-block-versioning-published-at-last/">Basic Block Versioning - Published At Last!</a><div class="date">2015-03-18</div></div>
+<div class="post_link"><a class="title" href="2015/02/08/my-thesis-a-clearer-picture/">My Thesis: A Clearer Picture</a><div class="date">2015-02-08</div></div>
+<div class="post_link"><a class="title" href="2014/12/11/visit-to-northeastern-university/">Visit to Northeastern University</a><div class="date">2014-12-11</div></div>
+<div class="post_link"><a class="title" href="2014/11/14/the-fastest-for-in-loops-in-the-whole-wide-web/">The Fastest For-In Loops in the Whole Wide Web</a><div class="date">2014-11-14</div></div>
+<div class="post_link"><a class="title" href="2014/11/10/pushing-higgs-to-the-limit/">Pushing Higgs to the Limit</a><div class="date">2014-11-10</div></div>
+<div class="post_link"><a class="title" href="2014/10/26/circumventing-the-d-garbage-collector/">Circumventing the D Garbage Collector</a><div class="date">2014-10-26</div></div>
+<div class="post_link"><a class="title" href="2014/10/23/audiobooks-are-awesome/">Audiobooks are Awesome</a><div class="date">2014-10-23</div></div>
+<div class="post_link"><a class="title" href="2014/09/17/faster-than-v8/">Faster than V8 *</a><div class="date">2014-09-17</div></div>
+<div class="post_link"><a class="title" href="2014/09/11/making-waves-ds-gc-problem-followup/">Making Waves: D's GC Problem Followup</a><div class="date">2014-09-11</div></div>
+<div class="post_link"><a class="title" href="2014/09/09/ds-garbage-collector-problem/">D's Garbage Collector Problem</a><div class="date">2014-09-10</div></div>
+<div class="post_link"><a class="title" href="2014/07/19/dogfooding-higgs-with-the-turing-turtle/">Dogfooding Higgs with the Turing Turtle</a><div class="date">2014-07-19</div></div>
+<div class="post_link"><a class="title" href="2014/07/17/my-paper-was-rejected-again/">My Paper was Rejected Again</a><div class="date">2014-07-17</div></div>
+<div class="post_link"><a class="title" href="2014/07/11/the-constness-problem/">The Constness Problem</a><div class="date">2014-07-11</div></div>
+<div class="post_link"><a class="title" href="2014/05/08/news-of-higgs/">News of Higgs</a><div class="date">2014-05-08</div></div>
+<div class="post_link"><a class="title" href="2014/04/10/positive-results-for-higgs/">Positive Results for Higgs</a><div class="date">2014-04-10</div></div>
+<div class="post_link"><a class="title" href="2014/03/19/how-i-hacked-my-stationary-bike-and-voided-its-warranty/">How I Hacked my Stationary Bike and Voided its Warranty</a><div class="date">2014-03-20</div></div>
+<div class="post_link"><a class="title" href="2014/02/03/higgs-upcoming-talks-new-contributions/">Higgs: Upcoming Talks &amp; New Contributions</a><div class="date">2014-02-03</div></div>
+<div class="post_link"><a class="title" href="2014/01/28/accelerating-real-time-path-tracing/">Accelerating Real-Time Path Tracing</a><div class="date">2014-01-28</div></div>
+<div class="post_link"><a class="title" href="2014/01/08/contribute-to-the-higgs-js-compiler/">Contribute to the Higgs JS Compiler</a><div class="date">2014-01-08</div></div>
+<div class="post_link"><a class="title" href="2014/01/02/tile-based-image-compression/">Tile-Based Image Compression</a><div class="date">2014-01-03</div></div>
+<div class="post_link"><a class="title" href="2013/12/10/the-incremental-jit-lives/">The Incremental JIT Lives</a><div class="date">2013-12-10</div></div>
+<div class="post_link"><a class="title" href="2013/12/06/alan-turing-the-enigma-a-book-review/">Alan Turing: The Enigma - A Book Review</a><div class="date">2013-12-06</div></div>
+<div class="post_link"><a class="title" href="2013/12/05/the-electric-mirror/">The Electric Mirror</a><div class="date">2013-12-05</div></div>
+<div class="post_link"><a class="title" href="2013/10/31/higgs-the-first-jit-compiler-of-its-kind/">Higgs: the First JIT Compiler of its Kind</a><div class="date">2013-10-31</div></div>
+<div class="post_link"><a class="title" href="2013/10/21/ubertechnoshoes/">übertechnoshoes</a><div class="date">2013-10-21</div></div>
+<div class="post_link"><a class="title" href="2013/09/24/static-typing-may-not-scale/">Static Typing may not Scale</a><div class="date">2013-09-24</div></div>
+<div class="post_link"><a class="title" href="2013/08/29/down-the-rabbit-hole-that-is-inlining/">Down the Rabbit Hole that is Inlining</a><div class="date">2013-08-29</div></div>
+<div class="post_link"><a class="title" href="2013/08/14/higgs-rise-of-the-ssa-jit/">Higgs: Rise of the SSA JIT</a><div class="date">2013-08-14</div></div>
+<div class="post_link"><a class="title" href="2013/07/22/sometimes-a-datum-is-just-a-datum/">Sometimes a datum is just a datum</a><div class="date">2013-07-22</div></div>
+<div class="post_link"><a class="title" href="2013/07/19/programming-without-text-files/">Programming without Text Files</a><div class="date">2013-07-20</div></div>
+<div class="post_link"><a class="title" href="2013/07/20/on-holistic-programming-languages/">On Holistic Programming Languages</a><div class="date">2013-07-20</div></div>
+<div class="post_link"><a class="title" href="2013/06/20/how-i-miss-you-dear-ssa/">How I miss you, dear SSA</a><div class="date">2013-06-20</div></div>
+<div class="post_link"><a class="title" href="2013/06/03/inlining-in-higgs/">Inlining in Higgs</a><div class="date">2013-06-03</div></div>
+<div class="post_link"><a class="title" href="2013/05/28/psa-caffeine-is-a-drug/">PSA: Caffeine is a Drug</a><div class="date">2013-05-28</div></div>
+<div class="post_link"><a class="title" href="2013/05/15/turing-drawings-followup/">Turing Drawings Followup</a><div class="date">2013-05-15</div></div>
+<div class="post_link"><a class="title" href="2013/05/10/presented-at-dconf-2013/">Presented at DConf 2013</a><div class="date">2013-05-10</div></div>
+<div class="post_link"><a class="title" href="2013/03/31/progress-on-the-higgs-jit/">Progress on the Higgs JIT</a><div class="date">2013-03-31</div></div>
+<div class="post_link"><a class="title" href="2013/03/04/a-simple-jit-compiler/">A Simple JIT Compiler</a><div class="date">2013-03-04</div></div>
+<div class="post_link"><a class="title" href="2013/02/20/back-from-silicon-valley/">Back from Silicon Valley</a><div class="date">2013-02-20</div></div>
+<div class="post_link"><a class="title" href="2013/01/31/visiting-mozilla/">Visiting Mozilla</a><div class="date">2013-01-31</div></div>
+<div class="post_link"><a class="title" href="2013/01/22/higgs-has-a-garbage-collector/">Higgs has a Garbage Collector</a><div class="date">2013-01-22</div></div>
+<div class="post_link"><a class="title" href="2013/01/03/more-fun-with-turing-machines/">More Fun with Turing Machines</a><div class="date">2013-01-03</div></div>
+<div class="post_link"><a class="title" href="2012/12/31/turing-drawings/">Turing Drawings</a><div class="date">2012-12-31</div></div>
+<div class="post_link"><a class="title" href="2012/12/18/higgs-has-exceptions/">Higgs has Exceptions</a><div class="date">2012-12-18</div></div>
+<div class="post_link"><a class="title" href="2012/12/13/sky-blue/">Sky Blue</a><div class="date">2012-12-13</div></div>
+<div class="post_link"><a class="title" href="2012/12/08/higgs-my-new-tracing-jit-for-javascript/">Higgs: My New Tracing JIT for JavaScript</a><div class="date">2012-12-09</div></div>
+<div class="post_link"><a class="title" href="2012/11/09/static-vs-dynamic-why-not-both/">Static vs Dynamic: Why not Both?</a><div class="date">2012-11-10</div></div>
+<div class="post_link"><a class="title" href="2012/10/24/debugging-by-the-seat-of-the-pants/">Debugging by the Seat of the Pants</a><div class="date">2012-10-24</div></div>
+<div class="post_link"><a class="title" href="2012/09/29/dynamically-adjusting-lcd-brightness-with-ambient-light/">Dynamically Adjusting LCD Brightness with Ambient Light</a><div class="date">2012-09-29</div></div>
+<div class="post_link"><a class="title" href="2012/09/25/some-glues-dont-mix-with-electronics/">Some Glues Don't Mix with Electronics</a><div class="date">2012-09-25</div></div>
+<div class="post_link"><a class="title" href="2012/09/23/the-avr-alarm-clock-is-complete/">The AVR Alarm Clock is Complete</a><div class="date">2012-09-24</div></div>
+<div class="post_link"><a class="title" href="2012/07/25/short-update-on-toycpu/">Short Update on toyCPU</a><div class="date">2012-07-25</div></div>
+<div class="post_link"><a class="title" href="2012/07/19/toycpu-project-update/">toyCPU Project Update</a><div class="date">2012-07-19</div></div>
+<div class="post_link"><a class="title" href="2012/07/13/designing-a-toy-cpu/">Designing a toy CPU</a><div class="date">2012-07-13</div></div>
+<div class="post_link"><a class="title" href="2012/07/10/radical-intro-to-programming/">A Radical Introduction to Programming</a><div class="date">2012-07-10</div></div>
+<div class="post_link"><a class="title" href="2012/06/21/an-inexpensive-robot-platform/">An Inexpensive Robot Platform</a><div class="date">2012-06-22</div></div>
+<div class="post_link"><a class="title" href="2012/06/07/why-do-most-new-languages-fail/">Why Do Most New Languages Fail?</a><div class="date">2012-06-07</div></div>
+<div class="post_link"><a class="title" href="2012/05/15/loebner-contest-makes-turing-roll-in-his-grave/">Loebner Contest makes Turing Roll in his Grave</a><div class="date">2012-05-15</div></div>
+<div class="post_link"><a class="title" href="2012/05/08/we-should-be-dna-sequencing-endangered-species/">We Should be Sequencing the DNA of Endangered Species</a><div class="date">2012-05-09</div></div>
+<div class="post_link"><a class="title" href="2012/04/23/musictoy-music-made-simple/">MusicToy - Music Made Simple</a><div class="date">2012-04-23</div></div>
+<div class="post_link"><a class="title" href="2012/04/20/the-indirection-problem/">The Indirection Problem</a><div class="date">2012-04-20</div></div>
+<div class="post_link"><a class="title" href="2012/04/11/why-lisp-never-took-off/">Why LISP Never Took Off</a><div class="date">2012-04-11</div></div>
+<div class="post_link"><a class="title" href="2012/04/02/inefficient-numerical-operators/">Inefficient Numerical Operators</a><div class="date">2012-04-02</div></div>
+<div class="post_link"><a class="title" href="2012/03/30/teaching-computers-about-music/">Teaching Computers about Music</a><div class="date">2012-03-30</div></div>
+<div class="post_link"><a class="title" href="2012/03/09/game-development-toying-with-csg-and-webgl/">Game Development: Toying with CSG and WebGL</a><div class="date">2012-03-09</div></div>
+<div class="post_link"><a class="title" href="2012/02/27/are-variadic-functions-necessary/">Are Variadic Functions Necessary?</a><div class="date">2012-02-27</div></div>
+<div class="post_link"><a class="title" href="2012/02/23/stop-hating-on-c/">Stop Hating on C!</a><div class="date">2012-02-23</div></div>
+<div class="post_link"><a class="title" href="2012/02/09/venturing-into-electronic-music/">Venturing into Electronic Music</a><div class="date">2012-02-09</div></div>
+<div class="post_link"><a class="title" href="2012/01/31/exporting-midi-files-using-data-uris/">Exporting MIDI Files using Data URIs</a><div class="date">2012-01-31</div></div>
+<div class="post_link"><a class="title" href="2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/">Try my Web App: Melodique, a Procedural Melodic Phrase Generator</a><div class="date">2012-01-29</div></div>
+<div class="post_link"><a class="title" href="2012/01/21/algorithms-making-music/">Algorithms Making Music</a><div class="date">2012-01-21</div></div>
+<div class="post_link"><a class="title" href="2012/01/12/about-tachyons-garbage-collector/">About Tachyon's Garbage Collector</a><div class="date">2012-01-12</div></div>
+<div class="post_link"><a class="title" href="2012/01/12/263/">Two HDTVs for my Media PC</a><div class="date">2012-01-12</div></div>
+<div class="post_link"><a class="title" href="2012/01/06/tachyons-design-principles/">Tachyon's Design Principles</a><div class="date">2012-01-07</div></div>
+<div class="post_link"><a class="title" href="2011/12/17/tachyon-has-a-garbage-collector/">Tachyon has a Garbage Collector!</a><div class="date">2011-12-17</div></div>
+<div class="post_link"><a class="title" href="2011/12/11/type-analysis-for-javascript/">Type Analysis for JavaScript</a><div class="date">2011-12-12</div></div>
+<div class="post_link"><a class="title" href="2011/11/29/good-news-for-javascript-bad-news-for-me/">Good News for JavaScript! Bad News for Me...</a><div class="date">2011-11-29</div></div>
+<div class="post_link"><a class="title" href="2011/11/14/progress-on-the-uberclock/">Progress on the Überclock</a><div class="date">2011-11-14</div></div>
+<div class="post_link"><a class="title" href="2011/11/01/metaprogramming-for-javascript/">Metaprogramming for JavaScript</a><div class="date">2011-11-01</div></div>
+<div class="post_link"><a class="title" href="2011/10/31/what-id-like-to-know-about-javascript-programs/">What I'd like to Know about JavaScript Programs</a><div class="date">2011-10-31</div></div>
+<div class="post_link"><a class="title" href="2011/10/31/code-compactness-and-optimization-levels/">Code Compactness and Optimization Levels</a><div class="date">2011-10-31</div></div>
+<div class="post_link"><a class="title" href="2011/10/25/presented-at-dls-2011/">Presented at DLS 2011</a><div class="date">2011-10-25</div></div>
+<div class="post_link"><a class="title" href="2011/10/12/toying-with-microcontrollers-part-deux/">Toying with Microcontrollers Part Deux</a><div class="date">2011-10-12</div></div>
+<div class="post_link"><a class="title" href="2011/10/07/optimizing-global-value-numbering/">Optimizing Global Value Numbering</a><div class="date">2011-10-07</div></div>
+<div class="post_link"><a class="title" href="2011/10/04/whats-next-for-tachyon/">What's Next for Tachyon</a><div class="date">2011-10-04</div></div>
+<div class="post_link"><a class="title" href="2011/10/04/toying-with-avr-microcontrollers/">Toying with AVR Microcontrollers</a><div class="date">2011-10-04</div></div>
+<div class="post_link"><a class="title" href="2011/09/27/new-x86-backend-and-javascript-macros/">New x86 Backend and... JavaScript Macros?</a><div class="date">2011-09-28</div></div>
+<div class="post_link"><a class="title" href="2011/09/23/my-masters-research-just-in-time-specialization/">My Masters Research: Just-In-Time Specialization</a><div class="date">2011-09-23</div></div>
+<div class="post_link"><a class="title" href="2011/09/20/just-passed-my-predoctoral-exam/">Just Passed my Predoctoral Exam</a><div class="date">2011-09-20</div></div>
+<div class="post_link"><a class="title" href="2011/09/11/predoctoral-exam/">Predoctoral Exam</a><div class="date">2011-09-11</div></div>
+<div class="post_link"><a class="title" href="2011/08/29/artificial-life-in-your-web-browser/">Artificial Life in your Web Browser!</a><div class="date">2011-08-29</div></div>
+<div class="post_link"><a class="title" href="2011/08/27/the-tachyon-javascript-compiler/">The Tachyon JavaScript Compiler</a><div class="date">2011-08-27</div></div>
+<div class="post_link"><a class="title" href="2011/08/27/hello-world/">Hello world!</a><div class="date">2011-08-27</div></div>
+<p>In total, 167 blog posts were published since inception.</p><div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

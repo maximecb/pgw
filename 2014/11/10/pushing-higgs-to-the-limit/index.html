@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pushing Higgs to the Limit</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Pushing Higgs to the Limit">
+  <meta property="og:description" content="Pushing Higgs to the Limit">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-11-10-pushing-higgs-to-the-limit/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/10/26/circumventing-the-d-garbage-collector/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/11/14/the-fastest-for-in-loops-in-the-whole-wide-web/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Pushing Higgs to the Limit</h1>
+<div class="post_date">November 10th, 2014</div>
+</div>
+<p>Over a week ago, I received the unfortunate news that my basic block versioning paper was rejected for the third time. We had received five "weak accept" scores, but at the last minute, after the <a href="http://www.cs.toronto.edu/~kyros/oct2/help/rebuttal_help.html">rebuttal</a> period was over, one of the reviewers decided to change his vote and give us a "reject" rating. I won't lie, even though I knew the paper could be rejected, I found that I had a hard time getting out of bed the next day. For a little while, my motivation was completely crushed. I decided to put the latest version of the paper <a href="http://arxiv.org/abs/1411.0352">on arXiv.org</a>. I feel that it's useful to timestamp my progress, and it seems that sharing the results of my research is more important than getting into academic conferences.</p>
+<p>Fortunately, my motivation is beginning to return, in part because I've had some ideas on how to make the next version of the paper even better. Conference reviewers criticized us for not discussing compilation times, and raised the issue that perhaps <a href="/2013/10/31/higgs-the-first-jit-compiler-of-its-kind/">basic block versioning</a> could drastically increase compilation times. I think it will be easy enough to simply include a graph showing that this is not the case in practice, and avoid receiving this criticism ever again. Another thing that has been brought up multiple times is the request for a comparison of basic block versioning against <a href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">trace compilation</a>. I personally don't want to dedicate the next year to building a JavaScript tracing JIT to compare Higgs against, but I figured that maybe I could make a convincing case some other way.</p>
+<p>I decided to ask around on Twitter and found the last working version of the famous <a href="http://en.wikipedia.org/wiki/SpiderMonkey_(software)#TraceMonkey">TraceMonkey</a> JIT, which was once part of Mozilla's JavaScript engine. Numerous papers have been published about this JIT compiler and so it's relatively well known in the academic community. Hence, I figured that if Higgs could compare favorably to TraceMonkey in terms of performance, that may give us more credibility. Performing well against a well-known commercial JIT compiler will hopefully provide the psychological impact needed for conference reviewers to take us more seriously.</p>
+<figure>
+<a href="tm-comparison.png">
+<img alt="" src="tm-comparison.png">
+</a>
+</figure>
+<p>The graph above shows a comparison of the relative execution time of code compiled by Higgs vs TraceMonkey (lower is better). Compilation times are excluded from this comparison because of issues mentioned in <a href="/2014/09/09/ds-garbage-collector-problem/">a previous blog post</a>. The 26 benchmarks are from the SunSpider and V8 suites, but I've excluded regular expression benchmarks since Higgs doesn't have a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> compiler (only an interpreter), and my research is not specifically about regular expressions.</p>
+<p>Higgs clearly doesn't beat TraceMonkey across the board, but it does perform better on half of the above benchmarks, sometimes by a wide margin. What seems clear after some analysis is that TraceMonkey does very well in benchmarks with short, obvious loops, but poorly in benchmarks with more complex control-flow. This should at least highlight the fact that basic block versioning is not the same thing as tracing, and can, in fact, deal with situations to which tracing is less suitable.</p>
+<p>Fortunately for me, TraceMonkey is not a moving target in terms of performance, and this week, I've been working on helping Higgs catch up. I've added string optimizations such as <a href="http://blog.cdleary.com/2012/01/string-representation-in-spidermonkey/">ropes</a> and precaching of one-character strings. I've also been working on eliminating bottlenecks in the runtime and standard libraries. Tomorrow, I'll be optimizing the inefficient way in which Higgs handles for-in loops (property enumerations), which are extensively used in the fasta benchmark.</p>
+<p>It's very motivating to have a goal. You can be sure that the next paper I submit will be showing Higgs beating TraceMonkey on most of these benchmarks. I'm going to keep improving the performance, keep improving our results, and keep amassing more and more evidence that basic block versioning is a worthwhile JIT compiler architecture. I'm going to push Higgs <a href="https://www.youtube.com/watch?v=sT1bp9ujQEE">to the limit</a>.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

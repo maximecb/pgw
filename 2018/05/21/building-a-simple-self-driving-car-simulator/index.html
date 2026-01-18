@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Building a Simple Self-Driving Car Simulator</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building a Simple Self-Driving Car Simulator">
+  <meta property="og:description" content="Building a Simple Self-Driving Car Simulator">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2018-05-21-building-a-simple-self-driving-car-simulator/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2018/12/17/a-small-dose-of-optimism/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Building a Simple Self-Driving Car Simulator</h1>
+<div class="post_date">May 21st, 2018</div>
+</div>
+<p>As part of my new job, I've been working with Professor Liam Paull and his students on building a simulator for <a href="http://duckietown.org/">Duckietown</a>. This is a university course being taught at ETH Zurich, the University of Montreal, TTIC/UChicago and other institutions, where students learn about self-driving cars and robotics by building their own small-scale model which can drive around in the miniature Duckietown universe, complete with turns, intersections, traffic signs, and other moving vehicles.</p>
+<p>The course has, so far, been focused on traditional robotics methods using computer vision and PID controllers to drive the robots. However, students and professors are becoming increasingly interested in using deep learning (and reinforcement learning in particular). Since reinforcement learning needs a lot of data, it's much more practical to do it in simulation than with physical robots. This has been one of the main motivations for building a simulator.</p>
+<p>The simulator I'm building works as an OpenAI Gym environment, which makes it easy to use for reinforcement learning. It's written in pure Python and uses OpenGL (pyglet) to produce graphics. I chose Python because this is the language most used by the deep learning community, and I wanted for students to be able to modify the simulator easily. The simulator performs many forms of <a href="https://arxiv.org/abs/1703.06907">domain randomization</a>: it randomly varies colors, the camera angle and field of view, etc. This feature is meant to help neural networks learn to deal with variability, so that trained networks will hopefully work not just in simulation, but also in the real world as well.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/b_T-QpdXbes?si=70RjtUKm1xsKohpz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>Because Duckietown is a toy universe that is essentially two-dimensional, I've designed a <a href="https://github.com/duckietown/gym-duckietown/blob/master/gym_duckietown/maps/udem1.yaml">YAML map format</a> which can be easily hand-edited to create custom new environments. It essentially describes a set of tiles, and where to place 3D models relative to those tiles. I've also made some simplifying assumptions with regard to physics (the agent essentially moves along a 2D plane).</p>
+<p>While working on this simulator, I'm also experimenting with sim-to-real transfer, that is, getting policies trained in simulation to work with a real robot. This is a work in progress, but we are close to having this working reliably. The video below shows some promising results:</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/Jo4rLRZ6a64?si=ilUw8_vSAeBSwNqw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>If you're interested in playing with this, the source code is <a href="https://github.com/duckietown/gym-duckietown">available on GitHub</a>. Feedback and contributions are welcome. If you run into any issues, please report them, as I'd like to make the simulator as easy to use as possible.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Teaching Computers about Music</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Teaching Computers about Music">
+  <meta property="og:description" content="Teaching Computers about Music">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-03-30-teaching-computers-about-music/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/03/09/game-development-toying-with-csg-and-webgl/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/04/02/inefficient-numerical-operators/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Teaching Computers about Music</h1>
+<div class="post_date">March 30th, 2012</div>
+</div>
+<p>I recently took an interest in music. More specifically, <a href="http://en.wikipedia.org/wiki/Algorithmic_composition">algorithmic composition</a>, that is, designing computer programs that can compose music. I made <a href="/2012/01/21/algorithms-making-music/">some attempts</a> at implementing such programs, based on the idea that it should be possible to come up with a set of rules for generating music that sounds pleasant. What's pleasant to one person might not be pleasant for everyone, but I thought I could easily conjure rules for generating music that was pleasant to me.</p>
+<p>Unfortunately, the more I looked into <a href="http://en.wikipedia.org/wiki/Music_theory">music theory</a>, the more problematic this became. There are some known, seemingly loose and imprecise, "rules" associated with classical music, but it seems to me these "rules" are in no way sufficient to derive an algorithm. Furthermore, I find that music theory largely fails to account for modern music. Some people might tell you that pop and dance music are trivial once you know about classical music. I would argue that this point of view is arrogant and uninformed. Modern electronic music has a much stronger focus on rhythm and unpitched sounds. It has integrated musical elements from non-european cultures and features instruments and composition techniques that didn't exist before the 1960s.</p>
+<p>A few days ago, I started thinking about ways to flip the algorithmic composition problem on its head. I'm unable, at this point, to write out elaborate rules to compose musical pieces by hand. It seems like an overly complex, tiresome process. I do, however, have my own musical tastes. If you show me a snippet of music, I can tell you whether it sounds musical or discordant to me. My idea then, is to have an algorithm that composes random musical patterns, and to have a human judge tell the algorithm what sounds best.</p>
+<p>I was able to prototype a simple version of this idea in about 6 hours of programming time. The program I implemented essentially "evolves" a simple musical <a href="http://en.wikipedia.org/wiki/Generative_grammar">grammar</a> based on the user's tastes and renders the sounds using a synthesized bass patch. My girlfriend and I both tried teaching the program about our tastes.</p>
+<p>Here are some samples from a single run I did last night. The training took about 15 minutes:</p>
+<ul>
+<li>
+<p><a href="patterns_ex1.mp3">Example 1</a></p>
+</li>
+<li>
+<p><a href="patterns_ex2.mp3">Example 2</a></p>
+</li>
+<li>
+<p><a href="patterns_ex3.mp3">Example 3</a></p>
+</li>
+</ul>
+<p>Here is one sample from a run supervised by my girlfriend:</p>
+<ul>
+<li>
+<p><a href="patterns_ex4.mp3">Example 4</a></p>
+</li>
+</ul>
+<p>The first 3 examples sound similar because they are based on the same grammar derived during one run. The algorithm is capable of generating rather different sounds, however, based on the choices made during a given run and your own personal preferences.</p>
+<p>So far, I find the  results very encouraging. I think there is clearly potential in the idea that someone can teach an algorithm how to compose based on their own tastes, even if they themselves do not have formal knowledge of music theory. I plan to explore this concept further. I will be trying to generate more complex music that integrates a drum kit and variable-length notes.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

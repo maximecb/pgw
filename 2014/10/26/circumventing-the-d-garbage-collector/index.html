@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Circumventing the D Garbage Collector</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Circumventing the D Garbage Collector">
+  <meta property="og:description" content="Circumventing the D Garbage Collector">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-10-26-circumventing-the-d-garbage-collector/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/10/23/audiobooks-are-awesome/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/11/10/pushing-higgs-to-the-limit/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Circumventing the D Garbage Collector</h1>
+<div class="post_date">October 26th, 2014</div>
+</div>
+<p>I recently wrote about performance issues I ran into with Higgs. Compilation times are currently unacceptably slow, and I tracked the cause down to performance problems in <a href="/2014/09/09/ds-garbage-collector-problem/">D's garbage collector</a>. Someone familiar with the GC internals explained that the GC scales poorly, with total collection time increasing quadratically in function of the amount of memory allocated. Despite this poor GC scaling being an obvious flaw, I <a href="/2014/09/11/making-waves-ds-gc-problem-followup/">received criticism</a> from people telling me that my compiler was simply allocating "too many objects" and that I was doing something wrong. That I should be implementing my own custom memory allocation strategies because garbage collectors were always going to be slow.</p>
+<p>Despite the nay sayers, Andrei Alexandrescu, co-creator of D, <a href="http://www.reddit.com/r/programming/comments/2g03af/ds_garbage_collector_problem/ckent8c">announced</a> that he would be rewriting D's GC to fix these performance problems, and his announcement was well-received in the D community. Unfortunately for me, this GC rewrite doesn't seem to be a top priority, and I'm not sure how many months it will take before a new collector replaces the current one. It seems conceivable that it could take over a year, or that it might happen after I finish my PhD studies. In a sense, the nay sayers are right. With the current GC situation, I have no choice but to circumvent the GC to get acceptable performance.</p>
+<p>I decided to do some research into alternative memory management strategies. I first started by looking at the way it's done in Google's V8 JIT. Their strategy is a system of memory "zones". These appear to be large memory arrays in which a pointer is bumped to allocate memory, which is very fast. They generate a function's Abstract Syntax Tree (AST) and it's Intermediate Representation (IR), allocating all node objects into a zone, and then discard all of these objects at once when they are no longer needed. The cost to deallocate an entire zone at once is constant. This strategy is clever, but it isn't sufficient for Higgs. I could see myself using something like this for my AST and IR (and maybe I will), but there are other objects in the system which need more fine-grained deallocation.</p>
+<p>Quite possibly, I'll end up implementing <a href="http://en.wikipedia.org/wiki/Object_pool_pattern">object pools</a> with <a href="http://en.wikipedia.org/wiki/Free_list">free lists</a>. This wouldn't be quite as blazingly fast as zones, but it would result in less memory waste, and it would be usable for all of the often-allocated kinds of objects in Higgs. The folks <a href="http://forum.dlang.org/thread/nkqymnaolmqpdsvaxszd@forum.dlang.org">on the D forum</a> were kind enough to point me to useful resources on how to <a href="http://wiki.dlang.org/Memory_Management#Explicit_Class_Instance_Allocation">manually allocate class instances</a> in D.</p>
+<p>Out of curiosity, before seriously considering implementing an object pool, I decided to try and benchmark the D garbage collector. I knew there was a performance issue, but I hadn't precisely quantified it. I was curious to see how much time would be needed to allocate a few million objects, and so I wrote the following test program:</p>
+<figure>
+<a href="membench.png">
+<img alt="" src="membench.png">
+</a>
+</figure>
+<p>The results, timed on my Core i7 3.4GHz with 16GB of RAM, were as follows:</p>
+<figure>
+<a href="curve.png">
+<img alt="" src="curve.png">
+</a>
+</figure>
+<p>The curve above is not perfectly quadratic, but if anyone doubted that the D GC has a performance problem, I think that this should be proof enough, with 8 million node allocations taking over a minute on a very recent CPU. In comparison, Higgs itself is able to execute a similar JavaScript benchmark with 10 million objects allocated and initialized in less than 10 seconds.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

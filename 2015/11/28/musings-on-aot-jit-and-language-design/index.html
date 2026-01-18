@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Musings on AOT, JIT and Language Design</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Musings on AOT, JIT and Language Design">
+  <meta property="og:description" content="Musings on AOT, JIT and Language Design">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-11-28-musings-on-aot-jit-and-language-design/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/11/25/have-static-languages-won/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/01/07/exercise-depression-and-the-energy-hypothesis/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Musings on AOT, JIT and Language Design</h1>
+<div class="post_date">November 28th, 2015</div>
+</div>
+<p>Lately, I've been <a href="/2015/11/25/have-static-languages-won/">pondering</a> the strengths and weaknesses of static and dynamic languages. In particular, the reaction of the online programming community to Elben Shira's post <i><a href="http://elbenshira.com/blog/the-end-of-dynamic-languages/">The End of Dynamic Languages</a></i> made me realize that many (most?) programmers out there seem to prefer static languages. This seems to be largely because static languages usually come with better IDE and tool support, as well as static guarantees which programmers value highly (and rightly so).</p>
+<p>I'm slowly working on a design for a programming language of my own, and I had a <i>"wait a minute, let's take a step back"</i> kind of moment. Why? Because the language I was working on was going to be extremely dynamic. It was going to be JIT compiled, dynamically typed, with an extremely powerful macro system based on the ability to hijack and modify the parser while a program is being parsed. I was also considering using a self-modifying <a href="http://cs.lmu.edu/~ray/notes/ir/">Intermediate Representation (IR)</a> as part of the design of the JIT compiler.</p>
+<p>Elben's post made me take a step back because it made me realize that the design of my ultra-dynamic language would make it near-impossible to have much tool support. If you can hijack the parsing of a program while it's being parsed, and alter the parser using custom code you wrote, then good luck running any kind of static analysis. It's just not going to work.</p>
+<p>I saw that I was a being myopic. I use a bare-bones text editor, no tools, and I've only used a debugger a handful of times in the last few years. That's the way I program, but it's not the way most people program. I can get away with this because the projects I've worked on have all been under 100K lines of code. Designing a language which makes any kind of static analysis, refactoring-assistance or autocompletion near-impossible is a sure way to guarantee the language won't gain adoption outside of hobbyist circles.</p>
+<p>Then, there's the issue of JIT compilation. I very much like JIT compilers because that's where my expertise lies, I've written <a href="https://github.com/higgsjs/Higgs">my own JIT</a> as part of my PhD thesis. Still, I have to keep an open mind and ask myself what's best for my language. JIT compilers are fundamentally more powerful in terms of optimization capabilities than AOT (Ahead-Of-Time or static) compilers, because they can adapt the way they optimize code based on the behavior of running programs. They're great for dynamic languages.</p>
+<p>Unfortunately, it seems that the world, at the moment at least, is stepping away from JIT compilation. In order to support mobile platforms or compile to WebAssembly, it seems to me that JIT compilation is impractical. Why? Because it requires generating machine code on the fly. At the moment, it's unrealistic to just plop a custom binary with self-modifying machine code on the Apple or Android app stores.</p>
+<p>I'm thinking I might just design my language so that it compiles to plain old C. This would make it possible to leverage the C compilers that already exist for every platform out there. Rest assured though, this language will be dynamically typed ;)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

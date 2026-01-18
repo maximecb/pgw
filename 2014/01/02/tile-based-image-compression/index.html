@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tile-Based Image Compression</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Tile-Based Image Compression">
+  <meta property="og:description" content="Tile-Based Image Compression">
+  <meta property="og:image" content="https://pointersgonewild.com/2014/01/02/tile-based-image-compression/lenna5121.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-01-03-tile-based-image-compression/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/12/10/the-incremental-jit-lives/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/01/08/contribute-to-the-higgs-js-compiler/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Tile-Based Image Compression</h1>
+<div class="post_date">January 3rd, 2014</div>
+</div>
+<div class="cover_image">
+<img src="lenna5121.png">
+</div>
+<p>I'm not any kind of <a href="http://en.wikipedia.org/wiki/Data_compression">data compression</a> expert, but I find the topic quite interesting. There's something fascinating about the idea of data compression and its relationship to machine learning. What I mean to say is that to compress a data stream efficiently, you should ideally capture something fundamental about the structure of the data being encoded. The ideal compression algorithm should somehow be able to "learn" and "understand" the core nature of the data being compressed, so that it can encode it in a very compact way, with as little redundancy as possible. The compression algorithms in use today do this in at a rather superficial level, seeking to shorten the encoding of repeated patterns of bits. <a href="http://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch">LZW</a>, for example, will build a dictionary (a simple grammar) as it encodes a binary data stream, and reuse pieces from this dictionary, when useful, to shorten the encoding. This simple yet clever strategy is remarkably effective, and quite difficult to improve upon.</p>
+<p><a href="http://en.wikipedia.org/wiki/Image_compression">Image compression</a> is something I find particularly interesting. Images we typically see around, photos in particular, are not at all random. There's structure: edges, shapes, visible patterns and repetitions. Real-world objects, letters, people, curves, textures, all of these things could in theory be mathematically approximated in a way that's much more compact than an array of millions of pixel samples. Our brain is somehow able to recover the underlying structure of the world from images, and transform millions of samples into high-level semantic entities. I've seen people use <a href="http://en.wikipedia.org/wiki/Genetic_algorithm">genetic algorithms</a> to <a href="http://rogeralsing.com/2008/12/07/genetic-programming-evolution-of-mona-lisa/">approximate images using colored triangles</a>. This got me thinking: what if you had something more expressive than triangles? Could you use genetic algorithms to evolve <a href="http://en.wikipedia.org/wiki/Boolean_function">boolean functions</a> to encode the pixels of an image as a function of their x/y coordinates?</p>
+<p>I did a number of experiments trying to come up with boolean functions to approximate one-bit-per-pixel black and white images using mutations and <a href="http://en.wikipedia.org/wiki/Hill_climbing">hill climbing</a>, but got surprisingly poor results. There are a number of issues. For one, evaluating complex boolean functions on millions of pixels is very time consuming. Another problem is that there are many complex functions to evaluate, and very very very few of them actually resemble the output we want. It's like looking for a needle in a galaxy. I think that in all probability, an approach using <a href="http://en.wikipedia.org/wiki/Artificial_neural_network">neural networks</a> working with floating-point values would have a better likelihood of panning out. There are training algorithms for neural networks, which would be a better starting point than completely random mutations. Furthermore, floating-point outputs are probably better for learning than boolean outputs, as there are multiple gradations of how wrong a given output is, rather than all or nothing, but this is a topic for another blog post.</p>
+<figure>
+<a href="lenna512.png">
+<img alt="Lenna at one bit per pixel" src="lenna512.png">
+</a>
+<figcaption>Lenna at one bit per pixel</figcaption>
+</figure>
+<figure>
+<a href="best1.png">
+<img alt="Not quite Lenna" src="best1.png">
+</a>
+<figcaption>Not quite Lenna</figcaption>
+</figure>
+<p>After the horrible failure of my boolean image approximation attempt, I sobbed while sipping on one ounce of whisky, but then, I had an idea. Simple approaches that exploit fundamental properties of a problem space tend to do quite well in practice. Maybe something resembling the LZW algorithm would work better. Maybe I could exploit the <a href="http://en.wikipedia.org/wiki/Self-similarity">self-similarity</a> of images (recurring patterns) in a very simple way. I started thinking about an algorithm to encode images using tiles. Split the image into NxN tiles (e.g. 4x4 or 8x8) and encode each tile either as a direct listing of pixel values, or as a reference to another part of the image. The idea is to save space by reusing image information when a similar enough tile already exists. I used the <a href="http://en.wikipedia.org/wiki/Mean_squared_error">Mean Squared Error (MSE)</a> of tile pixel values to decide when tiles are similar enough to allow reuse. Someone probably has already come up with a similar image compression algorithm before, but my google-fu has not revealed anything obvious.</p>
+<p>The tile-based algorithm, which my friend Molly has codenamed übersmüsh (USM for short), performs surprisingly well. It's not comparable to <a href="http://en.wikipedia.org/wiki/JPEG">JPEG</a>, which is a very sophisticated format layering many levels of clever tricks to get an encoding as compact as possible, but it does much better than I would have expected. Using 4x4 tiles to compress a 512x512 version the classic <a href="http://en.wikipedia.org/wiki/Lenna">Lenna</a> image, I was able to generate something visually quite similar to the original by supplying only 610 tiles of source pixel data, out of 16384. This means that only 3.7% of the tiles in the compressed image come from the source image, the rest are all backreferences to x/y regions of the compressed image. I allowed backreferences to rescale the color values of the tiles being referenced for additional flexibility, which makes for a much smaller tile use.</p>
+<figure>
+<a href="lenna5121.png">
+<img alt="The original" src="lenna5121.png">
+</a>
+<figcaption>The original</figcaption>
+</figure>
+<figure>
+<a href="4x4-pre-adjust-mul.png">
+<img alt="Compressed output" src="4x4-pre-adjust-mul.png">
+</a>
+<figcaption>Compressed output</figcaption>
+</figure>
+<figure>
+<a href="4x4-pre-adjust-mul-tagged.png">
+<img alt="Source tiles highlighted" src="4x4-pre-adjust-mul-tagged.png">
+</a>
+<figcaption>Source tiles highlighted</figcaption>
+</figure>
+<p>There are some issues, such as the fact that we probably use too few tiles for the background and too many in some detailed regions. This can probably be improved by tweaking or replacing the heuristic deciding when to use source tiles or backreferences. I can think of several other ideas to improve on the algorithm as a whole:</p>
+<ul>
+<li>
+<p>Pre-filtering of random noise to make tiles more reusable. The Lenna image has quite a bit of high-frequency noise, as most photographs probably do, due to the nature of image sensors in cameras.</p>
+</li>
+<li>
+<p>Reducing the size of source pixel data using <a href="http://en.wikipedia.org/wiki/Chroma_subsampling">chroma subsampling</a>. This may also have the benefit of making tiles more similar to each other, and thus more reusable.</p>
+</li>
+<li>
+<p>Avoiding supplying whole source tiles and instead supplying only enough source pixels to get an acceptable error threshold. The rest of the pixels would always come from a backreference.</p>
+</li>
+<li>
+<p>Using bigger tiles when possible (e.g. 16x16 or 8x8) and resorting to a recursive subdivision scheme only when necessary. This would reduce the number of tiles we need to encode.</p>
+</li>
+</ul>
+<p>Some important weaknesses right now might be the difficulty of encoding the tile reference table compactly. The code I wrote is also unoptimized and very slow. It's a brute-force search that looks at all possible previous pixel coordinates to find the most-resembling 4x4 tile in what has yet been compressed. This currently takes over an hour on my Code 2 Quad. The algorithm could probably be made much faster with a few simple tweaks to reduce the candidate set size. For example, the tiles could be sorted or hashed based on some metric, and only a few candidate tiles examined, instead of hundreds of thousands. The source code is written in <a href="http://dlang.org/">D</a>. It's not the cleanest, but if there's interest I might just clean it up and make it available.</p>
+<p>Happy new year to all :)</p>
+<h2>Edit: Challenge Accepted</h2>
+<p>A friend suggested I try übersmüsh on a different kind of image: a screenshot of Facebook containing text and large flat areas. I was curious to see how well it would do, and so I accepted his challenge. I quickly hacked the algorithm to look for matches in restricted size windows (close in position to the current tile). This probably reduces its effectiveness somewhat, but was needed to get a reasonable execution time (minutes instead of multiple hours).</p>
+<figure>
+<a href="fbshot.png">
+<img alt="Source image" src="fbshot.png">
+</a>
+<figcaption>Source image</figcaption>
+</figure>
+<figure>
+<a href="fbshot_out.png">
+<img alt="Compressed output" src="fbshot_out.png">
+</a>
+<figcaption>Compressed output</figcaption>
+</figure>
+<figure>
+<a href="fbshot_tagged.png">
+<img alt="Source tiles highlighted" src="fbshot_tagged.png">
+</a>
+<figcaption>Source tiles highlighted</figcaption>
+</figure>
+<p>A total of 3354 source tiles was used out of 49000 tiles total, which is about 6.8% of the source image data. Predictably, the algorithm does very well in flat areas. There is some amount of reuse in text, but this could be better if I hadn't reduced the search window size, and instead implemented a better search heuristic. Some of the ad pictures, namely the ones in the bottom-right corner, show very poor reuse, probably because my mean-squared-error heuristic is a poor approximation of what error is visually perceptible.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

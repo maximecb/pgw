@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Preparing UVM for 3D Graphics</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Preparing UVM for 3D Graphics">
+  <meta property="og:description" content="Preparing UVM for 3D Graphics">
+  <meta property="og:image" content="https://pointersgonewild.com/2023/11/01/preparing-uvm-for-3d-graphics/screenshot-2023-10-31-at-1.10.47-pm.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2023-11-01-preparing-uvm-for-3d-graphics/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2023/05/29/software-bugs-that-cause-real-world-harm/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2023-12-24-toxic-by-design-human-scale-vs-asymmetric-social-media/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Preparing UVM for 3D Graphics</h1>
+<div class="post_date">November 1st, 2023</div>
+</div>
+<div class="cover_image">
+<img src="screenshot-2023-10-31-at-1.10.47-pm.png">
+</div>
+<p>Since the beginning of this year, I’ve been casually working on <a href="https://github.com/maximecb/uvm">UVM</a>, a project to a minimalistic virtual machine that is portable and easy to target. As part of this project, I’ve also been working on a toy C compiler to make creating software for this VM easier. I first <a href="/2023/02/24/building-a-minimalistic-virtual-machine/">wrote about UVM</a> on February 24th, and got a fairly mixed reaction on Hacker News. Many people couldn’t see the appeal/interest in creating yet another VM or bytecode format when there’s already technology such as the JVM and WASM out there.</p>
+<p>I’m doing this in part for the learning experience, and also because I think it’s fun. The end goal is to end up with a VM that has a very simple architecture that’s easy to understand and a stable foundation to build software on, without having to worry about issues of portability. Part of my inspiration comes from retrocomputing. Computers used to be simple. You used to be able to power on a Commodore 64 and immediately write BASIC code. Programming today can be a lot more complex. It's hard to understand the entire machine, and just setting up a new development project can sometimes feels tedious. I’d like UVM to be simple to use, but also capable of effectively using the capabilities of modern computers, without arbitrary restrictions.</p>
+<p>Since I last wrote about UVM, I’ve spent a fair bit of time improving NCC, the toy C compiler, adding features like typedefs, structs, and a custom C preprocessor with macros. Writing a C compiler has made me realize that there’s more complexity to C than meets the eye. The compiler is still missing several features, but it’s already quite capable, fun to use and fairly well tested. I wrote several <a href="https://github.com/maximecb/uvm/tree/main/ncc/examples">example C programs</a> that can run on UVM, including a 2.5D <a href="https://github.com/maximecb/uvm/blob/main/ncc/examples/raycaster.c">raycaster</a>, and a pentatonic <a href="https://github.com/maximecb/uvm/blob/main/ncc/examples/sequencer.c">step sequencer</a>. I had fun writing these programs. It’s a different experience being able to do graphics and audio in C without having to think about portability and without any boilerplate. I’ve also somehow convinced Oscar Toledo to port nanochess to UVM, and Abdul Bahajaj to write a simple BASIC interpreter with graphics capabilities. Oscar reported 3 bugs in the C compiler, which I quickly fixed.</p>
+<p>The way graphics work in UVM is that there is a system call (an API call into the host VM), to create a window, which has an associated RGBA32 frame buffer. An entire frame of pixels can be copied and displayed into the window with another system call. Because each pixel is 32 bits, individual pixels can be manipulated with a single 32-bit store instruction. There’s also a memset32 instruction which makes it possible to fill rows of pixels really fast as this can use SIMD instructions internally. That’s all there is to UVM the graphics API. Everything else is done in software for now. I may eventually add another system call that does fast RGBA32 blitting with alpha blending (loosely inspired by the Amiga), so that UVM can render GUIs really fast, but I haven’t decided yet.</p>
+<p>I thought it would be extra cool if I were able to do 3D graphics on UVM. It currently runs on an interpreter, but in release builds, the interpreter is able to hit about 500 MIPS (million instructions per second) on my MacBook Air M1, which should be comparable to the speed of a Pentium II, and sufficient for some basic rasterization or even just wireframe 3D graphics. I started by adding floating-point support to the VM and compiler so that I could do vector and matrix math. Then I used ChatGPT to implement some <a href="https://github.com/maximecb/uvm/blob/main/ncc/include/uvm/3dmath.h">OpenGL-like functions</a> to generate rotation and perspective matrices, and transform 3D points. I don't think I saved any time doing that, because it took me a while to verify and fix up the output that came out of ChatGPT, but I did end up with working code.</p>
+<p>To represent 3D vectors and 4x4 matrices, I created typedefs for floating-point arrays. In order to be able to use these comfortably in my C code, I also needed to add support in NCC for stack-allocating array variables. Without that, every array variable would need to be a global. This was a bit tricky to do because UVM doesn't allow you to directly take the address of something on the stack (like a stack-allocated array) for performance reasons, and so if you want to take the address of things on the stack, the compiler needs to manage a separate stack for the things you take the address of. Once I got that working, I was able to put all the pieces together, and render a glorious <a href="https://github.com/maximecb/uvm/blob/main/ncc/examples/3dcube.c">3D rotating wireframe cube</a>.</p>
+<p>In terms of future plans, I’d like to add a simple asynchronous TCP networking API to UVM. That will make it possible to write something like a simple web server running on top of UVM, or maybe something like a custom bulletin board or a chat that can run without a web browser. I’m also thinking that it might be fun to create something like a little 64KB demoscene competition. In that spirit, I added some demos implementing demoscene fire and <a href="https://github.com/maximecb/uvm/blob/main/ncc/examples/plasma.c">plasma</a> effects based on Lode Vandevenne's <a href="https://lodev.org/cgtutor/">excellent tutorials</a>.</p>
+<p>If you think that UVM sounds like a cool project and you’d like to contribute, there are some <a href="https://github.com/maximecb/uvm/issues">open issues</a> on GitHub. I can use feedback on various design issues. I also really welcome bug reports, and new example programs to showcase what’s possible with UVM. All of the examples are licensed as CC0 (public domain) so that anyone can freely reuse the code and remix them. I would love to see new cool demoscene effects, games and audio/music programs, or anything fun, creative or useful you can come up with. If you find any of this interesting, feel free to reach out via <a href="https://github.com/maximecb/uvm/issues">GitHub issues</a> and <a href="https://github.com/maximecb/uvm/discussions">discussions</a> or via <a href="https://x.com/love2code">twitter/X</a>.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
