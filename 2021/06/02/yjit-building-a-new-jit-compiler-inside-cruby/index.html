@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>YJIT: Building a New JIT Compiler Inside CRuby</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="YJIT: Building a New JIT Compiler Inside CRuby">
+  <meta property="og:description" content="YJIT: Building a New JIT Compiler Inside CRuby">
+  <meta property="og:image" content="https://pointersgonewild.com/2021/06/02/yjit-building-a-new-jit-compiler-inside-cruby/yjit-logo-rect.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2021-06-02-yjit-building-a-new-jit-compiler-inside-cruby/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2021/02/21/investing-is-a-social-phenomenon/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>YJIT: Building a New JIT Compiler Inside CRuby</h1>
+<div class="post_date">June 2nd, 2021</div>
+</div>
+<div class="cover_image">
+<img src="yjit-logo-rect.png">
+</div>
+<p>The 1980s and 1990s saw the genesis of Perl, Ruby, Python, PHP and JavaScript: interpreted, dynamically-typed programming languages which favored ease of use and flexibility over performance. In many ways, these programming languages are a product of the surrounding context. The 90s were the peak of the dot-com hype, and CPU clock speeds were still doubling roughly every 18 months. It looked like the growth was never going to end. You didn’t really have to try to make your software run fast, because computers were just going to get faster, and the problem would take care of itself. Today, things are a little different. We’re reaching the limit of current fabrication technologies, we can’t rely on single-core performance increases to solve our performance problems, and because of mobile devices and environmental concerns, we’re starting to realize that energy efficiency matters.</p>
+<p>Last year, during the pandemic, I took a job at Shopify, a company that has a massive server infrastructure powered by Ruby on Rails. I joined a team with multiple software engineers working on improving the performance of Ruby code in a variety of ways, ranging from optimizing the CRuby interpreter and its garbage collector, to the implementation of TruffleRuby, an alternative Ruby implementation. Since then, I’ve been working with a small team of skilled engineers on YJIT, a new JIT compiler inside CRuby.</p>
+<p>This project is important to Shopify and Ruby developers worldwide because speed is an underrated feature. There is already a JIT compiler inside CRuby, known as MJIT, which has been in the works for 3 years, and while it has delivered speedups on smaller benchmarks, it has, so far, been less successful at delivering real-world speedups on widely used Ruby applications including Rails. With YJIT, we take a data-driven approach, and focus specifically on performance hotspots of larger applications such as Rails and Shopify Core (Shopify’s main Rails monolith).</p>
+<p>YJIT is an attempt to gradually build a JIT compiler inside CRuby such that more and more of the code is executed by the JIT, which will eventually replace the interpreter for most of the execution. Our compiler is based on <a href="https://arxiv.org/pdf/1411.0352v2.pdf">Basic Block Versioning</a> (BBV), a JIT compiler architecture I started developing during my PhD. I’ve given a <a href="https://www.youtube.com/watch?v=vucLAqv7qpc">talk about YJIT</a> in March of this year at MoreVMs 2021 workshop if you’re curious to hear more about the approach we’re taking.</p>
+<p>I don’t want to oversell YJIT. Our results have significantly improved since the MoreVMs talk, but are still modest. We’re very much at the early stages of this project and there are known bugs in our implementation. That being said, according to <a href="https://github.com/Shopify/yjit-bench">our benchmarks</a>, we’ve been able to achieve speedups over the CRuby interpreter of 7% on railsbench, 19% on liquid template rendering, and 19% on activerecord. YJIT also delivers very fast warm up. It reaches near-peak performance after a single iteration of any benchmark, and performs at least as well as the interpreter on every benchmark, even on the first iteration.</p>
+<figure>
+<a href="yjit_bench.png">
+<img alt="" src="yjit_bench.png">
+</a>
+</figure>
+<p>Building YJIT inside CRuby comes with a number of limitations. It means that our JIT compiler has to be written in C, and that we have to live with design decisions in the CRuby codebase that were not made with a high performance JIT compiler in mind. However, it has the key advantage that YJIT is able to maintain almost 100% compatibility. We are able to pass the CRuby test suite, comprising about 30,000 tests, and we have also been able to pass all of the tests of the Shopify Core CI, a codebase that comprises over 3 million lines of code and depends (directly and indirectly) on over 500 Ruby gems, as well as all the tests in the CI for GitHub’s backend.</p>
+<p>We believe that the BBV architecture that powers YJIT offers some key advantages when it comes to compiling dynamically-typed code, and that having end-to-end control over the full code generation pipeline will allow us to go farther than what is possible with the current architecture of MJIT, which is based on GCC. Notably, YJIT can quickly specialize code based on type information and patch code at run time based on the run-time behavior of programs.</p>
+<p>Currently, only about 50% of instructions in railsbench are executed by YJIT, and the rest run in the interpreter, meaning that there is still a lot we can do to improve upon our current results. There is a clear path forward and we believe YJIT can deliver much better performance than it does now. However, as part of building YJIT, we’ve had to dig through the implementation of CRuby so we could understand it in detail. In doing so, it’s become obvious that one of the main performance challenges in implementing a fast JIT compiler in CRuby, is that key elements of the architecture are optimized with an interpreter in mind, and not a JIT compiler.</p>
+<p>For instance, in CRuby every object instance variable read or write requires multiple pointer indirections and dynamic checks. In order to read an instance variable (ivar) from a Ruby object, one has to:</p>
+<ol start="1">
+<li>
+<p>Check that the receiver is not an immediate value</p>
+</li>
+<li>
+<p>Check that the receiver is not <code>Qnil</code></p>
+</li>
+<li>
+<p>Check that the receiver is a <code>T_OBJECT</code></p>
+</li>
+<li>
+<p>Check that the object class matches our inline cache</p>
+</li>
+<li>
+<p>Read the serial number from the class (extra pointer indirection, memory access)</p>
+</li>
+<li>
+<p>Check whether the object stores its ivars internally or on an external table</p>
+</li>
+<li>
+<p>Potentially: read the pointer to the external table (extra memory access)</p>
+</li>
+<li>
+<p>Potentially: check if the ivar index is within the bounds of the external table</p>
+</li>
+<li>
+<p>Read the ivar from the object or external table</p>
+</li>
+</ol>
+<p>Note that at the moment, only 3 instance variable slots can be stored directly on the object itself, so instance variables are almost always on an external table in the vast majority of accesses.</p>
+<p>As you can imagine, even though some of these checks can sometimes be optimized away, generating efficient machine code for instance variable accesses in CRuby is very difficult. It doesn’t have to be this way. This problem was solved by Self, the successor of Smalltalk, in the early 1990s. Self used what they call “maps”, but nowadays are typically referred to as object shapes (see <a href="https://bibliography.selflanguage.org/_static/implementation.pdf">Section 3 of An Efficient Implementation of SELF</a>). This is tested and proven technology, used by Chrome’s V8 , Firefox’s SpiderMonkey, and <a href="https://chrisseaton.com/rubytruffle/pppj14-om/pppj14-om.pdf">TruffleRuby</a>. If you are curious, this excellent <a href="https://mathiasbynens.be/notes/shapes-ics">blog post</a> by Mathias Bynens and <a href="https://www.youtube.com/watch?v=IFWulQnM5E0">this great talk</a> by Benedikt Meurer explain the concept of object shapes and shape trees in more details.</p>
+<pre><code># Optimized ivar reads can be as short as three x86 instructions
+# ebx = pointer to the object
+cmp [ebx + &lt;object shape offset&gt;], &lt;cached object shape&gt;
+jne &lt;inline cache miss&gt;
+mov eax,[ebx, &lt;cached ivar offset&gt;] # load the ivar value
+</code></pre>
+<p>Thanks to object shapes, V8, SpiderMonkey and TruffleRuby are able to implement instance variable reads in as little as one single dynamic check, giving them an enormous performance advantage. We believe that with a coordinated effort that involves the Ruby Core developers, key technologies such as this could be implemented inside CRuby, and would benefit MJIT, YJIT, and any other future attempts to implement a JIT inside CRuby, and this without significantly impacting the performance of the interpreter.</p>
+<p>Matz has stated in his recent talk at Euruko 2021 that Ruby would <a href="https://www.youtube.com/watch?v=ZcbTlNvNGbs&t=4610s">remain conservative with language additions</a> in the near future. We believe that this is a wise decision as rapid language changes can make it difficult for JIT implementations to get off the ground and stay up to date. It makes some sense, in our opinion, for Ruby to focus on internal changes that will make the language more robust and deliver competitive performance in the future.</p>
+<p>I believe that, through incremental, targeted changes, CRuby can be gradually re-engineered so that it can eventually have a true high-performance JIT compiler. Doing so must necessarily involve both JIT compiler experts and the Ruby Core developers. One key area of potential improvement would be the inclusion of object shapes. There are other things that could help us, such as rewriting some C methods in pure Ruby, such as Array#each and Fixnum#times, so that JIT compilers can inline through them. I may expand on such things in a future blog post. What would also be greatly helpful to JIT implementers is to have some commitment to stabilizing the internal Ruby bytecode format, or at least, to not add extra complexity and special cases to existing bytecode instructions. Currently, CRuby implements <i>11 kinds</i> of method dispatch, which, as you can imagine, makes optimization and inlining very challenging.</p>
+<p>If you’re interested in contributing or simply trying YJIT, it is <a href="https://github.com/Shopify/yjit">available on GitHub</a> under the same license as CRuby. The caveat of course is that we are at an early stage in this project and it’s very possible that you could run into bugs, or that you may not find the current performance particularly impressive. If you do want to help, YJIT could use more testing. Tracking down small regression tests for bugs is very valuable to us. We could also use more, larger benchmarks that better reflect real-world Ruby usage.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

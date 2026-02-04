@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Moving to the Valley</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Moving to the Valley">
+  <meta property="og:description" content="Moving to the Valley">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-02-24-moving-to-the-valley/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/02/04/building-a-small-scale-prototype/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/03/23/sense-from-chaos-crossing-the-semantic-gap/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Moving to the Valley</h1>
+<div class="post_date">February 24th, 2016</div>
+</div>
+<p>I haven't talked much about my research work on this blog recently. That's because I've been busy writing <a href="/2015/02/08/my-thesis-a-clearer-picture/">my thesis</a> and wrapping things up. The good news is that I've had my thesis defense two weeks ago, and I've completed the requirements to get my PhD. It feels a little surreal to have finally reached this goal, after six and a half years. The next step, for me, is a transition to working in the industry. I <a href="/2015/11/15/why-i-chose-industry-over-a-postdoc/">considered doing a postdoc</a> after my PhD, but it's become fairly clear to me that although I do enjoy research, I can't stand the way academia operates, and the focus on minimum publishable units.</p>
+<p>At the moment, I'm in the process of selling, giving away and packing up my things in Montreal. I signed a job offer with Apple. I chose to work with them in large part because their recruitment process was very smooth and human, for lack of a better word. The people I interviewed with seemed relaxed, and like they genuinely enjoyed their work. I know from experience that this is not the case everywhere. I've had interviews at tech companies which run giant cubicle farms with people running everywhere, interviewers who look nervous and overcaffeinated. Apple is quite secretive, and I don't think I'm allowed to say much about my job description, but I will be working on compiler technology, and developing my skills in this area further, which is what I wanted.</p>
+<p>I will be moving to the bay area in early March. It pains me to leave behind Montreal, the city where I was born and raised, as well as all of my friends here, but It's also exciting to be moving to Silicon Valley, the Holy Mecca of the technological world, and to get a chance to work on cutting edge technology. It will be nice to be able to meet more people who share similar interests on a regular basis. As someone who gets a bit emotionally down during the Canadian winter, it's also uplifting to contemplate living in California, where there is plenty of sunlight and fresh produce all year long.</p>
+<p>One of the decisions I have to make is where I'm going to live. Apple is based in Cupertino, which is about 45 miles from San Francisco. They have a shuttle which goes to the city, but that means two or more hours of commuting every weekday. I've lived in the city all my life, and I know that San Francisco is way more hopping than the bay area suburbs, but I find myself thinking that I should probably make my home closer to the Apple offices. If I live in the suburbs, I could probably bike to work every morning, a net positive for my health (whereas two hours of sitting in a bus would be a net negative). The suburbs also have slightly less insane rents than San Francisco, which means I could afford to have my own sweet 700 square feet of living space.</p>
+<p>For those wondering, I do plan to keep on running this blog. I don't know how much free time I can realistically expect to have, and how much energy I'll be able to dedicate to coding after work hours, but I will try to keep advancing on my personal projects, and keep using this blog to discuss various topics I find interesting.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

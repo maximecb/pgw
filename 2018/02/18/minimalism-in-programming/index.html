@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Minimalism in Programming</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Minimalism in Programming">
+  <meta property="og:description" content="Minimalism in Programming">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2018-02-18-minimalism-in-programming/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2018/01/28/my-new-job-in-rl-robotics-research/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Minimalism in Programming</h1>
+<div class="post_date">February 18th, 2018</div>
+</div>
+<p>I'm 32, and I've been programming actively for over 16 years at this point. I don't have a lifetime of experience doing this, but over the years, I've come to develop a certain style, a kind of philosophy or methodology that I try to apply in everything I do. Crucially, I would say that I'm a minimalist. I like to build things that are only as complex as they need to be to accomplish their purpose. I like to distill ideas to their simplest form.</p>
+<p>Much of what I will discuss in this post may seem like common sense to many of you. I'm probably not the first one to tell you about the principles of <a href="https://en.wikipedia.org/wiki/KISS_principle">KISS</a> and <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI</a>. Unfortunately, I think that the art of building simple, robust engineering is something that is rarely taught in universities, poorly understood, and often disregarded. We live in a world full of bug-ridden, poorly written software, with a thousand useless bells an whistles. I don't believe it has to be this way. In my view, much of the bugs we encounter could be avoided if more programmers followed some basic principles to minimize complexity.</p>
+<p>Back when I was a teenager, back in the early 2000s, one of the first programming projects I embarked on was some ambitious 3D game. I recruited several people to work on this project with me. We produced a lot of art, and we did implement a game engine and even a map editor. We had some nice screenshots to show. Unfortunately, no game ever came out of it. One of the main issues is that there was a lack of focus on my part. I wanted to build something more awesome than Unreal, Quake 3 and Half-Life, and I thought I needed killer tech to do this, but I didn't really have a specific game in mind. I had no specific goal, and so no concrete plan. I would guide the project in whatever direction seemed most interesting at the moment. Every two weeks, I'd start working on some new feature for the game engine, but never quite finish it. We most likely could have built a game, if I'd been willing to aim at a simpler, more realistic objective.</p>
+<p>These days, before I even start on a new project, I try to spend some time doing some research to convince myself that this project is worth doing, that I have the time to do it, and that I can set realistic goals. I try to start small. I ask myself what is the smallest, simplest version of my idea that I could implement, with the least amount of features, and I try to plan out the steps I will need to complete to get to that. Simply put, the first step, in my view, is to clearly outline what the <a href="https://en.wikipedia.org/wiki/Minimum_viable_product">Minimum Viable Product (MVP)</a> is going to be. Defining an MVP helps me stay focused, and it also ensures that I have a goal simple enough that I can be sure I'll stay motivated long enough to get there.</p>
+<p>Many people make the mistake of thinking that if they don't immediately account for all the features they could possibly want to add to a project from the beginning, they might paint themselves into a corner, unable to refactor the code, unable to bring the project where they ultimately want it to be. My counter-argument would be that refactorings are inevitable. You will make design choices that turn out to be wrong. You will need to change your code. You simply can't account for every possibility and every single interaction from the beginning, because there are too many unknowns. If you start with an MVP, you will gain a lot of insight in the process. You will also have a working product that is very simple, and so very easy to refactor.</p>
+<p>Trying to build simple products will help you keep people motivated, gain insights, and ultimately reach your goals. It might also help you avoid bugs. Less code means less corner cases, less things to test, less that can break, and less to debug. This is something that good engineers understand very well. When you minimize the number of moving parts, when you minimize complexity, you minimize the chances that your product, and your project, will fail.</p>
+<p>I think most of what I've said so far is commonly accepted wisdom among seasoned programmers. What I'd like to bring up next is that minimizing the complexity of your software, eliminating possible points of failure, is not just about simplifying the code you write. In my opinion, it also applies to the things your software stands on. The software you build necessarily makes a number of assumptions, and has external dependencies. Most programmers, it seems to me, follow the "don't reinvent the wheel" philosophy. If something has already been implemented, you should just use it, never implement your own. This is seen as a way to minimize the complexity of your software. The problem is that not all external dependencies are created equal.</p>
+<p>Every library that you import is a piece of software you don't have control over. It's something that needs to be built and installed in order for your software to run. It's a black box with its own many dependencies and possible points of failure. How often have you tried to install a library or piece of software and found that it was broken out of the box? If your software has 15 external dependencies, then quite possibly, over the next year, one of these will break, and your software will be broken along with it. If you're programming in Python, chances are that your software will break several times over the next few months, as packages are being changed and broken under your feet.</p>
+<p>When I write software, I try to minimize the number of dependencies I rely on. I do this both to minimize possible points of failure, and to make sure that people installing my software won't have a terrible time getting it to work. When I have to rely on external dependencies, I try to pick the ones that are more established and well-maintained rather than obscure ones. Sometimes, I will "reinvent the wheel", when I judge that the effort required is small enough. Obviously, this doesn't always make sense. If you roll your own crypto and you're not a crypto researcher, you deserve to be slapped upside the head. However, if you need to load textures in your indie game, you very well could implement a parser for 24-bit <a href="https://en.wikipedia.org/wiki/Truevision_TGA">TGA images</a> instead of relying on some library which itself has 50 external dependencies. This can be done in less than 100 lines of code.</p>
+<p>There are other ways in which you can minimize points of failure and make your software more reliable. You can prefer simple file formats, prefer open standards, and avoid proprietary solutions. Ultimately, the best way to keep things simple, however, is to simply have less features. I'm a minimalist. I prefer to build software that does one thing and does it well. Ultimately, you'll never make everyone happy, you'll never satisfy every use case, not without contorting your design into something unmaintainable and fragile.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

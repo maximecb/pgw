@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>News of Higgs</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="News of Higgs">
+  <meta property="og:description" content="News of Higgs">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-05-08-news-of-higgs/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/04/10/positive-results-for-higgs/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/07/11/the-constness-problem/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>News of Higgs</h1>
+<div class="post_date">May 8th, 2014</div>
+</div>
+<h2>Coming Soon to OSX & BSD</h2>
+<p>While chatting in the higgsjs chat room, Molly and I found out that several people had tried running Higgs on OSX systems without success. Since she and I both run Linux as our main OS, we were both unaware of the portability issues involved. The unfortunate thing is that this situation has probably been going on for months, and nobody had told us until now. It makes me a little sad to think that, quite possibly, several dozen people may have tried and discarded Higgs after running into such problems. Fortunately, Paul Fryzel has generously been helping us test and debug Higgs on his Mac and we're now pretty close to a working solution. Molly will also be testing Higgs on BSD for good measure.</p>
+<h2>Drawing Library</h2>
+<p>Molly Everett has completed the first version of a simple 2D drawing library (<a href="https://github.com/maximecb/Higgs/blob/master/source/lib/draw.js">lib/draw</a>) based on <a href="http://en.wikipedia.org/wiki/Xlib">xlib</a>. This library ships with Higgs and allows rendering simple static and interactive graphics.</p>
+<figure>
+<a href="xuyjecu.gif">
+<img alt="" src="xuyjecu.gif">
+</a>
+</figure>
+<p>We've decided to add an <a href="https://github.com/maximecb/Higgs/tree/master/examples">examples</a> directory to the Higgs repository to showcase usage of Higgs-specific libraries and language features. This currently includes a "Hello World" example for the draw library, and a simple pong game clone built for Higgs.</p>
+<h2>Upcoming Paper</h2>
+<p>I've been spending most of my time working on a paper on <a href="bbv_paper.pdf">Basic Block Versioning</a> (BBV) and incremental compilation. The results so far are very encouraging. BBV is able to eliminate more type tests than a static analysis, and produces measurable improvements in running time on the benchmarks we've tested it on. The graph below shows some preliminary results on part of the set of benchmarks tested (lower is better):</p>
+<figure>
+<a href="screenshot-14-05-08-095336-am.png">
+<img alt="" src="screenshot-14-05-08-095336-am.png">
+</a>
+</figure>
+<p>While working on the paper, I've been optimizing the size and quality of the code generated by Higgs so as to improve performance. I also discovered a strange anomaly in the results. Running the static type analysis produced a very significant slowdown (over 2x) on some benchmarks, even when the results of the said analysis were not used. Simply running the analysis in the same process brought a huge performance penalty in terms of execution time, with the time taken by the analysis itself excluded from measurement.</p>
+<p>This led me to discover that the D garbage collector, which is used by the type analysis, is very inefficient, and performs much worse when there is more data allocated. Higgs has its own heap for JS code, but sometimes needs to perform allocations when interacting with the host runtime (written in D). These allocations were much slower than I expected. With a <a href="http://forum.dlang.org/thread/ustyltiooelhlijcjxma@forum.dlang.org?page=1">simple change</a>, I was able to eliminate most of them. I also decided to pre-allocate memory for the D garbage collector in order to reduce collection frequency. To my surprise, this yielded a 4x performance improvement on several benchmarks.</p>
+<h2>The Next Phase</h2>
+<p>It seems i've been able to convince my PhD advisor (<a href="http://www.iro.umontreal.ca/~feeley/">Marc Feeley</a>) that the next phase of my research, after the current paper is submitted, should focus on extending basic block versioning to add object/field type analysis capabilities. In my opinion, the right way to do this is to implement a system of typed <a href="https://developers.google.com/v8/design#prop_access">hidden classes</a> (or shapes, as the Mozilla people call them). This should make it possible to eliminate many more type tests, and accelerate property accesses as well as method calls. As an added bonus, a proper implementation of hidden classes will provide a better foundation to efficiently implement <a href="http://stackoverflow.com/questions/17764795/create-getter-and-setter-in-javascript">getters and setters</a> in Higgs.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

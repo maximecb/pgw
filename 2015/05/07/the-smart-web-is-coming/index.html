@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Smart Web is Coming</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Smart Web is Coming">
+  <meta property="og:description" content="The Smart Web is Coming">
+  <meta property="og:image" content="https://pointersgonewild.com/2015/05/07/the-smart-web-is-coming/cyberface.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-05-07-the-smart-web-is-coming/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/04/16/the-problem-with-html/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/05/10/the-ai-breakthrough-that-wont-happen/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Smart Web is Coming</h1>
+<div class="post_date">May 7th, 2015</div>
+</div>
+<div class="cover_image">
+<img src="cyberface.jpg">
+</div>
+<p>In the 1970s, there was great enthusiasm about <a href="http://en.wikipedia.org/wiki/Artificial_intelligence">Artificial Intelligence (AI)</a>. Projects such as <a href="http://en.wikipedia.org/wiki/SHRDLU">SHRDLU</a> and <a href="http://en.wikipedia.org/wiki/Shakey_the_robot">Shakey</a> the robot generated a huge amount of hype, and had people believing that computers would reach human-level intelligence within only a decade or two. Unfortunately, cracking the general intelligence problem turned out to be more difficult than anticipated. The AI field stagnated for years, and after multiple repeated failures, funding from AI research was <a href="http://en.wikipedia.org/wiki/AI_winter">cut down drastically</a>. The term artificial intelligence became somewhat of a dirty word in computer science circles. In the mid-1980s, the field began a slow return with the arrival of <a href="http://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural networks</a>. To dissociate itself from needless hype, AI was rebranded as <a href="http://en.wikipedia.org/wiki/Machine_learning">Machine Learning (ML)</a>, with much more modest goals such as producing programs capable of classifying objects in an image or translating human speech to text.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/7bsEN8mwUB8?si=XafGuMCgNpL_KlOS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>Recently, <a href="http://en.wikipedia.org/wiki/Deep_learning">deep learning</a>, a technique that allows training of deep multi-layered neural networks, has shown much promise. It has been able to outperform every other technique when it comes to <a href="http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf">image recognition</a>, even <a href="http://www.forbes.com/sites/michaelthomsen/2015/02/19/microsofts-deep-learning-project-outperforms-humans-in-image-recognition/">outperforming humans</a>. Deep learning has also helped us make some headway in <a href="http://andyljones.tumblr.com/post/111299309808/why-word2vec-works">natural language processing</a> and machine translation. I'm going to take a break right here and tell you that this post is not about <a href="http://en.wikipedia.org/wiki/Accelerando">"the singularity"</a>, Kurzweil synthesizers, jacking ethernet cables into your neck or how terminators are coming to your house with BDSM gear and cans of WD-40. What I want to talk about is not science-fiction, but the kinds of changes that are likely to happen in the next 5 to 10 years.</p>
+<figure>
+<a href="happy_terminator.jpg">
+<img alt="" src="happy_terminator.jpg">
+</a>
+</figure>
+<p>I believe the internet is about to change, a lot, in ways that are difficult to predict even for experts in the field. Deep learning and the widespread availability of extremely powerful computing clusters will make it possible to implement services and APIs (software agents) with increasing degrees of <a href="/2015/04/15/what-is-intelligence/">intelligence</a>. As I write this, machine learning labs are turning out graduates who are surely eager to capitalize on their expertise by creating useful services that can be marketed to search engines, advertising agencies and social media. There are huge financial gains to be made, which makes these changes almost inevitable.</p>
+<p>The first, most obvious change we're likely to see in the next few years is that there's going to be an increasing prevalence of facial and object recognition on the internet. If someone takes a picture of you and it gets uploaded somewhere, Google will know about it. Progress will not stop at facial recognition, however. Computers will slowly begin to <a href="http://liris.cnrs.fr/Documents/Liris-5228.pdf">understand some of the content</a> on the web on a semantic level. YouTube will soon know which people are in your videos, where the video is being filmed and what objects are in each shot. Eventually, it will also be able to transcribe what you say in textual form and, well, understand the actions people in videos are making at a basic level (e.g. at the 5 minute mark Johnny kisses his girlfriend Lucy on the cheek, Lucy smiles and appears happy).</p>
+<p>The level of understanding that <a href="http://en.wikipedia.org/wiki/Software_agent">intelligent agents</a> possess is only going to increase over time. Again, I think it's largely a matter of economics. There is so much profit to be made in creating smart agents that understand some aspects of the world, the incentives are so large, that it's almost inevitable that tech companies will begin throwing hundreds of billions of dollars at the machine learning field, and progress is going to happen very rapidly. Soon enough, tech companies will use GPS tracking and image recognition to understand what your average day looks like and predict your behavior. They might begin to do what can only be described as "psychological modelling", and gain an understanding of you that, in some ways, is better than your own, at least as far as predicting your behavior goes. This is the threshold at which things become somewhat worrisome.</p>
+<p>Extrapolating further, we can imagine smart agents capable of combining information from your various online profiles, chat conversations, photos and a variety of other data sources to gain a fairly good understand what is happening in your life. Without sentience ever coming into the picture, these intelligent agents are going to be able to make connections individual humans beings can't realistically make. Tech companies may be able to infer with some percentage of certainty whether or not you skipped breakfast, took your Wellbutrin, indulged in a few too many drinks at the office party and cheated on your partner. With access to a firehose of information, they could also try to predict who your next boyfriend/girlfriend might be among some set of people you know. With targeted ads and very subtle alterations of your daily life experience, they could even influence who that someone will be in some cases.</p>
+<p>It's easy to imagine a plethora of much darker scenarios. What if some intelligent agent concluded some financial interests might be better off if you were dead, and then tried to subtly push you in the direction of depression, suicide or drug addiction? You might think that this is all very far-fetched, that none of the big companies would ever do such evil, that the law will surely protect us, or we don't have technology anywhere near this. Perhaps you're right. It seems to me though that if you create a powerful technological tools and there is sufficient economical motive to use them for a given purpose, somebody will abuse said tools. There is surely some financial incentive to steer your life in certain directions.</p>
+<p>What would the internet be like if spammers had access to intelligent agents capable of generating believable and unique content? There are no humanoid robots walking our streets, but I believe it might be wise to start thinking about the implications of upcoming technological changes now. Though history has shown time and again that humans tend to be more reactive than proactive.</p>
+<p>On the upside, the smart web means some good things in the realm of education. Imagine what the world would be like if you could ask Wikipedia questions verbally, and get tailored answers, maybe even custom diagrams and visual explanations generated based on your queries. Imagine if all the depressed people in the world could get access to <a href="http://en.wikipedia.org/wiki/Cognitive_behavioral_therapy">Cognitive Behavioral Therapy (CBT)</a> for free from the comfort of their homes. One thing is absolutely certain, we're <a href="http://en.wikipedia.org/wiki/May_you_live_in_interesting_times">living in interesting times</a>.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

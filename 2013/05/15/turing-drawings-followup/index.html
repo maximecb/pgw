@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Turing Drawings Followup</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Turing Drawings Followup">
+  <meta property="og:description" content="Turing Drawings Followup">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-05-15-turing-drawings-followup/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/05/10/presented-at-dconf-2013/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/05/28/psa-caffeine-is-a-drug/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Turing Drawings Followup</h1>
+<div class="post_date">May 15th, 2013</div>
+</div>
+<p>Late last night, I was surprised when a friend informed me that a fork of my <a href="/2012/12/31/turing-drawings/">Turing Drawings</a> project had made its way to the front page of <a href="https://news.ycombinator.com/item?id=5709128">Hacker News</a>. The fork by Darius Bacon includes new features such as the ability to make the rendering faster or slower, as well as a new backend which compiles the Turing machines to <a href="http://asmjs.org/">asm.js</a> instead of interpreting them, offering impressive speedups. The Hacker News community responded with great enthusiasm and found many interesting drawings, some of which I've collected below:</p>
+<ul>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,3,3,2,0,3,2,2,3,2,1,0,2,1,0,1,1,2,1,1,2,2,1,2,1,2,2,2,0,3,2,2,0,1,2,3,1,0">Scooty lightning</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#13,21,10,11,1,0,7,0,4,17,3,7,16,0,11,4,1,9,3,1,7,17,3,1,7,3,11,11,1,1,11,1,8,10,0,1,8,1,1,10,2,3,8,2,0,19,2,2,15,3,8,18,0,10,17,3,11,17,2,0,1,3,4,9,3,2,1,1,10,16,3,5,4,1,5,2,1,10,10,3,1,16,3,0,18,2,7,15,0,6,15,0,10,20,2,9,14,2,11,1,1,3,10,2,9,8,3,3,5,2,3,19,2,7,15,0,8,20,1,0,15,0,7,16,0,12,12,0,0,14,0,12,5,3,5,18,1,7,5,1,3,4,2,0,17,1,6,1,1,4,7,2,3,11,2,4,11,3,6,14,2,12,9,3,11,1,2,1,16,1,3,10,1,4,17,3,9,6,3,6,15,0,11,10,1,4,15,2,12,7,2,11,6,1,7,15,1,9,11,1,1,1,3,2,4,0,4,6,2,0,1,2,5,3,2,5,15,0,5,12,0,7,19,1,6,5,0,6,5,0,0,15,1,4,2,0,0,17,2,3,20,1,0,18,1,12,12,2,7,6,0,5,19,3,6,12,1,8,20,3,1,9,1,1,15,1,6,19,0,11,3,0,2,6,2,10,20,3,1,16,1,2,10,3,2,14,0,4,2,3,3,18,3,1,5,2,6,19,3,0,13,2,7,8,2,10,4,0,6,7,1,4,12,2,7,20,1,7,11,3,1,14,0,1,15,1,11,19,2,8,20,0,3,17,2,7,14,3,12,14,1,2,2,0,2,15,1,3,19,0,9,17,2,5,8,2,7,15,2,1,8,0,9,15,3,8,14,0,6,20,0,4,8,3,6,5,0,3,1,2,12,6,3,4,16,0,7,2,0,12,13,1,9,16,1,11,10,2,2,5,0,9,8,3,7,2,0,11,9,0,3,15,1,0,3,2,11,17,0,1,9,2,5,5,0,1,3,0,7,14,0,6,1,0,5,1,2,11,18,1,3,20,2,10,14,0,12,2,1,5,19,3,10,7,2,11,11,2,9,12,0,9,11,3,3,6,1,12,15,0,10,4,3,6,4,1,5,6,2,2,7,2,9,6,0,11,5,0,0,9,2,2,16,3,8,5,2,5,8,1,10,18,2,3,17,3,12,9,1,12,7,0,4,8,2,5,11,2,9,11,2,10,7,2,11,5,2,9,5,2,10,3,1,9,2,2,10,10,1,7,17,0,8,16,1,8,14,1,9,14,3,6,11,1,2,19,1,6,13,2,2,12,0,8,10,1,10,6,3,6,7,1,3,4,2,6,6,2,12,13,2,1,14,3,10,15,0,0,7,1,9,12,3,6,9,3,11,1,3,5,5,0,7,3,2,4,10,0,2,2,0,9,9,0,5,2,0,9,15,3,9,9,0,6,9,1,9,15,2,7,6,0,10,4,3,6,13,0,6,7,3,7,17,2,12,11,2,1,10,2,0,4,0,12,12,0,11,8,2,2,11,0,7,2,0,5,4,2,9,16,0,8,2,3,7,11,1,2,7,3,3,2,2,3,20,0,4,20,0,7,10,1,6,5,3,12,13,1,0,14,3,1,7,0,5,8,1,11,7,3,6,13,3,3,7,0,7,10,3,1,2,0,7,4,2,1,1,2,3,11,3,4,6,3,7,1,0,3,20,0,7,4,3,5,7,0,10,8,2,4,20,2,7,11,2,9,8,1,10,2,0,12,8,1,0,20,1,12,15,3,8,3,3,4,6,0,9,15,0,5,4,0,6,11,2,12,7,0,4,8,3,5,11,1,5,19,3,11,5,1,5,2,2,1,20,0,3,20,1,2,10,3,3,4,2,7,11,2,11,17,3">Spilled drink</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#13,21,0,17,3,11,4,0,0,12,0,10,5,3,11,17,2,11,14,2,4,20,3,12,2,2,1,13,3,5,14,1,5,12,0,10,16,0,3,3,3,8,4,3,2,13,2,10,11,2,0,19,2,10,3,3,5,4,0,6,19,3,8,10,2,1,20,0,10,15,2,11,18,1,8,18,3,5,7,2,3,9,0,2,13,3,6,12,2,9,13,1,6,15,1,11,18,2,12,5,3,8,16,0,1,2,2,8,18,2,12,13,0,10,10,0,9,5,2,10,8,1,10,1,3,5,17,1,1,15,2,9,12,1,5,7,0,9,16,3,12,11,1,10,4,1,0,19,2,12,16,3,2,20,0,4,13,2,12,18,1,7,12,1,7,11,3,12,3,0,1,1,3,1,4,1,1,17,2,6,20,0,4,4,1,12,18,1,12,10,3,11,12,0,12,12,2,6,11,3,4,1,0,7,4,3,0,1,1,8,16,2,6,19,2,9,6,0,6,10,3,2,2,0,1,7,0,0,15,2,1,5,0,6,6,0,9,19,3,9,5,0,0,9,1,8,17,1,0,11,2,7,3,1,1,18,2,1,17,0,9,17,3,2,11,1,1,6,1,10,8,3,8,10,0,0,6,0,6,9,1,8,1,3,5,12,3,6,3,2,9,4,2,10,9,1,8,12,2,12,12,0,7,19,2,11,9,1,12,20,0,7,18,2,10,8,2,11,8,2,1,7,1,9,3,0,3,2,3,4,12,2,3,14,2,4,7,3,3,19,2,5,18,2,2,16,2,9,19,1,0,7,2,7,20,1,9,9,2,1,7,0,3,9,2,10,11,2,2,15,2,2,9,3,8,8,1,6,19,2,9,20,2,1,5,0,8,17,3,4,5,0,10,9,3,10,10,0,11,2,0,8,10,0,7,20,2,0,9,3,8,19,3,10,8,1,9,16,0,1,11,0,10,7,0,10,20,0,11,6,3,8,12,1,6,7,1,7,2,2,0,10,1,4,17,0,2,9,1,5,8,3,8,14,2,7,11,3,9,20,1,0,1,0,2,17,1,4,11,3,4,13,0,4,3,2,1,17,0,12,17,0,4,6,3,9,14,2,7,7,1,2,7,3,2,17,2,11,18,3,8,13,0,8,3,3,0,20,0,4,1,0,2,7,3,11,20,2,4,14,2,9,10,3,10,14,3,6,20,0,11,4,2,2,4,0,3,6,0,11,16,1,2,9,0,12,19,3,8,4,3,2,2,0,6,14,3,4,17,2,10,16,0,4,14,3,11,5,3,6,17,1,2,19,0,8,3,0,1,13,1,11,11,3,6,12,1,0,12,2,5,8,3,9,9,2,12,12,1,9,20,2,10,1,2,5,3,3,10,1,1,12,11,2,8,10,2,4,1,0,0,2,1,5,3,0,10,7,0,7,19,0,10,12,3,11,11,3,5,11,2,2,2,2,2,15,1,6,8,0,5,18,3,10,11,0,5,3,2,6,16,3,6,20,3,10,5,1,9,10,1,10,18,1,7,20,2,11,16,3,2,16,0,10,6,2,10,11,1,3,1,2,3,18,1,7,11,2,3,2,3,8,8,0,11,20,1,8,19,1,10,11,1,2,13,0,11,7,3,9,14,2,1,5,0,8,16,0,11,3,0,8,8,1,0,14,2,7,18,0,9,12,0,5,2,3,11,19,3,0,20,3,1,4,1,6,12,0,2,12,0,8,5,2,1,17,2,7,20,2,1,20,3,6,11,0,1,17,0,3,17,3,6,2,3,3,19,0,1,19,3,5,12,2,11,2,0,7,10,3,10,9,2,12,11,2,9,15,0,5,9,2,12,9,3,7,16,2,3,16,2">Donkey kong</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#2,11,1,7,3,0,2,0,0,3,3,1,9,0,1,5,2,1,9,1,0,6,1,1,8,3,0,3,0,0,9,1,1,1,1,1,8,2,1,6,3,1,5,1,0,7,3,1,6,3,0,3,0,1,4,1,1,6,0,1,9,0,0,2,1,0,9,0">Sewing machine</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#3,13,0,4,3,2,1,1,2,1,3,2,9,3,2,4,3,2,9,1,2,9,3,2,7,1,2,9,0,2,6,3,1,11,2,1,12,0,0,7,3,0,10,1,1,7,3,0,12,3,1,11,1,0,2,1,0,2,3,0,9,1,1,6,0,1,10,3,0,2,1,0,2,0,1,9,2,1,8,3,2,2,2,1,3,0,2,2,2,2,1,3,2,7,2,2,5,2,1,11,1,2,8,0,2,10,2,0,10,0,2,5,3,1,12,1,0,5,2">Surprising</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,3,3,2,0,0,2,1,0,1,1,1,1,0,3,1,1,3,1,1,1,1,1,2,2,0,2,2,0,3,2,0,3,1,2,3,2,2">Stream</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#2,7,1,2,2,0,6,1,0,1,1,0,4,2,0,4,1,1,2,1,0,2,2,1,1,3,1,1,0,0,4,3,0,2,2,1,5,2,1,4,0,0,6,0">Blue</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,3,3,1,0,0,1,2,1,1,0,1,1,0,1,2,1,1,1,3,3,1,3,0,1,2,0,2,3,3,1,1,1,2,1,0,2,1">Wave</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,3,2,1,1,2,1,1,1,1,3,1,2,3,2,1,3,1,2,2,0,2,2,1,1,2,1,2,3,0,1,0,2,2,2,1,1,1">Rebirth</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,3,2,2,1,3,2,2,3,2,1,2,2,2,2,1,0,0,1,1,3,2,0,3,2,3,3,2,3,2,1,2,1,2,2,0,2,1">Glider</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,3,1,2,2,0,1,3,2,1,2,3,2,1,1,1,2,2,2,0,0,2,3,3,1,0,2,2,1,1,1,1,1,1,3,3,2,0">Bubbles</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,5,0,4,0,2,1,0,3,2,3,2,3,3,2,3,1,2,4,0,2,2,3,0,1,3,2,2,1,1,4,0,0,4,0,3,3,0,2,4,1,1,2,2,1,3,0,0,4,3,1,4,0,3,4,1,3,2,2,2,2,2">In 3 acts</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#4,3,0,2,2,0,2,3,1,1,2,2,1,2,2,2,0,1,1,0,1,2,0,2,1,3,1,2,1,0,1,3,1,2,0,3,2,2">Laser rain</a></p>
+</li>
+<li>
+<p><a href="https://maximecb.github.io/Turing-Drawings/#24,2,19,1,0,23,1,0,0,1,0,1,1,0,13,1,3,22,1,2,18,1,1,14,1,0,10,1,1,23,1,1,15,1,1,14,1,2,1,1,1,5,1,3,23,1,0,15,1,0,11,1,1,15,1,3,16,1,1,3,1,0,22,1,1,19,1,3,0,1,2,13,1,1,3,1,3,7,1,2,15,1,3,15,1,3,18,1,1,23,1,1,23,1,1,22,1,3,3,1,1,20,1,1,9,1,1,9,1,0,17,1,1,11,1,3,23,1,0,12,1,3,5,1,2,15,1,0,15,1,1,3,1,3,16,1,1,7,1,0,10,1,0,8,1,2">Gothic Sierpinski</a></p>
+</li>
+</ul>
+<p>Posters also contributed interesting bits of information. It seems that the idea behind Turing Drawings is not entirely new, but rather an independent re-discovery of an existing formalism called a <a href="http://en.wikipedia.org/wiki/Turmite">Turmite</a>, with a finite tape instead of an infinite one. Another poster had the following insight:</p>
+<blockquote>
+<p>The world is finite, so every drawing eventually loops. However, the state space is something like k * 2^18 * n^(2^18), where k is the number of states and n the number of symbols. For the default (4, 3) this is 3.125 * 10^125080, so you could be waiting for a while :)</p>
+</blockquote>
+<p>Someone associated with Wolfram even suggested that it may be possible to participate in a summer school project involving 2D Turing Machines:</p>
+<blockquote>
+<p>Wolframite here: these would make a good summer school project for our summer school (plug: the 2013 one is coming up, apply at <a href="https://www.wolframscience.com/summerschool/">https://www.wolframscience.com/summerschool/</a> if you're interested in this kind of stuff and want to do a 3-week project).</p>
+<p>In fact I studied the space-filling behavior of precisely these 2D Turing machines in 2009. For low numbers of states and colors you can enumerate them exhaustively and calculate the distribution of space-filling efficiency (log-normal, if anyone is interested).</p>
+<p>The full spectrum of behavior is quite fascinating to catalog. All these kinds of simple computational system have a character and 'zaniness' all their own.</p>
+</blockquote>
+<p>The idea behind Turing Drawings came to me while pondering generative art. I had already experimented with various approaches, such as plotting mathematical functions of two-variables, but had little success in creating interesting patterns. Intuitively, it seemed that Turing machines would be an ideal formalism because, even if they were randomly generated in a naive fashion, they would have a high likelihood of creating complex (and potentially interesting) visual patterns as a side effect of their computational process.</p>
+<p>Users of Turing Drawings may find themselves clicking the "random" button many times before seeing anything interesting, but through the power of crowdsourcing, it becomes possible to explore hundreds of thousands of patterns in a relatively short time. Turing Drawings is a toy, but it's interesting to observe the dynamics of chaos and entropy at play, and to see order come out of randomness and very simple rules.</p>
+<p>It's the first time one of my hobby projects gathers so much attention online (even <a href="http://www.crackajack.de/2013/05/15/turing-drawing-machines/">foreign blogs</a> are covering it, wow). I'm happy to see that by making it open source, it's been possible for Turing Drawings to take on a life of its own. Someone has already informed me that they were interested in adding features to visualize the transitions and better analyze the behavior of the machines. I anticipate that after the Hacker News coverage, more forks are likely to occur.</p>
+<p>In case anyone is interested, I should also mention that I tried to apply the idea of Turing Drawings to procedural music generation, with moderate success. The project is called <a href="http://maximecb.github.io/Turing-Tunes/">Turing Tunes</a>, and is also open source.</p>
+<p>EDIT: Turing Drawings was also covered on <a href="http://www.metafilter.com/128120/Random-Art">MetaFilter</a> and on <a href="http://ikono.org/2013/05/generate-turing-drawings-turing-tunes/">ikono</a>'s art blog.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

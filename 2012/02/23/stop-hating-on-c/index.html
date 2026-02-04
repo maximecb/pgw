@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stop Hating on C!</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Stop Hating on C!">
+  <meta property="og:description" content="Stop Hating on C!">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/02/23/stop-hating-on-c/haters-gonna-hate.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-02-23-stop-hating-on-c/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/02/09/venturing-into-electronic-music/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/02/27/are-variadic-functions-necessary/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Stop Hating on C!</h1>
+<div class="post_date">February 23rd, 2012</div>
+</div>
+<div class="cover_image">
+<img src="haters-gonna-hate.jpg">
+</div>
+<p>It seems most computer science programs out there don't teach <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C programming</a> anymore, instead focusing exclusively on higher-level languages such as Java or Scheme. I would say there's actually quite a bit of C <i>hate</i> going around. People would like to claim that C simply isn't a language worth learning, that C is badly designed, that it's overly complex and extremely error-prone, that it's unpredictable and brittle.</p>
+<p>You can hate on C as much as you want, but the truth is that it's a programming language that's survived for 40 years, delivers unparalleled performance and powers the core of almost every computer system in existence. C isn't just used for low-level kernel and driver hacking either. Even today, almost all games programmed for the PlayStation 3 and other consoles are programmed in C and C++. Suck on that, haters!</p>
+<p>C isn't badly designed, or overly complex. It has a very simple grammar, predictable semantics and accomplishes its design goals very well. The C language is meant to be a platform-neutral abstraction layer over <a href="http://en.wikipedia.org/wiki/Assembly_language">assembly language</a>. C allows you to make function calls and manipulate pointers or other machine data types in a consistent way across different platforms, without having to worry about how these operations are going to be implemented in terms of machine code.</p>
+<p>Surely, the language could be improved in various ways (no header files, anyone?), but its beauty stems from the fact that it's a very thin abstraction layer over the hardware. As such, it's a very good representation of what actually happens behind the scenes and does not have hidden costs or performance penalties. Languages such as Java, Scheme and JavaScript most certainly have their place, but they are rather far removed from the internal workings of any <a href="http://en.wikipedia.org/wiki/Central_processing_unit">CPU</a>, and thus far, cannot compete with the performance attainable by C programs.</p>
+<p>I believe this message, posted anonymously on 4chan, says it best:</p>
+<blockquote>
+<p>I don't think C gets enough credit. Sure, C doesn't love you. C isn't about love--C is about thrills. C hangs around in the bad part of town. C knows all the gang signs. C has a motorcycle, and wears the leathers everywhere, and never wears a helmet, because that would mess up C's punked-out hair. C likes to give cops the finger and grin and speed away. Mention that you'd like something, and C will pretend to ignore you; the next day, C will bring you one, no questions asked, and toss it to you with a you-know-you-want-me smirk that makes your heart race. Where did C get it? "It fell off a truck," C says, putting away the boltcutters. You start to feel like C doesn't know the meaning of "private" or "protected": what C wants, C takes. This excites you. C knows how to get you anything but safety. C will give you anything but commitment</p>
+<p>In the end, you'll leave C, not because you want something better, but because you can't handle the intensity. C says "I'm gonna live fast, die young, and leave a good-looking corpse," but you know that C can never die, not so long as C is still the fastest thing on the road.</p>
+</blockquote>
+<p>As far as C and its derivatives being worth learning, it seems that might depend on your area of expertise. There are certainly millions of programs and libraries written in C out there, and this alone might justify wanting to learn C. The other reason is that once you truly <i>master</i> C, you will have an understanding of computers that goes far beyond that of most programmers out there. Once you understand pointers, memory allocation and integer arithmetic, you will have a basic, intuitive understanding of the beast that makes your computer tick, and no programming language will ever scare you again.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

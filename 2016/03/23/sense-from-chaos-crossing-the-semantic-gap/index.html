@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sense from Chaos - Crossing the Semantic Gap</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sense from Chaos - Crossing the Semantic Gap">
+  <meta property="og:description" content="Sense from Chaos - Crossing the Semantic Gap">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-03-23-sense-from-chaos-crossing-the-semantic-gap/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/02/24/moving-to-the-valley/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/05/08/optimizing-ray-marching-through-partial-evaluation/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Sense from Chaos - Crossing the Semantic Gap</h1>
+<div class="post_date">March 23rd, 2016</div>
+</div>
+<p>Edsger Dijkstra once said:</p>
+<blockquote>
+<p>"The question of whether machines can think is about as relevant as the question of whether submarines can swim."</p>
+</blockquote>
+<p>This was the view most AI researchers held back in the 1960s and 1970s. Back then, many thought that general-purpose AI could be achieved purely through <a href="https://en.wikipedia.org/wiki/Symbolic_artificial_intelligence">symbolic</a> manipulation. That is, it was thought that we could build machines that, through purely logical reasoning, would derive a sufficient understanding of the world to reach and even exceed human intelligence. This kind of vision of AI is illustrated in classic sci-fi novels, and embodied in the infamous <a href="https://www.youtube.com/watch?v=HwBmPiOmEGQ">HAL 9000</a> computer of 2001: A Space Odyssey.</p>
+<p>The quest to build symbolic AI led to much research, and <a href="https://www.youtube.com/watch?v=QAJz4YKUwqw">impressive early successes</a>. These successes lead to great optimism, and the belief that computers would be able to effectively handle human language, machine translation and vehicle driving before 1980. Symbolic reasoning is very adequate for reasoning about mathematics, or small closed systems with very well-defined properties, such as the game of chess. Unfortunately, multiple dead ends were quickly reached. It was found, as philosophers had predicted, that you could hardly build a machine capable of reasoning about the real world through purely symbolic means. The problem was one of <a href="https://en.wikipedia.org/wiki/Symbol_grounding_problem">grounding</a>.</p>
+<p>Symbols in a vacuum don't mean anything. You can create an ontology in which you define the concept of a chair, and you can put logical statements in this ontology as to how people use chairs for sitting on, and that chairs are movable objects that behave according to Newtonian laws of physics. However, if you're trying to build a robot that can see and manipulate chairs, your ontology is basically worthless. You have two HD cameras providing you with 20 million pixels of raw data at 60 frames a second, and no logical statements are sufficient to help you tell where a chair might be in all that noise. Your machine has the concept of a chair, but this concept exists only in some Platonic realm that is completely divorced from the real-world.</p>
+<p>Ultimately, the grandiose predictions of early AI researchers proved much too ambitious, because the real world was much too difficult to cope with, or at least, much more difficult to cope with than mathematicians had hoped. This lead to the first <a href="https://en.wikipedia.org/wiki/AI_winter">AI winter</a>, with funding rapidly drying up for what is now known as <a href="https://www.cs.swarthmore.edu/~eroberts/cs91/projects/ethics-of-ai/sec3_1.html">GOFAI</a> (Good Old Fashioned AI) research. For at least two decades after this, AI became kind of a dirty word in computer science circles. Those who still pursued AI-related research renamed their field machine learning, so as to avoid any association with the overhyped goal that we might one day build machines with human-level intelligence. From then on, machine learning researchers left behind the lofty goals of AI, and instead focused on the basics: small narrowly-defined learning tasks where they knew they could make headway.</p>
+<p><a href="https://en.wikipedia.org/wiki/Perceptrons_(book)">Neural networks</a> are not new, but it's only in the last few years that they have started to really shine, with deep learning. Advances in algorithms, access to large datasets and the unprecedented availability of computational resources have made it possible to scale this machine learning technique to networks with many layers of depth. Recently, some impressive feats have been achieved with <a href="https://en.wikipedia.org/wiki/Deep_learning">deep neural networks</a>, including object classification that <a href="http://venturebeat.com/2015/02/09/microsoft-researchers-say-their-newest-deep-learning-system-beats-humans-and-google/">exceeds human performance</a>, and of course the much-discussed victory of the computer program AlphaGo over human Go champion Lee Sedol. Some amazing projects such as the <a href="https://github.com/jcjohnson/neural-style">neural artistic style transfer</a> and deep networks that learn to synthesize new images have also surfaced.</p>
+<p>At the moment, universities are seeing a huge increase in student interest in deep neural networks, with classes sometimes tripling in size over previous years. Governments and industry alike are pouring billions into deep learning research. It's undeniable: we're in the middle of a machine learning boom. The optimism is so great that well-known researchers such as Yann Lecun and Yoshua Bengio are even <a href="http://www.iro.umontreal.ca/~bengioy/papers/ftml.pdf">daring</a> to use the word AI again.There's a lot of excitement (and some <a href="http://insidebigdata.com/2014/05/03/stephen-hawking-machine-learning-scary/">fear</a>) about what deep neural networks will bring. People are becoming scared about <a href="https://www.youtube.com/watch?v=7Pq-S557XQU">robots taking human jobs</a>, and the question of when computers will reach human-level intelligence is being asked.</p>
+<p>To me, it really is a question of <i>when</i>. Provided that humanity doesn't sink into a post-apocalyptic middle-age, there is no doubt in my mind that machines can and will reach human intelligence. I just don't think that we'll get to <a href="https://www.youtube.com/watch?v=7Pq-S557XQU">Artificial General Intelligence (AGI)</a> in the way that most people think we will. Many seem to believe that we just haven't come up with the right algorithm for human-equivalent intelligence, or that we just don't have enough computational power. Clearly, to reach human-level intelligence, what we need is a deep neural network with a number of connections equivalent to that present in the human brain, right? I don't think so. I don't think that's what we're missing.</p>
+<p>In my view, the human brain is not running some one algorithm. The human brain is not just a huge wad of neurons, a huge uniform neural network. The human brain is made of many different specialized components that do different things, connected together by a variety of pathways. Deep neural networks are awesome, they're an amazing achievement, but they're just one piece of the puzzle. What deep neural networks do, is solve the <i>perceptual problem</i>. Deep learning allows us to do what the human visual cortex does. You get a million pixels of color information as input, and you turn this raw mass of data into a few classes of output. In short, with deep neural networks, we can <i>turn real-world data into symbols</i>.</p>
+<p>There is no doubt in my mind that an AGI has to contain some sort of <a href="https://en.wikipedia.org/wiki/Connectionism">connectionist</a> component, such as a neural network within it. To make useful AI programs however, the logical thing to do seems to be to assemble multiple specialized pieces together. In my view, AlphaGo is a beautiful illustration of this. It melds together multiple deep neural networks, which are used to do things such as assigning a value to different Go board configurations, along with a Markov tree search algorithm for looking at possible future moves. AlphaGo is very much a marriage of GOFAI techniques together with the power of deep neural networks. Deep networks make sense of complex board configurations without the need for hard-written logical rules as to how individual Go stones should be counted. Deep networks do the more intuitive perceptual work, and good old fashioned tree search does the logical reasoning based on this data.</p>
+<p>Deep neural networks bridge the semantic gap between classical computer systems, where symbolic entities are defined in absolute terms in databases, and the fuzziness of the real world, where exceptions are the norm, and nothing can be entirely captured by absolute rules. If I had to guess, I would speculate that robots of the future, as they get more intelligence, are going to feature increasingly complex AI architectures made of multiple specialized components. There will be deep networks that do vision, hearing, perceive human faces and facial expressions. There will also be modules that do <a href="https://en.wikipedia.org/wiki/Automated_planning_and_scheduling">planning</a>, navigation, logical/ontological reasoning and reasoning by analogy. All of this AI technology that we've been developing for the last 60 years is going to need to come together into a whole. That is one of the next big challenges. Making AGI happen won't just be scientific work, it will also pose a plethora of engineering challenges.</p>
+<p>I think it's possible to build useful robots and human-equivalent AI without understanding the human brain in depth. However, I think that when we do build such AI, we're necessarily going to converge towards an architecture that does many things in ways that are actually quite similar to what happens, in computational terms, inside the human brain. Submarines may not swim, but in order to move forward, they still have to displace water. It's said that humans can only keep about 7 items of data in their <a href="https://en.wikipedia.org/wiki/Working_memory">working memory</a>. It wouldn't surprise me all that much if, one day, neuroscientists manage to map out the human frontal cortex, and they discover that in this region of the brain, there are neurons laid out in a system that implements what can essentially be thought of as a small set of <a href="https://en.wikipedia.org/wiki/Processor_register">general-purpose registers</a>, each able to store a neural vector representing a <a href="http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/">semantic concept</a>. In other words, our ability to reason by analogy and to manipulate abstract concepts in our mind is probably embodied by neural machinery that serves to perform symbolic manipulations.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

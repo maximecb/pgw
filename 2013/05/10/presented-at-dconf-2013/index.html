@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Presented at DConf 2013</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Presented at DConf 2013">
+  <meta property="og:description" content="Presented at DConf 2013">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-05-10-presented-at-dconf-2013/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/03/31/progress-on-the-higgs-jit/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/05/15/turing-drawings-followup/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Presented at DConf 2013</h1>
+<div class="post_date">May 10th, 2013</div>
+</div>
+<p>Back in February, I <a href="/2013/01/31/visiting-mozilla/">visited Mozilla</a> to present my research on dynamic language optimization and learn more about the architecture of the JIT compiler that powers Mozilla Firefox. The talk I gave at Mozilla was made <a href="https://air.mozilla.org/higgs-jit/">available online</a> and eventually linked on Reddit. This resulted in <a href="http://en.wikipedia.org/wiki/Andrei_Alexandrescu">Andrei Alexandrescu</a>, co-creator of the <a href="http://dlang.org/">D programming language</a> noticing my work and inviting me to present at <a href="http://dconf.org/talks/chevalier_boisvert.html">DConf 2013</a>. I accepted the invitation as this seemed like a great opportunity to get the word out about my research, network with programming language and compiler experts, and of course, to learn more about D.</p>
+<figure>
+<a href="img_20130503_162943.jpg">
+<img alt="D programming is serious business." src="img_20130503_162943.jpg">
+</a>
+<figcaption>D programming is serious business.</figcaption>
+</figure>
+<p>Last week, I had the pleasure of attending DConf. The conference was hosted at the Facebook HQ in Menlo Park, California. The talks gave me more insight into the D language and the philosophy behind its design. I was a little worried about my own talk, trying to fit 70 slides into 55 minutes and touching on many different subjects: dynamic languages, Higgs, my research, a small critique of D, and the potential use of a JIT compiler for D's <a href="http://giovanni.bajo.it/post/47209620364/compile-time-function-execution-in-d">Compile-Time Function Execution (CTFE)</a>. It seems I managed to thread it together pretty well in front of the audience, however; I ended up receiving several compliments. I agreed to have the talk filmed, and so a video should appear on YouTube in the next few days. In the meantime, the slides are available <a href="slides-maxime.pdf">here</a>.</p>
+<p>One of the things I touched on in my talk is the new approach I'm taking with the Higgs JIT. After running into some issues with tracing, I decided that a method JIT would make more sense, and so I spent a few days converting the Higgs JIT to be method-based instead; fortunately, this went surprisingly smoothly. I am planning on using a technique which should hopefully offer some of the same benefits as tracing, without the downsides. I call this technique context-driven block versioning. The idea is similar to that of procedure cloning, but done at a lower level (that of basic blocks). I plan on cloning/versioning block based on type information to remove much of the dispatch overhead.</p>
+<p>Higgs interfacing with xlib:</p>
+<figure>
+<a href="screenshot.jpg">
+<img alt="" src="screenshot.jpg">
+</a>
+</figure>
+<p>On a different front, Molly Everett is still helping me grow Higgs. She's completed the implementation of a Foreign Function Interface (FFI) and used this to create a user-friendly wrapper for the C stdio functions. We've updated the <a href="https://github.com/maximecb/Higgs/blob/master/README.md">README</a> file on github to explain how this API can be used. Our hope is to improve the FFI API itself and eventually provide wrappers for graphics and sound libraries. We'd also like to devise a procedure for people to request the inclusion of libraries and tests they wrote into Higgs using pull requests.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

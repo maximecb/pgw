@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Designing a toy CPU</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Designing a toy CPU">
+  <meta property="og:description" content="Designing a toy CPU">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/07/13/designing-a-toy-cpu/abc_blocks.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-07-13-designing-a-toy-cpu/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/07/10/radical-intro-to-programming/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/07/19/toycpu-project-update/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Designing a toy CPU</h1>
+<div class="post_date">July 13th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="abc_blocks.png">
+</div>
+<h2>A Positive Response</h2>
+<p>I'm happy to see that my previous post, <a href="/2012/07/10/radical-intro-to-programming/">A Radical Introduction to Programming</a> ended up generating quite a bit of discussion on <a href="http://www.reddit.com/r/coding/comments/wevui/a_radical_introduction_to_programming/">r/coding</a>. The reception was fairly warm overall. Most people seemed to think that the idea of teaching simplified assembly as a first programming language made sense. Those who disagreed seemed to mostly come from two camps: adepts of functional programming, and others who simply didn't see the potential of assembly as a teaching platform, for a variety of reasons.</p>
+<p>I would like to say that I'm not suggesting the teaching of assembly should replace teaching of high-level languages. What I would like to do with assembly, is give students a short 2-4 week introduction to computers and programming. Fundamental concepts such as integer arithmetic, branching, the run-time stack, recursive function calls and arrays would be exposed in a very concrete, hands-on manner. Ideally, students should then be able to move on to higher-level languages with more confidence, and perhaps even learn more advanced material at a faster pace.</p>
+<p>The positive responses to my post have motivated me to go ahead and develop an online emulator for simplified assembly, and perhaps even build a series of tutorials around it (help with the writing would be appreciated). I don't necessarily think that this system will be the perfect learning platform for everybody, some people might learn better with other teaching methods, but I certainly think it's worth at least putting it out there and letting people try it. If just a few people learn something, I'll be happy. I, for one, think I would have <i>loved</i> such a system when I was 9-10 and started getting interested in computers!</p>
+<p>Some people have asked why I'd want to design my own assembly and emulator when there are other existing assembly options out there, some of which already have browser-based emulators. It has been suggested, for example, that I could instead use (from most to least practical):</p>
+<ul>
+<li>
+<p>Notch's DCPU-16 architecture (<a href="http://dwilliamson.github.com/">in-browser emulators exist</a>)</p>
+</li>
+<li>
+<p>6502 (NES, C64, Apple II) assembly (<a href="https://skilldrick.github.io/easy6502/">in-browser emulators exist</a>)</p>
+</li>
+<li>
+<p>A subset of <a href="http://www.coranac.com/tonc/text/asm.htm">ARM assembly</a></p>
+</li>
+<li>
+<p>Physical <a href="http://www.arduino.cc/">microcontroller devices</a> (Atmel, PIC)</p>
+</li>
+<li>
+<p>Actual vintage <a href="https://en.wikipedia.org/wiki/Commodore_64">C64 computers</a></p>
+</li>
+</ul>
+<p>I'll go right ahead and confess that I do like the idea of rolling my own, and I feel very confident in my own ability to do so. This isn't the only motivating factor, however. While it may not have as much of a cool factor as a physical computer, there is clearly a definite teaching advantage to having an in-browser emulator that can be accessed from anywhere at a cost of zero dollars and can't be broken by accident. As for other assembly languages, I feel they generally have arbitrary restrictions that will hinder teaching. My goal is not really to simulate a retro computer, it's to make the language as accessible as possible, and things like having only three usable 8-bit registers can get in the way.</p>
+<h2>Architectural Considerations</h2>
+<p>As is usually the case when I start getting excited about a project, I had a flood of ideas for my emulated system. I've been giving some thought to architectural considerations, trying to strike a balance between realism, simplicity and ease of use by novices. The following is largely a brain dump of my thoughts on the design of the system:</p>
+<ol start="1">
+<li>
+<p>The instruction set will have the standard arithmetic (add, sub, mul, div, mod) and bitwise (and, or, xor, not, shift) operations, as well as multiple conditional branching instructions. The goal is not to make the instruction set <a href="http://en.wikipedia.org/wiki/One_instruction_set_computer">as small as possible</a>. It is to make it somewhat realistic, very easy to grasp, while demonstrating important concepts.</p>
+</li>
+<li>
+<p>I'm thinking a 16-bit architecture might be best at this point. All registers would be 16-bit, and the memory space would contain 64K words (either 8 or 16-bit each). As someone pointed out, 16-bit registers can easily be displayed on one page, showing all the bits. A 64K memory space is small enough that one can easily visualize it and see the stack pointer move, while being large enough to allow useful programs to be written.</p>
+</li>
+<li>
+<p>There will most likely be 16 registers in total. 12 fully general-purpose registers, a flags register, the stack pointer, the instruction pointer, and another register currenty reserved for future uses. All registers will be usable in any operation that can take a register argument.</p>
+</li>
+<li>
+<p>The instruction encoding will be fairly naive. Variable length. One opcode byte, one operand format byte, extra bytes for operands (register indices or constants). The point is not to have a realistic ARM or x86-like encoding, but rather that the instructions have an encoding in memory, and that this encoding be easy to decode if desired.</p>
+</li>
+<li>
+<p>I'm unsure at this point if the RAM should be byte-addressable, or addressable only by 16-bit words. The latter has the advantage that we get twice the ram (128K!) and we can probably offer better visualization of values in the RAM, as they couldn't be unaligned. The disadvantage is that real-world systems are <i>usually</i> byte-addressable (sort-of?).</p>
+</li>
+<li>
+<p>I was initially thinking of memory mapping (DMA) all the display memory. This is problematic because even at 256x192 and 8 bits per-pixel, that's 48KBs, most of the RAM. I think I will instead rely on a virtual display adapter that responds to simple commands (draw a square, draw a circle, draw a line, draw a sprite) and has its own memory spaces for the frame buffer and sprites. This will allow me to "cheat". RAM will be freed, people will be able to plot individual pixels if they so desire, but they will also be able to do fast rendering of decent-resolution graphics in 24bpp glory.</p>
+</li>
+<li>
+<p>I'm thinking the sound chip should probably be a simple 16-voice subtractive synthesizer, with the standard waveforms, an LFO and a filter, all able to follow individual envelopes. The possibility of playing raw audio data would be trivial to support as well.</p>
+</li>
+<li>
+<p>For some realism, virtual devices will be interacted with through a simulated parallel master-slave bus (the CPU being the master, all devices being slaves). Communication will be in the form of 16-bit words. Library routines will be provided to wrap all the gory (not that bad, actually) details and provide simple calls that satisfy most use cases.</p>
+</li>
+<li>
+<p>The library code will be browsable (read-only), and possibly indexed with a doxygen/javadoc-like system, allowing you to get a description of all available routines and even see their implementation if you so desire. The library should be fairly extensive and allow you to get started writing useful programs right away.</p>
+</li>
+<li>
+<p>I'm not sure if it's best to grow the stack up or down. Is there a disadvantage to growing it upwards?</p>
+</li>
+<li>
+<p>I've been thinking of a name for the system. Right now I'm leaning towards toyCPU (short and sweet).</p>
+</li>
+<li>
+<p>I'll look into possibly using Google AppEngine to store user-created programs online, and perhaps allow users to rate them, comment on them and fork their own version. This should help grow a user base.</p>
+</li>
+</ol>
+<h2>Help Wanted</h2>
+<p>I already started working on the implementation. I decided to use the <a href="http://codemirror.net/">CodeMirror</a> library to give the code a nice display with line numbers and syntax highlighting. I think I might start to have something working this weekend, but I probably won't make it publicly available until it's closer to complete. I figure it's best to wait until the implementation is relatively stable and there is a mechanism to share your code online so that people don't waste effort or lost interest before the system is ready. I may, however, be willing to share a link with a few people early (beta testing, anyone?).</p>
+<figure>
+<a href="i-want-you-flat.jpg">
+<img alt="" src="i-want-you-flat.jpg">
+</a>
+</figure>
+<p>If you're interested in helping, I could use help at various stages:</p>
+<ul>
+<li>
+<p>Setting up an AppEngine platform for code sharing and community building.</p>
+</li>
+<li>
+<p>Writing virtual devices, such as the graphics adapter, the sound adapter and the system clock.</p>
+</li>
+<li>
+<p>Writing the standard library.</p>
+</li>
+<li>
+<p>Writing cool demo programs (simple games, music, basic/scheme interpreter, demoscene, etc.)</p>
+</li>
+<li>
+<p>Writing programming tutorials.</p>
+</li>
+<li>
+<p>Beta testing.</p>
+</li>
+<li>
+<p>Promoting the platform and tutorials.</p>
+</li>
+</ul>
+<p>If you're interested in helping, please let me know. I will warn you that I'm somewhat of a code nazi, but I do my best to be friendly.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

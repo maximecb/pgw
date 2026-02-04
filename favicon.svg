@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Black background square with rounded corners -->
+  <rect x="0" y="0" width="32" height="32" rx="4" fill="#000000"/>
+  
+  <!-- Segmented display style P with thicker lines -->
+  <path d="M10 8v16 M10 8h12 M22 8v8 M10 16h12 M10 8h12" 
+        stroke="#FFFFFF" 
+        stroke-width="4" 
+        stroke-linecap="square"
+        stroke-linejoin="miter"
+        fill="none"/>
+</svg>

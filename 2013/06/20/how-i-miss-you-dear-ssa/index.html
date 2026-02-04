@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How I miss you, dear SSA</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How I miss you, dear SSA">
+  <meta property="og:description" content="How I miss you, dear SSA">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-06-20-how-i-miss-you-dear-ssa/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/06/03/inlining-in-higgs/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/07/20/on-holistic-programming-languages/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>How I miss you, dear SSA</h1>
+<div class="post_date">June 20th, 2013</div>
+</div>
+<p>To recap, I recently succeeded in <a href="/2013/06/03/inlining-in-higgs/">getting inlining to work</a> in the Higgs JIT compiler. I went a little further and implemented some very basic logic to adjust the topmost stack frame. This allows replacing the currently running function by an optimized function in which code is inlined. It's a limited form of On-Stack Replacement (OSR) which gets me most of the <a href="http://i2.ytimg.com/vi/9QS0q3mGPGg/hqdefault.jpg">win</a> without too much complexity. Higgs is now able to inline code in the large majority of functions. This isn't sufficient to make inlining worthwhile, however. I needed to make the JIT be able to optimize the inlined code in the context of caller functions. This is where I ran into problems.</p>
+<p>The <a href="http://en.wikipedia.org/wiki/Intermediate_language#Intermediate_representation">Intermediate Representation</a> (IR) used by Higgs is centered around the interpreter. It's what's commonly referred to as a <a href="http://en.wikipedia.org/wiki/Three_address_code">3-address</a> representation. Instructions operate on mutable stack slots which are used both as inputs and outputs. The <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> (AST) gets directly translated into this IR and is immediately ready to be executed by the interpreter. My original idea was that the translation from source code to IR should be quick, and the IR should be in a format that's reasonably quick for the interpreter to execute. Doing a naive JIT compilation of this IR to machine code isn't difficult and provides very significant speedups. Where it gets problematic, however, is if one wants to do even basic optimizations on the IR.</p>
+<p>Properly optimizing the IR with things as simple as <a href="http://en.wikipedia.org/wiki/Constant_folding">constant propagation</a> requires being able to do <a href="http://en.wikipedia.org/wiki/Substitution_(algebra)">algebraic substitutions</a>. This is where things get hairy quickly. The fact that stack slots are mutable means that we can't easily do substitutions. We don't know where all the values of a given slot may be used. We don't know where it may be defined. We have no information about how values flow from one instruction to another. Acquiring this information requires a separate analysis pass. Such an analysis, which would produce <a href="http://en.wikipedia.org/wiki/Use-define_chain">use-def and def-use</a> chains, isn't very difficult to implement. The problem is that the information we obtained would be invalidated when we transform the IR. We may have to run this analysis multiple times for successive optimization passes.</p>
+<p>Functional programming buffs may begin to see the fundamental problem here. The 3-address IR works with mutable, "impure" values. It's a very literal IR, aimed at running code on a <a href="http://en.wikipedia.org/wiki/Virtual_machine">Virtual Machine</a> (VM) in which we have virtual <a href="http://en.wikipedia.org/wiki/Register_file">registers</a> that have actual concrete addresses. The information we want for optimization, on the other hand, is rather symbolic. We want to work with values that flow from one operation to the next, and are ideally immutable, so that we can be able to perform algebraic substitutions and other simplifications, in the mathematical sense. Fortunately for us, this problem has already been solved in the compiler world. There is an IR out there called SSA, which stands for <a href="http://en.wikipedia.org/wiki/Static_single_assignment_form">Static Single Assignment form</a> and it has some very nice properties which make working with it much more enjoyable.</p>
+<p>I've already worked with SSA, in the <a href="/2011/08/27/the-tachyon-javascript-compiler/">Tachyon</a> compiler, and found it rather pleasant to use. I thought I was simplifying things, reducing overhead by going with a more literal IR, but I've now concluded that this was a mistake. I decided to bite the bullet and begin the tedious work of refactoring Higgs to use an SSA-based IR instead. This is a big piece of work because the IR is probably the most central component of Higgs. The interpreter, the JIT, and the analyses all work with the IR. So far, I'm working on the biggest piece of the puzzle, the ~2500 lines of code that build the IR from the AST. The code I've refactored so far makes a lot more sense, probably because it decouples the problem of extracting the core language semantics out of the AST from the problem of assigning stack slots to values in a semi-efficient manner, resulting in overall simpler code.</p>
+<p>Fortunately, even though I'm making pretty fundamental changes to the IR, I don't anticipate that porting the intepreter itself will be very difficult. The execution model will remain the same, the core operations will remain the same, the JavaScript runtime won't change very much if at all. This is the scary kind of refactoring that might make people shy away from doing it, but I figure I'll be able to generate much cleaner and effective code in the end. I'm doing this work now to fix a problem while it's still small, instead of relying on several inefficient and increasingly complex workarounds. I hope to have the refactoring complete around the end of this month or the beginning of July. In the meantime, the master branch of Higgs remains working, and has inlining enabled by default.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

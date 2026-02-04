@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A Radical Introduction to Programming</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Radical Introduction to Programming">
+  <meta property="og:description" content="A Radical Introduction to Programming">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/07/10/radical-intro-to-programming/c64combo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-07-10-radical-intro-to-programming/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/06/21/an-inexpensive-robot-platform/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/07/13/designing-a-toy-cpu/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>A Radical Introduction to Programming</h1>
+<div class="post_date">July 10th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="c64combo.jpg">
+</div>
+<h2>Java for the Masses</h2>
+<p>A few years ago, when I was just starting my M.Sc. in computer science at McGill, I had to teach the COMP-202 Intro to Computing class. This is essentially an introductory programming class. The students enrolled were mostly first year computer science or computer engineering undergrads. The language I was to introduce to them was Java. During the first class, I presented the students with a typical <a href="http://docs.oracle.com/javase/tutorial/getStarted/application/">Java "Hello World" program</a>. I thought this would seem trivial and obvious to everyone, but shortly after I showed them the program, there was a storm of questions:</p>
+<blockquote>
+<p>Student 1: "Why does it say class there?"</p>
+<p>Student 2: "What's public?"</p>
+<p>Student 3: "What's static void?"</p>
+<p>Student 4: "What's main?"</p>
+<p>Student 5: "What's System.out?"</p>
+<p>Student 6: "What are those brackets doing there?"</p>
+<p>Student 7: "What's bytecode?"</p>
+</blockquote>
+<p>It quickly became clear to me that Java was not an ideal language for beginners. Its verbosity was cumbersome and explaining example programs required the students to have <i>faith</i> in my teachings: "I can't explain all the details right now, but you'll have to trust me, this isn't relevant to the example, it will be explained later". A few weeks into the class, it pained me to realize that while about 60% of the class did quite well, the remaining 40% struggled with every programming concept I introduced. For some people, programming seemed intuitive and easy, but for others, it remained foreign and mysterious. Having only limited teaching experience, I assumed that I was the one at fault, until I found myself in a teacher's assistant position for a similar class at another university, where I witnessed a similar scenario.</p>
+<p>Many computer science departments across the world have chosen Java as their introductory language of choice. Other common choices are Python, Scheme and ML (mostly taught in Europe). My own university will likely soon be teaching JavaScript as an introductory language. These languages were chosen because they are believed to be simple and relatively easy for beginners to understand. At the very least, easier and less confusing than a language such as C, C++ or Fortran. Why is it then, that in most introductory programming classes, a large proportion of the class struggles? Why do "easy" languages still seem so difficult for some students to grasp?</p>
+<p>I believe that one of the main issues when teaching a language such as Java, Python or Scheme to newcomers is that these languages are too high-level. Programming is all about getting computers to accomplish work. To properly understand programming requires some mental model of the computational engine that will perform this work. It shouldn't be surprising, then, that so many students struggle. Most introductory programming classes teach nothing about the way computers work. They are taught by example using high-level languages that are fairly disconnected from how computers work internally. It remains very difficult to teach programming to students when you can't fully explain to them how source code relates to computation and instead have to rely on handwaving.</p>
+<h2>Odd Beliefs in Computer Science</h2>
+<p>Many computer science professors hold the deep-seated belief that it's not important at all to understand how modern computers work.The great <a href="http://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a> has taught us that all universal Turing machines can simulate each other. Therefore, CPUs, clocks, registers, RAM, ALUs, logic gates and any other implementation details are completely irrelevant. Deep down, computer science is only pure math, the structured manipulation of symbols with abstract machines. Programmers need only understand the semantics of their language of choice. Turing would surely agree... Well, I actually found some interesting quotes about Alan Turing recently:</p>
+<blockquote>
+<p><b>"Although a mathematician, Turing took quite an interest in the engineering side of computer design."</b> - Maurice V. Wilkes</p>
+<p><b>"He was particularly fond of little programming tricks (some people would say that he was too fond of them to be a good programmer) and would chuckle with boyish good humor at any little tricks I may have used."</b> - James H. Wilkinson</p>
+</blockquote>
+<p>You may not know that Alan Turing, after his time at <a href="http://en.wikipedia.org/wiki/Bletchley_Park">Bletchley Park</a>, worked on the design of a real-world general-purpose computer, the <a href="http://en.wikipedia.org/wiki/Automatic_Computing_Engine">ACE</a>, which was ahead of its time with fast in-CPU registers, microcode, a subroutine stack and floating-point arithmetic. Turing knew how to use a soldering iron and dabbled into electronics. He was very much interested in the implementation details of real computers. Why? Because it mattered. Turing wanted to build something: a computer that could simulate a mind. Without actual computers and programming languages, computer science would be nothing more than a pipe dream.</p>
+<p>Find me a highly-skilled programmer, someone with at least a few years experience, someone you admire for their coding prowess, and I can guarantee you that this person has at least a fair understanding of how computers work internally. They have an accurate mental model of computers, their capabilities and the semantics of the code they write. This understanding is part of what allows them to be masters of their craft. I'm not saying that you have to have programmed in C, assembly or VHDL to be a good programmer, of course not. I'm saying that any skilled programmer could likely manage if they had to.</p>
+<h2>Focus on the Fundamentals</h2>
+<p>Perhaps the right thing to do would be to focus on teaching intro to programming classes with something lower-level than Java. It might actually make sense to teach people assembly as a first programming language. I can hear people cringing at the thought of this idea. Assembly seems too complex, too low-level, too archaic, too arcane, tied into the implementation details of actual hardware (not portable), and not that useful in real-world programming tasks. Teaching assembly to newbies might seem like some anachronistic and weird idea to many of you.</p>
+<p>At the same time, there are advantages to assembly as a teaching language. When you're learning assembly, you're learning how an actual computer processor does what it does. You're learning about the instruction pointer, basic arithmetic operations, branching, memory layouts, the stack and how it can be used to implement recursive function calls. There is no compiler, there are no complex semantics. Everything is as plain and clear as it could be. For each instruction, the processor performs a precisely defined unit of work. The computational model is clear and unambiguous, and the root of such basic programming concepts as control flow and integer arithmetic is obvious.</p>
+<p>You might still think I'm crazy. x86 assembly has <a href="http://en.wikipedia.org/wiki/X86_instruction_listings">hundreds of instructions</a> and many ugly oddities that are purely due to historical accidents. There are simpler assembly languages out there (ARM, MIPS), but they are still fairly difficult for the newcomer to grasp. Here's the thing, if you're going to teach assembly, you don't necessarily need to bother with these complexities. It should be possible to design a simplified assembly language for a virtual processor that still exposes the interesting concepts to be taught. Something with the following features, for example:</p>
+<ul>
+<li>
+<p>Minimal instruction set with branching, stack manipulation and integer arithmetic (15-30 instructions total)</p>
+</li>
+<li>
+<p>32 truly general-purpose registers, all of the same size (e.g. 32 bits)</p>
+</li>
+<li>
+<p>Instruction and stack pointers</p>
+</li>
+<li>
+<p>Large, uniformly addressed memory space (e.g. 4MB)</p>
+</li>
+<li>
+<p>Simple calling convention, push everything on the stack, instructions can be provided to save and restore all registers at once.</p>
+</li>
+<li>
+<p>All instructions operate on general-purpose registers in the same way</p>
+</li>
+<li>
+<p>All instructions can take a constant where a register operand can go</p>
+</li>
+<li>
+<p>Simple and obvious instruction syntax, favoring longer names instead of cryptic mnemonics (e.g. <code>r3 = shift_left r1, 2</code>)</p>
+</li>
+</ul>
+<p>Such an assembly language could be implemented in a simple virtual machine, for example in a web browser, to make it widely accessible. Edited code could be written to memory and run instantly with only one click. I/O operations would be kept minimally simple, with direct memory mapped output to video and sound buffers, and some simple library routines to make it that much easier. Useful learning tools such as real-time visualization of register contents and a color-coded view of the machine's memory space could also be provided.</p>
+<p>Essentially, students would be programming a fancy <a href="http://en.wikipedia.org/wiki/Commodore_64">"Commodore 64"</a>, with all the teaching benefits of direct interaction with the hardware, but without the discomfort and impracticality brought by the restrictions of <a href="https://www.youtube.com/watch?v=LhUcSbbURyc">1980's</a> hardware and what was practical to implement at the time. The teaching system would be simplified wherever possible while still resembling a real machine in all important aspects.</p>
+<p>Because such a simplified assembly language wouldn't have all the complex syntax and the long feature list of a high-level programming language, it should actually be possible to teach it to students fairly quickly (perhaps within only a week or two). The true benefit is that teaching such a language also implies teaching students about a realistic computational model. Once the students understand this, teaching them about high-level languages should be much easier and much more rewarding.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

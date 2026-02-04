@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Thesis: A Clearer Picture</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My Thesis: A Clearer Picture">
+  <meta property="og:description" content="My Thesis: A Clearer Picture">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-02-08-my-thesis-a-clearer-picture/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/12/11/visit-to-northeastern-university/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/03/18/basic-block-versioning-published-at-last/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>My Thesis: A Clearer Picture</h1>
+<div class="post_date">February 8th, 2015</div>
+</div>
+<p>In December, I submitted a paper about my work on <a href="http://arxiv.org/abs/1411.0352">basic block versioning</a> to <a href="http://2015.ecoop.org/">ECOOP 2015</a>. Basic block versioning (BBV for short) is a technique to specialize machine code in order to eliminate type checks. It works by generating type-specialized versions of basic blocks on the fly based on the types observed during the execution of a program. It's a way to type-specialize code without doing type analysis per-se. The technique, as described in the ECOOP paper, works at the intraprocedural level (inside function bodies) and only deals with primitive types (i.e. integer, string, object, boolean). My goal with this paper was to explain basic block versioning in its simplest possible form and avoid complicating the explanation by having to delve into the details of various enhancements to the technique.</p>
+<p>I still don't know if the paper will be accepted or not, but in the meantime, my research has been advancing. I extended BBV to perform overflow check elimination on loop increments, which turned out to be a <a href="https://github.com/higgsjs/Higgs/blob/0320bc42ffd282490060e232b4e5fe33acb4e4d9/source/runtime/object.d#L167">relatively trivial extension</a> to make. I also implemented what I refer to as <a href="/2014/12/11/visit-to-northeastern-university/northeastern.pdf">typed shapes</a>, which is a mechanism to version code based on <a href="http://www.infoq.com/presentations/javascript-objects-spidermonkey">object shapes</a> and property types that I feel meshes quite well with BBV. Most recently, I've been working on extending BBV to work interprocedurally. That is, allowing type information to cross function call boundaries. I see this last addition as the <i>missing piece of the puzzle</i> which completes the BBV approach and makes it into a viable complete alternative to traditional fixed point interprocedural type analyses.</p>
+<p>My implementation of interprocedural BBV can be divided into at least four components:</p>
+<ol start="1">
+<li>
+<p>Generating type-specialized function entry points (passing types to callees)</p>
+</li>
+<li>
+<p>Type-specialized call continuations (passing return types back to callers)</p>
+</li>
+<li>
+<p>Shapes-changed "dirty" flag propagation to call continuations (shape mutation/aliasing info)</p>
+</li>
+<li>
+<p>Threading the global object shape through function calls</p>
+</li>
+</ol>
+<p>So far, I have the first two parts working on my development branch with all tests passing and all benchmarks working. The results are quite positive so far. I've been able to achieve a reduction in the number of type tag tests of 98% on average over 26 benchmarks. On many of the simpler benchmarks, there are essentially no type tests executed during the entire execution.</p>
+<figure>
+<a href="2014-04-14-type-test-counts.png">
+<img alt="" src="2014-04-14-type-test-counts.png">
+</a>
+</figure>
+<figure>
+<a href="2014-04-14-speedup-vs-v8.png">
+<img alt="" src="2014-04-14-speedup-vs-v8.png">
+</a>
+</figure>
+<p>The results so far are impressive enough that I believe BBV may actually be eliminating more type tests than what is achievable with traditional type analyses. This is assuming that such analyses eliminate redundant type tests <i>without</i> versioning or duplicating code. I intend to explore this further as part of my PhD dissertation. I would like to be able to show that BBV is not only fast but actually more capable than iterative fixed-point type analyses.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Building a Small-Scale Prototype</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building a Small-Scale Prototype">
+  <meta property="og:description" content="Building a Small-Scale Prototype">
+  <meta property="og:image" content="https://pointersgonewild.com/2016/02/04/building-a-small-scale-prototype/watch.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-02-04-building-a-small-scale-prototype/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/01/07/exercise-depression-and-the-energy-hypothesis/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/02/24/moving-to-the-valley/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Building a Small-Scale Prototype</h1>
+<div class="post_date">February 4th, 2016</div>
+</div>
+<div class="cover_image">
+<img src="watch.jpg">
+</div>
+<p>I've <a href="/2015/11/28/musings-on-aot-jit-and-language-design/">blogged before</a> about my plans to create a programming language of my own. I have a long list of features I'd like to experiment with. I want to incorporate features that are not commonly found in other languages. For instance, the language is going to have an extensible grammar. I'd like to have <a href="http://stackoverflow.com/questions/3561145/what-is-a-smalltalk-image">program images</a> that can be suspended and resumed like in Smalltalk. I'm also trying to sketch out a JIT compiler that compiles itself. Unfortunately, so far, I've spent more time thinking about the design and implementation of this language than writing any code. I wrote a decent amount of code, then ended up scrapping it and starting over, only to think that I should maybe start over again.</p>
+<p>Part of the problem, I think, is that I keep wanting to plan 20 steps ahead. My language, zeta, is going to have a few features which are fairly uncommon/experimental, such as the extensible grammar. I don't know ahead of time precisely how these features are going to work out as part of the overall design, there are many small micro-decisions to make, things that could be implemented this way or that way, and that's where I keep getting stuck. I keep worrying about issues such as performance, garbage collection, multithreading, and how different language features will integrate with one another. Inevitably, I end up having to admit that there are simply a lot of important questions I don't yet have an answer to. Language design is hard, and so is compiler design.</p>
+<p>I think that this is a common problem with ambitious engineering projects. When you're trying to innovate (or just do things differently) on ten different fronts at the same time, there are simply too many unknowns, too many degrees of freedom. This is why innovation is typically more incremental than revolutionary. People build on trusted foundations, and maybe they add one or two cool new features on top. When you try to reinvent everything, there are just too many problems to be solved at once. Solving multiple problems simultaneously is problematic, because it gets in the way of building your product. You want to create something that's globally optimal, as good as you can make it, but you keep having to make technical decisions which you simply don't have enough information to make. Each of these decision points stalls you a little bit, because making the optimal technical decision requires taking the time to pause and gather more data. Worse yet, not all of these technical decisions are independent, some are simply incompatible with one another. Choices you make now will push you down a certain path later down the road. Sometimes, you make a certain set of choices, and later on you realize that you went down the wrong path, and you have to backtrack.</p>
+<p>I keep wanting to do the ambitious thing, and getting into complex, elaborate designs as a result. I start building, and I often end up <a href="/2015/11/28/musings-on-aot-jit-and-language-design/">backtracking</a>. I've decided to take a step back and ask myself some important questions, such as, why "Why do I even want to create a programming language?" and "What am I getting out of this?" One of the things I've come to realize is that creating a programming language as a hobby project for the simple joy of doing it, and creating a programming language which I hope will eventually become popular and dethrone python are two very different projects with very different requirements. Creating a programming language for fun is a project with very loose requirements and much freedom to explore, motivated by the joy of programming I discovered when I was a teenager (and hope to keep alive for a long time). On the other hand, creating a language in the hope of whacking Python in the gonads with a 2x4 is a project likely motivated by my inflated ego, and my failure to integrate mindfulness meditation into my daily routine.</p>
+<p>Designing and implementing a popular programming language means I have to care about many issues such as:</p>
+<ul>
+<li>
+<p>How learnable/palatable the syntax is to the masses</p>
+</li>
+<li>
+<p>How beginner-friendly the language is</p>
+</li>
+<li>
+<p>Integration with C/C++ code</p>
+</li>
+<li>
+<p>Deployment, how easy it is to install my compiler/VM</p>
+</li>
+<li>
+<p>Being able to generate binary executables</p>
+</li>
+<li>
+<p>Multi-platform support, including mobile devices</p>
+</li>
+<li>
+<p>Unicode support and internationalization</p>
+</li>
+<li>
+<p>The absolute performance of my language</p>
+</li>
+<li>
+<p>Multithreading and parallel performance</p>
+</li>
+<li>
+<p>Security of my implementation (exploits)</p>
+</li>
+<li>
+<p>Responding to the wants and needs of the community</p>
+</li>
+</ul>
+<p>All of these issues, and more, are things that necessarily strongly influence the design of a language. They are things that limit my ability to freely explore language design. Most importantly, creating a language with popularity in mind means that this project starts to be very much about caring about the wants and needs of the community. Lots of limitations on my ability to pick the language design I want, and having to care (work for) a huge community means that the project starts to look a lot like a <code>job</code> rather than a fun hobby. Hence, if I want to explore language design, maybe I ought to go about this project differently, scale down my ambitions, and go for something less grandiose.</p>
+<p>I've decided that I'm probably not ready to build a commercial/popular language. Instead, I'm building a small-scale prototype. I've asked myself "What's the most important language feature I want to experiment with?" The answer is the extensible grammar. What I'm doing, then, is building a sort of Minimum Viable Product (MVP). A tiny minimalist language with just the features I need, so that I can get to the interesting part of experimenting with an extensible grammar as soon as possible. Right now, this language is interpreted only, and it has no garbage collector (it never deallocates). Even this, I'm finding out, is challenging. Even this tiny project involves solving many technical problems, but things are already much simpler, and most importantly, much more fun. Once I have the extensible grammar working well, I'll move on to adding other features, and exploring other equally interesting technical problems.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

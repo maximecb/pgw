@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Basic Block Versioning - My Best Result Yet</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Basic Block Versioning - My Best Result Yet">
+  <meta property="og:description" content="Basic Block Versioning - My Best Result Yet">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-09-24-basic-block-versioning-my-best-result-yet/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/09/15/all-hope-is-not-lost-for-flying-cars/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/10/06/theres-too-many-programming-languages/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Basic Block Versioning - My Best Result Yet</h1>
+<div class="post_date">September 24th, 2015</div>
+</div>
+<p>For those not familiar with this blog, my <a href="/2015/02/08/my-thesis-a-clearer-picture/">PhD research</a> is focused on the optimization of programs written in <a href="https://en.wikipedia.org/wiki/Dynamic_programming_language">dynamically typed</a> programming languages, JavaScript (JS) in particular. In JS, every arithmetic operator and every object property access needs to do dynamic dispatch based on the type of its operands. For instance, the addition operator can work on integers, strings and floating point values. It can actually accept values of any type as operands. The types of both inputs are implicitly tested at run time so that the correct behavior can be chosen. Much of these type tests are redundant, because even in a dynamically typed programming language like JavaScript, most variables don't change type over the execution of a program.</p>
+<p>Earlier this year, my first <a href="http://arxiv.org/abs/1411.0352">paper about Basic Block Versioning</a> (BBV) was accepted at <a href="http://2015.ecoop.org/">ECOOP 2015</a>. BBV is a JIT code generation technique I've been working on which is very effective for eliminating redundant dynamic type tests. In this first paper, we (my advisor and I) were able to show that our technique eliminates 71% of dynamic type tests across our set of benchmarks, resulting in significant performance improvements. Last week, I submitted a paper about an interprocedural extension to BBV. This extends on the original work we did by generalizing the technique to propagate type information through function calls, about function parameters and return types as well.</p>
+<p>The improvements are quite striking. We're now able to eliminate 94.3% of dynamic type tests on average, and we eliminate more than 80% of type tests on every benchmark. To put things in perspective, I decided to compare this result with what's achievable using a <a href="https://en.wikipedia.org/wiki/Static_program_analysis">static type analysis</a>. I devised a scheme to give me an upper bound on the number of type tests a static analysis could possibly eliminate. First, execute all the benchmarks and record the result of each type tests. Then, re-execute the benchmarks with the type tests that always evaluate to the same result removed. This is equivalent to using a static type analysis with access to "perfect" information about which type tests are going to be redundant. The resuls of this experiment are shown in the graph below:</p>
+<figure>
+<a href="testcounts1.png">
+<img alt="testcounts" src="testcounts1.png">
+</a>
+<figcaption>testcounts</figcaption>
+</figure>
+<p>I was very pleased when I first saw these results. The "perfect" static analysis eliminates, on average, 91.7% of type tests, which is less than what we achieve with interprocedural BBV. You might be wondering how this is possible, how BBV can possibly eliminate more type tests than what should be an upper bound on the number of type tests that can be eliminated. The main point is that the analysis is just an oracle that tells us whether any given type test is going to be redundant and safe to eliminate or not. In contrast, BBV has the power to selectively duplicate sections of code, which makes it possible to eliminate even more type tests.</p>
+<p>The main reason that code duplication (or versioning), is useful, is that it allows BBV to separate out contextual information which wasn't present in the original untransformed program. If you want a simple example, think of a loop where some variable <code>x</code> is an integer in the first iteration, and then becomes a string in every subsequent iteration. A traditional type analysis will see that this variable could be either an integer or a string, and conclude that we don't know what type this variable will have at run time. In contrast, BBV might be able to unroll the first iteration of the loop, and know that it will be integer in this first iteration, and a string in every other iteration, thus eliminating all type tests on the variable <code>x</code>.</p>
+<p>There are interesting implications to the results obtained with BBV, in my opinion. I was recently talking to someone at Facebook about HHVM, their virtual machine for PHP and <a href="https://en.wikipedia.org/wiki/Hack_(programming_language)">Hack</a>. They were telling me that Hack has gradual typing, and that this information isn't yet used to optimize code in HHVM. Based on the results I got, I would say that there is probably no real need to type-annotate code in order to improve performance. Gradual typing can be useful for documentation, tools and safety, but it doesn't really offer performance advantages. BBV can already eliminate over 94% of type tests on average, and this is only the beginning, there are still many easy ways to further improve upon these results. Alternatively, flipping what I just said on its head, if a JIT compiler can known the types of most variables at code generation time, the type assertions introduced by gradual typing can be implemented at little to no cost.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

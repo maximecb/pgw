@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Creating a Toy Programming Language with Actor-Based Parallelism</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Creating a Toy Programming Language with Actor-Based Parallelism">
+  <meta property="og:description" content="Creating a Toy Programming Language with Actor-Based Parallelism">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-08-03-creating-a-toy-language-with-actor-based-parallelism/bear_coding.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-08-03-creating-a-toy-language-with-actor-based-parallelism/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Creating a Toy Programming Language with Actor-Based Parallelism</h1>
+<div class="post_date">August 3rd, 2025</div>
+</div>
+<div class="cover_image">
+<img src="bear_coding.jpg">
+</div>
+<p>Over the past few years, I've created several toy languages and <a href="https://github.com/maximecb/uvm">virtual machines</a>, some of which were open source, some not, just for the sake of exploring different ideas and for the fun of recreational programming. During my PhD I built a JIT compiler for JavaScript, and since then I've always had kind of a soft spot for dynamically-typed languages. Dynamic typing gets a lot of hate nowadays, but there's a reason why Python is the most popular language ever, and why it's come to dominate the AI world. Dynamic typing, because it imposes less hard constraints on how you write code, can feel very expressive and freeing.</p>
+<p>Something that's maybe a bit disappointing is that, at least so far, mainstream dynamic languages have struggled when it comes to providing clean, safe, effective abstractions for parallelizing code. This is a bit of a bummer because when you think of an interpreted language, you might be taking a 10-20x performance hit compared to native code. Then on top of that, if your code is single-threaded, you might only be using just one CPU core on a 16-core machine. If you write C/C++ code, you have full access to OS threads and shared memory, but that comes with many footguns and the potential for subtle bugs that can be very hard to track down.</p>
+<p>Dynamic languages are typically marketed as higher-level languages and are aimed at enabling coders with less familiarity with low-level implementation details to write memory-safe code. There is an open question as to how to give people the ability to parallelize their programs in a way that's reasonably performant and also beginner-friendly. This got me thinking about actor-based parallelism.</p>
+<p>In the <a href="https://en.wikipedia.org/wiki/Actor_model">actor-based framework</a>, each actor behaves almost like an isolated process with its own memory space that can't be touched by other actors. There are no locks or synchronization primitives. Actors communicate by sending messages to each other, and that's all there is to it. Well, that probably doesn't sound very compelling. It's conceptually not so different from forking a process and opening a pipe to your forked process to communicate with it. It also means that since actors don't share memory, you might need to copy data you want to share, which is inefficient, both in terms of cycles spent copying data and memory wasted on multiple copies of the same data.</p>
+<p>There are some things that make actor-based parallelism much more interesting though, particularly with good language support. For one thing, an actor-based VM doesn't have to suffer any of the issues associated with forking processes because it can internally use threads to implement actors. It's also possible to design a language that makes it pretty easy and seamless to send objects and data structures over to other actors, without any of the hassle of serializing/deserializing data and dealing with pipes. Communication between thread-based actors can also be much faster than inter-process communication, and it so happens that modern CPUs are actually extremely fast at copying memory. Not only that, but in theory, some optimizations are possible. Immutable data can be shared without copying. An actor can also send/move an object to another actor without copying the object provided that the ownership can be safely transferred to the receiving actor.</p>
+<p>Creating a new programming language to compete with mainstream languages would be a massive undertaking that is unlikely to succeed, but I figured that I could probably put together a kind of small scale prototype to experiment with language and virtual machine design and just have fun with these concepts. I figured that I could put together a simple dynamically-typed language with a stack-based interpreter that is similar to <a href="https://craftinginterpreters.com/the-lox-language.html">Lox</a> in a reasonable amount of time. I decided to call this language <a href="https://github.com/maximecb/plush">Plush</a>. Creating yet another Lox-like language and interpreter is probably not that impressive, but introducing parallelism and primitives to deal with that cleanly and with reasonable efficiency makes it a much more fun and interesting challenge.</p>
+<h2>Messages and Inheritance</h2>
+<p>JavaScript has something like actor-based parallelism in the form of web workers. However, the way web workers operate makes them kind of awkward to work with. Web workers run a separate script, effectively operating as a completely different program. You can send them messages, but you're more or less limited to JSON data and specific object types. You can't, for instance, send a class instance over. You have to handle serializing and deserializing class instances yourself. This might not seem like a big thing, but it adds a lot of friction when writing code.</p>
+<p>At first, I wanted to design Plush to have prototypal inheritance like JavaScript, because it seemed simpler and more flexible than class-based inheritance. However, I quickly realized that this makes it awkward to send arbitrary objects over. When sending objects over to another actor, you may need to perform a structured object graph copy. The problem is that with prototype-based inheritance, you may end up copying the whole prototype chain, which seems wasteful. There's another problem though. If you send two objects that share the same prototype/ancestor one after the other, you may end up with two copies of the prototype being created in the receiving actor. This breaks the <code>instanceof</code> operator which JavaScript relies on. That is, two objects which shared a common ancestor might be sent over, and no longer share a common ancestor on the receiving side.</p>
+<p>I ended up deciding to use class-based inheritance like Lox. Having classes enables actors to share the same fixed class hierarchy as a common reference such that an object sent as a message remains an instance of the same class for both the sender and the receiver. Actors need access to classes during their execution, but for performance reasons, I wanted to avoid needing to lock on the class representation every time some class field is being accessed. To address that, I made it so that actors make a local copy of a class the first time they need access to it.</p>
+<p>The Plush messaging system is quite flexible. You can send any object from one actor to another. You can even send closures. You have to be somewhat careful, because any object indirectly reference by a message you send will be copied, this is the main caveat there. Another caveat is that when you spawn a child actor, it will copy all of your global variables. This works similarly to when you fork a process. Still, this process is quite fast.</p>
+<p>I tried to design the messaging system with efficiency in mind. Each actor has an allocator which it uses to allocate objects during its own execution, and a mailbox allocator which is used to allocate objects when sending it messages. What this means is that senders need to lock on the receiver's mailbox allocator when sending a message. However, the receiving actor's execution is not interrupted. An actor doesn't need to take any lock to allocate objects locally. I haven't yet implemented a GC for Plush, but the plan is to make it so that each actor has its own GC that runs completely independently of other actors, without any need for whole-program synchronization. This helps maximize single-threaded performance.</p>
+<pre><code>time cargo run --release benchmarks/ping_pong.pls
+0.92s user 0.95s system 91% cpu 2.049 total
+</code></pre>
+<p>I put together a <code>ping_pong</code> microbenchmark which sends an object to another actor, which then increments a counter on the object before sending it object back to the main actor. On my MacBook M1 laptop, this benchmark can send the object back and forth 500,000 times in just about two seconds. This seems quite fast given that Plush is interpreted, and I haven't taken the time to profile and optimize it yet. Subjectively, it seems like this kind of message passing speed should be fast enough for many types of applications.</p>
+<h2>Programming a Parallel Raytracer</h2>
+<p>I got curious and started to wonder how much I could accelerate a raytracer if I could parallelize it with actors. I implemented some host functions that allow Plush programs to open a window and draw frames. I also added a <code>ByteArray</code> type which can be used as a frame buffer and to pass over image data between actors. I've written raytracers before, but I didn't necessarily feel like spending hours on this experiment, so I decided to ask Grok to try and generate a script. I provided some basic guidelines about the syntax of Plush, which I described as a Lox-like language. I needed to tweak the prompt a bit, but within 10 minutes I had a valid raytracer program. Something that would probably have taken me 2 to 4 hours to write by hand.</p>
+<p>Generating this program made me realize that Plush was missing things like an <code>sqrt</code> function, but I quickly filled in the gaps and had a raytraced sphere with basic shading. For the next step, I tried Google Code CLI and asked it to modify the program to parallelize it using actors. I gave it other Plush programs as sample input. Even though Google Code CLI had never seen Plush code, it seemed to very quickly understand and I had a parallel raytracer working within 30 minutes. There were some minor issues. The LLM kept trying to use some methods that were not present in Plush, despite me repeatedly correcting it, but it was still a huge time saver.</p>
+<figure>
+<a href="plush_rt.png">
+<img alt="" src="plush_rt.png">
+</a>
+</figure>
+<p>I also used Google Code CLI to help me think of optimizations to make this program run faster. On my Ryzen 7950x desktop, the program renders a frame in 510ms in single-actor mode, and 32ms with 32 actors. This is a 15.9x speedup. Given that this is a 16-core CPU, I would say that's pretty good. In order to parallelize the render, we need to send rendering requests over and copy image data back. This seems super inefficient, but the overhead of sending messages back and forth is practically nothing compared to the time spent rendering. The raytracer program is <a href="https://github.com/maximecb/plush/blob/main/examples/raytracer.pls">available here</a> if you're curious.</p>
+<p>As a final note, since Plush currently has no GC, I can't render too many frames before it runs out of memory. However, once a GC is implemented, it should actually be possible to build a simple raytracer that animates a moving light source in real-time, which I think would be pretty fun. Of course we'll only be able to do this for something like a 400x300 or 640x480 resolution, but still, not bad for an interpreted language.</p>
+<h2>LLMs and New Programming Languages</h2>
+<p>I've had people tell me that LLMs would essentially mean the end of new programming languages, because there's simply not enough training data. The existing training data constitutes a moat that favors popular pre-existing languages. Personally, I feel like these people lack imagination. In the future, we'll likely have much smarter LLMs, and we may also figure out techniques to enable more sample-efficient training and retraining. We might even have AI models that can practice doing something on their own and adjust their own weights.</p>
+<figure>
+<a href="plush_mondrian.png">
+<img alt="" src="plush_mondrian.png">
+</a>
+</figure>
+<p>My personal experience is that LLMs can in fact be useful at generating code in a previously unseen language. I shared this on twitter and got both positive and negative responses. The negative responses seemed to echo the same thought that goes something like:</p>
+<blockquote>
+<p>"Well, your language has C-like syntax, therefore it's not really novel"</p>
+</blockquote>
+<p>These people are hugely missing the mark in my opinion. JavaScript has syntax that is superficially similar to both C and Java, but you would be a fool to claim that it's the same language. Unless you're intentionally trying to create the next brainfuck, any new programming language will have some similarity with existing ones. That's to be expected.</p>
+<p>In creating Plush, I made an intentional effort to go along with existing conventions where it makes sense. This makes the language more approachable to newcomers. That's a feature, not a bug. Still, its semantics don't perfectly align with any existing language, and it has its own spin on actor-based parallelism, which is something that's not really present in any mainstream language.</p>
+<h2>Final Notes</h2>
+<p>Plush is available <a href="https://github.com/maximecb/plush">on GitHub</a> if you're interested in taking a look. Do keep in mind that this is a side-project and an experiment. The main limitations are that there is no GC yet, and I've cut corners when it comes to error handling. You're likely to get a Rust panic if you do something that's not supported. My plan is to gradually improve things over time. I also make no claim that Plush is some kind of next-generation super language with exquisite design. There are a number of places where the semantics could be better thought out.</p>
+<p>In terms of next steps, there are a few things I would like to do. At the moment, the Plush interpreter is something like half the speed of the Python interpreter on a recursive fibonacci microbenchmark. I would like to profile it and implement some basic optimizations. I think it should be possible to pretty easily recover 25-50% more performance.</p>
+<p>Something else I'd like to do is to add a simple audio output API. I'm already using SDL2 for graphics, so I intend to use that for audio output as well. This would make it possible to write fun little music programs. I opened <a href="https://github.com/maximecb/plush/issues/1">an issue</a> on GitHub for that. There are some key design decisions to be made there such as whether <code>ByteArrays</code> or plain arrays of floats should be used to manipulate audio data.</p>
+<p>I'd be happy to accept pull requests for more tests, more benchmark, and new example programs showcasing fun things you can do with Plush. I had Google Code CLI help me to put together a <a href="https://github.com/maximecb/plush/blob/main/docs/language.md">Plush language quickstart</a> guide which can be helpful to newcomers, and can also be used as input to LLMs when working with the language.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

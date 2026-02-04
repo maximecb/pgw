@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A Simple JIT Compiler</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Simple JIT Compiler">
+  <meta property="og:description" content="A Simple JIT Compiler">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-03-04-a-simple-jit-compiler/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/02/20/back-from-silicon-valley/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/03/31/progress-on-the-higgs-jit/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>A Simple JIT Compiler</h1>
+<div class="post_date">March 4th, 2013</div>
+</div>
+<p>In the last few days I've been prototyping a basic Just-In-Time (JIT) compiler for Higgs. I decided to start with a very simple design which is sometimes referred to as a <a href="http://www.facebook.com/notes/facebook-engineering/speeding-up-php-based-development-with-hiphop-vm/10151170460698920">tracelet JIT</a>. This is simply a compiler which compiles one <a href="http://en.wikipedia.org/wiki/Basic_block">basic block</a> at a time, basic blocks being defined as single-entry, single-exit sequences of instructions. This compiler is lazy, meaning it doesn't compile unexecuted blocks. It also only compiles "hot" blocks that have been executed a few hundred times, the idea being to avoid wasting time compiling code that only runs once or very few times (e.g. initialization code). Another advantage of delaying compilation somewhat is to allow time for profiling statistics to be gathered.</p>
+<p>I have to admit that I was very excited to actually begin generating machine code (if you can believe that). It took me a few days to port over the <a href="http://en.wikipedia.org/wiki/X86">x86</a> assembler I wrote in JavaScript for Tachyon to D, along with all associated unit tests. Once this was done, I was able to get a very basic tracelet JIT working in less than a day. This first version simply compiled sequences of calls to functions implementing interpreter instructions. This provided small speedups on the order of 5%. I improved on this by adding JIT code generation support for some basic arithmetic, bitwise and branching operations which provided speedups of up to 30%. The next step, in my mind, was to support all branching operations so that tracelets could jump directly into each other without ever needing to fall back to the <a href="http://en.wikipedia.org/wiki/Interpreter_(computing)">interpreter</a>. However, I ran into a problem.</p>
+<p>The Higgs interpreter was designed with simplicity and maintainability in mind, a choice which has paid off thus far. Unfortunately, this means that some operations aren't built with pure speed in mind, and one problematic case is the call instruction. The call instruction builds the stack frame for callees. This means it needs to make several conditional checks and push the right number of arguments and local variable slots, which isn't the same for every callee. I started trying to implement the full dynamic extent of calls in the JIT compiler. I stopped once I realized how big and messy the generated code would be. Since every runtime primitive is self-hosted in Higgs, there are calls everywhere, which would assuredly mean the generated machine code would be huge (bad for the instruction <a href="http://en.wikipedia.org/wiki/CPU_cache">cache</a>).</p>
+<p>I decided to try an idea just for the fun of it. Most of the calls in the small benchmarks I was testing were global function calls. For such calls, it's quite easy to guess correctly who the callee would be. I chose to implement a mechanism which tries to guess the callee and has an optimized call path specifically for the said function. If the callee isn't correctly guessed, the interpreter's call instruction logic is used instead. Amazingly, such a simple optimization (two hours of work) yielded a total performance improvement of about 500% over the interpreter on most of the benchmarks I tried.</p>
+<figure>
+<a href="speedups.png">
+<img alt="Speedups over the interpreter" src="speedups.png">
+</a>
+<figcaption>Speedups over the interpreter</figcaption>
+</figure>
+<p>The numbers above show the speedups I measured on some of the SunSpider benchmarks, going from very simple to medium-sized programs. If you're familiar with these benchmarks, you might feel that these times are ridiculously slow either way. You should keep in mind that this is still very preliminary work (I did say the JIT was a <code>prototype</code>) and that these values were measured using the linux <code>time</code> utility, and so include initialization time. Higgs is also self-hosted, meaning that it lazily compiles parts of its own standard library when you run a program. As such, Higgs will probably always be at a disadvantage when it comes to very short running programs.</p>
+<p>At this point, the tracelet JIT compiler is about 800 lines of D code (excluding the x86-64 assembler). It's very much a prototype and a platform for me to experiment with, meaning I will probably refactor the design in many ways. I'm already thinking of several improvements I can make over the course of the next week which should bring more significant speedups. The main thing I will be doing is trying to extend tracelets in a trace-like manner, which should tremendously help with loops.</p>
+<p>As I said earlier, I designed the Higgs interpreter to be simple and easy to maintain. This decision was partly motivated by my belief that interpreter speed should be largely irrelevant in a system where a JIT compiler is also available. I could have tried hard to make the Higgs interpreter faster, at the cost of tasteless <a href="http://en.wikipedia.org/wiki/Kludge">kludges</a> and largely increased code complexity, but I don't think it would have been worth it, especially now that I've shown that 4 days of work can yield a simple JIT compiler producing 500% speedups. Next week, I'd like to have at least 1000% speedups over the interpreter, which I believe is easily achievable.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>So I Rolled My Own Static Site Generator</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="So I Rolled My Own Static Site Generator">
+  <meta property="og:description" content="So I Rolled My Own Static Site Generator">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-01-10-so-i-rolled-my-own-static-site-generator/gears_escher.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-01-10-so-i-rolled-my-own-static-site-generator/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2024/04/20/the-alternative-implementation-problem/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-03-06-my-low-tech-attempt-to-automate-spellchecking/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>So I Rolled My Own Static Site Generator</h1>
+<div class="post_date">January 10th, 2025</div>
+</div>
+<div class="cover_image">
+<img src="gears_escher.jpg">
+</div>
+<p>I started this blog back in August of 2011 with no expectations about what it would become or how much viewership it would get. Back then, I was a PhD student, and I wanted to be able to write some kind of journal or log with various thoughts about the research work I was doing. I find that by writing my thoughts down, sometimes it helps me articulate them and figure out certain things. It can even be therapeutic. Over the years, I went on to publish 159 posts on this blog about a wide variety of subjects. Looking back, not everything I wrote is of the same quality level, but I've made the Hacker News front page more times than I can count. This blog has been an invaluable tool in connecting with like-minded people. It got me valuable feedback, speaking gigs, jobs, and even helped me make new friends.</p>
+<p>Until recently, this blog was hosted on WordPress. It worked fine, but it also came with its share of annoyances. I find the WordPress editor lackluster, unintuitive and annoying to use. I believe it's possible now, but for years, there was no code block primitive. This is something that I find particularly annoying since I often blog about programming. However, it's even more annoying to think about when you consider that WordPress was founded by two programmers. It employs many programmers, and a significant chunk of its users are programmers. Why did they need 15 years to add such a basic feature? Then there was this one time where my paying WordPress subscription failed to renew and I was never notified for whatever reason. I only realized there was a problem when a friend complained about ads on my blog, which I never noticed because I use an ad blocker.</p>
+<p>I've been kind of wanting to get back to blogging more actively again, but I found the annoying WordPress editor, and the ugly brown template I had on there were putting me off. I don't know if that makes sense or not, but as a programmer I find working with a text editor and a shell to be comfortable, maybe even comforting. I found myself wishing that I could just start writing text in a markdown file and check it into version control. There have been a few times when I found myself on a plane with no internet connection and this would have been particularly useful. I read posts on Hacker News regularly and there are a few blogs with minimalistic templates that I found were just beautiful. It feels really nice when there are no elements to distract you from reading text, no ads and no dark patterns or popups to bug you. I started to put together a list of blogs I thought looked particularly good that I could draw inspiration from.</p>
+<h2>Markdown Site Generator</h2>
+<p>You're looking at my new blog now. It's hosted on GitHub pages. I decided to write my own markdown parser and static website generation code from scratch, in Rust, along with my own CSS. I'm sure this choice seems questionable to many people. There are already many options to generate static websites from Markdown files. The most widely known is Jekyll, but there are probably over 100 options out there. Furthermore, GitHub pages will actually generate HTML from markdown files for you, and you can supply your own CSS, no configuration required.</p>
+<p>I didn't want to just use GitHub's website generator because I wanted my code to avoid getting locked into anything GitHub-specific. It feels nice knowing that I can deploy this anywhere. I wrote my own markdown parser because I feel like writing parsers is fun. I've gotten pretty good at writing recursive descent parsers and I have a kind of toolbox of primitives that I've been accumulating for that purpose. I also feel like there's no better way to understand something than to just write your own from scratch. In the process of writing this, I learned a lot more about markdown. I also learned more about HTML and CSS, and how to build a responsive layout that works on mobile. Best of all, it wasn't even difficult. I had about 80% of the markdown parsing working in a couple of days, and I completed most of the finishing touches over the holidays.</p>
+<p>It turns out that markdown is a bit quirky. It has many weird corner cases. I found that the commonmark.js <a href="https://spec.commonmark.org/dingus/">dingus</a> was particularly helpful in making sense of them. I also used Claude and Grok to learn more about CSS. I've always found CSS very unintuitive. It's also hard to find learning materials sometimes because there is just so much blogspam. The LLMs were extremely helpful in answering my hundreds of questions and troubleshooting things. Claude was also reasonably good (though not perfect) at helping me figure out one-liner shell commands to validate a bunch of things. I use VSCode as a text editor and I was pleased to see that it does syntax highlighting for markdown. This helps catch many formatting errors.</p>
+<p>My parser is basically feature-complete at this point. I did some things differently from Jekyll, such as automatically showing image alt text as image captions. I also wrote a basic <a href="/feed.xml">RSS feed</a> generator. The RSS feed may need some work because it doesn't include the post HTML in the feed for now. I may add that later if people request it.</p>
+<h2>Backwards Compatibility</h2>
+<p>One of the main issues I had in mind when porting my site away from WordPress is that there are many existing links to my previous blog posts out in the wild already. I wanted to make sure that I could keep these links working. WordPress uses a quirky subdirectory structure where it groups posts by year and then by month, which I don't particularly like, but I needed a way to have my old posts be placed in the same subdirectories in order for old links to work. My markdown parser supports a basic YAML prelude which allows me to have an output path override directive for that purpose:</p>
+<pre><code>---
+title: &quot;The Alternative Implementation Problem&quot;
+cover_image: &quot;astronauts.jpg&quot;
+dst_path: &quot;2024/04/20/the-alternative-implementation-problem/&quot;
+---
+</code></pre>
+<p>Unfortunately there are still old links from before I had a dot com domain for Pointers Gone Wild. Those old links point to a wordpress subdomain. For that reason, I probably won't just delete the old blog. I'll keep it around to keep those links working, and post a notice that the blog has moved to a new home.</p>
+<h2>Manual Validation</h2>
+<p>In order to move my site away from WordPress, I needed a way to convert the posts to markdown. I found that someone had written <a href="https://github.com/lonekorean/wordpress-export-to-markdown">JS code</a> to do just that. This code is even nice enough to download images from your blog. Unfortunately I found that there were some bugs. It would download images, but the markdown image tags would still refer to files hosted on WordPress. There were also a few other things that were non-standard and slightly broken.</p>
+<p>One of the first things I did was to set up a <a href="/test_page.html">test page</a> to visually check that my markdown parser was working correctly. I also added a number of regression tests as I found issues. However, because of the slightly borky markdown exporter, a good amount of manual tweaking and editing was required. This was a labor of love and an opportunity to go over my older posts and clean them up. Given that I had already written 159 blog posts, going over each of them would be a lot of work. I added some simple features such as keyboard shortcuts (Shift+Left and Shift+Right) to go from one post to the next without having to click any links. It's a small thing but it makes a big difference in how long it takes to visually check all the posts.</p>
+<figure>
+<a href="iphonese.png">
+<img alt="Pointers Gone Wild on iPhone SE" src="iphonese.png">
+</a>
+<figcaption>Pointers Gone Wild on iPhone SE</figcaption>
+</figure>
+<p>I also found that there were many broken links in my older posts. This was kind of upsetting because many of these links I would have expected people to put more effort in maintaining. Many people deleted their blogs or changed the URL for seemingly no reasons. There were academic websites with PDFs of published papers at my previous universities that vanished. Government websites that changed address. Documentation pages from big tech companies that were moved or deleted. I wish that people would put more effort in keeping old links working, but ultimately, it looks like if you want a website to work long-term, you should probably make it self-contained as much as possible.</p>
+<h2>Automated Checks</h2>
+<p>One of the beautiful things about having a markdown website and my own parser is that I can easily build some automated checks. I wrote some code to check that all image tags use relative links (no linking to external images) and that all image files referenced actually exist. I found two missing image files this way. I also used a simple shell one-liner to check that there are no images over 500KB:</p>
+<pre><code>find site -type f \( -name &quot;*.jpg&quot; -o -name &quot;*.jpeg&quot; -o -name &quot;*.png&quot; -o -name &quot;*.gif&quot; \) -size +500k
+</code></pre>
+<p>This is useful because GitHub pages currently limits you to a 1GB repo, and it's very easy to copy in an image files that's multiple megabytes in size (for no real reason) without noticing.</p>
+<p>I tried to roll my own spell checker but quickly found that this was more complex than anticipated. However, it seems it's pretty easy to detect common bad patterns such as "be be", "the the", "is is", "a the". I did find a few of those in existing blog posts. I wanted to try to use a local LLM to do more sophisticated grammar checking, but found that llamafile didn't quite cut it, at least not with the size of model I can realistically run on my MacBook Air. I settled on using the <code>aspell</code> command-line tool for now. It's not perfect but it's useful. In an ideal world, I could have my deployment script throw an error if I try to publish a post with an obvious spelling or grammar mistake, but there are no tools reliable enough to do that yet, as far as I'm aware.</p>
+<p>The <code>aspell</code> command has direct support for markdown, which is pretty useful, but I needed to use <code>sed</code> to remove the YAML prelude from my markdown files first:</p>
+<pre><code>sed '/^---$/,/^---$/d' $1 | aspell list --mode=markdown --lang=en --personal=&quot;$PWD/wordlist.pws&quot;
+</code></pre>
+<p>Two other simple automated check that I added is to make sure that drafts aren't included in the deployment, and to make sure that I don't directly link to <code>index.html</code> to try and futureproof things in case I ever wanted to move away from a fully static website.</p>
+<h2>Conclusion</h2>
+<p>In terms of next steps, I would like to write my own code to check for broken links. There are a few websites that will do this for you, but they all seem to want to charge you money for something that honestly seems pretty basic. I think I can pretty easily whip out a script that will spawn a few threads and check links as needed.</p>
+<p>I'd also like to add a portfolio page with a list of projects I've worked on. Right now, my GitHub kind of serves that purpose. However, the thing is, I've been coding for something like 24 years at this point. There are many projects I've worked on that I would like to showcase, but aren't necessarily codebases that I can just put on my GitHub. There are also pieces of software I wrote professionally that I could talk about, but pinning the repos on GitHub isn't the ideal way to do that.</p>
+<p>At this point, I feel like the most important thing is to have a setup I'm happy with. Something that will encourage me to blog more often. I've been asked if I was going to open source my website generator. I think the answer is probably not. I wrote this code for myself. I don't really want to make it super general purpose and cater to the needs of others. I would like to encourage you to roll your own, using which ever programming language and software you like working with, and make it unique.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Feels like Censorship</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Feels like Censorship">
+  <meta property="og:description" content="Feels like Censorship">
+  <meta property="og:image" content="https://pointersgonewild.com/2015/07/27/feels-like-censorship/internet_censorship1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-07-27-feels-like-censorship/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/07/10/presented-at-ecoop/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/07/30/all-possible-thoughts/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Feels like Censorship</h1>
+<div class="post_date">July 27th, 2015</div>
+</div>
+<div class="cover_image">
+<img src="internet_censorship1.jpg">
+</div>
+<p>I just got informed that my second paper on basic block versioning, an extension of my <a href="/2015/07/10/presented-at-ecoop/">previous work</a>, has been rejected. Most academics don't really talk about these things. You probably shouldn't publicly say that your paper has been rejected, because you want to project some kind of image of never-ending flawless success. The calculated, business-like, aseptic thing to do is to keep quiet, rework your paper, submit it somewhere else, rinse and repeat.</p>
+<p>I'm talking about it. I need to let out some steam, express my frustrations a little bit. If that's a bad career move, well, so be it. I don't want to spend my life hiding behind a façade, pretending I'm perfect and always cheerful. Living life without ever expressing yourself is a fast path to depression, if you ask me. At the moment, I'm both frustrated and sad. I've spent months working on this paper. It was a good paper. Somehow though, it wasn't good enough. It didn't make the cut. Better luck next time. Call me cynical, but it is a little depressing considering this conference has an acceptance rate of about 45%. Damn.</p>
+<p>I've worked as part of a conference's program committee before. I've had to evaluate a paper about a programming language that consisted of a hand-written AST encoded in XML, with no tool support. I think the paper was 8 pages long. They were pitching this as a revolutionary new idea. This was back in the day of the XML-all-the-things craze. Are you telling me that my latest submission is in the same category as the XML one? I guess when it comes to computer science conferences, you're either a zero or a one. There is no middle ground. Your idea is either deserving of publication, or piped into /dev/null.</p>
+<p>The perverse thing is that this constant stream of rejection discourages exploration. As an academic, you really want your papers to get accepted. Your funding and ultimately your academic career depend on it. I've already started to adapt the way that I work. When I started my PhD, I had no idea how the paper game was played. Now, when I have a new idea for my research, I have to ask myself: it this publishable? It's really interesting, it has a lot of potential, but <i>is it publishable</i>?</p>
+<p>To publish your idea, you should craft the smallest possible publishable unit. It needs to be sexy and trendy. It needs to be about JavaScript. It needs to reference as many recent papers as possible, and ideally, point in the same direction as those papers. Contradicting established wisdom is not smart. Suggesting alternatives to the established wisdom is not very smart either. You're contradicting iron-clad, proven, mathematical facts, which means you are wrong.</p>
+<p>The reason why conferences have limited acceptance rates dates back to the days when conference papers were published in these books called "proceedings" which were purchased, printed and shipped in the mail. You couldn't accept every paper, it wasn't physically or financially possible. Nowadays, it's estimated the Google server farms have a total storage capacity rated in multiple exabytes. Conceivably, we could make all submissions to all conferences available on conference websites.</p>
+<p>Why do so many computer science papers come without any source code? Because the current practices in our field discourage replication and encourage "massaging" of results. In the spirit of transparency, we could make all submissions available, along with all of the reviewer comments. Maybe we don't want all papers to be on the same footing. Maybe your paper would get ranked into class A, B, C or D, maybe you'd get some score on a 5 or 10 point scale. Certainly, not everyone could realistically be invited to come and give a talk. Still, is there really a need to <i>silently discard</i> 50 to 90% of all submissions to a conference?</p>
+<p>It feels like censorship. When a paper is rejected, it strongly discourages further exploration of that research avenue. You're telling me that my idea doesn't deserve to be seen. Worse, you're giving my academic competitors a chance to beat me to the punch. Science is about proving and disproving things, but it's also about playing with ideas. In the world of computer science conferences, there's very little room for disproving anything, and even less room for playing with ideas. We don't have time for that. The next conference deadline is coming up real soon, and we have funding applications to write. Peer reviews can become peer pressure, a civilized form of hazing.</p>
+<p>Fortunately, my paper is already <a href="http://arxiv.org/abs/1507.02437">online on arXiv</a>. It's timestamped. It's out there. I don't know if I'll have time to publish this paper at an academic conference before the end of my PhD. I'm being pressed to finish as soon as possible, and to submit more papers. If it gets rejected one or two or three more times, it might never get into any conference. I can at least take some comfort in the idea that some of my research was published, and my latest work is out there. It might inspire someone to explore a similar research direction.</p>
+<p>My personal opinion is that academic research in compilers is dying. It's going to go the way of operating systems research. Why? Because there's too much infrastructure to build. It takes too long. It's just not practical to publish about. These days, the game-changing, innovative work in compilers is largely happening in the industry, and it's being done by people who left academia.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

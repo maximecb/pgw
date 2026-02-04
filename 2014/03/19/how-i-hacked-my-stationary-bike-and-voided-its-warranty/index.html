@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>How I Hacked my Stationary Bike and Voided its Warranty</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How I Hacked my Stationary Bike and Voided its Warranty">
+  <meta property="og:description" content="How I Hacked my Stationary Bike and Voided its Warranty">
+  <meta property="og:image" content="https://pointersgonewild.com/2014/03/19/how-i-hacked-my-stationary-bike-and-voided-its-warranty/img_20140318_184639.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-03-20-how-i-hacked-my-stationary-bike-and-voided-its-warranty/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/02/03/higgs-upcoming-talks-new-contributions/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/04/10/positive-results-for-higgs/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>How I Hacked my Stationary Bike and Voided its Warranty</h1>
+<div class="post_date">March 20th, 2014</div>
+</div>
+<div class="cover_image">
+<img src="img_20140318_184639.jpg">
+</div>
+<p>Working out is good for your mood, your motivation and energy levels. It's good for staying thin and looking good, too. Still, going to the gym is impractical. Especially in a city with a harsh winter like Montreal. I just haven't been able to motivate myself to make that kind of time commitment. Still, I found a nice compromise. I bought myself a <a href="http://www.schwinnfitness.com/schwinn_fitness_us/nln/retiredproducts/uprightsr/prdcd~100193/Schwinnreg+A10+Upright+Bike.jsp">Schwinn A10</a> stationary bike and set it up right next to my desk at home. That way, I can hop on it whenever I want, right in the middle of a coding session. Hit an annoying bug? Need some time to think? Why not take a break to watch a few minutes of an interesting talk while biking. This works pretty well for me, I now do cardio almost every day.</p>
+<p>I like my stationary bike: the mechanism is quiet and sturdy, it offers a good resistance level. Unfortunately, it has a slight design flaw. After 5 minutes of inactivity, it goes into sleep mode, and then, if you leave it in sleep mode for more than one minute or so, all of your workout stats get erased. It seems that when it goes in sleep mode, the microcontroller driving it gets powered off completely, and its RAM only survives so long without a refresh. This is problematic since, as I said earlier, I often like to workout in short sessions of a few minutes each, stretching over several hours. Being the tinkerer that I am, I started thinking about ways to work around this problem. I don't have awesome soldering skills and I didn't think I could reverse engineer the stationary bike's control board, but I did think of something.</p>
+<figure>
+<a href="img_20140318_175753.jpg">
+<img alt="Components for this project" src="img_20140318_175753.jpg">
+</a>
+<figcaption>Components for this project</figcaption>
+</figure>
+<figure>
+<a href="img_20140318_184639.jpg">
+<img alt="Prototype on a breadboard" src="img_20140318_184639.jpg">
+</a>
+<figcaption>Prototype on a breadboard</figcaption>
+</figure>
+<figure>
+<a href="img_20140318_205224.jpg">
+<img alt="Components soldered on a protoboard" src="img_20140318_205224.jpg">
+</a>
+<figcaption>Components soldered on a protoboard</figcaption>
+</figure>
+<p>I designed and built a small board with a microcontroller and a <a href="http://en.wikipedia.org/wiki/Reed_relay">reed relay</a> (low power relay) to trigger a button on the console every 3 minutes. I chose the very basic and inexpensive Atmel <a href="https://en.wikipedia.org/wiki/ATtiny_microcontroller_comparison_chart">ATtiny85</a> for this. The reed relay is connected to the "enter" button pins on the bike's control board. Some of you are probably thinking a microcontroller is overkill for this, that I could have used an NE555 timer. I could have, but that would have made for a more complex electronic design. The microcontroller also allows me to easily trigger the "enter" button exactly 3 times in a row, which changes a setting and then restores it to its original value, essentially performing a no-op which only serves to keep the bike's control board from going into sleep mode.</p>
+<figure>
+<a href="img_20140318_215526.jpg">
+<img alt="Connections for the "enter" button" src="img_20140318_215526.jpg">
+</a>
+<figcaption>Connections for the "enter" button</figcaption>
+</figure>
+<figure>
+<a href="img_20140318_215513.jpg">
+<img alt="Fitting my new board inside the housing" src="img_20140318_215513.jpg">
+</a>
+<figcaption>Fitting my new board inside the housing</figcaption>
+</figure>
+<figure>
+<a href="img_20140318_221144.jpg">
+<img alt="New switch and LED on the front panel" src="img_20140318_221144.jpg">
+</a>
+<figcaption>New switch and LED on the front panel</figcaption>
+</figure>
+<p>The circuit was tested on a breadboard before I soldered it on a prototype board. Hot glue was used to install the clandestine board inside the bike's console. The device draws power directly from the bike's batteries (4 x D cells). It can be turned on and off with a switch I installed on the front console, and there's a green panel mount LED to indicate its status. My Schwinn A10's warranty is no doubt voided now, but the annoying flaw is fixed, and this was a fun little hack to work on. Honestly, I was just curious to see if I could make this work ;)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

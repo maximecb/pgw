@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Problem with HTML</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Problem with HTML">
+  <meta property="og:description" content="The Problem with HTML">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-04-16-the-problem-with-html/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/04/15/what-is-intelligence/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/05/07/the-smart-web-is-coming/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Problem with HTML</h1>
+<div class="post_date">April 16th, 2015</div>
+</div>
+<p>The <a href="http://en.wikipedia.org/wiki/HTML">HyperText Markup Language (HTML)</a> was invented by Physicist Tim Berners-Lee of CERN, and its first publicly available specification surfaced on the internet in 1991. It was meant intended as a simple format for people to share enriched static documents or pages that could refer to one another through hyperlinks. The original design was relatively simple, with just 18 types of elements. As of today, the <a href="https://html.spec.whatwg.org/print.pdf">HTML specification in PDF format</a> is 1156 pages long.</p>
+<p>HTML, on its own, usually isn't all there is to a modern webpage. Most websites are also described in terms of <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">Cascading Style Sheets (CSS)</a> and <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript (JS)</a>. What's the problem, then? The problem is that HTML, which is already a hugely complex standard, is growing in complexity year after year, along with CSS and JavaScript. Furthermore, HTML is now a "living standard", meaning it's constantly changing and there is no version number. This might be the official recognition that the web is moving too fast.</p>
+<p>As of today, Chromium is about 17 million lines of code, comments excluded. The sheer complexity of HTML+JS+CSS is enormous. This is a problem because it means there are many areas where implementations can differ. What I mean is that your webpage is increasingly likely to break or not behave the same on different web browsers. The fact that HTML is a fast-moving target and a "living standard" certainly won't help. What recently dawned on me is that HTML too complex for any individual or corporation to ever implement a new web browser from scratch.</p>
+<p>CSS is now complex enough that <a href="http://blog.frankmtaylor.com/2012/02/14/happy-valentines-day-with-a-css3-heart/">you can do animations with it</a>. It's not really just a stylesheet format anymore. The way I see it, it's really feature-redundant nonsense. JavaScript is a programming language, and it should be plenty capable of doing animations. Giving CSS the ability to do animations is a great way to guarantee your webpage, which looks nice on Firefox, won't look right on Chrome.</p>
+<p>Then there's <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a>. I know JavaScript pretty well, because I've been working on my own JIT compiler as part of my thesis. It took me about two years to have about-complete support for ECMAScript 5 (ES5) and decent performance. The ES6 draft specification is literally twice the length as that of ES5, a huge increase in complexity. They're not done though, many features are already planned for ES7, even though the ES6 specification is not yet officially finalized. You can't really call JS the assembly language of the web with a straight face when it's trying to integrate all the features of Java, C++, CoffeeScript and Haskell.</p>
+<p>A few years ago, I started playing with new HTML APIs to produce audio output. I was one of the first play with Mozilla's <a href="https://wiki.mozilla.org/Audio_Data_API">Audio Data API</a>. This API allowed you to generate raw audio samples and send them to an audio output, among other things. Unfortunately, Chrome never implemented this API. They opted instead to create the competing <a href="http://webaudio.github.io/web-audio-api/">Web Audio API</a>. Since Web Audio has the backing of the W3C, it became obvious it would win out, and the Web Data API would die. It took about 3 years for Firefox to finally implement Web Audio. I'm still not sure if Safari and IE support it properly.</p>
+<p>The victory of Web Audio over Audio Data frustrated me a bit, because I really thought the Mozilla's Audio Data API had the right approach: it was simple and low-level. You generated samples and wrote them out for output. The Web Audio API, in comparison, is essentially a modular synthesizer, with many different types of audio processing nodes you can interconnect together. It's way more complex than the Audio Data API. The Web Audio API is most likely implemented in C++ and interfaced with JS through several dozen types of HTML <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM</a> nodes.</p>
+<p>The Web Audio API is stupid for two simple reasons. The first is that you really could implement your own modular synthesizer in JS (please refrain from telling me that JS is too slow for that as I've <a href="http://maximecb.github.io/Turing-Tunes/#foo,100,4,4,80,C4,0.5,,C4,0.5,0,C4,1,,C4,1,0,D#4,0.5,,D#4,0.5,0,D#4,1,,D#4,1,0,F4,0.5,,F4,0.5,0,F4,1,,F4,1,0,F#4,0.5,,F#4,0.5,0,F#4,1,,F#4,1,0,G4,0.5,,G4,0.5,0,G4,1,,G4,1,0,A#4,0.5,,A#4,0.5,0,A#4,1,,A#4,1,0,C5,0.5,,C5,0.5,0,C5,1,,C5,1,0,D#5,0.5,,D#5,0.5,0,D#5,1,,D#5,1,0,F5,0.5,,F5,0.5,0,F5,1,,F5,1,0,F#5,0.5,,F#5,0.5,0,F#5,1,,F#5,1,0,G5,0.5,,G5,0.5,0,G5,1,,G5,1,0,A#5,0.5,,A#5,0.5,0,A#5,1,,A#5,1,0,C6,0.5,,C6,0.5,0,C6,1,,C6,1,0,C7,0.5,,C7,0.5,0,C7,1,,C7,1,0,D#7,0.5,,D#7,0.5,0,D#7,1,,D#7,1,0,F7,0.5,,F7,0.5,0,F7,1,,F7,1,0,F#7,0.5,,F#7,0.5,0,F#7,1,,F#7,1,0,G7,0.5,,G7,0.5,0,G7,1,,G7,1,0,A#7,0.5,,A#7,0.5,0,A#7,1,,A#7,1,0,C8,0.5,,C8,0.5,0,C8,1,,C8,1,0,10,10,50000,7,5,71,1,1,3,0,2,0,1,2,7,53,1,0,9,4,9,1,1,0,6,13,1,1,9,7,29,0,0,1,1,5,1,0,1,0,12,0,0,9,8,57,1,0,3,2,42,0,1,5,8,59,0,1,1,8,43,0,0,5,8,68,0,1,5,3,30,0,0,4,4,65,1,1,7,7,69,1,0,2,4,53,0,0,3,1,1,1,1,2,5,26,1,0,4,7,3,0,0,3,4,54,1,1,3,8,31,0,1,4,2,47,1,0,0,3,34,0,0,7,9,74,1,1,1,9,35,1,0,1,3,14,0,1,5,5,74,0,0,4,9,30,1,0,0,2,40,0,0,6,4,68,1,1,3,7,24,1,0,5,4,2,1,1,4,7,58,1,0,5,8,54,0,0,3,1,15,1,1,3,8,45,0,1,3,8,4,0,1,6,4,32,0,0,3,7,42,1,1,8,3,18,1,1,7,3,57,0,0,3,7,46,1,0,2,6,2,0,0,7,2,69,0,1,6,9,77,1,0,3,5,57,1,0,2,5,72,0,0,3,2,53,1,1,2,9,8,0,0,4,3,48,0,1,7,1,26,0,1,4,4,19,1,0,1,1,42,1,1,2,3,20,0,0,0,7,35,0,0,2,3,74,1,1,4,6,57,1,0,2,6,29,0,0,6,0,7,0,1,5,7,21,0,1,2,7,43,0,1,8,3,8,1,1,0,2,68,1,0,6,2,35,0,1,7,8,37,0,0,8,1,67,1,0,6,6,54,1,1,9,5,74,0,0,9,2,67,1,1,4,2,2,0,0,6,7,32,1,1,1,2,13,0,1,0,4,34,1,1,1,4,47,0,1,4,3,14,0,1,5,6,19,0,1,4,9,42,0,1,6,3,41,0,0,5,4,77,1,0,6,8,20,0,1,5,0,70,0,1,7,0,15,0,1,7,5,69,1,1,6,6,9,1,1,3,0,25,0,0,2,9,2,0,1,3,4,74,1,0,6,0,31,1,1,3,1,67,1,0,2,1,70,0,0,1,4,64,0,1,1,6,33,0,0,8,9,42,0,0,3,0,50,1,0,5,6,60,0,0,2,8,13,0,0,1,3,57,0,1,6,6,78,0,1,9,6,49,0,1">already implemented one</a>). Letting people implement their own modular synthesizer as part of a library is more flexible and more portable. The second reason Web Audio is stupid is that implementing many kinds of pre-made synthesizer nodes in C++ and interfacing them through the DOM almost guarantees that Web Audio will not sound the same on different web browsers.</p>
+<p>In my opinion, the problem with HTML is the growing complexity and feature redundancy. The web is moving very fast, too fast maybe, probably in part because it's a hugely competitive market. Everyone wants HTML to support the latest and coolest feature their need in the way they like best. Design by committee ensures that bloat accumulates. I think that one day, HTML is bound to crumble upon its own weight, and something more minimalistic will take its place. Something designed from the ground up for web applications instead of static webpages. The app stores used on cellphones may be a hint of things to come.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A Small Dose of Optimism</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Small Dose of Optimism">
+  <meta property="og:description" content="A Small Dose of Optimism">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2018-12-17-a-small-dose-of-optimism/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2018/05/21/building-a-simple-self-driving-car-simulator/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2019/01/29/miniworld-a-vizdoom-alternative-for-openai-gym/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>A Small Dose of Optimism</h1>
+<div class="post_date">December 17th, 2018</div>
+</div>
+<p>Before I went to see Blade Runner 2049, I sat down with a friend to re-watch the original Blade Runner from 1982. At the beginning of the movie, there is a grim portrayal of the future. A title screen reads "Los Angeles: November 2019". We are then shown a dark city obscured by smog, with tall buildings and even taller chimneys that have columns of oil fire and smoke projecting upwards.</p>
+<figure>
+<a href="bladerunner-full.jpg">
+<img alt="Los Angeles in 2019 according to Blade Runner" src="bladerunner-full.jpg">
+</a>
+<figcaption>Los Angeles in 2019 according to Blade Runner</figcaption>
+</figure>
+<p>It's 2018, and there are a lot of things to be upset and worried about. The sum of all human knowledge has never been greater than it is now, but unfortunately, our world seems to be ruled by plutocrats, and divided by identity politics. The stock market is negative for the year, and the sky might be just about to fall, or so the news media would have you believe. Thankfully, the world is not yet as grim as what Blade Runner projected, and with any luck, it probably won't be so grim in November 2019 either.</p>
+<p>I'm very optimistic about green energy. I have been a Tesla shareholder since 2016, and it has been amazing to watch that company's progress. Despite all the negative press, they have produced and sold over 200,000 electric cars in 2018, and produced a profit that beat estimates in the last quarter. The nay sayers will tell you that Tesla produces luxury cars which are out of reach of the masses. That's currently still true, but Tesla has been sticking to its plan, which is to produce cheaper and cheaper cars as they perfect the technology and achieve economy of scale. Their cheapest car, the mid-range Model 3, is currently priced for $45,000 USD, which is a lot cheaper than the first car they ever sold, the Roadster, which sold for $122,000 USD (adjusted for inflation).</p>
+<p>In my opinion, Tesla is succeeding in its stated mission: "to accelerate the world's transition to sustainable energy". China and Europe are ahead of the curve in electric vehicle production and adoption, but Tesla, GM and Nissan are already selling electric cars in the US, and almost all major automakers have announced plans to begin producing them as well: even Ford has announced a Mustang EV. Tesla is forcing every automaker to see the obvious: if you can make them cheap and give them enough range, there is massive pent up demand for electric cars. The electric car revolution is happening, for real.</p>
+<p>The common argument against electric cars is that the electricity they use is often produced from non-renewable sources, negating their environmental benefit. I'll begin by stating that this isn't true everywhere. Quebec, the Canadian province where I'm from, produced 95.2% of its power from hydro, and 3.6% from wind <a href="https://www.neb-one.gc.ca/nrg/sttstc/lctrct/rprt/2017cndrnwblpwr/prvnc/qc-eng.html">in 2016</a>. However, even if all the power in the world was generated by burning coal, the fact is that industrial power plants are <a href="https://www.lightsonsolar.com/emissions-and-efficiency-in-electric-cars-versus-gasoline-cars/">much more efficient</a> at converging fossil fuels into energy than car engines. They can be made more efficient because they don't have the same size and weight constraints as car engines do.</p>
+<p>Many will argue that solar power and wind can't possibly replace fossil fuels because the sun doesn't always shine and the wind doesn't always blow. This problem is being addressed as well. Tesla are building large batteries that can be installed in your home or <a href="https://www.theguardian.com/technology/2018/sep/27/south-australias-tesla-battery-on-track-to-make-back-a-third-of-cost-in-a-year">at large power plants</a>. Multiple <a href="http://news.mit.edu/2018/metal-mesh-membrane-rechargeable-batteries-renewable-energy-0122">startups</a> are also working on utility-scale energy storage solutions. The cost of renewable energy technologies is still a little steep, but <a href="https://blog.pickmysolar.com/the-price-of-a-solar-panel-system-over-the-years">solar panels,</a> windmills and lithium-ion batteries have been <a href="https://cleantechnica.com/2017/12/11/batteries-keep-getting-cheaper/">steadily becoming more affordable</a> every year.</p>
+<p>Currently, it's possible to buy and install a 5KW solar setup that includes a home battery for about $15,000 USD. This is enough for one person to live completely off the grid. That price may seem high, but if you amortize it over a 20 year mortgage, and you factor in energy savings, you realize that it's already within reach of many people. Assuming that the cost of solar cells and batteries keeps falling, we will soon reach a point where renewable energy is available 24 hours a day, and cheaper than fossil fuels. When this happens, it will be economically unjustifiable to use fossil fuels for energy, and the transition will not only be quick, but also inevitable.</p>
+<p>Global warming is still a problem, particularly if you take into account the <a href="https://en.wikipedia.org/wiki/Runaway_greenhouse_effect">runaway greenhouse effect</a>. However, the transition to renewables could happen faster than you think. It's not unrealistic to think that in less than 5 years, electric cars will be about as cheap as gasoline cars, and in less than a decade, we may see some oil and gas corporations going bankrupt. It's also very possible that the cost of solar cells and energy storage will keep going down even after they become price-competitive with non-renewable energy technologies. Within this century, we may enter an era where energy is cheap and plentiful.</p>
+<p>That's great, but what about all the other problems in the world? If you look beyond the negative headlines, there are many reasons to remain optimistic. According to multiple sources, the number of people living in conditions of extreme poverty is <a href="https://www.cnbc.com/2018/09/19/world-bank-global-poverty-rate-drops-to-record-low.html">hitting an all time low</a>. It's also likely that cheaper and cleaner energy will help us not just with clean air, but also alleviate issues of scarcity in many parts of the world. Solar panels and batteries can produce energy anywhere in the world, and it so happens that many of the poorest countries get plenty of sunlight.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

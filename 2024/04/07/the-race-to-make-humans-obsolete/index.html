@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Race to Make Humans Obsolete</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Race to Make Humans Obsolete">
+  <meta property="og:description" content="The Race to Make Humans Obsolete">
+  <meta property="og:image" content="https://pointersgonewild.com/2024/04/07/the-race-to-make-humans-obsolete/sad-robot.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2024-04-07-the-race-to-make-humans-obsolete/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2023-12-24-toxic-by-design-human-scale-vs-asymmetric-social-media/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2024/04/20/the-alternative-implementation-problem/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Race to Make Humans Obsolete</h1>
+<div class="post_date">April 7th, 2024</div>
+</div>
+<div class="cover_image">
+<img src="sad-robot.jpg">
+</div>
+<p>I got up today, had my morning coffee, and was surprised to find that AI music is <a href="https://app.suno.ai/song/f81be5c0-3de9-4940-95e1-cfb780d3aa5e">pretty much solved</a>. Okay, there are still some audible artifacts, and you can argue that the song I linked to is not that original if it makes you feel better. Still, as someone who's <a href="/2022/02/18/noisecraft-project-update/">dabbled with music and composition</a> and worked in the AI field for a while, this is incredibly impressive. We now have a software system that can crank out more catchy music than 99 out of 100 musicians, and do it about 100,000 faster than a human could. The end game of AI music seems pretty obvious. Soon, you'll be able to have access to an app like Spotify that generates an endless stream of music tailored specifically to your unique and <a href="/2017/12/04/we-all-live-in-a-bubble/">ever-changing personal tastes</a>.</p>
+<p>As with any technology, it will open many new possibilities. You may never have to be in a situation where you can't find new music to listen to. It's also now going to be within your reach to have an app generate multiple custom pieces of music for your friend's birthday, incorporating all your favorite inside jokes. It also seems not too unrealistic that we could have an AI-powered Netfix eventually. What if you could have an endless TV series fully tailored to your preferences? What if that TV show could have you as a character? I know that personally, I'd love to watch 12 new seasons of Star Trek: The Next Generation. If I'm being honest, I'd probably watch 3 new episodes every day, until I get so sick of Star Trek that I need to take a multi-year break.</p>
+<p>Endless music and TV shows seem pretty exciting until you stop to think that Spotify pays artists less than half a cent per stream on average. More content seems better, but the online world already feels, in some ways, like some weird endless, <a href="https://www.youtube.com/watch?v=HObNARwPTPk">borderline dystopian</a> competition for attention. What's going to happen if we throw content-generating machines into the mix? Surely, like me, you've already stumbled upon a number of AI-generated videos on YouTube. Remind yourself that this is just the beginning. Eventually, no matter how smart and educated you are, you'll have genuine difficulty telling apart what's AI-generated and what's not. I'm sure this makes you feel warm and fuzzy inside (that was sarcasm).</p>
+<p>I've worked in an academic AI research lab for a few years. I genuinely believe that AI, as a technology, has tremendous potential. I dream of one day having a humanoid robot at home to keep my place clean, do my laundry, do home repairs, and occasionally cook. I'd really love to be able to spend more time with friends and working on side-projects without ever having to worry about doing chores. What if my AI-assistant could file my taxes for me? A world without chores or paperwork, wouldn't that be amazing? I'm a bit scared of having children because of how much work it represents, and the huge resulting loss in free time. What if I could have a kid without ever having to change diapers? Maybe the robot could even come up with clever games to teach my kid how to read while also being physically active?</p>
+<p>The potential for AI is truly exciting. It's truly the most transformative technology we've ever created. The thing is though, that fundamentally, the more AI and robotics technology advances, the more we're devaluing human labor, and even human creativity. You can try to pretend that's not true, but we all know that the end goal is to create machines that can do anything a human can. If we succeed, then eventually, there will be no task that a human can do that a machine can't do better and more efficiently.</p>
+<p>We're trying to create a world where we have access to infinite labor. Economics dictate that as the supply for labor increases, its value must decrease. You can say that's not true, because with infinite labor, the economy can also grow to infinite size. The reality is, neither you or I have a crystal ball. The socio-political ramifications are massive. AI is going to transform the world in ways we can't predict. I understand why you might find that exciting, but that excitement should also be tempered by an appropriate amount of fear. We're on the verge of technological breakthroughs that have the potential to necessitate a radical transformation of the worldwide economic system, and make your own skills and creativity basically irrelevant.</p>
+<p>I've watched a documentary about the lives of migrant workers living in Shenzhen. A man, looking tired, was living in an illegal dwelling. It was a cube about 2m (6ft) on every side, with a bed and a tiny television. Long hours, gruelling work, no social life. What happens to these people when their work can be automated? Do they instantly have access to UBI and food to eat?</p>
+<p>I've also watched a documentary about the lives of <a href="https://www.youtube.com/watch?v=SORthIsoLP0">Hikikomori in Japan</a>. Shut-ins who experience social anxiety, never leave home and often spend most of their time gaming. Thanks to technological progress, you can now get groceries, clothing and household items delivered, get Uber Eats with no social contact. You can take courses online. Work remotely. Game in virtual reality. Substitute relationships and intimacy for a porn addiction. What if we do get access to UBI? Is that going to turn our world into a utopia? Do you think we'll all be sipping margaritas on the beach all day while giving each other back rubs? Are you going to be really motivated to learn to sing or play the guitar if nobody cares to listen?</p>
+<p>I apologize if the tone of this post is dark. I generally consider myself an optimist, and I don't think it's all that useful to engage in doomerism. However, I also think we're facing unprecedented change. The future is really hard to predict, this is a crazy experiment, and we don't necessarily get to try it multiple times. So I'd like to ask a few open-ended questions: is it possible to be simultaneously excited but also cautious? Can we acknowledge that even without killer machines, there are real dangers here, if only because this is completely uncharted territory? How can we help humans remain both physically and mentally healthy in a world where machines can potentially do everything we do better than we can, the online world is saturated with content, and it's possible to live without any social contact?</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

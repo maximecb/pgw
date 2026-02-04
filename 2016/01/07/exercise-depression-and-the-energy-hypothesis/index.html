@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Exercise, Depression and the Energy Hypothesis</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Exercise, Depression and the Energy Hypothesis">
+  <meta property="og:description" content="Exercise, Depression and the Energy Hypothesis">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-01-07-exercise-depression-and-the-energy-hypothesis/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/11/28/musings-on-aot-jit-and-language-design/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/02/04/building-a-small-scale-prototype/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Exercise, Depression and the Energy Hypothesis</h1>
+<div class="post_date">January 7th, 2016</div>
+</div>
+<p>There's an increasing body of evidence claiming that <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC474733/">exercise can help alleviate symptoms of depression</a>. Some studies are claiming that exercise is just as effective as prescription antidepressants, and possibly even more so. The question I ask myself is: why is exercise helpful in cases of depression? It's universally accepted that exercise is good for you in many respects. So much so, that we rarely stop to ask ourselves why that might be.</p>
+<p>I'll begin by saying that depression is a complex phenomenon. I don't personally believe that depression is some one disease or disorder with some fixed set of symptoms or some single cause that we can point to. Rather, I believe it's an umbrella term that we generally use to describe the experience of people who experience persistently low moods and a lack of energy or motivation for what seems like an abnormally long amount of time. In this post, I'm going to focus on one component or symptom of depression which is known as motivational <a href="https://en.wikipedia.org/wiki/Anhedonia">anhedonia</a>, this is the loss of desire or motivation to engage in activities.</p>
+<p>It seems that one of the areas where exercise is most helpful is in helping people find more energy and motivation. I'm going to propose a simple hypothesis as to why that might be, which is that <i>your brain has evolved to save and accumulate energy</i>. It wants you to stay alive and hopefully spread your genes, but ideally, it wants you to do this while spending the least amount of energy possible. Your brain would rather have you accumulating energy than spending it. Body fat is an insurance policy: saved up energy to safeguard you against the bitter famine that might be just around the corner. The reason why many people find it so difficult to lose weight is likely that our brains don't really want to let us do so.</p>
+<p>When the winter comes around, and the days get shorter, many people experience <a href="https://en.wikipedia.org/wiki/Seasonal_affective_disorder">Seasonal Affective Disorder (SAD)</a>, which can cause lower moods and difficulty getting out of bed in the morning. Here's the thing though: it's probably natural for you to feel tired, to move less and to spend more time sleeping during the winter. Most other mammals probably feel just the same way. This is simply your instinct trying to keep you from running around and jumping everywhere, trying to make you save your energy, because in the winter, there's much less food for you to find. Sleeping more and moving less might not feel very good, but it's probably the safe thing to do when resources are scarce.</p>
+<p>How does exercise fit into the picture? I propose that <i>your motivation to move around and do things reflects your brain's willingness to let you spend energy</i>. I propose that probably, somewhere in your brain, there's some mechanism which measures how much energy you need to spend to stay alive, a kind of <i>daily energy budget.</i> This energy budget is likely based on how much energy you've needed to stay alive in the past. Exercising involves forcing yourself to spend more energy than usual. When you do this, your brain estimates that your life situation requires you to spend more energy to stay alive, and increases your energy budget.</p>
+<p>This hypothesis might help explain why, despite the abundance of food and entertainment found in western societies, depression is <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3330161/">on the rise</a>. By many accounts, living conditions in North America are more comfortable than they've ever been. Maybe that's part of the problem though. Maybe the comfort of modern civilization: cars which can get us around without walking, entertainment we can enjoy while sitting on the couch and microwaveable food we don't even need to cook, have made our lives too easy. These things have made it possible for us to survive without spending energy or moving very much. Maybe, for many people, the way to find more energy is to spend more energy.</p>
+<p>Interestingly, there's also been some recent research suggesting that intermittent fasting, and ghrelin (the hormone which produces the feeling of hunger) might stimulate neurogenesis. As such, it's possible that intermittent fasting might help combat depression. This also fits with the energy hypothesis, in that when there is a calorie deficit, and energy sufficiency isn't guaranteed, the brain becomes motivated to have us spend energy so that we might be able to find more food.</p>
+<p>I'll conclude by saying that I do not, in any way, mean to trivialize depression, or the suffering that's involved. I've been depressed, and I know very well that the last thing you feel like doing, when it seems like your world is crumbling down, is to hop on a treadmill and run. I also know that the last thing you should tell a depressed person is to "just snap out of it". If you have a depressed friend, and you want to help them, then my advice to you is to offer them support, kindness, and a lot of patience. Lastly, exercise and diet can only go so far. Depression is not one disease, and exercise is not some universal cure. Some people cannot get out of depressed states without the help of professionals and prescription antidepressants. These people need help and support just as much.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

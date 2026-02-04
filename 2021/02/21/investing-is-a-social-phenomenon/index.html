@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Investing is a Social Phenomenon</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Investing is a Social Phenomenon">
+  <meta property="og:description" content="Investing is a Social Phenomenon">
+  <meta property="og:image" content="https://pointersgonewild.com/2021/02/21/investing-is-a-social-phenomenon/wsb.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2021-02-21-investing-is-a-social-phenomenon/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2021/02/07/on-insurmountable-technical-obstacles/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2021/06/02/yjit-building-a-new-jit-compiler-inside-cruby/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Investing is a Social Phenomenon</h1>
+<div class="post_date">February 21st, 2021</div>
+</div>
+<div class="cover_image">
+<img src="wsb.png">
+</div>
+<p>I first started trading on the stock market back in 2016. I had been curious about stock trading before that, but up until that point, I did what most people my age did, which is to simply put money into a regular savings account without really thinking about it. Things changed when I took a job at Apple in Silicon Valley. Part of the compensation was in Apple stock, and so, my new employer opened a stock brokerage account in my name where the shares would be deposited every six months. All of a sudden, I had access to a website where I could log in and place trades, and a whole new world was opened to me. I could own a small piece of some the greatest companies in the world, and that seemed really exciting, but which ones should I buy, and how much? What strategy should I use? I did what any responsible adult would do, and turned to YouTube and Reddit to look for answers.</p>
+<p>This probably sounds laughable to many of you. I'm sure it would sound laughable to most Wall Street professionals, but there's a lot of valuable information out there on YouTube, Reddit and other social media platforms. The key is knowing how to filter out valuable insight from terrible advice. Furthermore, investing fundamentally a social phenomenon, and as the GameStop saga made clear, social media is changing the game. Suddenly, ordinary folks with a computer or cellphone have access to an incredible amount of information, and huge online communities where they can exchange ideas. This is levelling the playing field to some extent.</p>
+<p>That's not to say that there <a href="https://www.youtube.com/watch?v=if-2M3K1tqk">isn't anything dodgy</a> happening on these platforms. I follow multiple YouTubers who post videos about stocks, and I noticed something both interesting and frightening. A YouTuber I won't name, with over 600,000 followers, would often post videos where he would praise some specific stock. Often these stocks had relatively small market caps, about one billion dollars. Without fail, in the day following his videos being posted, the price of the stock discussed the day before would raise by something between 10 and 30%. This guy, simply by having a large online following, could easily manipulate the market in real time. The potential for abuse there is obviously enormous. Sven Carlin, another YouTuber I follow, revealed that he and many others had <a href="https://www.youtube.com/watch?v=rkl39ppvTGg">been offered money</a> to promote certain stocks. This kind of scam is nothing new, I'm sure that Wall Street stock analysts have been paid to promote stocks for as long as there have been stock analysts, but again, social media is changing the game. People you assume to be trustworthy regular folks just sharing their personal opinion might actually be paid shills, it's just much harder to tell because they're not wearing suits.</p>
+<p>Why is it that the stock price of some companies, like Amazon or Tesla, seems to rise exponentially? It's because investing is fundamentally a social phenomenon. Investing is about trust, and the stock price of a company reflects our collective belief in the future potential of that company to succeed and grow. For many years, the stock price of Amazon didn't move very much. People questioned their ability to succeed, and the fact that they weren't profitable, but some time around 2010, that view shifted very rapidly, as if some threshold had been reached. The idea that Amazon was going to succeed, that it was an unstoppable behemoth, became the dominant one seemingly overnight, and from that point on, the price of its stock never stopped rising. The same thing seems to be happening with Tesla. The company's stock price has risen about 700% during 2020, and I don't think that a rapid fundamental shift in the underlying business explains that. Rather, I think the rapid fundamental shift has been in the public perception of the company's ability to deliver on its promises. That shift has been caused, in large part, by a large online community of unrelenting fans praising the company on social media. With social media, anyone can have a voice, it becomes possible for individuals to shift collective beliefs, and in doing so, we can make companies succeed or fail, and to some extent, reshape the future.</p>
+<figure>
+<a href="stock_charts.webp">
+<img alt="" src="stock_charts.webp">
+</a>
+</figure>
+<p>Investing is, or should be, about allocating capital to ideas you believe in, and it can be a beautiful thing, a force for change. Back in 2016, I started investing in multiple companies in the renewable energy space. I chose to do that because I was part of a growing online community of investors that believe in the potential of renewable energy, and its necessity for a better future. What I've been seeing, since then, is that as Tesla succeeds, more and more capital is flowing away from oil stocks and into renewable energy stocks. Starting in December 2019, before everyone was broadly aware of the pandemic, the price of oil giant Exxon Mobil took a sharp drop, while the price of Tesla started increasing steeply. Tesla has shown that renewable energy companies can succeed, and the rising tide lifts all boats. There's more to it than just the stock price going up though. Like I said, the stock price, or more accurately, the total valuation of a company, reflects our collective belief that a company can succeed.</p>
+<p>When a company's stock price goes up, it suddenly becomes very easy for that company to raise money by selling more shares. This means there's never been a better time to start a renewable energy company, because it's easy to raise money to make that company grow. In some ways, it's a self-fulfilling prophecy. Because we believe that green energy stocks can succeed, people buy the stock and their stock price goes up. Because people are buying green energy stocks, these companies can raise money easily. Since they can raise money easily, it's much easier for them to grow, and to succeed, which also leads to a higher stock price. In many ways, our collective belief that these companies can succeed is making it possible for them to succeed. Are electric vehicle and green energy stocks in a bubble? Maybe, but it shouldn't matter. Among these companies, those with competent management teams have already taken advantage of the current climate to raise money, and give themselves enough runway, even if there is a temporary pullback. Some of these companies will undoubtedly succeed, and the market will reward them for it. Don't believe me, just watch.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

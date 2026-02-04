@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What Killed Smalltalk?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What Killed Smalltalk?">
+  <meta property="og:description" content="What Killed Smalltalk?">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-08-20-what-killed-smalltalk/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/08/02/javascript-is-the-c-of-the-web/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/09/12/why-you-should-be-a-little-scared-of-machine-learning/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>What Killed Smalltalk?</h1>
+<div class="post_date">August 20th, 2015</div>
+</div>
+<p>I've been thinking about designing my own programming language for a long time. I've actually been keeping a lot of notes, and even throwing together some code when I can find time. My plan is to build something that takes inspiration from LISP, JavaScript and Smalltalk. I think there's a niche to be filled. There are many new programming languages coming out lately, but most of them are statically typed and compiled ahead of time. The <a href="https://en.wikipedia.org/wiki/Dynamic_programming_language">dynamic languages</a> that do come out often don't perform very well (see CPython, Ruby) or have poorly thought out semantics.</p>
+<p>I've written a few blog posts pointing and laughing at perceived failures of JavaScript, but the truth is that programming language design is hard. There's no limit to the complexity of the things you can build with programming code. No matter the design choices you make, no matter the language you design, there are bound to be some inconsistencies and weaknesses somewhere. I think that Smalltalk is a very inspiring programming language, revolutionary in many ways, but it's also one that has gone extinct. It's interesting, in my opinion, to ask ourselves why Python thrives but Smalltalk died.</p>
+<p>Like LISP, Smalltalk implemented some interesting features which have influenced other languages (such as Java and JavaScript). Some nifty features of Smalltalk are really cool, but still aren't implemented in any other language. For instance, Smalltalk had the ability to suspend running programs into a saved image, and resume execution later at the saved point. As you can imagine, this is extremely powerful and useful. Forget saving documents or saving games, just save the state of an entire program, no implementation effort required.</p>
+<p>I found an interesting talk on YouTube titled "What Killed Smalltalk could Kill Ruby Too":</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/YX3iRjKj7C0?si=Dhj6a7qj6E9DxraG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>Robert Martin makes the case that one of the big weaknesses of Smalltalk is that it was just "too easy to make a mess". Smalltalk was highly dynamic, and encouraged people to "monkey patch" things and do quick fixes/hacks. He also makes the point that Smalltalk just "didn't play well with others". When you think about it, Smalltalk had its own source control, IDE and GUI built into live images, living alongside your program. Smalltalk isn't just a language, it's an operating system and a way of life. It's conflating things that would maybe be best left separate.</p>
+<p>It seems to me that in some key areas, the Smalltalk creators placed their own radical ideas above everything else. They chose idealism over pragmatism. Smalltalk was a language created with a grandiose vision. It had some deeply rooted principles which didn't necessarily work so well in practice, such as the idea that everything had to be an object, that the object metaphor should be applied everywhere, one size fits all. At the end of the day, programmers want to get things done and be productive. If the language design or implementation gets in the way of getting things done, people will leave. Pragmatism is key for a programming language to succeed.</p>
+<p>Smalltalk was also designed with the idea that it should be easy to learn and intuitive. This has led its creators to have a heavy focus on graphical user interfaces. I watched an introduction to <a href="https://www.youtube.com/watch?v=Ox5P7QyL774">Self on YouTube</a> (Self is a direct descendent of Smalltalk) and saw the heavy emphasis on interacting with objects through UIs. The user interfaces showcased in this video are, in my opinion, horribly complex and unintuitive. Pretty much all of the interactions done through the UI would have been simpler and easier to understand if they had been done by writing one or two lines of code instead!</p>
+<p>When you sit down and think about it for one second, you have to realize that programming doesn't fundamentally have anything to do with graphical user interfaces. Yes, you can use programming code to create GUIs, but there is no reason that programming should have to involve GUIs and be tied to them. The metaphor of writing code has been extremely successful since the very beginning, and it probably makes more sense to the mathematical mind of a skilled programmer. Not everything has to have a visual metaphor. This is again a case of pushing some idealistic principle too far, in my opinion.</p>
+<p>I believe that a lack of pragmatism is something that has killed many languages. Not just Smalltalk, but Scheme too. My first experience with Scheme involved trying and failing to install multiple Scheme distributions because I couldn't get all the dependencies to work. Then, finally getting a Scheme compiler installed, and struggling to implement simple routines to parse text files, because Scheme doesn't include the most basic string routines. The Scheme compiler I'd selected bragged that the code it produced was highly optimized, but once I finally managed to write my own string routines, I compiled my program, ran it, and it was dog slow. Parsing a one-megabyte CSV spreadsheet took over a minute. I ended up rewriting the code in Python. Why don't more people code in Scheme? Because they try to realize their ideas in Scheme, and it just doesn't quite work out.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

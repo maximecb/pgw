@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Are Variadic Functions Necessary?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Are Variadic Functions Necessary?">
+  <meta property="og:description" content="Are Variadic Functions Necessary?">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-02-27-are-variadic-functions-necessary/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/02/23/stop-hating-on-c/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/03/09/game-development-toying-with-csg-and-webgl/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Are Variadic Functions Necessary?</h1>
+<div class="post_date">February 27th, 2012</div>
+</div>
+<p>Many, if not most modern programming languages offer <a href="http://en.wikipedia.org/wiki/Variadic_function">variadic functions</a>, that is, functions that can accept a variable (indefinite) number of arguments. Perhaps the oldest language to offer this feature was <a href="http://en.wikipedia.org/wiki/Lisp_(programming_language)">LISP</a>. The way dynamic languages such as LISP, Python and JavaScript typically implement this is by making it possible for functions to access their arguments in the form of a list of values. The caller can pass as many arguments as desired, and the callee receives the argument values in a list which can have variable length.</p>
+<p>In most LISP derivatives, variadic functions occupy a central position in the language. This is made clear by the fact that most LISP primitive operators (e.g. <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>and</code>, <code>or</code>, etc.) can apply to a variable number of arguments. LISP languages also typically offer a special <code>apply</code> function which is used to pass a list of arguments to a given function. It's understandable that LISP languages would want these operators to be variadic, as the syntax could quickly become tiresome otherwise if the basic operators could only accept two arguments:</p>
+<pre><code>(+ a (+ b ( + c (+ d e)))) vs (+ a b c d e)
+</code></pre>
+<p>What about other languages? Do they really need variadic functions? Are variadic functions even that useful? From a language design perspective, I will argue that this is not the case. If we take JavaScript, for example, it's fairly common to see definitions of functions which require at least n arguments, but can take extra arguments. One could imagine a JavaScript <code>printf</code> function, for example, which takes a mandatory format string, and optional values to insert into the formatted string:</p>
+<pre><code>printf(&quot;I have %i apples, %i lemons and %i oranges&quot;, v1, v2, v3);
+</code></pre>
+<p>There is an easy alternative, however. One could simply pass the value arguments in a list:</p>
+<pre><code>printf(&quot;I have %i apples, %i lemons and %i oranges&quot;, [v1, v2, v3]);
+</code></pre>
+<p>This might actually be better, as it makes it obvious that we are passing a list of value arguments that is semantically distinct from the mandatory format string. Using a variadic functions, the list was implicit, and there was no syntactic indication that a list of values was being passed. Hence, passing an explicit list of arguments makes the function's usage and the programmer's intention clearer.</p>
+<p>I argue that in JavaScript, all cases where variadic functions are used could be adequately served with lists of arguments. The main disadvantage (if it really is one) is that the programmer is required to type two extra characters (the list delimiters). If one designed a language with this in mind, though, syntactic sugar could be provided to mean that remaining arguments after a certain point are to be passed as a list:</p>
+<pre><code>printf(&quot;I have %i apples, %i lemons and %i oranges&quot; ; v1, v2, v3)
+</code></pre>
+<p>At this point, you might wonder why one would want to design a programming language without variadic functions. One reason is that they are superfluous, and it might be best, in the spirit of clarity and simplicity, not to include them. Another is that removing variadic functions would help simplify the implementation of the said language. JavaScript VMs, for example, must implement more complex calling conventions to support the efficient passing of a variable number of arguments and the <code>apply</code> function.</p>
+<p>In addition to this, JavaScript provides the <a href="https://developer.mozilla.org/en/JavaScript/Reference/Functions_and_function_scope/arguments">arguments object</a> primarily to support variadic functions. The arguments object makes optimization of JavaScript programs more difficult and its efficient implementation significantly complexifies JavaScript VMs. Much of this complexity could be avoided in a language which did not provide variadic functions and instead simply encouraged passing explicit lists of arguments when desired.</p>
+<p>I believe that most languages, especially the ones that feature native support for lists or arrays, could do away with variadic functions. LISP derivatives could too, if their primitive operators were implemented in terms of variadic macros that unfold into applications of binary primitive operators. That is, it would be possible to design a LISP language in which functions are not variadic, but macros can be.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

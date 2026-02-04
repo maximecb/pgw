@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Minimalism in Programming Language Design</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Minimalism in Programming Language Design">
+  <meta property="og:description" content="Minimalism in Programming Language Design">
+  <meta property="og:image" content="https://pointersgonewild.com/2022/05/23/minimalism-in-programming-language-design/milad-fakurian-ppgy7sjpf_0-unsplash.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2022-05-23-minimalism-in-programming-language-design/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2022/03/05/democracy-dictatorships-and-access-to-information/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2022/06/08/typed-vs-untyped-virtual-machines/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Minimalism in Programming Language Design</h1>
+<div class="post_date">May 23rd, 2022</div>
+</div>
+<div class="cover_image">
+<img src="milad-fakurian-ppgy7sjpf_0-unsplash.jpeg">
+</div>
+<p>Four years ago, I wrote a blog post titled <a href="/2018/02/18/minimalism-in-programming/">Minimalism in Programming</a>, in which I tried to formulate an argument as to why it's usually a good idea to try to minimize complexity in your programming projects. Today, I want to write about something I've been thinking about for a long time, which is the idea that we also ought to take a more intentionally minimalistic philosophy when designing programming languages.</p>
+<p>Designing a programming language to be intentionally minimalistic is an idea that's highly underrated in my opinion. Most modern programming languages adopt much more of a maximalist design approach. Rapidly adding new features is seen as a competitive edge over other programming languages. The general thinking seems to be that if your language doesn't have feature X, then people will choose to use another language, or that adding more features is an easy way to show progress. This line of thinking is simplistic, and disregards many other key aspects that are necessary for a programming language to succeed and thrive, such as learnability, stability, tool support and performance.</p>
+<h2>Change and Churn</h2>
+<p>I'd like to make the argument that intentionally designing a programming languages to have fewer features, and to change less rapidly over time, is in itself a powerful feature. When a programming language changes often, it necessarily causes breakage and churn. Tools become out of date, codebases need to be updated, libraries become broken, but it causes churn on the human side too.</p>
+<p>I first started programming in C++ around 1998. I haven't really touched the language in a few years, and I have to say, I feel kind of lost. So many new features have been added that it's a different language now. Last year, I wanted to use C++20 modules in a new project, only to find that support in G++ and Clang was so incomplete that modules were just not a viable feature. My general impression at the time was that there aren't enough people working on C++ compilers to keep said compilers up to date. The language has become so complex, and so many new features have been added, that compiler developers are kind of burned out. It seems to me that slowly but surely, C++ is crumbling under its own weight.</p>
+<p>Something that many people forget, is that for a language to succeed, there has to be good tool support. If the language and its feature set keeps changing, then tools need to be updated constantly. One of the many problems with C++ is that its grammar is very hard to parse. That was already the case back in 1998. If you add on top of that the problem that the grammar changes to become even more complex every year or two, what do you think the impact of that will be? The people maintaining C++ tools are going to want to go do something else with their lives, and so will the users of those tools.</p>
+<h2>Learnability and the Human Element</h2>
+<p>More recently, colleagues and I have decided to <a href="https://shopify.engineering/porting-yjit-ruby-compiler-to-rust">port a C codebase to Rust</a>. I'm generally pleased with the core feature set of Rust and I feel that in many ways it's a great improvement over C and C++. However, one of the main weaknesses of Rust, in my opinion, is its high complexity. Both at the syntactic and semantic level, Rust is a very complex language. The syntax can get very verbose, and there's a lot to know, a lot of rules and unintuitive subtleties about what you can and can't do where. The learning curve is steep and the cognitive load is high.</p>
+<p>Last week, I was pair programming with a colleague when he said "I feel like the Rust compiler is always telling me that I'm too stupid". That remark surprised me, because I'd had the same thought. Somehow Rust feels unergonomic, and the high complexity of the language surely contributes to that feeling that the language is a bit user-hostile. It breaks your intuition, and it constantly feels like the compiler is telling you that you're writing code wrong. Two days after my colleague made that remark, I saw a post appear on Hacker News titled <a href="https://www.bunniestudios.com/blog/?p=6375">Rust: A Critical Retrospective</a> which echoed similar feelings about Rust's complexity.</p>
+<p>In a lot of ways, I feel like designing a language to be minimalistic, to have fewer concepts, and to choose primitives that combine well together, is a good way to make the language easier to learn. If the programming language has fewer concepts, there's less to learn, and your level of proficiency will increase faster. Code written in a more minimalistic language may also be easier to read. If we think about C++ code, we have a situation where the language has so many redundant features that a typical workplace will mandate that code be written in a subset of C++, with some language features being explicitly banned. That can mean that people writing C++ code at different workplaces will have a hard time reading each other's code because foreign C++ code will be written in a different dialect.</p>
+<p>In some ways, I feel like intentionally minimizing complexity and keeping the feature set small is a way of better respecting programmers. It means we respect that programmers are people with potentially busy lives and many things to do, and that they probably don't have time to read hundreds of pages of documentation to learn our language. Programming languages are user interfaces, and as such, they should obey the <a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least surprise</a>. Minimizing complexity is also a way to reduce cognitive load and respect human limitations. Human beings are amazingly capable creatures, but we're also basically just clever monkeys that can talk. We can only keep a few items in our working memory, we can only account for so many design constraints, and we can only focus for so long. A well-designed programming language ought to help us succeed despite our human limitations.</p>
+<p>At the end of the day, I think that a language's complexity and how intuitive it feels is going to affect its ability to attract and retain new users. In my opinion, the focus on reducing friction contributed greatly to Python's initial success and rapid increase in popularity. I think it's also fair to say that many people were frustrated when the complexity of the Python ecosystem increased, for example, during the switch from Python 2 to 3, or when the redundant <a href="https://pythonsimplified.com/the-most-controversial-python-walrus-operator/">walrus operator</a> was introduced.</p>
+<h2>Minimalism</h2>
+<p>So far, I've made multiple references to minimalism and I've also briefly mentioned the principle of least surprise. I've hinted that minimalism also means having a smaller feature set and less concepts to learn. Minimalism doesn't just mean a smaller feature set though. It also means carefully choosing features that combine together seamlessly. If we design a language with a large feature set, there's a combinatorial explosion in how these different features could interact, which means we're more likely to end up with situations where some language features interact together poorly.</p>
+<p>Imperative programming languages typically make a grammatical distinction between statements and expression. Functional languages instead tend to be structured in a way that everything inside a function body is an expression. The latter is more minimalistic, and also imposes less constraints on the programmer. Some languages impose a distinction between code that can be run at compile time vs code that can be run at program execution time. This distinction often increases the complexity of the language as there tends to be a duplication of language features and fairly arbitrary restrictions as to what code the compiler is able to run at compilation time.</p>
+<p>In terms of minimizing surprise, we want to avoid introducing strange corner cases that only show up in some circumstances. Another important pitfall to avoid is introducing hidden behaviors that the programmer may not expect. An example of this would be the equality operator <code>==</code> in JavaScript, which actually includes an implicit conversion to the string type, meaning that <code>1 == &quot;1&quot; </code> evaluates to true. Because of this undesirable hidden behavior, JS actually has a separate strict equality operator <code>===</code> which doesn't perform the hidden string conversion. This suggests to me that JS should only ever have had a strict equality operator, and that if you want to convert the values you're comparing to strings before performing the equality comparison, you should just have to explicitly spell that out. It should not be the default behavior.</p>
+<h2>Implementation Complexity</h2>
+<p>Language design is hard because the space of possible programming languages is infinite, and so compromises have to be made. It's hard to provide hard numbers to quantify what makes one design better than another. Some of the things that can be quantified to some degree are the complexity of the implementation of a language and also the way that a particular language implementation performs.</p>
+<p>My <a href="phdthesis.pdf">PhD thesis</a> involved the implementation of a JIT compiler for JavaScript ES5. As such, I got to become intimately familiar with the semantics of the language and everything that has to go on behind the scenes to make JavaScript code run fast. At times, that was a frustrating experience. I've become convinced that a lot of the complexity and the hidden behaviors in JS and in many other languages are essentially bad for everyone.</p>
+<p>Unnecessary complexity in a language is bad for those learning the language, because it makes the language less intuitive and harder to learn. It's bad for the programmers working with the language everyday, because it increases their cognitive load and makes it harder to communicate about code. It's bad for language implementers and tool maintainers, because it makes their job harder, but at the end of the day, it's also bad for end users, because it leads to software with more bugs and poorer performance.</p>
+<p>To give you an example of unnecessary implementation complexity, many object-oriented languages have this idea, borrowed from Smalltalk, that everything should be an object, including booleans and integer values. At the same time, languages implementation for these languages have to do a lot of work behind the scenes to try and represent integers efficiently (as machine integers) while presenting an interface to the user that resembles that of an object. However, the abstraction presented to the user for an integer object is typically not really the same as that of a normal OOP object, it's a leaky abstraction, because being able to redefine integer values makes no sense, because integer values have to be singletons, and because being able to store properties/attributes on integers is both dumb and terrible for performance and so typically isn't allowed.</p>
+<p>Ultimately, integers are not objects in the object oriented sense. They're a distinct type of atomic value with a special meaning, and that's okay. The mistaken idea that "everything should be an object" doesn't actually simplify anything in practice. We're lying to ourselves, and in doing so, we actually makes the life of both language implementers and programmers more complicated.</p>
+<h2>Actionable Advice</h2>
+<p>This blog post has turned into more of a rant than I expected it to be. It's easy to critique the status quo, but I'll also try to conclude with some actionable advice. My first piece of advice for aspiring language designers is that you should start small. Your language is a user interface, and an API which people use to interface with machines. The smaller the API surface, the less you risk introducing accidental complexity and subtle design mistakes.</p>
+<p>My second piece of advice is that if you can, you should try to keep your language small. Limiting yourself to a smaller feature set likely means you will want to choose features that don't overlap and that provide the most expressiveness, the most value to programmers. If you do want to grow your language, do it slowly. Take some time to write code in your language and work through the potential implications of the design changes that you are making.</p>
+<p>It's easy to add new features later on, but if you add new features and people begin using them, it's going to be hard or even impossible to take these features back, so choose wisely. Remember that you don't have to please everyone and say yes to every feature request. No language or tool can possibly satisfy every use case, and in my opinion, trying to do so is a mistake.</p>
+<p>Lastly, remember that language design is an art. It's a delicate balance of many different constraints, just like user interface design. Brainfuck is a language that is very small and has very few concepts, but nobody would call it expressive or elegant. Lisp is regarded by many as one of the most beautiful and elegant languages in existence, but my PhD advisor, a Scheme fanatic, had the habit of writing code with single-letter variable names and very few comments. An elegant language doesn't automatically make for elegant code, but you can encourage good coding practices if you lead by example.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

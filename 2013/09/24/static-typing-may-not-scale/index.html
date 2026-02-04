@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Static Typing may not Scale</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Static Typing may not Scale">
+  <meta property="og:description" content="Static Typing may not Scale">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-09-24-static-typing-may-not-scale/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/08/29/down-the-rabbit-hole-that-is-inlining/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/10/21/ubertechnoshoes/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Static Typing may not Scale</h1>
+<div class="post_date">September 24th, 2013</div>
+</div>
+<p>I program in both statically and dynamically typed languages (currently mostly <a href="http://dlang.org/">D</a> and JavaScript) and I tend to think that I appreciate the advantages of both. One of the main arguments made by the Haskell crowd in favor of static typing seems to be that developing large applications is hard, and really, as a programmer, you really should use all the help you can get, and that help should come in the form of an expressive static <a href="http://en.wikipedia.org/wiki/Type_system">type system</a>. I'd be inclined to agree. Developing large applications is in fact difficult, and static typing can help you discover many bugs that would otherwise remain hidden in your code for a long time. Static types give the compiler more semantic understanding of your code, which makes it better able to optimize the said code and detect bugs, both great advantages.</p>
+<p>I recently got to thinking about the future of programming. I believe that as systems grow ever more complex and networked, we're headed for a future where programming won't be about <a href="/2013/07/19/programming-without-text-files/">editing code in text files</a>, compiling them, and restarting programs (wash-rinse-repeat), but rather, incrementally building <a href="http://en.wikipedia.org/wiki/Live_coding">live systems</a>, and performing microsurgery on running programs, without interrupting them. As we work on ever bigger systems, we'll need all the debugging help we can get, and type systems sure would come in handy, but there's just one issue with that: I think that static type systems, and type inference as implemented in languages like Haskell won't work so well with such a model. I think the truth is that dynamic languages are much better suited to the incremental, organic model of software development we're getting pushed into. Dynamic languages are here to stay. They've been gaining in popularity, and this trend isn't going to reverse, it's only going to grow stronger.</p>
+<p>Imagine you're working on a live system. You're modifying the code for a program that's currently running on some remote server. Now imagine this system is statically typed. You want to make a change to a method somewhere, but unfortunately, this small change would cause a type error. You need to modify several other functions elsewhere in the system, as well as schema/record declarations. The statically typed approach would probably involve making all of your code changes, changing the schema declarations, running some kind of type inference algorithm, verifying that everything checked, and then running some sort of "commit" that recompiles the needed code on the remote machine and translates your records to the new format, probably interrupting the program while this is happening (and who knows how long this might take, could be hours). The big issue here is that with current static type systems, you can only go from one statically valid program to another statically valid program, which seems poorly suited to the incremental modification of a running system.</p>
+<p>The dynamically typed approach approach might be to write code to handle the new schema before it's even introduced, then run some code to translate from the old schema format to the new (all on-the-fly), and watch the system adapt, translating your records without a pause. Once all records are translated, you can then remove the code that deals with the old schema. I think the great advantage here is that a dynamic language allows you more wiggle room to make things temporarily inconsistent and refactor the system in an incremental manner. With dynamic languages, you can have two record formats for the same data at the same time, and code that has typing errors won't cause the system to fail so long as it's not executed. It's a more organic approach to the problem, and I think that programming live systems might actually be inherently organic in nature.</p>
+<p>Now, I stated early in this post that I believe type systems and type inference are actually quite helpful. You could actually make the argument that organically modifying massive online systems on-the-fly without type checking is about as safe as riding a dirt bike through a Serbian minefield or playing Russian roulette everyday for a year. My answer would be that type inference isn't fundamentally incompatible with dynamic typing. The <a href="http://www.cs.colorado.edu/~bec/courses/csci5535-s09/slides/ML_Type_Inference_and_Unification.pdf">unification-based</a> type inference algorithms that Haskell and ML use don't apply to dynamic languages, because they're trying to solve a system of constraints where every variable has one single type, but unification <a href="http://dl.acm.org/citation.cfm?id=2254094">isn't the only type inference algorithm</a> in existence. It's quite possible to create a dynamic language VM that does type inference, and warns you about possible type errors. The difference is that the dynamic language VM will let you have temporary type errors, so long as you know you can make things eventually consistent.</p>
+<p>What if you were modifying a live system, and introduced some crash bug? If you were working on a large production system, this could have terrible consequences. I would argue that if we're going to modify live systems, we probably need to introduce live debugging tools. Things such as the ability to snapshot the system before introducing code changes, recording traces and being able to backtrack execution some large number of steps should a crash occur. It may also be interesting to be able to install monitoring on new pieces of code to keep track of what these specific pieces of code are doing after their introduction. Ultimately, however, with live systems, we should be prepared to have programmers directly intervening at the moment of a crash to repair the system on-the-fly and resume its execution. With the ability to backtrack execution and examine the live heap, this might actually turn out to be a rather comfortable way of debugging programs.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

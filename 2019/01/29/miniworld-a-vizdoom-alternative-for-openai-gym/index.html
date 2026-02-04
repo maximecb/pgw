@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MiniWorld: A VizDoom Alternative for OpenAI Gym</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MiniWorld: A VizDoom Alternative for OpenAI Gym">
+  <meta property="og:description" content="MiniWorld: A VizDoom Alternative for OpenAI Gym">
+  <meta property="og:image" content="https://pointersgonewild.com/2019/01/29/miniworld-a-vizdoom-alternative-for-openai-gym/maze_0.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2019-01-29-miniworld-a-vizdoom-alternative-for-openai-gym/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2018/12/17/a-small-dose-of-optimism/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2019/06/10/the-end-of-online-anonymity/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>MiniWorld: A VizDoom Alternative for OpenAI Gym</h1>
+<div class="post_date">January 29th, 2019</div>
+</div>
+<div class="cover_image">
+<img src="maze_0.jpg">
+</div>
+<p>VizDoom and DMLab are two 3D simulated environments commonly used in the reinforcement learning community. <a href="http://vizdoom.cs.put.edu.pl/">VizDoom</a> is based on the original Doom game, and <a href="https://github.com/deepmind/lab">DMLab</a> is based on the Quake 3 game engine. Recently, DeepMind has produced impressive results using DMLab, showing that neural networks trained end-to-end can learn to navigate 3D environments using visual inputs alone, and even <a href="https://arxiv.org/abs/1706.06551">execute simple language commands</a>.</p>
+<p>These simulated environments are popular and useful, but they can also be difficult to work with. VizDoom can be tricky get running on your system; there are unfortunately many dependencies, and if any of them fail to build and install, you're going to have a bad time. Furthermore, both VizDoom and DMLab are fairly impractical to customize. The Doom and Quake game engines are written in (poorly commented) C code. Also, because VizDoom is based on a game from 1993, it stores its assets in a binary format which is fairly archaic (<a href="https://en.wikipedia.org/wiki/Doom_WAD">WAD</a> files). DMLab is nice enough to provide a scripting layer which allows you to create custom environments without touching C code or using a map editor. However, this scripting layer is in Lua and is poorly documented.</p>
+<p>The 3D environments typically used in reinforcement learning experiments are typically fairly simple (e.g. Mazes, rooms connected by hallways, etc), and it seems obvious to me that the full Quake 3 game engine is overkill for what DeepMind has built with DMLab. As such, I set out to build <a href="https://github.com/maximecb/gym-miniworld">MiniWorld</a>, a minimalistic 3D engine for the purpose of building OpenAI Gym environments. MiniWorld is all written in Python and uses Pyglet (OpenGL) to produce 3D graphics. I wrote everything in Python because this language has become the "lingua franca" of the deep learning community, and I wanted MiniWorld to be easily modified and extended by students. Python is not known to be a fast language, but since the bulk of the work (3D graphics) is GPU-accelerated, MiniWorld can run at over 2000 frames per second on a desktop computer.</p>
+<p><a href="https://github.com/maximecb/gym-miniworld">MiniWorld</a> has trivial collision detection which prevents the agents from going through walls. It's not physically accurate, and not appropriate for robotic arm control type of tasks. However, I believe it can be useful for navigation tasks where you want to procedurally generate a variety of simple environments. It can render indoor (and fake outdoor) environments made of rooms connected by hallways. The package is designed to make it easy to generate these environments procedurally using code, that is, you never have to produce map files. Because MiniWorld has been intentionally kept minimalistic, it has very few dependencies: Pyglet, NumPy and OpenAI Gym. This makes it easy to install and get working almost anywhere. This is an asset in the world of machine learning, where you may have to get experiments running on multiple compute clusters.</p>
+<p>There are many use cases which MiniWorld cannot satisfy, but I believe that despite its simplicity, it can be a useful research tool. I've integrated <a href="https://arxiv.org/abs/1703.06907">domain randomization</a> features which make it possible to do sim-to-real transfer experiments, similar to what I had previously implemented in the <a href="/2018/05/21/building-a-simple-self-driving-car-simulator/">gym-duckietown</a> environment. Domain randomization means randomly varying parameters of the environment to prevent a neural network from overfitting to the simulation, hopefully forcing the neural network to generalize to the real world. The videos below show a small robot trained to follow a red box in a simulated environment, and then tested in the real world.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/bxImThOTBRw?si=eRHpFtv1xOOtfKwD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/bv3wGgjVpVM?si=N557L665JeWFp_Ck" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>If you are interested in using MiniWorld for your research, you can find the source code in <a href="https://github.com/maximecb/gym-miniworld">this repository</a>. Bug reports, contributions and feature requests welcome. If you feel that some specific feature would be particularly useful for your research, feel free to open an issue on GitHub. You can influence the course of this project.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

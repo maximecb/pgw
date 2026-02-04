@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Experience with the ESP8266 - Making an LED Strip I can Control from my Shell</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My Experience with the ESP8266 - Making an LED Strip I can Control from my Shell">
+  <meta property="og:description" content="My Experience with the ESP8266 - Making an LED Strip I can Control from my Shell">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-09-25-esp8266/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/09/20/silicon-valley-six-months-later/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/11/18/so-ive-been-using-gedit-this-whole-time/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>My Experience with the ESP8266 - Making an LED Strip I can Control from my Shell</h1>
+<div class="post_date">September 25th, 2016</div>
+</div>
+<p>IoT is one of those buzzwords that's been thrown around so much that it's become largely synonymous with disappointing marketing hype. Still, home automation, in principle at least, has a lot of potential. The <a href="https://en.wikipedia.org/wiki/ESP8266">ESP8266</a> chip came out about two years ago, and it's been drawing a lot of interest from the "maker" community. This inexpensive chip, for those who don't know, incorporates a wifi module, flash memory, and a small 32-bit <a href="https://en.wikipedia.org/wiki/Tensilica">Xtensa</a> core in a tiny package. This has had many people excited, because it means all kinds of electronic projects can be connected to wifi networks for only a few dollars in hardware cost.</p>
+<p>I've known about the ESP8266 for a while, but until now, it wasn't so interesting. Early versions of the chip had only a handful of I/O pins. You also needed to install some clunky SDK provided by the vendor to program it, and the instructions were not straightforward. Think tons of dependencies and lots of boilerplate code. Thankfully, this isn't the case anymore. It's now possible to get a NodeMCU module on eBay for less than $3.50 shipped, or <a href="https://www.amazon.com/NodeMCU-Internet-ESP8266-Development-ESP12-E/dp/B01HNRPHW8/ref=sr_1_5?ie=UTF8&qid=1474768676&sr=8-5&keywords=nodemcu">$7 on Amazon</a>. This module has many I/O pins, its own 3.3V voltage regulator, its own USB interface for programming, and best of all, is <a href="https://github.com/esp8266/Arduino">programmable with the Arduino IDE</a>.</p>
+<p>I've recently completed two projects with the ESP8266. One of them is a wifi-enabled power outlet that can be remotely switched on and off. The other is an RGB LED strip whose color can be changed remotely. I work with a Linux machine at home, and needed to update my <a href="https://github.com/platformio/platformio/blob/develop/scripts/99-platformio-udev.rules">udev rules</a> in order for the USB interface of my NodeMCU modules to be recognized so that I could program them. Besides that, the whole process has been almost seamless.</p>
+<figure>
+<a href="holder.jpg">
+<img alt="The components I used to interface a NodeMCU board with a 12V RGB LED strip" src="holder.jpg">
+</a>
+<figcaption>The components I used to interface a NodeMCU board with a 12V RGB LED strip</figcaption>
+</figure>
+<p>There is a simple "Hello World!" web server example that comes with the Arduino core package, and <a href="https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266WebServer/examples/HelloServer/HelloServer.ino">this example</a> is less than 100 lines long. Making a wifi-enabled LED strip, on the software side, was a simple matter of parsing web request arguments for red, green and blue color values, and translating these into PWM intensity values to control output pins. Hardware-wise, I connected three 2N2222 transistors to the D0-D2 output pins, which are able to handle the current required to drive my one meter LED strip. The real beauty of it though, is that I can control the LED strip with shell commands, by issuing HTTP requests, which opens up the realm of scripting home automation:</p>
+<pre><code># Make it red!
+$ wget -O- 192.168.0.56/?r=255&amp;g=0&amp;b=0
+</code></pre>
+<figure>
+<a href="2016-09-24-19-22-34.jpg">
+<img alt="The final product under my desk" src="2016-09-24-19-22-34.jpg">
+</a>
+<figcaption>The final product under my desk</figcaption>
+</figure>
+<p>I intend to play with more of these in the future. There are now LED strips with individually-addressable LEDs, which seems like a lot of fun. I would also like to make a box with temperature, light and motion sensors that I can query remotely. If you're interested in working with the ESP8266, I personally recommend buying a NodeMCU instead of a bare module. It will make your life much, much simpler.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

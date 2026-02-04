@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Test Page</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Test Page">
+  <meta property="og:description" content="Test Page">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/test_page.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "test_page.html";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "test_page.html";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (false) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="about/">About</a>
+    <a href="about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Test Page</h1>
+</div>
+<p>This is a page to test and visualize all of the markdown features we support in one place, along with some corner cases I encountered.</p>
+<h2>Paragraphs and Their Contents</h2>
+<p>This paragraph has a link to the <a href="/about">about page</a> in it. This link to the <a href="http://en.wikipedia.org/wiki/Lisp_(programming_language)">LISP</a> Wikipedia page has parentheses in the URL, which is a corner case we need to handle. A paragraph can also contain <b>bold text</b>, <i>italic text</i>, and text that is both <b><i>bold and italic</i></b> at the same time. We can even style links in <i><a href="https://en.wikipedia.org/wiki/Italic_type">italic type</a></i>. The next paragraph shows what multiple lines of plain text look like with the current styling.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non urna ultricies, maximus urna eget, dapibus justo. Aliquam elementum velit velit, sed luctus ante fringilla vitae. Sed vestibulum, risus et mattis ultricies, nibh sem vulputate risus, in placerat urna orci eget erat. Sed ultrices tellus sit amet libero faucibus, non aliquet diam iaculis. Sed fermentum, nisi eget dictum dictum, lectus sapien sollicitudin libero, in placerat magna quam ut urna. Nunc urna odio, faucibus a pretium vel, dignissim a turpis. Pellentesque congue faucibus nisl, sit amet finibus ipsum interdum sed.</p>
+<h2>Code Blocks</h2>
+<p>This is a little inline code snippet <code>x = y + foo()</code> inside of a paragraph. References to individual variables look like <code>x</code>, <code>y</code> and <code>foo</code>. A function call looks like <code>foobar(1, 2)</code>.</p>
+<p>This is a larger multiline code block with assembly code:</p>
+<pre><code>mov r8, 0;
+IF_TRUE(2EF9)(7):
+cmp r8d, 2000000000;
+jge FOR_EXIT(2DFB)(219)
+mov ebx, r8d;
+add ebx, 1;
+jo ADD_OVER(169);
+mov r8, rbx;
+</code></pre>
+<p>Below is a multiline code block with some HTML code that needs to be escaped to display properly:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+    &lt;p&gt;This is a basic HTML page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>This is a code block containing a very long identifier which requires scrolling horizontally:</p>
+<pre><code>very_very_ridiculously_long_identifier_that_requires_a_scrollbar_because_it_wont_fit_in_the_code_block_width();
+</code></pre>
+<p>Machine code dump:</p>
+<pre><code>— Optimized code —
+optimization_id = 0
+source_position = 0
+kind = OPTIMIZED_FUNCTION
+stack_slots = 2
+Instructions (size = 346)
+0xc579e565ae0 0 55 push rbp
+0xc579e565ae1 1 4889e5 REX.W movq rbp,rsp
+0xc579e565ae4 4 56 push rsi
+0xc579e565ae5 5 57 push rdi
+0xc579e565ae6 6 4883ec10 REX.W subq rsp,0x10
+0xc579e565aea 10 488b45f8 REX.W movq rax,[rbp-0x8]
+0xc579e565aee 14 488945e0 REX.W movq [rbp-0x20],rax
+0xc579e565af2 18 488bf0 REX.W movq rsi,rax
+0xc579e565af5 21 493ba540070000 REX.W cmpq rsp,[r13+0x740]
+0xc579e565afc 28 7305 jnc 35 (0xc579e565b03)
+0xc579e565afe 30 e8bdd5fcff call StackCheck (0xc579e5330c0)
+0xc579e565b03 35 33c0 xorl rax,rax
+0xc579e565b05 37 48bb681c51f000110000 REX.W movq rbx,0x1100f0511c68 ;; property cell
+0xc579e565b0f 47 4d8b55b0 REX.W movq r10,[r13-0x50]
+0xc579e565b13 51 4c3913 REX.W cmpq [rbx],r10
+</code></pre>
+<p>A C struct:</p>
+<pre><code>struct Car
+{
+    char makeModel[128]; // String for the car's make and model
+    struct Wheel
+    {
+        double direction; // Wheel direction angle
+        double rotation;  // Current angle of rotation
+    } wheels[4];
+} car;
+</code></pre>
+<p>JS object literal:</p>
+<pre><code>// Car object literal
+var car =
+{
+    makeModel: 'make and model string',
+    wheels: [
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+    ]
+}
+</code></pre>
+<p>Small C program:</p>
+<pre><code>// Integer hash function with a good distribution
+// Based on:
+// https://github.com/skeeto/hash-prospector
+uint32_t hash_u32(uint32_t x)
+{
+    x = x ^ (x &gt;&gt; 16);
+    x = x * 0x7feb352d;
+    x = x ^ (x &gt;&gt; 15);
+    x = x * (0x846ca68b);
+    x = x ^ (x &gt;&gt; 16);
+    return x;
+}
+
+int main()
+{
+    // For comparison against GCC
+    assert(hash_u32(0) == 0);
+    assert(hash_u32(1) == 1753845952);
+    assert(hash_u32(2) == 3507691905);
+    assert(hash_u32(3) == 1408362973);
+
+    uint32_t sum = 0;
+
+    for (uint32_t i = 0; i &lt; 30; ++i)
+    {
+        uint32_t r = hash_u32(i) % 20;
+
+        #ifndef TEST
+        printf(&quot;%u\n&quot;, r);
+        #endif
+
+        sum = sum + r;
+    }
+
+    #ifndef TEST
+    printf(&quot;sum = %u\n&quot;, sum);
+    #endif
+
+    assert(sum == 271);
+
+    return 0;
+}
+</code></pre>
+<h2>Itemized Lists</h2>
+<p>This is a plain unordered list:</p>
+<ul>
+<li>
+<p>First item</p>
+</li>
+<li>
+<p>Second item</p>
+</li>
+<li>
+<p>Third item</p>
+</li>
+<li>
+<p>Fourth item</p>
+</li>
+</ul>
+<p>This is an unordered list with nesting:</p>
+<ul>
+<li>
+<p>First item,   with a paragraph continuing over a second line</p>
+<p>Second paragraph inside first item.</p>
+</li>
+<li>
+<p>Second item</p>
+<ul>
+<li>
+<p>Sublist item 1</p>
+</li>
+<li>
+<p>Sublist item 2</p>
+<p>Second paragraph in sublist item 2</p>
+<p>Third paragraph in sublist item 2</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Third item of top list</p>
+<ul>
+<li>
+<p>Level 2</p>
+<ul>
+<li>
+<p>Level 3</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Level 2</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Fourth item of top list</p>
+</li>
+</ul>
+<p>This is a plain ordered list:</p>
+<ol start="1">
+<li>
+<p>First item</p>
+</li>
+<li>
+<p>Second item</p>
+</li>
+<li>
+<p>Third item</p>
+</li>
+<li>
+<p>Fourth item</p>
+</li>
+</ol>
+<p>This ordered list starts at number 5:</p>
+<ol start="5">
+<li>
+<p>Hello!</p>
+</li>
+<li>
+<p>Number 6.</p>
+</li>
+<li>
+<p>Seven.</p>
+</li>
+</ol>
+<p>This ordered list contains an unordered list:</p>
+<ol start="1">
+<li>
+<p>First item</p>
+<ul>
+<li>
+<p>Sub 1</p>
+</li>
+<li>
+<p>Sub 2</p>
+</li>
+<li>
+<p>Sub 3</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Second item</p>
+</li>
+<li>
+<p>Third item</p>
+</li>
+</ol>
+<h2>Quote Blocks</h2>
+<p>This is a simple quote:</p>
+<blockquote>
+<p>Quotes can contain multiple paragraphs. This is the first paragraph of this quote block.</p>
+<p>They can also contain the usual <i>italic</i> or <b>bold</b> text,  as well as things like <a href="https://en.wikipedia.org/wiki/Hyperlink">web links</a>.</p>
+</blockquote>
+<p>These are two quote blocks separated by a blank line:</p>
+<blockquote>
+<p>"A person who never made a mistake never tried anything new." - Albert Einstein</p>
+</blockquote>
+<blockquote>
+<p>"If people do not believe that mathematics is simple, it is only because they do not realize how complicated life is." - John von Neumann</p>
+</blockquote>
+<p>This is a quote block containing a list with a nested sublist:</p>
+<blockquote>
+<p>List of fruits:</p>
+<ul>
+<li>
+<p>Apples</p>
+<ul>
+<li>
+<p>Red apples</p>
+</li>
+<li>
+<p>Green apples</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Bananas</p>
+</li>
+<li>
+<p>Pears</p>
+</li>
+</ul>
+</blockquote>
+<p>This is a quote containing another quote:</p>
+<blockquote>
+<p>Second nested quote below:</p>
+<blockquote>
+<p>Hello there!</p>
+</blockquote>
+<p>Second paragraph in the toplevel quote</p>
+</blockquote>
+<h2>YouTube Video Embedding</h2>
+<p>Sometimes on my blog I embed YouTube videos that I think are relevant. This is done using an <code>&lt;iframe&gt;</code> tag.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/tg37ecXooD8?si=Fg5zhViERJkT-GNA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<h2>Image Support</h2>
+<h3>Small Image of a Watch Mechanism</h3>
+<p>This is a small image. It remains small and doesn't get upscaled.</p>
+<figure>
+<a href="2016/02/04/building-a-small-scale-prototype/watch.jpg">
+<img alt="Watch mechanism" src="2016/02/04/building-a-small-scale-prototype/watch.jpg">
+</a>
+<figcaption>Watch mechanism</figcaption>
+</figure>
+<h3>Large Image</h3>
+<p>The following image is large, and its width is limited to a percentage of the parent container's width while remaining centered. The height of the image is also limited so that it doesn't feel overwhelmingly large. You can also click the image to see the full size version.</p>
+<figure>
+<a href="2020/01/03/maybe-planets-are-overrated/torus_cutaway_web-1.jpg">
+<img alt="Ring space station with spin gravity" src="2020/01/03/maybe-planets-are-overrated/torus_cutaway_web-1.jpg">
+</a>
+<figcaption>Ring space station with spin gravity</figcaption>
+</figure>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

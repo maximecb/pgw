@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Static vs Dynamic: Why not Both?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Static vs Dynamic: Why not Both?">
+  <meta property="og:description" content="Static vs Dynamic: Why not Both?">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-11-10-static-vs-dynamic-why-not-both/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/10/24/debugging-by-the-seat-of-the-pants/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/12/08/higgs-my-new-tracing-jit-for-javascript/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Static vs Dynamic: Why not Both?</h1>
+<div class="post_date">November 10th, 2012</div>
+</div>
+<p>Every once in a while, a blog post pops up where someone advocates that static languages are <a href="http://bill.burkecentral.com/2008/02/04/dynamic-languages-rationalizations-and-myths/">better than dynamic languages</a>, or vice versa. Static language advocates will claim that static languages offer undeniable safety and speed advantages. Those who like dynamic languages will tell you that expressiveness and productivity gains are invaluable. Having programmed in both C++ and JavaScript for several years, I feel that both points of view are correct. Having written both dynamic and static programming language compilers, I also feel that both kinds of languages are really two sides of the same coin.</p>
+<p>From my perspective, as a compiler writer, the difference between static and dynamic languages is a simple one. In static languages, variables are assigned a fixed type at compilation time. In dynamic languages, variables can change type over the course of a program's execution. Dynamic languages are not "untyped", they are typed, sometimes even <a href="http://en.wikipedia.org/wiki/Strong_typing">strongly typed</a>, but their types are associated with values rather than variables. This distinction becomes somewhat blurred by the fact that static languages all offer ways to perform <a href="http://en.wikipedia.org/wiki/Dynamic_dispatch">dynamic dispatch</a>, and some even offer sum types. Conversely, in most programs written in a dynamic language, most variables will not change type over the execution of a program.</p>
+<p>Static languages have definite strengths. As of yet, most dynamic languages are much slower than Java and C. There is also some truth to the idea that it becomes "messy" to maintain programs written in dynamic languages as they grow. This is in part due to often poor tool support. The type annotations present in Java and C make it very easy to implement tools to help with documentation and refactoring. On the other hand, programming in JavaScript feels much more productive than programming in Java, C++, ML or D. <a href="http://en.wikipedia.org/wiki/Duck_typing">Duck typing</a> allows <a href="http://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a> without rigid declarations. Object and class literals allow declarative programming on a level templates can't match. Run-time code generation allows easy JIT compilation of custom code.</p>
+<p>For the past few months, I've been working on <a href="http://en.wikipedia.org/wiki/Data-flow_analysis">dataflow-based</a> static <a href="/2011/12/11/type-analysis-for-javascript/">type analysis</a> for JavaScript. These analyses are essentially a form of <a href="http://en.wikipedia.org/wiki/Type_inference">type inference</a> that tries to compute the set of possible types a variable (or object property) can have at run-time. This is different from ML-style <a href="http://en.wikipedia.org/wiki/Hindley%E2%80%93Milner">Hindley-Milner</a> type inference in that flow-based analyses can allow variables to have more than one possible type. The obvious aim of my work, and that of <a href="http://www.brics.dk/TAJS/">others</a> who have worked on this problem, is to facilitate tool support and allow better optimization of dynamic languages. There's one unfortunate issue with JavaScript and static type analysis though: JavaScript wasn't designed for type inference, and constructs like <a href="http://en.wikipedia.org/wiki/Eval">eval</a> make compile-time type inference problematic at best.</p>
+<p>What if, through type inference, you could have all the expressiveness and flexibility of dynamic typing with the speed and robustness of static typing? We have the technology, but making this happen would likely require a new programming language design. Retrofitting type inference on existing dynamic languages such as Python, Ruby and JavaScript has proven to be problematic, largely because these languages were never designed with type analysis in mind. They integrate features that make type analysis and optimization unnecessarily difficult. Contrast this with the <a href="http://en.wikipedia.org/wiki/ML_(programming_language)">ML</a> programming language, which was designed in conjunction with its type analysis. ML doesn't have to deal with constructs which are fundamentally incompatible with type inference: ML is the embodiment of the capabilities of the <a href="http://en.wikipedia.org/wiki/Hindley%E2%80%93Milner">Hindley-Milner</a> method.</p>
+<p>What if we could do the same thing for dynamic languages? What if we designed a dynamic language in conjunction with the capabilities of flow-based points-to type analyses? A language that is dynamically typed, but for which we have an algorithm that allows us to know all possible types statically. What would that look like, and what advantages would it have? I propose that it would be possible to design programming languages which have the strengths typically associated with both static and dynamic languages. Imagine, for example, a language that is similar to Python and JavaScript and which possesses the following features:</p>
+<ul>
+<li>
+<p>No need to declare types for variables or function arguments</p>
+</li>
+<li>
+<p>New fields can be added to objects dynamically</p>
+</li>
+<li>
+<p>Variables can change type dynamically, duck-typing is fully supported</p>
+</li>
+<li>
+<p>Refactoring tools which can determine the possible types for all variables</p>
+</li>
+<li>
+<p>Documentation tools which take advantage of type inference (e.g. <a href="http://en.wikipedia.org/wiki/Doxygen">doxygen</a>)</p>
+</li>
+<li>
+<p>Can be statically compiled and linked directly with C code</p>
+</li>
+<li>
+<p>Can be interpreted and tinkered with in a shell environment (i.e. <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>)</p>
+</li>
+<li>
+<p>Type errors are detected at compilation time in most cases (e.g. accessing missing object field)</p>
+</li>
+<li>
+<p>Performance comparable to that of Java (~50% of the speed of C code in most tasks)</p>
+</li>
+</ul>
+<p>Such a programming language is possible with the knowledge we have today, and I believe there is definitely a large niche for it to fill. Many programmers out there love Python for its flexibility and ease of use. However, Python, due to its lack of performance, is currently unusable in many application realms. Furthermore, dynamic languages are still vastly inferior in terms of tool support. Having built-in support for type inference would make it possible to have competent IDEs with all the capabilities people are used to when working with Eclipse, for example.</p>
+<p>Now, I said that some language features, such as <code>eval</code>, make type inference difficult. You might be wondering what kind of unholy sacrifices we'd have to make when designing a dynamic language that is amenable to type analysis. The answer, I believe, is that we wouldn't have to sacrifice much. In its most common form, <code>eval</code> is problematic because it can access any variable in the program: it's simply too unpredictable for type analysis, because it could do almost anything to a program's state. There is a simple fix for this: don't let <code>eval</code> write to program variables! Our new language could simply let <code>eval</code> execute in a restricted environment passed as argument. This is safer, and eliminates the problem without getting rid of the useful construct that is <code>eval</code>.</p>
+<p>Other design compromises might have to be made to make type analysis more effective. I've suggested in the past, for example, that it would be easier to infer types in JavaScript if the language had <a href="/2012/04/02/inefficient-numerical-operators/">both integer and floating point types</a>. Throwing an exception when missing object fields are accessed (instead of producing the <code>undefined</code> value) would help type analysis as well. Such compromises are actually quite sensible: they make type inference easier without reducing expressiveness or getting in the way of programmers. In fact, throwing exceptions early, for example, actually helps debug programs more effectively!</p>
+<p>I believe that often, there is a "right" time for ideas to become mainstream. The time for this idea will come soon. There is a niche to be filled, there is a part of programming language design space we haven't really explored, and we have the technology to make it all happen. I don't know that I have time to create such a programming language myself, but I'm already seeing <a href="http://www.edofic.com/2012/11/cool-monday-hindley-milner-on-dynamic.html">hints</a> that <a href="http://whiley.org/2012/10/31/formalising-flow-typing-with-union-intersection-and-negation-types/">others</a> are thinking along the same lines that I am. The statically type inferred, high performance dynamic language will happen eventually, and probably sooner than you think.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

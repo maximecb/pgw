@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Audiobooks are Awesome</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Audiobooks are Awesome">
+  <meta property="og:description" content="Audiobooks are Awesome">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-10-23-audiobooks-are-awesome/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/09/17/faster-than-v8/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/10/26/circumventing-the-d-garbage-collector/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Audiobooks are Awesome</h1>
+<div class="post_date">October 23rd, 2014</div>
+</div>
+<p>It's a sad admission to make, but I've always found reading books tedious and uncomfortable. Paper books cause me eye strain and I can never seem to find a comfortable position to hold them in. Computer screens aren't much better: I have a hard time reading multiple pages in one sitting, and reading a book one page at a time is rather ineffective. I'm not sure if I have some kind of low-grade attention deficit, or if it's a side-effect of programming and using the internet for so many years, but I prefer for written information to come in bite-sized pieces.</p>
+<p>I've always loved science fiction, but until recently, my only exposure to it came from movies and tv shows. This changed recently after I acquired a smartphone (my beloved Nexus 4). I found out that there were several free audiobook playback apps in the Google Play store and that many of the greatest science fiction classics were available in audiobook form. I decided to give this a try and listened to <a href="http://en.wikipedia.org/wiki/Neuromancer">Neuromancer</a>, the ultimate cyberpunk classic. I was instantly hooked.</p>
+<p>Since discovering audiobooks just a few months ago, I've "read":</p>
+<ul>
+<li>
+<p>Neuromancer</p>
+</li>
+<li>
+<p>Burning Chrome</p>
+</li>
+<li>
+<p>Dune</p>
+</li>
+<li>
+<p>Dune Messiah</p>
+</li>
+<li>
+<p>Children of Dune</p>
+</li>
+<li>
+<p>Foundation</p>
+</li>
+<li>
+<p>The Positronic Man</p>
+</li>
+<li>
+<p>The Last Theorem</p>
+</li>
+<li>
+<p>I, Robot</p>
+</li>
+<li>
+<p>Buddha's Brain</p>
+</li>
+<li>
+<p>Robot Dreams</p>
+</li>
+<li>
+<p>Hyperion</p>
+</li>
+</ul>
+<p>Listening to audiobooks is a relaxing experience, a way to take my mind off of things while having a story narrated to me, a way to take a break. What's even better is that this entertainment doesn't take time away from productive activities at all. I can listen to audiobooks while I'm walking somewhere, on the subway or on the bus, while I'm cooking alone, running errands, in a waiting room or even while brushing my teeth. I just have to whip out my phone and earbuds and press play.</p>
+<p>The audiobook app I use (<a href="https://play.google.com/store/apps/details?id=ak.alizandro.smartaudiobookplayer&hl=en">Smart Audiobook Player</a>) is nice enough to automatically stop playback if the earbuds get unplugged, and to go back some number of seconds when playback is resumed. This means that if I run into someone I want to talk to, I can simply unplug the earbuds and stop playback without missing anything. The earbuds I bought ($10 Panasonics) provide good enough sound isolation to use on the subway or in other loud environments.</p>
+<p>I implied earlier that I have a hard time staying focused on paper books. I'm one of those people who will be reading a book, and eventually realize that I'm rereading the same sentence for the 5th time. You might think that staying focused on audiobooks is just as hard, but I find it a little easier. What I'm also finding though, is that I've gotten better at staying focused on audiobooks.</p>
+<p>In a way, listening to audiobooks can be seen as a form of <a href="http://en.wikipedia.org/wiki/Mindfulness">mindfulness</a> practice (a form of meditation). If I let my mind run away in thoughts, I lose track of the story and I might want to rewind a bit to try and pay more attention, but I find myself needing to do this less and less. What maybe makes this less tedious than with paper books is that there seems to be less effort involved in listening to something than in reading.</p>
+<p>I'm currently listening to <a href="http://en.wikipedia.org/wiki/The_Fall_of_Hyperion">The Fall of Hyperion</a> and enjoying it very much so far. I plan to listen to many more audiobooks. It's come to the point where when I'm between books, I miss having something to listen to. Fortunately, there are many great science-fiction classics out there which have been highly acclaimed and are available in audiobook format.</p>
+<p>If you're a computer geek and you're looking for something that doesn't take itself too seriously, I would highly recommend collections of short stories by Isaac Asimov, such as <a href="http://en.wikipedia.org/wiki/I,_Robot">I, Robot</a>. I found them amusing and relaxing to listen to. For rich and complex fictional universes, you might want to check out <a href="http://en.wikipedia.org/wiki/Dune_(novel)">Dune</a>, <a href="http://en.wikipedia.org/wiki/Neuromancer">Neuromancer</a> or <a href="http://en.wikipedia.org/wiki/Hyperion_(Simmons_novel)">Hyperion</a>. Scott Brick, narrator of the Dune audiobook I listened to, is an excellent voice actor who even makes convincing female voices. His <a href="http://en.wikipedia.org/wiki/Scott_Brick">wikipedia page</a> lists several other books he has narrated.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

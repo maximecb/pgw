@@ -1,0 +1,1180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<language>en-US</language>
+<title>Pointers Gone Wild</title>
+<link>https://pointersgonewild.com/</link>
+<description>Latest Posts from Pointers Gone Wild</description>
+<lastBuildDate>Tue, 3 Feb 2026 23:41:12 -0500</lastBuildDate>
+
+<item>
+<title>Building a Copying GC for the Plush Programming Language</title>
+<link>https://pointersgonewild.com/2025-11-29-building-a-copying-gc-for-the-plush-programming-language/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-11-29-building-a-copying-gc-for-the-plush-programming-language/</guid>
+<pubDate>Sat, 29 Nov 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Optimizing the Plush Interpreter for Faster Raytracing</title>
+<link>https://pointersgonewild.com/2025-10-12-optimizing-the-plush-interpreter-for-faster-raytracing/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-10-12-optimizing-the-plush-interpreter-for-faster-raytracing/</guid>
+<pubDate>Sun, 12 Oct 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Out-Fibbing CPython with the Plush Interpreter</title>
+<link>https://pointersgonewild.com/2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/</guid>
+<pubDate>Wed, 6 Aug 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Creating a Toy Programming Language with Actor-Based Parallelism</title>
+<link>https://pointersgonewild.com/2025-08-03-creating-a-toy-language-with-actor-based-parallelism/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-08-03-creating-a-toy-language-with-actor-based-parallelism/</guid>
+<pubDate>Sun, 3 Aug 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>AI Safety in the Presence of Multiple ASI Systems</title>
+<link>https://pointersgonewild.com/2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/</guid>
+<pubDate>Fri, 4 Jul 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Yes, We Do Want Humanoid Robots</title>
+<link>https://pointersgonewild.com/2025-04-12-yes-we-do-want-humanoid-robots/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-04-12-yes-we-do-want-humanoid-robots/</guid>
+<pubDate>Sat, 12 Apr 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>My Low-Tech Attempt to Automate Spellchecking</title>
+<link>https://pointersgonewild.com/2025-03-06-my-low-tech-attempt-to-automate-spellchecking/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-03-06-my-low-tech-attempt-to-automate-spellchecking/</guid>
+<pubDate>Thu, 6 Mar 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>So I Rolled My Own Static Site Generator</title>
+<link>https://pointersgonewild.com/2025-01-10-so-i-rolled-my-own-static-site-generator/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2025-01-10-so-i-rolled-my-own-static-site-generator/</guid>
+<pubDate>Fri, 10 Jan 2025 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Alternative Implementation Problem</title>
+<link>https://pointersgonewild.com/2024/04/20/the-alternative-implementation-problem/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2024/04/20/the-alternative-implementation-problem/</guid>
+<pubDate>Sat, 20 Apr 2024 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Race to Make Humans Obsolete</title>
+<link>https://pointersgonewild.com/2024/04/07/the-race-to-make-humans-obsolete/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2024/04/07/the-race-to-make-humans-obsolete/</guid>
+<pubDate>Sun, 7 Apr 2024 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Human-Scale vs Asymmetric Social Media</title>
+<link>https://pointersgonewild.com/2023-12-24-toxic-by-design-human-scale-vs-asymmetric-social-media/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2023-12-24-toxic-by-design-human-scale-vs-asymmetric-social-media/</guid>
+<pubDate>Sun, 24 Dec 2023 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Preparing UVM for 3D Graphics</title>
+<link>https://pointersgonewild.com/2023/11/01/preparing-uvm-for-3d-graphics/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2023/11/01/preparing-uvm-for-3d-graphics/</guid>
+<pubDate>Wed, 1 Nov 2023 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Software Bugs That Cause Real-World Harm</title>
+<link>https://pointersgonewild.com/2023/05/29/software-bugs-that-cause-real-world-harm/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2023/05/29/software-bugs-that-cause-real-world-harm/</guid>
+<pubDate>Mon, 29 May 2023 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Memory, Pages, mmap, and Linear Address Spaces</title>
+<link>https://pointersgonewild.com/2023/03/12/memory-pages-mmap-and-linear-address-spaces/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2023/03/12/memory-pages-mmap-and-linear-address-spaces/</guid>
+<pubDate>Sun, 12 Mar 2023 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Building a Minimalistic Virtual Machine</title>
+<link>https://pointersgonewild.com/2023/02/24/building-a-minimalistic-virtual-machine/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2023/02/24/building-a-minimalistic-virtual-machine/</guid>
+<pubDate>Fri, 24 Feb 2023 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Typed vs Untyped Virtual Machines</title>
+<link>https://pointersgonewild.com/2022/06/08/typed-vs-untyped-virtual-machines/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2022/06/08/typed-vs-untyped-virtual-machines/</guid>
+<pubDate>Wed, 8 Jun 2022 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Minimalism in Programming Language Design</title>
+<link>https://pointersgonewild.com/2022/05/23/minimalism-in-programming-language-design/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2022/05/23/minimalism-in-programming-language-design/</guid>
+<pubDate>Mon, 23 May 2022 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Democracy, Dictatorships and Access to Information</title>
+<link>https://pointersgonewild.com/2022/03/05/democracy-dictatorships-and-access-to-information/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2022/03/05/democracy-dictatorships-and-access-to-information/</guid>
+<pubDate>Sun, 6 Mar 2022 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>NoiseCraft Project Update</title>
+<link>https://pointersgonewild.com/2022/02/18/noisecraft-project-update/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2022/02/18/noisecraft-project-update/</guid>
+<pubDate>Fri, 18 Feb 2022 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Code that Doesn&apos;t Rot</title>
+<link>https://pointersgonewild.com/2022/02/11/code-that-doesnt-rot/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2022/02/11/code-that-doesnt-rot/</guid>
+<pubDate>Fri, 11 Feb 2022 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Internet Changed My Life</title>
+<link>https://pointersgonewild.com/2022/01/19/the-internet-changed-my-life/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2022/01/19/the-internet-changed-my-life/</guid>
+<pubDate>Wed, 19 Jan 2022 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>What&apos;s Could You Use Tesla Bot For?</title>
+<link>https://pointersgonewild.com/2022/01/08/whats-could-you-use-tesla-bot-for/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2022/01/08/whats-could-you-use-tesla-bot-for/</guid>
+<pubDate>Sat, 8 Jan 2022 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>NoiseCraft: a Browser-Based Visual Programming Language for Sound &amp;amp; Music</title>
+<link>https://pointersgonewild.com/2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/</guid>
+<pubDate>Sun, 5 Dec 2021 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>YJIT: Building a New JIT Compiler Inside CRuby</title>
+<link>https://pointersgonewild.com/2021/06/02/yjit-building-a-new-jit-compiler-inside-cruby/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2021/06/02/yjit-building-a-new-jit-compiler-inside-cruby/</guid>
+<pubDate>Wed, 2 Jun 2021 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Investing is a Social Phenomenon</title>
+<link>https://pointersgonewild.com/2021/02/21/investing-is-a-social-phenomenon/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2021/02/21/investing-is-a-social-phenomenon/</guid>
+<pubDate>Sun, 21 Feb 2021 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>On Insurmountable Technical Obstacles</title>
+<link>https://pointersgonewild.com/2021/02/07/on-insurmountable-technical-obstacles/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2021/02/07/on-insurmountable-technical-obstacles/</guid>
+<pubDate>Sun, 7 Feb 2021 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Combatting Pessimism: 3 Keys to Innovation</title>
+<link>https://pointersgonewild.com/2020/12/01/combatting-pessimism-3-keys-to-innovation/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2020/12/01/combatting-pessimism-3-keys-to-innovation/</guid>
+<pubDate>Tue, 1 Dec 2020 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Need for Stable Foundations in Software Development</title>
+<link>https://pointersgonewild.com/2020/09/22/the-need-for-stable-foundations-in-software-development/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2020/09/22/the-need-for-stable-foundations-in-software-development/</guid>
+<pubDate>Tue, 22 Sep 2020 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Maybe Planets are Overrated?</title>
+<link>https://pointersgonewild.com/2020/01/03/maybe-planets-are-overrated/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2020/01/03/maybe-planets-are-overrated/</guid>
+<pubDate>Fri, 3 Jan 2020 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>It&apos;s Been Done Before</title>
+<link>https://pointersgonewild.com/2019/11/05/its-been-done-before/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2019/11/05/its-been-done-before/</guid>
+<pubDate>Tue, 5 Nov 2019 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>They Might Never Tell You It&apos;s Broken</title>
+<link>https://pointersgonewild.com/2019/11/02/they-might-never-tell-you-its-broken/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2019/11/02/they-might-never-tell-you-its-broken/</guid>
+<pubDate>Sat, 2 Nov 2019 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Balancing Fun, Stress and Profit</title>
+<link>https://pointersgonewild.com/2019/10/19/balancing-fun-stress-and-profit/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2019/10/19/balancing-fun-stress-and-profit/</guid>
+<pubDate>Sat, 19 Oct 2019 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Zupiter: a Web-Based Modular Synthesizer</title>
+<link>https://pointersgonewild.com/2019/10/06/zupiter-a-web-based-modular-synthesizer/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2019/10/06/zupiter-a-web-based-modular-synthesizer/</guid>
+<pubDate>Sun, 6 Oct 2019 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The End of Online Anonymity</title>
+<link>https://pointersgonewild.com/2019/06/10/the-end-of-online-anonymity/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2019/06/10/the-end-of-online-anonymity/</guid>
+<pubDate>Mon, 10 Jun 2019 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>MiniWorld: A VizDoom Alternative for OpenAI Gym</title>
+<link>https://pointersgonewild.com/2019/01/29/miniworld-a-vizdoom-alternative-for-openai-gym/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2019/01/29/miniworld-a-vizdoom-alternative-for-openai-gym/</guid>
+<pubDate>Tue, 29 Jan 2019 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>A Small Dose of Optimism</title>
+<link>https://pointersgonewild.com/2018/12/17/a-small-dose-of-optimism/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2018/12/17/a-small-dose-of-optimism/</guid>
+<pubDate>Mon, 17 Dec 2018 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Building a Simple Self-Driving Car Simulator</title>
+<link>https://pointersgonewild.com/2018/05/21/building-a-simple-self-driving-car-simulator/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2018/05/21/building-a-simple-self-driving-car-simulator/</guid>
+<pubDate>Mon, 21 May 2018 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets</title>
+<link>https://pointersgonewild.com/2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2018/05/20/spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/</guid>
+<pubDate>Sun, 20 May 2018 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Minimalism in Programming</title>
+<link>https://pointersgonewild.com/2018/02/18/minimalism-in-programming/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2018/02/18/minimalism-in-programming/</guid>
+<pubDate>Sun, 18 Feb 2018 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>My new Job in RL &amp;amp; Robotics Research</title>
+<link>https://pointersgonewild.com/2018/01/28/my-new-job-in-rl-robotics-research/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2018/01/28/my-new-job-in-rl-robotics-research/</guid>
+<pubDate>Sun, 28 Jan 2018 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>We All Live in a Bubble</title>
+<link>https://pointersgonewild.com/2017/12/04/we-all-live-in-a-bubble/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2017/12/04/we-all-live-in-a-bubble/</guid>
+<pubDate>Mon, 4 Dec 2017 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The AI Risk Isn&apos;t What You Think</title>
+<link>https://pointersgonewild.com/2017/10/20/the-ai-risk-isnt-what-you-think/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2017/10/20/the-ai-risk-isnt-what-you-think/</guid>
+<pubDate>Fri, 20 Oct 2017 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Zeta&apos;s JITterpreter</title>
+<link>https://pointersgonewild.com/2017/06/11/zetas-jitterpreter/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2017/06/11/zetas-jitterpreter/</guid>
+<pubDate>Mon, 12 Jun 2017 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>ZetaVM, my new compiler project</title>
+<link>https://pointersgonewild.com/2017/04/29/zetavm-my-new-compiler-project/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2017/04/29/zetavm-my-new-compiler-project/</guid>
+<pubDate>Sat, 29 Apr 2017 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Technodiversity</title>
+<link>https://pointersgonewild.com/2017/01/14/technodiversity/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2017/01/14/technodiversity/</guid>
+<pubDate>Sat, 14 Jan 2017 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Brain&apos;s Registers</title>
+<link>https://pointersgonewild.com/2016/12/22/the-brains-registers/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/12/22/the-brains-registers/</guid>
+<pubDate>Thu, 22 Dec 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Method Call Syntax in a JS-like Language</title>
+<link>https://pointersgonewild.com/2016/11/22/method-call-syntax-in-a-js-like-language/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/11/22/method-call-syntax-in-a-js-like-language/</guid>
+<pubDate>Wed, 23 Nov 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>So, I&apos;ve been using gedit this whole time</title>
+<link>https://pointersgonewild.com/2016/11/18/so-ive-been-using-gedit-this-whole-time/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/11/18/so-ive-been-using-gedit-this-whole-time/</guid>
+<pubDate>Fri, 18 Nov 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>My Experience with the ESP8266 - Making an LED Strip I can Control from my Shell</title>
+<link>https://pointersgonewild.com/2016/09/24/esp8266/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/09/24/esp8266/</guid>
+<pubDate>Sun, 25 Sep 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Silicon Valley, Six Months Later</title>
+<link>https://pointersgonewild.com/2016/09/20/silicon-valley-six-months-later/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/09/20/silicon-valley-six-months-later/</guid>
+<pubDate>Wed, 21 Sep 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Optimizing Ray Marching through Partial Evaluation</title>
+<link>https://pointersgonewild.com/2016/05/08/optimizing-ray-marching-through-partial-evaluation/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/05/08/optimizing-ray-marching-through-partial-evaluation/</guid>
+<pubDate>Mon, 9 May 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Sense from Chaos - Crossing the Semantic Gap</title>
+<link>https://pointersgonewild.com/2016/03/23/sense-from-chaos-crossing-the-semantic-gap/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/03/23/sense-from-chaos-crossing-the-semantic-gap/</guid>
+<pubDate>Wed, 23 Mar 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Moving to the Valley</title>
+<link>https://pointersgonewild.com/2016/02/24/moving-to-the-valley/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/02/24/moving-to-the-valley/</guid>
+<pubDate>Wed, 24 Feb 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Building a Small-Scale Prototype</title>
+<link>https://pointersgonewild.com/2016/02/04/building-a-small-scale-prototype/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/02/04/building-a-small-scale-prototype/</guid>
+<pubDate>Thu, 4 Feb 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Exercise, Depression and the Energy Hypothesis</title>
+<link>https://pointersgonewild.com/2016/01/07/exercise-depression-and-the-energy-hypothesis/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2016/01/07/exercise-depression-and-the-energy-hypothesis/</guid>
+<pubDate>Thu, 7 Jan 2016 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Musings on AOT, JIT and Language Design</title>
+<link>https://pointersgonewild.com/2015/11/28/musings-on-aot-jit-and-language-design/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/11/28/musings-on-aot-jit-and-language-design/</guid>
+<pubDate>Sat, 28 Nov 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Have Static Languages Won?</title>
+<link>https://pointersgonewild.com/2015/11/25/have-static-languages-won/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/11/25/have-static-languages-won/</guid>
+<pubDate>Wed, 25 Nov 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Why I Chose Industry Over a Postdoc</title>
+<link>https://pointersgonewild.com/2015/11/15/why-i-chose-industry-over-a-postdoc/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/11/15/why-i-chose-industry-over-a-postdoc/</guid>
+<pubDate>Sun, 15 Nov 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Robotic Revolution</title>
+<link>https://pointersgonewild.com/2015/11/08/the-robotic-revolution/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/11/08/the-robotic-revolution/</guid>
+<pubDate>Sun, 8 Nov 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>There&apos;s Too Many Programming Languages!</title>
+<link>https://pointersgonewild.com/2015/10/06/theres-too-many-programming-languages/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/10/06/theres-too-many-programming-languages/</guid>
+<pubDate>Tue, 6 Oct 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Basic Block Versioning - My Best Result Yet</title>
+<link>https://pointersgonewild.com/2015/09/24/basic-block-versioning-my-best-result-yet/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/09/24/basic-block-versioning-my-best-result-yet/</guid>
+<pubDate>Thu, 24 Sep 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>All Hope is Not Lost for Flying Cars</title>
+<link>https://pointersgonewild.com/2015/09/15/all-hope-is-not-lost-for-flying-cars/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/09/15/all-hope-is-not-lost-for-flying-cars/</guid>
+<pubDate>Tue, 15 Sep 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Why You Should be a Little Scared of Machine Learning</title>
+<link>https://pointersgonewild.com/2015/09/12/why-you-should-be-a-little-scared-of-machine-learning/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/09/12/why-you-should-be-a-little-scared-of-machine-learning/</guid>
+<pubDate>Sat, 12 Sep 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>What Killed Smalltalk?</title>
+<link>https://pointersgonewild.com/2015/08/20/what-killed-smalltalk/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/08/20/what-killed-smalltalk/</guid>
+<pubDate>Thu, 20 Aug 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>JavaScript is the C++ of the Web</title>
+<link>https://pointersgonewild.com/2015/08/02/javascript-is-the-c-of-the-web/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/08/02/javascript-is-the-c-of-the-web/</guid>
+<pubDate>Sun, 2 Aug 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>All Possible Thoughts</title>
+<link>https://pointersgonewild.com/2015/07/30/all-possible-thoughts/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/07/30/all-possible-thoughts/</guid>
+<pubDate>Thu, 30 Jul 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Feels like Censorship</title>
+<link>https://pointersgonewild.com/2015/07/27/feels-like-censorship/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/07/27/feels-like-censorship/</guid>
+<pubDate>Mon, 27 Jul 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Presented at ECOOP</title>
+<link>https://pointersgonewild.com/2015/07/10/presented-at-ecoop/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/07/10/presented-at-ecoop/</guid>
+<pubDate>Fri, 10 Jul 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Typed Shapes Paper Submitted</title>
+<link>https://pointersgonewild.com/2015/06/22/typed-shapes-paper-submitted/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/06/22/typed-shapes-paper-submitted/</guid>
+<pubDate>Mon, 22 Jun 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Maybe we ought to have Numerical Coprocessors?</title>
+<link>https://pointersgonewild.com/2015/05/25/maybe-we-ought-to-have-numerical-coprocessors/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/05/25/maybe-we-ought-to-have-numerical-coprocessors/</guid>
+<pubDate>Mon, 25 May 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The AI Breakthrough that Won&apos;t Happen</title>
+<link>https://pointersgonewild.com/2015/05/10/the-ai-breakthrough-that-wont-happen/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/05/10/the-ai-breakthrough-that-wont-happen/</guid>
+<pubDate>Sun, 10 May 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Smart Web is Coming</title>
+<link>https://pointersgonewild.com/2015/05/07/the-smart-web-is-coming/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/05/07/the-smart-web-is-coming/</guid>
+<pubDate>Thu, 7 May 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Problem with HTML</title>
+<link>https://pointersgonewild.com/2015/04/16/the-problem-with-html/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/04/16/the-problem-with-html/</guid>
+<pubDate>Thu, 16 Apr 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>What is Intelligence?</title>
+<link>https://pointersgonewild.com/2015/04/15/what-is-intelligence/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/04/15/what-is-intelligence/</guid>
+<pubDate>Wed, 15 Apr 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Basic Block Versioning - Published At Last!</title>
+<link>https://pointersgonewild.com/2015/03/18/basic-block-versioning-published-at-last/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/03/18/basic-block-versioning-published-at-last/</guid>
+<pubDate>Wed, 18 Mar 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>My Thesis: A Clearer Picture</title>
+<link>https://pointersgonewild.com/2015/02/08/my-thesis-a-clearer-picture/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2015/02/08/my-thesis-a-clearer-picture/</guid>
+<pubDate>Sun, 8 Feb 2015 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Visit to Northeastern University</title>
+<link>https://pointersgonewild.com/2014/12/11/visit-to-northeastern-university/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/12/11/visit-to-northeastern-university/</guid>
+<pubDate>Thu, 11 Dec 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Fastest For-In Loops in the Whole Wide Web</title>
+<link>https://pointersgonewild.com/2014/11/14/the-fastest-for-in-loops-in-the-whole-wide-web/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/11/14/the-fastest-for-in-loops-in-the-whole-wide-web/</guid>
+<pubDate>Fri, 14 Nov 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Pushing Higgs to the Limit</title>
+<link>https://pointersgonewild.com/2014/11/10/pushing-higgs-to-the-limit/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/11/10/pushing-higgs-to-the-limit/</guid>
+<pubDate>Mon, 10 Nov 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Circumventing the D Garbage Collector</title>
+<link>https://pointersgonewild.com/2014/10/26/circumventing-the-d-garbage-collector/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/10/26/circumventing-the-d-garbage-collector/</guid>
+<pubDate>Sun, 26 Oct 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Audiobooks are Awesome</title>
+<link>https://pointersgonewild.com/2014/10/23/audiobooks-are-awesome/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/10/23/audiobooks-are-awesome/</guid>
+<pubDate>Thu, 23 Oct 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Faster than V8 *</title>
+<link>https://pointersgonewild.com/2014/09/17/faster-than-v8/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/09/17/faster-than-v8/</guid>
+<pubDate>Wed, 17 Sep 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Making Waves: D&apos;s GC Problem Followup</title>
+<link>https://pointersgonewild.com/2014/09/11/making-waves-ds-gc-problem-followup/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/09/11/making-waves-ds-gc-problem-followup/</guid>
+<pubDate>Thu, 11 Sep 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>D&apos;s Garbage Collector Problem</title>
+<link>https://pointersgonewild.com/2014/09/09/ds-garbage-collector-problem/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/09/09/ds-garbage-collector-problem/</guid>
+<pubDate>Wed, 10 Sep 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Dogfooding Higgs with the Turing Turtle</title>
+<link>https://pointersgonewild.com/2014/07/19/dogfooding-higgs-with-the-turing-turtle/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/07/19/dogfooding-higgs-with-the-turing-turtle/</guid>
+<pubDate>Sat, 19 Jul 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>My Paper was Rejected Again</title>
+<link>https://pointersgonewild.com/2014/07/17/my-paper-was-rejected-again/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/07/17/my-paper-was-rejected-again/</guid>
+<pubDate>Thu, 17 Jul 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Constness Problem</title>
+<link>https://pointersgonewild.com/2014/07/11/the-constness-problem/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/07/11/the-constness-problem/</guid>
+<pubDate>Fri, 11 Jul 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>News of Higgs</title>
+<link>https://pointersgonewild.com/2014/05/08/news-of-higgs/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/05/08/news-of-higgs/</guid>
+<pubDate>Thu, 8 May 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Positive Results for Higgs</title>
+<link>https://pointersgonewild.com/2014/04/10/positive-results-for-higgs/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/04/10/positive-results-for-higgs/</guid>
+<pubDate>Thu, 10 Apr 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>How I Hacked my Stationary Bike and Voided its Warranty</title>
+<link>https://pointersgonewild.com/2014/03/19/how-i-hacked-my-stationary-bike-and-voided-its-warranty/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/03/19/how-i-hacked-my-stationary-bike-and-voided-its-warranty/</guid>
+<pubDate>Thu, 20 Mar 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Higgs: Upcoming Talks &amp;amp; New Contributions</title>
+<link>https://pointersgonewild.com/2014/02/03/higgs-upcoming-talks-new-contributions/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/02/03/higgs-upcoming-talks-new-contributions/</guid>
+<pubDate>Mon, 3 Feb 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Accelerating Real-Time Path Tracing</title>
+<link>https://pointersgonewild.com/2014/01/28/accelerating-real-time-path-tracing/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/01/28/accelerating-real-time-path-tracing/</guid>
+<pubDate>Tue, 28 Jan 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Contribute to the Higgs JS Compiler</title>
+<link>https://pointersgonewild.com/2014/01/08/contribute-to-the-higgs-js-compiler/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/01/08/contribute-to-the-higgs-js-compiler/</guid>
+<pubDate>Wed, 8 Jan 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Tile-Based Image Compression</title>
+<link>https://pointersgonewild.com/2014/01/02/tile-based-image-compression/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2014/01/02/tile-based-image-compression/</guid>
+<pubDate>Fri, 3 Jan 2014 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Incremental JIT Lives</title>
+<link>https://pointersgonewild.com/2013/12/10/the-incremental-jit-lives/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/12/10/the-incremental-jit-lives/</guid>
+<pubDate>Tue, 10 Dec 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Alan Turing: The Enigma - A Book Review</title>
+<link>https://pointersgonewild.com/2013/12/06/alan-turing-the-enigma-a-book-review/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/12/06/alan-turing-the-enigma-a-book-review/</guid>
+<pubDate>Fri, 6 Dec 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Electric Mirror</title>
+<link>https://pointersgonewild.com/2013/12/05/the-electric-mirror/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/12/05/the-electric-mirror/</guid>
+<pubDate>Thu, 5 Dec 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Higgs: the First JIT Compiler of its Kind</title>
+<link>https://pointersgonewild.com/2013/10/31/higgs-the-first-jit-compiler-of-its-kind/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/10/31/higgs-the-first-jit-compiler-of-its-kind/</guid>
+<pubDate>Thu, 31 Oct 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>übertechnoshoes</title>
+<link>https://pointersgonewild.com/2013/10/21/ubertechnoshoes/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/10/21/ubertechnoshoes/</guid>
+<pubDate>Mon, 21 Oct 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Static Typing may not Scale</title>
+<link>https://pointersgonewild.com/2013/09/24/static-typing-may-not-scale/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/09/24/static-typing-may-not-scale/</guid>
+<pubDate>Tue, 24 Sep 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Down the Rabbit Hole that is Inlining</title>
+<link>https://pointersgonewild.com/2013/08/29/down-the-rabbit-hole-that-is-inlining/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/08/29/down-the-rabbit-hole-that-is-inlining/</guid>
+<pubDate>Thu, 29 Aug 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Higgs: Rise of the SSA JIT</title>
+<link>https://pointersgonewild.com/2013/08/14/higgs-rise-of-the-ssa-jit/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/08/14/higgs-rise-of-the-ssa-jit/</guid>
+<pubDate>Wed, 14 Aug 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Sometimes a datum is just a datum</title>
+<link>https://pointersgonewild.com/2013/07/22/sometimes-a-datum-is-just-a-datum/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/07/22/sometimes-a-datum-is-just-a-datum/</guid>
+<pubDate>Mon, 22 Jul 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Programming without Text Files</title>
+<link>https://pointersgonewild.com/2013/07/19/programming-without-text-files/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/07/19/programming-without-text-files/</guid>
+<pubDate>Sat, 20 Jul 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>On Holistic Programming Languages</title>
+<link>https://pointersgonewild.com/2013/07/20/on-holistic-programming-languages/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/07/20/on-holistic-programming-languages/</guid>
+<pubDate>Sat, 20 Jul 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>How I miss you, dear SSA</title>
+<link>https://pointersgonewild.com/2013/06/20/how-i-miss-you-dear-ssa/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/06/20/how-i-miss-you-dear-ssa/</guid>
+<pubDate>Thu, 20 Jun 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Inlining in Higgs</title>
+<link>https://pointersgonewild.com/2013/06/03/inlining-in-higgs/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/06/03/inlining-in-higgs/</guid>
+<pubDate>Mon, 3 Jun 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>PSA: Caffeine is a Drug</title>
+<link>https://pointersgonewild.com/2013/05/28/psa-caffeine-is-a-drug/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/05/28/psa-caffeine-is-a-drug/</guid>
+<pubDate>Tue, 28 May 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Turing Drawings Followup</title>
+<link>https://pointersgonewild.com/2013/05/15/turing-drawings-followup/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/05/15/turing-drawings-followup/</guid>
+<pubDate>Wed, 15 May 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Presented at DConf 2013</title>
+<link>https://pointersgonewild.com/2013/05/10/presented-at-dconf-2013/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/05/10/presented-at-dconf-2013/</guid>
+<pubDate>Fri, 10 May 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Progress on the Higgs JIT</title>
+<link>https://pointersgonewild.com/2013/03/31/progress-on-the-higgs-jit/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/03/31/progress-on-the-higgs-jit/</guid>
+<pubDate>Sun, 31 Mar 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>A Simple JIT Compiler</title>
+<link>https://pointersgonewild.com/2013/03/04/a-simple-jit-compiler/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/03/04/a-simple-jit-compiler/</guid>
+<pubDate>Mon, 4 Mar 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Back from Silicon Valley</title>
+<link>https://pointersgonewild.com/2013/02/20/back-from-silicon-valley/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/02/20/back-from-silicon-valley/</guid>
+<pubDate>Wed, 20 Feb 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Visiting Mozilla</title>
+<link>https://pointersgonewild.com/2013/01/31/visiting-mozilla/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/01/31/visiting-mozilla/</guid>
+<pubDate>Thu, 31 Jan 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Higgs has a Garbage Collector</title>
+<link>https://pointersgonewild.com/2013/01/22/higgs-has-a-garbage-collector/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/01/22/higgs-has-a-garbage-collector/</guid>
+<pubDate>Tue, 22 Jan 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>More Fun with Turing Machines</title>
+<link>https://pointersgonewild.com/2013/01/03/more-fun-with-turing-machines/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2013/01/03/more-fun-with-turing-machines/</guid>
+<pubDate>Thu, 3 Jan 2013 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Turing Drawings</title>
+<link>https://pointersgonewild.com/2012/12/31/turing-drawings/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/12/31/turing-drawings/</guid>
+<pubDate>Mon, 31 Dec 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Higgs has Exceptions</title>
+<link>https://pointersgonewild.com/2012/12/18/higgs-has-exceptions/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/12/18/higgs-has-exceptions/</guid>
+<pubDate>Tue, 18 Dec 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Sky Blue</title>
+<link>https://pointersgonewild.com/2012/12/13/sky-blue/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/12/13/sky-blue/</guid>
+<pubDate>Thu, 13 Dec 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Higgs: My New Tracing JIT for JavaScript</title>
+<link>https://pointersgonewild.com/2012/12/08/higgs-my-new-tracing-jit-for-javascript/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/12/08/higgs-my-new-tracing-jit-for-javascript/</guid>
+<pubDate>Sun, 9 Dec 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Static vs Dynamic: Why not Both?</title>
+<link>https://pointersgonewild.com/2012/11/09/static-vs-dynamic-why-not-both/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/11/09/static-vs-dynamic-why-not-both/</guid>
+<pubDate>Sat, 10 Nov 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Debugging by the Seat of the Pants</title>
+<link>https://pointersgonewild.com/2012/10/24/debugging-by-the-seat-of-the-pants/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/10/24/debugging-by-the-seat-of-the-pants/</guid>
+<pubDate>Wed, 24 Oct 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Dynamically Adjusting LCD Brightness with Ambient Light</title>
+<link>https://pointersgonewild.com/2012/09/29/dynamically-adjusting-lcd-brightness-with-ambient-light/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/09/29/dynamically-adjusting-lcd-brightness-with-ambient-light/</guid>
+<pubDate>Sat, 29 Sep 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Some Glues Don&apos;t Mix with Electronics</title>
+<link>https://pointersgonewild.com/2012/09/25/some-glues-dont-mix-with-electronics/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/09/25/some-glues-dont-mix-with-electronics/</guid>
+<pubDate>Tue, 25 Sep 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The AVR Alarm Clock is Complete</title>
+<link>https://pointersgonewild.com/2012/09/23/the-avr-alarm-clock-is-complete/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/09/23/the-avr-alarm-clock-is-complete/</guid>
+<pubDate>Mon, 24 Sep 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Short Update on toyCPU</title>
+<link>https://pointersgonewild.com/2012/07/25/short-update-on-toycpu/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/07/25/short-update-on-toycpu/</guid>
+<pubDate>Wed, 25 Jul 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>toyCPU Project Update</title>
+<link>https://pointersgonewild.com/2012/07/19/toycpu-project-update/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/07/19/toycpu-project-update/</guid>
+<pubDate>Thu, 19 Jul 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Designing a toy CPU</title>
+<link>https://pointersgonewild.com/2012/07/13/designing-a-toy-cpu/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/07/13/designing-a-toy-cpu/</guid>
+<pubDate>Fri, 13 Jul 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>A Radical Introduction to Programming</title>
+<link>https://pointersgonewild.com/2012/07/10/radical-intro-to-programming/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/07/10/radical-intro-to-programming/</guid>
+<pubDate>Tue, 10 Jul 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>An Inexpensive Robot Platform</title>
+<link>https://pointersgonewild.com/2012/06/21/an-inexpensive-robot-platform/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/06/21/an-inexpensive-robot-platform/</guid>
+<pubDate>Fri, 22 Jun 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Why Do Most New Languages Fail?</title>
+<link>https://pointersgonewild.com/2012/06/07/why-do-most-new-languages-fail/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/06/07/why-do-most-new-languages-fail/</guid>
+<pubDate>Thu, 7 Jun 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Loebner Contest makes Turing Roll in his Grave</title>
+<link>https://pointersgonewild.com/2012/05/15/loebner-contest-makes-turing-roll-in-his-grave/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/05/15/loebner-contest-makes-turing-roll-in-his-grave/</guid>
+<pubDate>Tue, 15 May 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>We Should be Sequencing the DNA of Endangered Species</title>
+<link>https://pointersgonewild.com/2012/05/08/we-should-be-dna-sequencing-endangered-species/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/05/08/we-should-be-dna-sequencing-endangered-species/</guid>
+<pubDate>Wed, 9 May 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>MusicToy - Music Made Simple</title>
+<link>https://pointersgonewild.com/2012/04/23/musictoy-music-made-simple/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/04/23/musictoy-music-made-simple/</guid>
+<pubDate>Mon, 23 Apr 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Indirection Problem</title>
+<link>https://pointersgonewild.com/2012/04/20/the-indirection-problem/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/04/20/the-indirection-problem/</guid>
+<pubDate>Fri, 20 Apr 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Why LISP Never Took Off</title>
+<link>https://pointersgonewild.com/2012/04/11/why-lisp-never-took-off/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/04/11/why-lisp-never-took-off/</guid>
+<pubDate>Wed, 11 Apr 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Inefficient Numerical Operators</title>
+<link>https://pointersgonewild.com/2012/04/02/inefficient-numerical-operators/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/04/02/inefficient-numerical-operators/</guid>
+<pubDate>Mon, 2 Apr 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Teaching Computers about Music</title>
+<link>https://pointersgonewild.com/2012/03/30/teaching-computers-about-music/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/03/30/teaching-computers-about-music/</guid>
+<pubDate>Fri, 30 Mar 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Game Development: Toying with CSG and WebGL</title>
+<link>https://pointersgonewild.com/2012/03/09/game-development-toying-with-csg-and-webgl/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/03/09/game-development-toying-with-csg-and-webgl/</guid>
+<pubDate>Fri, 9 Mar 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Are Variadic Functions Necessary?</title>
+<link>https://pointersgonewild.com/2012/02/27/are-variadic-functions-necessary/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/02/27/are-variadic-functions-necessary/</guid>
+<pubDate>Mon, 27 Feb 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Stop Hating on C!</title>
+<link>https://pointersgonewild.com/2012/02/23/stop-hating-on-c/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/02/23/stop-hating-on-c/</guid>
+<pubDate>Thu, 23 Feb 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Venturing into Electronic Music</title>
+<link>https://pointersgonewild.com/2012/02/09/venturing-into-electronic-music/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/02/09/venturing-into-electronic-music/</guid>
+<pubDate>Thu, 9 Feb 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Exporting MIDI Files using Data URIs</title>
+<link>https://pointersgonewild.com/2012/01/31/exporting-midi-files-using-data-uris/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/01/31/exporting-midi-files-using-data-uris/</guid>
+<pubDate>Tue, 31 Jan 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Try my Web App: Melodique, a Procedural Melodic Phrase Generator</title>
+<link>https://pointersgonewild.com/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/</guid>
+<pubDate>Sun, 29 Jan 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Algorithms Making Music</title>
+<link>https://pointersgonewild.com/2012/01/21/algorithms-making-music/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/01/21/algorithms-making-music/</guid>
+<pubDate>Sat, 21 Jan 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>About Tachyon&apos;s Garbage Collector</title>
+<link>https://pointersgonewild.com/2012/01/12/about-tachyons-garbage-collector/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/01/12/about-tachyons-garbage-collector/</guid>
+<pubDate>Thu, 12 Jan 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Two HDTVs for my Media PC</title>
+<link>https://pointersgonewild.com/2012/01/12/263/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/01/12/263/</guid>
+<pubDate>Thu, 12 Jan 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Tachyon&apos;s Design Principles</title>
+<link>https://pointersgonewild.com/2012/01/06/tachyons-design-principles/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2012/01/06/tachyons-design-principles/</guid>
+<pubDate>Sat, 7 Jan 2012 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Tachyon has a Garbage Collector!</title>
+<link>https://pointersgonewild.com/2011/12/17/tachyon-has-a-garbage-collector/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/12/17/tachyon-has-a-garbage-collector/</guid>
+<pubDate>Sat, 17 Dec 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Type Analysis for JavaScript</title>
+<link>https://pointersgonewild.com/2011/12/11/type-analysis-for-javascript/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/12/11/type-analysis-for-javascript/</guid>
+<pubDate>Mon, 12 Dec 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Good News for JavaScript! Bad News for Me...</title>
+<link>https://pointersgonewild.com/2011/11/29/good-news-for-javascript-bad-news-for-me/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/11/29/good-news-for-javascript-bad-news-for-me/</guid>
+<pubDate>Tue, 29 Nov 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Progress on the Überclock</title>
+<link>https://pointersgonewild.com/2011/11/14/progress-on-the-uberclock/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/11/14/progress-on-the-uberclock/</guid>
+<pubDate>Mon, 14 Nov 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Metaprogramming for JavaScript</title>
+<link>https://pointersgonewild.com/2011/11/01/metaprogramming-for-javascript/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/11/01/metaprogramming-for-javascript/</guid>
+<pubDate>Tue, 1 Nov 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>What I&apos;d like to Know about JavaScript Programs</title>
+<link>https://pointersgonewild.com/2011/10/31/what-id-like-to-know-about-javascript-programs/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/10/31/what-id-like-to-know-about-javascript-programs/</guid>
+<pubDate>Mon, 31 Oct 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Code Compactness and Optimization Levels</title>
+<link>https://pointersgonewild.com/2011/10/31/code-compactness-and-optimization-levels/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/10/31/code-compactness-and-optimization-levels/</guid>
+<pubDate>Mon, 31 Oct 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Presented at DLS 2011</title>
+<link>https://pointersgonewild.com/2011/10/25/presented-at-dls-2011/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/10/25/presented-at-dls-2011/</guid>
+<pubDate>Tue, 25 Oct 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Toying with Microcontrollers Part Deux</title>
+<link>https://pointersgonewild.com/2011/10/12/toying-with-microcontrollers-part-deux/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/10/12/toying-with-microcontrollers-part-deux/</guid>
+<pubDate>Wed, 12 Oct 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Optimizing Global Value Numbering</title>
+<link>https://pointersgonewild.com/2011/10/07/optimizing-global-value-numbering/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/10/07/optimizing-global-value-numbering/</guid>
+<pubDate>Fri, 7 Oct 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>What&apos;s Next for Tachyon</title>
+<link>https://pointersgonewild.com/2011/10/04/whats-next-for-tachyon/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/10/04/whats-next-for-tachyon/</guid>
+<pubDate>Tue, 4 Oct 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Toying with AVR Microcontrollers</title>
+<link>https://pointersgonewild.com/2011/10/04/toying-with-avr-microcontrollers/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/10/04/toying-with-avr-microcontrollers/</guid>
+<pubDate>Tue, 4 Oct 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>New x86 Backend and... JavaScript Macros?</title>
+<link>https://pointersgonewild.com/2011/09/27/new-x86-backend-and-javascript-macros/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/09/27/new-x86-backend-and-javascript-macros/</guid>
+<pubDate>Wed, 28 Sep 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>My Masters Research: Just-In-Time Specialization</title>
+<link>https://pointersgonewild.com/2011/09/23/my-masters-research-just-in-time-specialization/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/09/23/my-masters-research-just-in-time-specialization/</guid>
+<pubDate>Fri, 23 Sep 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Just Passed my Predoctoral Exam</title>
+<link>https://pointersgonewild.com/2011/09/20/just-passed-my-predoctoral-exam/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/09/20/just-passed-my-predoctoral-exam/</guid>
+<pubDate>Tue, 20 Sep 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Predoctoral Exam</title>
+<link>https://pointersgonewild.com/2011/09/11/predoctoral-exam/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/09/11/predoctoral-exam/</guid>
+<pubDate>Sun, 11 Sep 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Artificial Life in your Web Browser!</title>
+<link>https://pointersgonewild.com/2011/08/29/artificial-life-in-your-web-browser/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/08/29/artificial-life-in-your-web-browser/</guid>
+<pubDate>Mon, 29 Aug 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>The Tachyon JavaScript Compiler</title>
+<link>https://pointersgonewild.com/2011/08/27/the-tachyon-javascript-compiler/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/08/27/the-tachyon-javascript-compiler/</guid>
+<pubDate>Sat, 27 Aug 2011 00:00:00 -0000</pubDate>
+</item>
+
+<item>
+<title>Hello world!</title>
+<link>https://pointersgonewild.com/2011/08/27/hello-world/</link>
+<guid isPermaLink="true">https://pointersgonewild.com/2011/08/27/hello-world/</guid>
+<pubDate>Sat, 27 Aug 2011 00:00:00 -0000</pubDate>
+</item>
+
+</channel>
+</rss>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Human-Scale vs Asymmetric Social Media</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Human-Scale vs Asymmetric Social Media">
+  <meta property="og:description" content="Human-Scale vs Asymmetric Social Media">
+  <meta property="og:image" content="https://pointersgonewild.com/2023-12-24-toxic-by-design-human-scale-vs-asymmetric-social-media/angry-man-1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2023-12-24-toxic-by-design-human-scale-vs-asymmetric-social-media/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2023/11/01/preparing-uvm-for-3d-graphics/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2024/04/07/the-race-to-make-humans-obsolete/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Human-Scale vs Asymmetric Social Media</h1>
+<div class="post_date">December 24th, 2023</div>
+</div>
+<div class="cover_image">
+<img src="angry-man-1.jpg">
+</div>
+<p>Every once in a while, I see people mention "dark patterns" in UI design. Patterns that are actively trying to deceive users, either to maximize engagement, to click some ad, or to get them to perform an action they didn't want to perform. An obvious example would be some huge pop-up ad which can be closed by the user, but makes it as difficult as possible for you to find the god damn button to close it.</p>
+<p>I've been thinking that there are parallels to draw with the design of social media websites. There are many websites which could be categorized as forms of social media, and many ways to design such websites. Since the public internet exploded in mid-1990s, there's always been both good and bad things to be found in online communities. Opportunities to connect and exchange ideas with people, but also misinformation and problematic behaviors.</p>
+<p>Many people have been lamenting, with a sense of nostalgia, that the internet has sort of been going downhill over the past 20+ years. The original magic is mostly gone. Online discussions have become more toxic and politicized. No doubt, we live in a different world today than we did 20 or 30 years ago. Many people would point to the events of 2001 as a sort of turning point after which people started to become more cynical. Still, today, I want to raise a simple question: what if part of the problems we see in online communities today is structural? What if it's not just the people that changed, but the design of social media websites itself that exacerbates toxic behavior?</p>
+<p>Back in the mid to late 90s, when the internet still felt <a href="/2022/01/19/the-internet-changed-my-life/">new and exciting</a>, the main way that people would connect online was via chat rooms and smaller, usually topic-oriented online discussion forums. These still exist today, but by and large, they've been supplanted by large social media websites such as twitter/X, Instagram, and Facebook. The main argument I want to make is that we've seen a large shift from human-scale social media, to what I would refer to as influencer-follower (or asymmetric) social media, and this shift in the design of social media platforms exacerbates toxic social dynamics.</p>
+<p>The earliest online communication tools, chat rooms and small forums, try to imitate the way humans communicate in the real world. On these platforms, you communicate with people one-to-one, or with small groups of people for focused discussions. Because of the similarity to real-world interactions, I would describe these kinds of communication styles as human-scale. A platform like twitter is fundamentally different, because it puts the emphasis on one-to-many dissemination of information. There are influencers, and there are followers. Users are more or less explicitly ranked by popularity, with a small minority of popular users having a much, much, much louder voice than everyone else, and the less popular essentially existing in a different class where influencers hardly hear their voice. I would argue that this pattern, which functions almost like an online caste system, is fundamentally toxic.</p>
+<p>There have always been celebrities and politicians. There have always been people who are more popular than others and whose voice carries more influence. The difference is that in the information age, where everyone carries a smart device, information flows extremely quickly. It takes seconds to share your hot take on any topic with potentially hundreds of millions of people, and seconds to react. There's also a question of scale, where the massive scale amplifies pre-existing toxic social dynamics. Humans are tribal creatures, instinctively driven to follow thought leaders, and to exclude those who aren't part of their in-group, or those that thought leaders deem as bad people. The obvious example here being twitter mobs, where an influencer leverages their followers to engage in personal attacks and cyber-bullying of someone with less social status.</p>
+<p>As a counter-point to all this, many will disagree with me here, but I would argue that websites like Reddit and Hacker News are healthier social media platforms than twitter and Instagram, purely because of their design, which is more human-scale and community-driven. On Reddit and HN, the content is first. Anyone can submit a link or write a post, and discussions are centered around that topic, and if the content is found to be interesting, it rises to the top. It's not about which content some famous person might be looking at, or some half-baked hot take they posted from the bathroom.</p>
+<p>Yes, there are problematic people and behaviors on Reddit/HN as well. Humans gonna human, but I think that the design of a platform like twitter or Instagram, where people follow influencers, is fundamentally more unhealthy. Beyond the problems introduced by the fact that you're having asymmetric interactions with people on twitter, where influencers automatically have more of a voice than you, there's also the problem that many have already outlined on platforms like Instagram, where you're looking at curated, filtered glamor shots of people's lives. The fact that these platforms encourage you to post short-form content and penalize you for doing the opposite is also definitely not helpful for any attempt at having a balanced and nuanced discussion about anything.</p>
+<p>I'm sure that many will disagree with me, and will try to make the cynical argument that Reddit is just as toxic as every other social media platform. You're entitled to your own opinion. I think that there are definitely a number of issues with Reddit. Many of these issues stem, I believe, from mismanagement and poor decision making by the parent company. Still, I would argue that Reddit and HN are some of the few places where the original magic of the early internet still lives on, and part of this is because of their design and structure, which encourages human-scale and community-based social exchanges.</p>
+<p>Some may be tempted to disagree with me out of an emotional attachment to twitter/X. I've been casually using twitter for a few years. I use it pretty much exclusively to talk about my tech-related interests, and I follow pretty much only people who also post about tech and that I would consider to be friendly and kind. For the sake of own mental health, I try to stay way from hot button political discussions. The problem is, the platform is actively trying to hinder my efforts. It recommends tweets from people I don't follow, influencers who post low-effort hot takes. This is less of a problem since the recent algorithm changes, but I've also gotten angry at twitter when I noticed that the platform was showing me inflammatory political tweets, uninformed hostile political opinions, seemingly trying to drag me into a flame war to maximize engagement. Why is this crud in my feed?</p>
+<p>If you do agree with me that a big part of the toxicity of modern online platforms comes from issues with the nature of asymmetric, individualistic, follower-influencer design, there's another question that arises: what can we do about it? We live in an individualistic world, and many people are drawn to influencers and the kind of ego-driven content they tend to produce. Building platforms that cater to influencers can also clearly net you a lot of money. People have gotten rich by enabling personality cults, so there's a financial incentive to continue doing so.</p>
+<p>I think that the first step would be to develop an awareness of the nature of the problem. Being aware and willing to acknowledge that a problem exists, and having an understanding of its cause, can help us inform design decisions so that we can build and promote better platforms. At the very least, if we choose to use social media websites, we, as individual users, have the freedom choose platforms which are better for our own mental health, and it helps to have some understanding of why.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Loebner Contest makes Turing Roll in his Grave</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Loebner Contest makes Turing Roll in his Grave">
+  <meta property="og:description" content="Loebner Contest makes Turing Roll in his Grave">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-05-15-loebner-contest-makes-turing-roll-in-his-grave/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/05/08/we-should-be-dna-sequencing-endangered-species/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/06/07/why-do-most-new-languages-fail/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Loebner Contest makes Turing Roll in his Grave</h1>
+<div class="post_date">May 15th, 2012</div>
+</div>
+<p>I got up early this morning to watch a live streaming of the <a href="http://www.loebner.net/Prizef/loebner-prize.html">Loebner Prize</a> contest, a formal enactment of a <a href="http://en.wikipedia.org/wiki/Turing_test">Turing test</a> where human judges must hold chat conversations with humans and chat bots simultaneously, and try to determine which one is the human and which one is the bot. Hosted at <a href="http://www.bletchleypark.org.uk/">Bletchley Park</a> this year, the contest was divided into four rounds where a total of 14 entries were to be judged.</p>
+<p>Unfortunately, there were several technical issues. The Loebner website was poorly laid out and I had a hard time finding the live streaming URL to begin with. Once I got there, I found the web streaming interface was rather ineffective. Conversations between one judge, one human and one bot were divided into panels of four unlabeled windows where characters appeared as they were being typed, making it difficult at first glance to see what part of which conversation was happening where.</p>
+<figure>
+<a href="loebner.png">
+<img alt="" src="loebner.png">
+</a>
+</figure>
+<p>There were also connection and text formatting issues, with some text never appearing, connections being broken, and some chat bots never producing newlines, which gave them away pretty quickly. Apparently, the people behind the Loebner contest chose to design their own chat protocol. Probably not a wise choice. They would likely have been much better served by a private <a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a> server.</p>
+<p>The bigger problem, of course, is that most of the entries were absolutely terrible. It seems that none of the judges were "fooled" for more than a minute. Most bots were completely unable to follow a conversation in any way. Some kept asking random questions over and over. Most couldn't answer any questions from the judges, to the point where some judges decided to simply ignore the bots. It's rather appalling to see that even today, in 2012, several of these bots do worse than plain old <a href="http://en.wikipedia.org/wiki/ELIZA">Eliza</a>. I'm fully aware that programming a competent chat bot is no easy feat, but it seems like this competition simply hasn't attracted the cream of the crop.</p>
+<p>After the thrill of watching <a href="http://www.pcworld.com/article/219900/ibm_watson_wins_jeopardy_humans_rally_back.html">Watson</a> spank humanity's ass on Jeoparty, I'm convinced that with modern technology we could do much better than this, if only someone just tried. I wish that the people at <a href="http://www.cyc.com/">Cycorp</a> would try and program a chat bot and show us what they can do with that fancy knowledge base and <a href="http://en.wikipedia.org/wiki/Natural_language_processing">NLP</a> software of theirs. I guess the truth is that there is too little market value for good chat bots, and the people who have the knowledge to implement a serious contender are busy doing something that earns them money. Turing is rolling in his grave right now.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

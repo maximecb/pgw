@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Faster than V8 *</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Faster than V8 *">
+  <meta property="og:description" content="Faster than V8 *">
+  <meta property="og:image" content="https://pointersgonewild.com/2014/09/17/faster-than-v8/lelouch_r.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-09-17-faster-than-v8/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/09/11/making-waves-ds-gc-problem-followup/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/10/23/audiobooks-are-awesome/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Faster than V8 *</h1>
+<div class="post_date">September 17th, 2014</div>
+</div>
+<div class="cover_image">
+<img src="lelouch_r.jpg">
+</div>
+<p>There's an asterisk next to the title because in most cases, Higgs doesn't beat the performance of <a href="http://en.wikipedia.org/wiki/V8_(JavaScript_engine)">Google's V8</a>, quite the opposite. I've mentioned in my post about <a href="/2014/09/09/ds-garbage-collector-problem/">D's garbage collector performance</a> that Higgs suffers from very slow compilation times. Higgs also lacks the sophisticated <a href="http://en.wikipedia.org/wiki/Inline_expansion">inlining</a> capabilities of V8, along with a plethora of micro-optimizations needed to perform well on widely-used benchmarks. Hence, I was both surprised and pleased when I found out that Higgs performs better than V8 on a microbenchmark.</p>
+<p>The <a href="https://code.google.com/p/caliper/wiki/JavaMicrobenchmarks">microbenchmark</a> in question is a simple loop incrementing a global counter variable from 0 to one billion:</p>
+<pre><code>// Loop to 1B
+// Note: i is a global variable
+for (i = 0; i &lt; 1000000000; ++i)
+{
+}
+</code></pre>
+<p>On my Core i7 laptop running 64-bit linux, I get the following performance results (also replicated on an i7 desktop):</p>
+<pre><code>time d8 loop-global-incr.js
+
+real 0m2.686s
+user 0m2.672s
+sys 0m0.008s
+
+time ./higgs loop-global-incr.js
+
+real 0m2.415s
+user 0m2.368s
+sys 0m0.040s
+</code></pre>
+<p>This might seem quite pointless as it's a trivial piece of code, not at all representative of the complexities of a real program. As I said earlier, on real benchmarks, V8 usually wins by a wide margin. Still, I do think that this is interesting. Why? Because in this simple instance, I'm able to generate better quality machine code. Despite its complex multi-tiered architecture, type-feedback and type analysis capabilities, V8 actually does a fairly poor job of optimizing this loop, whereas the machine code generated by Higgs is fairly tight.</p>
+<p>Optimizing this simple loop is actually nontrivial. In JavaScript, global variables are properties of the global object. As such, these properties could turn out to be accessors (getters and setter methods). Global properties can also be deleted, in which case reading them should throw an exception. There is also the issue that the addition and less-than operators can operate on any type without throwing an error. Hence, to generate effective machine code, you have to prove that the global variable "i" is not an accessor, that it won't be deleted and that it will remain an integer. If you can't prove those facts, then the machine code you generate will contain redundant type checks.</p>
+<p>The optimized machine code generated by V8 is quite bulky and cryptic:</p>
+<pre><code>— Optimized code —
+optimization_id = 0
+source_position = 0
+kind = OPTIMIZED_FUNCTION
+stack_slots = 2
+Instructions (size = 346)
+0xc579e565ae0 0 55 push rbp
+0xc579e565ae1 1 4889e5 REX.W movq rbp,rsp
+0xc579e565ae4 4 56 push rsi
+0xc579e565ae5 5 57 push rdi
+0xc579e565ae6 6 4883ec10 REX.W subq rsp,0x10
+0xc579e565aea 10 488b45f8 REX.W movq rax,[rbp-0x8]
+0xc579e565aee 14 488945e0 REX.W movq [rbp-0x20],rax
+0xc579e565af2 18 488bf0 REX.W movq rsi,rax
+0xc579e565af5 21 493ba540070000 REX.W cmpq rsp,[r13+0x740]
+0xc579e565afc 28 7305 jnc 35 (0xc579e565b03)
+0xc579e565afe 30 e8bdd5fcff call StackCheck (0xc579e5330c0)
+0xc579e565b03 35 33c0 xorl rax,rax
+0xc579e565b05 37 48bb681c51f000110000 REX.W movq rbx,0x1100f0511c68 ;; property cell
+0xc579e565b0f 47 4d8b55b0 REX.W movq r10,[r13-0x50]
+0xc579e565b13 51 4c3913 REX.W cmpq [rbx],r10
+0xc579e565b16 54 0f84f6000000 jz 306 (0xc579e565c12)
+0xc579e565b1c 60 488903 REX.W movq [rbx],rax
+0xc579e565b1f 63 e911000000 jmp 85 (0xc579e565b35)
+0xc579e565b24 68 4883ec08 REX.W subq rsp,0x8
+0xc579e565b28 72 488b45f8 REX.W movq rax,[rbp-0x8]
+0xc579e565b2c 76 488b5d10 REX.W movq rbx,[rbp+0x10]
+0xc579e565b30 80 e908000000 jmp 93 (0xc579e565b3d)
+0xc579e565b35 85 488b5d10 REX.W movq rbx,[rbp+0x10]
+0xc579e565b39 89 488b45e0 REX.W movq rax,[rbp-0x20]
+0xc579e565b3d 93 48ba681c51f000110000 REX.W movq rdx,0x1100f0511c68 ;; property cell ptr
+0xc579e565b47 103 488b12 REX.W movq rdx,[rdx] ;; read counter from global
+0xc579e565b4a 106 f6c201 testb rdx,0x1 ;; type tag test
+0xc579e565b4d 109 0f8553000000 jnz 198 (0xc579e565ba6)
+0xc579e565b53 115 48c1ea20 REX.W shrq rdx,32 ;; unboxing counter
+0xc579e565b57 119 81fa00ca9a3b cmpl rdx,0x3b9aca00
+0xc579e565b5d 125 0f8d32000000 jge 181 (0xc579e565b95)
+0xc579e565b63 131 493ba540070000 REX.W cmpq rsp,[r13+0x740] ;; ???
+0xc579e565b6a 138 0f8261000000 jc 241 (0xc579e565bd1); jump on carry
+0xc579e565b70 144 83c201 addl rdx,0x1 ;; counter increment
+0xc579e565b73 147 8bca movl rcx,rdx ;; redundant move
+0xc579e565b75 149 48c1e120 REX.W shlq rcx,32 ;; boxing counter
+0xc579e565b79 153 48ba681c51f000110000 REX.W movq rdx,0x1100f0511c68 ;; property cell ptr
+0xc579e565b83 163 4d8b55b0 REX.W movq r10,[r13-0x50] ;; ???
+0xc579e565b87 167 4c3912 REX.W cmpq [rdx],r10 ;; ???
+0xc579e565b8a 170 0f8487000000 jz 311 (0xc579e565c17) ;; ???
+0xc579e565b90 176 48890a REX.W movq [rdx],rcx ;; write counter to globa
+0xc579e565b93 179 eba8 jmp 93 (0xc579e565b3d) ;; jump to loop header
+0xc579e565b95 181 48b82141d0c48b060000 REX.W movq rax,0x68bc4d04121
+0xc579e565b9f 191 488be5 REX.W movq rsp,rbp
+0xc579e565ba2 194 5d pop rbp
+0xc579e565ba3 195 c20800 ret 0x8
+0xc579e565ba6 198 4d8b5500 REX.W movq r10,[r13+0x0]
+0xc579e565baa 202 4c3952ff REX.W cmpq [rdx-0x1],r10
+0xc579e565bae 206 751a jnz 234 (0xc579e565bca)
+0xc579e565bb0 208 f20f104207 movsd xmm0,[rdx+0x7]
+0xc579e565bb5 213 f20f2cd0 cvttsd2sil rdx,xmm0
+0xc579e565bb9 217 0f57c9 xorps xmm1,xmm1
+0xc579e565bbc 220 f20f2aca cvtsi2sd xmm1,rdx
+0xc579e565bc0 224 660f2ec1 ucomisd xmm0,xmm1
+0xc579e565bc4 228 7504 jnz 234 (0xc579e565bca)
+0xc579e565bc6 230 7a02 jpe 234 (0xc579e565bca)
+0xc579e565bc8 232 eb8d jmp 119 (0xc579e565b57)
+0xc579e565bca 234 e86304caff call 0xc579e206032 ;; deoptimization bailout
+0xc579e565bcf 239 eb86 jmp 119 (0xc579e565b57)
+0xc579e565bd1 241 50 push rax
+0xc579e565bd2 242 51 push rcx
+0xc579e565bd3 243 52 push rdx
+0xc579e565bd4 244 53 push rbx
+0xc579e565bd5 245 56 push rsi
+0xc579e565bd6 246 57 push rdi
+0xc579e565bd7 247 4150 push r8
+0xc579e565bd9 249 4151 push r9
+0xc579e565bdb 251 4153 push r11
+0xc579e565bdd 253 4156 push r14
+0xc579e565bdf 255 4157 push r15
+0xc579e565be1 257 488d6424d8 REX.W leaq rsp,[rsp-0x28]
+0xc579e565be6 262 488b75f8 REX.W movq rsi,[rbp-0x8]
+0xc579e565bea 266 33c0 xorl rax,rax
+0xc579e565bec 268 498d9d451eb1fe REX.W leaq rbx,[r13-0x14ee1bb]
+0xc579e565bf3 275 e82806faff call 0xc579e506220 ;; CEntryStub
+0xc579e565bf8 280 488d642428 REX.W leaq rsp,[rsp+0x28]
+0xc579e565bfd 285 415f pop r15
+0xc579e565bff 287 415e pop r14
+0xc579e565c01 289 415b pop r11
+0xc579e565c03 291 4159 pop r9
+0xc579e565c05 293 4158 pop r8
+0xc579e565c07 295 5f pop rdi
+0xc579e565c08 296 5e pop rsi
+0xc579e565c09 297 5b pop rbx
+0xc579e565c0a 298 5a pop rdx
+0xc579e565c0b 299 59 pop rcx
+0xc579e565c0c 300 58 pop rax
+0xc579e565c0d 301 e95effffff jmp 144 (0xc579e565b70)
+0xc579e565c12 306 e8f303caff call 0xc579e20600a ;; deoptimization bailout
+0xc579e565c17 311 e80c04caff call 0xc579e206028 ;; deoptimization bailout
+</code></pre>
+<p>At the start, there's a long sequence of instruction which seems to be a function entry prelude. This is not part of the loop body.There are many instructions in this machine code which are never executed. You can see, for example, that there is floating-point code. That code was generated in case an overflow might occur, but this can't happen here. There are also deoptimization bailouts (calls into the JIT compiler) which are never needed. This code is unnecessary, but won't affect performance. Essentially, in each loop iteration, the counter variable is unboxed (using a shift instruction), its type tag is tested and then it is boxed again.</p>
+<p>In contrast, Higgs, using <a href="bbv_paper.pdf">basic block versioning</a>, is able to eliminate the type test from the loop body. Higgs also uses an unusual scheme where <a href="http://en.wikipedia.org/wiki/Tagged_union">type tags</a> are stored separately from value <a href="http://en.wikipedia.org/wiki/Word_(computer_architecture)">words</a>. Because of this, Higgs does not need to box and unbox object property values. Since the type of the counter variable is known to always be an integer in this case, type tags don't need to be touched at all inside the loop body. Furthermore, in Higgs, code is <a href="/2013/12/10/the-incremental-jit-lives/">lazily generated</a>, so there is no floating-point or bailout code. There are no long sequences of instructions that are never executed.</p>
+<p>The machine code produced by Higgs for the loop body is as follows:</p>
+<pre><code>for_test(19337):
+; $3 = shape_get_def $1, “i” =&gt; capture_cont(19386)
+mov rdx, 140451224576896; rdx = shape pointer, unused
+
+capture_cont(19386):
+; $8 = shape_get_prop $1, $3
+mov r10, [qword rsi + 2616];
+
+; $0 = lt_i32 $6, 1000000000
+cmp r10d, 1000000000;
+jge branch_for_exit(1933A);
+nop5;
+
+for_body(19338):
+; $4 = shape_get_def $1, “i” =&gt; capture_cont(193A5)
+mov r8, 140451224576896; rdx = shape pointer, unused
+
+; $11 = shape_get_prop $1, $4
+mov rdi, [qword rsi + 2616];
+
+; $17 = add_i32_ovf $9, 1 =&gt; call_merge(193FF), if_false(19410)
+add edi, 1;
+mov eax, 9795; eax = block idx, for eventual bailout
+jo branch_if_false(19410); overflow test
+
+; $14 = shape_get_def $1, “i” =&gt; capture_cont(19429)
+mov r9, 140451224576896; rdx = shape pointer, unused
+
+; shape_set_prop $1, “i”, $13
+mov [qword rsi + 2616], rdi;
+
+; jump =&gt; for_test(19337)
+jmp for_test(19337);
+</code></pre>
+<p>The machine code above is far from optimal. It contains redundant moves and overflow checks which are not yet optimized away. I'm also fully aware that V8 is a moving target in terms of performance: the V8 team is <a href="http://ariya.ofilabs.com/2014/08/javascript-and-v8-turbofan.html">already working on a better optimizing compiler</a>, and they will no doubt improve upon the current situation. Still, it's nice to see that all the work I've put into basic block versioning is paying off. In the general case, Higgs doesn't beat V8, and things are likely to remain that way, but in this specific instance, Higgs is able to generate better quality machine code than a commercial compiler which has tens of man-years of engineering behind it. It's a small victory, but I find it very encouraging nonetheless.</p>
+<p>The tests I performed were done with V8 version 3.29.66 (current SVN trunk revision), and the <a href="https://github.com/maximecb/Higgs/tree/6ef9e608abdd41ac07d32a5c86c4456ab8505859">current version</a> of my development branch. If someone has a recent version of the SpiderMonkey shell built, I'd be curious to see the generated code and performance results for this microbenchmark. I wouldn't be surprised if SpiderMonkey did better than V8 and Higgs, considering it sports a powerful <a href="http://rfrn.org/~shu/drafts/ti.pdf">hybrid type inference engine</a>.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

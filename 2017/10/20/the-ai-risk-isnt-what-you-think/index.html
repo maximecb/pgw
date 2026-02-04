@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The AI Risk Isn't What You Think</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The AI Risk Isn't What You Think">
+  <meta property="og:description" content="The AI Risk Isn't What You Think">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2017-10-20-the-ai-risk-isnt-what-you-think/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2017/06/11/zetas-jitterpreter/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2017/12/04/we-all-live-in-a-bubble/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The AI Risk Isn't What You Think</h1>
+<div class="post_date">October 20th, 2017</div>
+</div>
+<p>Recently, a number of prominent figures, including Elon Musk, have been warning us about the potential dangers that could arise if we can't keep artificial intelligence under control. The fear surrounding AI dates back a long time. Novels and stories about robot takeovers date back as far as the 1920s, before the advent of computers. A surge of progress in the field of machine learning, and the subsequent investment of hundreds of billions of dollars into AI research by tech giants has brought this fear back to the forefront. People are waking up to the fact that the age of AI and robots is coming soon, and that self-aware AI could very likely become a reality within their lifetime.</p>
+<p>The 2014 book <a href="https://en.wikipedia.org/wiki/Superintelligence:_Paths,_Dangers,_Strategies">Superintelligence: Paths, Dangers, Strategies</a> by <a href="https://www.theguardian.com/technology/2016/jun/12/nick-bostrom-artificial-intelligence-machine">Nick Bolstrom</a> embodies this fear. In his book, Bolstrom details multiple scenarios in which AI could spiral out of control. I believe that the author has achieved his goal: he has successfully scared many researchers into paying attention to the existential threat surrounding AI, to the point where <a href="https://futureoflife.org/ai-safety-research/">AI safety</a> is now a serious field of research in machine learning. This is a good thing. However, I think that Bolstrom's book is in many ways alarmist, and detracts from some of the bigger, more immediate threats surrounding AI.</p>
+<p>Much of the Doomsday scenarios in the Superintelligence book are centered on the idea that AI entities will be able to rapidly improve themselves, and reach "escape velocity" so to speak. That they will go from human-level intelligence to something much beyond in a ridiculously short amount of time. In many ways, I believe this portrays a poor understanding of the field of machine learning, and the way technology usually progresses. I see at least three factors that make this scenario unlikely:</p>
+<ol start="1">
+<li>
+<p>While the idea of an AI entity rewriting its own machine code may be seductive to sci-fi authors, the way deep neural networks operate now, they would be hard pressed to do such a thing, particularly if they weren't designed with that purpose in mind.</p>
+</li>
+<li>
+<p>Currently, machine learning researchers are struggling to put together enough computational power to train neural networks to do relatively simple things. If an AI became self-aware tomorrow, it probably couldn't double its computational power over night, because doing so would require access to physical computing resources that simply aren't there.</p>
+</li>
+<li>
+<p>Sudden explosive progress is not the way any past technology has progressed. As rapidly as computers have evolved, it took decades and decades to get from the ENIAC to the computers we have now. There is no reason to think that AI will be incredibly different. So far, the field of machine learning has seen a fairly gradual increase in the capabilities of the algorithms we have. It took decades to get to where we are now.</p>
+</li>
+</ol>
+<p>Silicon Valley likes to tell us that technological progress goes at an exponential rate, but fails to deliver any real evidence backing this dogmatic belief. In the case of self-aware AI, I think a more likely scenario is that we will be building machines with increasing levels of awareness of the world. We'll build robots to clean up around our homes, and the first ones will be fairly stupid, limited to a small set of tasks. With never generations, they'll become capable of doing more and more, and understanding more and more complex instructions. Until, eventually, you'll be talking to a robot, and it will understand you as well as another human being would.</p>
+<p>In my opinion, the advent of self-aware AI will require several more breakthroughs in machine learning. It may also require several generations of hardware that is designed with the sole purpose of accelerating neural networks. The good thing is that if self-aware AI takes a long time to emerge, the first general-purpose AIs will have a fairly limited understanding of the world, and limited computational capabilities. This means those first AIs will simply not be capable of taking over the world. It also means we may have several years to test a number of fail-safe mechanisms between the time where AIs start to have a useful understanding of the world, and the point where they are genuinely dangerous.</p>
+<p>I think that, in some ways, the focus on the existential threat surrounding AI detracts us from a bigger, more immediate danger. AI is an immensely powerful tool. In the hands of giant corporations, it can be used to sift through every text message and every picture you post online. It can be used to analyze your behavior, control the information you see. The <a href="/2015/09/12/why-you-should-be-a-little-scared-of-machine-learning/">biggest risk posed by AI</a>, in my opinion, is that it's a tool that can be used to manipulate your life in ways that are useful to those who control the AI. It's an incredibly powerful tool which is controlled by a very small few.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

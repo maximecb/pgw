@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zeta's JITterpreter</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Zeta's JITterpreter">
+  <meta property="og:description" content="Zeta's JITterpreter">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2017-06-12-zetas-jitterpreter/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2017/04/29/zetavm-my-new-compiler-project/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2017/10/20/the-ai-risk-isnt-what-you-think/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Zeta's JITterpreter</h1>
+<div class="post_date">June 12th, 2017</div>
+</div>
+<p>About six weeks ago, I made <a href="https://github.com/zetavm/zetavm">ZetaVM</a> open source and <a href="/2017/04/29/zetavm-my-new-compiler-project/">announced it</a> on this blog. This is a compiler/VM project that I had been quietly working on for about 18 months. The project now has 273 stars on GitHub. This is both exciting and scary, because so much of what I want to do with this project is not yet built. I really want to show this project to people, but I also find myself scared that people may come, see how immature/incomplete the project is at this stage, and never come back. In any case the project is open source now, and I think it would be good for me to write about it and explain some of the design ideas behind it, if only to document it for current and potential future collaborators.</p>
+<p>One of the main goals of ZetaVM is to be very approachable, and enable more people to create their own programming languages, or to experiment with language design. With that goal in mind, I've designed a <a href="https://github.com/zetavm/zetavm/blob/master/tests/vm/ex_image.zim">textual, stack-based bytecode format</a> that resembles JSON, but allows for cycles (objects can reference one-another). Functions, basic blocks, and instructions in this bytecode format are all described as a graph of JS-like objects. This is very user-friendly. Anyone can write a Python script that outputs code in this format and run the output in ZetaVM. It's also very powerful, in a LISP-y code-is-data kind of way: you can generate and introspect bytecode at run time, it's just made of plain objects and values that the VM can manipulate. ZetaVM has first-class bytecode.</p>
+<p>The downside of all this, as you can imagine, is that it inherently has to be absolutely dog slow. Or does it? The first version of the Zeta interpreter traversed the graph of bytecode objects the naive way, and it was indeed dog slow. I've since written a new interpreter which removes the overhead of the object-based bytecode by dynamically translating it to an internal representation (think <a href="https://en.wikipedia.org/wiki/Binary_translation">dynamic binary translation</a>). The internal IR is compact and flat, executing it involves no pointer hopping.</p>
+<p>The new interpreter generates code on the fly, which means it is, by definition, a Just-In-Time (JIT) compiler. It's architecture is based on <a href="https://www.youtube.com/watch?v=S-aHBuoiYE0">Basic Block Versioning (BBV)</a>, a compilation technique I developed during my PhD (talks and papers on the topic are <a href="/about/">linked here</a> if you're curious). BBV has the nice property that it generates code lazily, and the generated code naturally ends up compact and fairly linear. This is not done yet, but BBV also makes it possible to specialize code to eliminate dynamic type checks very effectively, and to perform various optimizations on the fly.</p>
+<p>You might be wondering why I'm bothering with an interpreter, instead of just writing a JIT that generates machine code. One of the motivating factors is that Zeta is still at a very early stage, and I think that an interpreter is a better choice for prototyping things. Another factor is that it occurred to me that I could potentially make Zeta more portable by having the interpreter do much of the compilation and optimization work. The interpreter can do type-specialization, inlining and various code simplifications.</p>
+<p>The interpreter will be designed in such a way that the internal IR it produces is optimized and in many ways very close to machine code. It should then be possible to add a thin JIT layer on top to generate actual machine code. The resulting JIT will hopefully be much simpler and easier to maintain than if one were compiling directly from the raw object-based bytecode format. Another benefit of this design is that all of the optimizations that the interpreter perform will not be tied in with the specifics of x86 or other architectures, they will remain portable.</p>
+<p>At the moment, the new interpreter is at a point where it lazily compiles code into the flat internal format, but performs no other optimization. This was enough to get a 7x performance improvement over the naive interpreter, but the current system is still quite a bit below the performance level of the Python interpreter, and there is definite room for improvement. Some of the first optimizations I would like to introduce are the elimination of redundant branching instructions, and the use of <a href="https://en.wikipedia.org/wiki/Inline_caching">inline caching</a> to speed up function calls.</p>
+<p>The elimination of redundant branches is fairly easy to do with BBV. Code is lazily compiled, and appended linearly into a buffer. When generating code for a branch, if the block we are jumping to is just about to be compiled, then the branch is redundant. BBV will naturally tend to generate code that flows linearly along hot code paths and branches out-of-line for infrequent code paths. That is, the default path often comes right next and requires no branching.</p>
+<p>Inline caching is a classic technique that was pioneered by the <a href="http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf">Smalltalk</a> and SELF VMs. It's used, among other things, to eliminate dynamic property lookups when polymorphic function calls are performed (see <a href="http://mrale.ph/blog/2015/01/11/whats-up-with-monomorphism.html">this excellent blog post</a> for more information). Currently, ZetaVM, when performing a function call, needs to read multiple properties on function objects. For instance, it needs to find out <a href="https://github.com/zetavm/zetavm/blob/920b121f85cd94b661528a69b5b04cf4f7fdb08f/vm/interp.cpp#L953">how many arguments</a> the function has, and what is its entry basic block. These property lookups are dynamic, and relatively slow. The end result is that the <code>call</code> instruction is very slow compared to other instructions.</p>
+<p>Most <code>call</code> instructions will end up always calling the same instruction. Hence, dynamic overhead on function calls can largely be eliminated by caching the identity of the function being called by a given <code>call</code> instruction. That is, one can cache the number of arguments and entry basic block associated with a function object the first time a <code>call</code> instruction is run, and then reuse this information when calling the function again, provided we keep calling the same function. This information will be cached in line, in the instruction stream, right after the call instruction opcode, hence the name inline caching. I anticipate that with inline caching, function calls in Zeta can be made several times faster.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

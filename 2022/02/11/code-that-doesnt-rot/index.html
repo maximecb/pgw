@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Code that Doesn't Rot</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Code that Doesn't Rot">
+  <meta property="og:description" content="Code that Doesn't Rot">
+  <meta property="og:image" content="https://pointersgonewild.com/2022/02/11/code-that-doesnt-rot/san_francisco_millennium_tower_july_2008-1.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2022-02-11-code-that-doesnt-rot/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2022/01/19/the-internet-changed-my-life/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2022/02/18/noisecraft-project-update/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Code that Doesn't Rot</h1>
+<div class="post_date">February 11th, 2022</div>
+</div>
+<div class="cover_image">
+<img src="san_francisco_millennium_tower_july_2008-1.jpeg">
+</div>
+<p>One of the most frustrating experiences, both as an end user and as a programmer, is to try to run a piece of software that used to work perfectly not that long ago, only to find out that it's now broken, the software won't run anymore, and it's not clear why. The software didn't change, but something broke, seemingly for no reason. This is often due to the phenomenon known as "code rot", or "bit rot".</p>
+<p>I used to work in a deep learning research lab, and I've seen cases where researchers had published code just six months ago, but one or more of the dependencies on which they relied had since made breaking changes. That put us in the unfortunate position of having to troubleshoot someone else's code. Sometimes you were lucky, and the problem was just that one of the Python packages which their code needed had made breaking changes, and the problem could be fixed by simply editing the project manifest. Sometimes people imported packages which they didn't really use, and we could completely remove the dependency. Other times we had to resolve conflicts between the multiple Python package managers that could be installed on a given system (pip2, pip3, Conda, and Ubuntu's apt).</p>
+<p>Editing a list of dependencies or wrangling with package managers doesn't sound too bad, but PyTorch, the deep learning framework which was key to a lot of this work, had this irritating feature that each release needed a specific version of the Nvidia GPU driver to run. Installing an older GPU driver required root access, which we often didn't have when working on remote compute clusters. Even if you were doing this on a local machine where you did have root access, the process of installing a new GPU driver was quite slow and tedious. Thanks to Nvidia's unfriendly driver installers, this process couldn't be automated, and once you were done, you might succeed in getting a specific release of PyTorch to work, but your other projects couldn't run anymore, because they needed the latest release instead.</p>
+<p>Researchers are encouraged to publish their code for the sake of replicability, but there's not much point if nobody else is able to run said code a few months down the line. As such, we started to encourage those wishing to publish their code to rely on containerization using either Docker or Singularity. That fixed issues such as broken Python packages, incompatible versions of PyTorch or TensorFlow and missing libraries on the host system. However, there was another problem, which is that much deep learning code can't really run fast enough on a CPU alone to be usable. Most of the code we saw required GPU acceleration. The solution to enable that was to use <a href="https://github.com/NVIDIA/nvidia-docker">nvidia-docker</a>, a special version of Docker which allowed code access to the host's Nvidia GPU drivers. This, however, reintroduced the problem that the code running inside the container needed a special version of the GPU drivers to be installed on the host machine to run correctly. Nvidia's solution to give people access to GPUs inside a Docker container was to breach the container and expose details of the host system in the process.</p>
+<p>How much time do we collectively waste, every year, fixing bugs due to broken dependencies? How many millions of hours of productivity are lost every single day? How much time do we spend rewriting software that worked just fine before it was broken? In my opinion, code rot is a problem that we ought to try to fix, or at least alleviate. Because of fundamental reasons I'll discuss later in this post, code rot probably can't ever be fully eliminated, but I think the situation could be made a lot better through more principled and forward-thinking software engineering. At the very least, the situation would be improved if we acknowledged that code rot is a problem, and understood what causes it to happen in the first place.</p>
+<p>How can we avoid code breakage? Linus Torvalds seems to think that in general, when compiling software, it's <a href="https://lore.kernel.org/lkml/CAHk-=whs8QZf3YnifdLv57+FhBi5_WeNTG1B-suOES=RcUSmQg@mail.gmail.com/">better to statically link</a> libraries if you can, because very few shared libraries are actually version safe, and with dynamic linking, you're always adding complexity and exposing yourself to the risk that the system your software is going to get installed on won't have a compatible version of the libraries you need.</p>
+<p>In my opinion, for software that relies on a package manager, it's better to fix package version numbers if possible. That is, to specify directly in the manifest of your package which version of each dependency to use. The reason for this is that you unfortunately can't trust newer version of your dependencies not to make breaking changes, and often, one broken dependency is all it takes to render your software broken. In some cases, programmers may avoid specifying fixed version numbers because package managers such as Python's pip don't support having multiple versions of a given package installed at the same time, which could mean that the version of a package you request could clash with other software already installed on a given system. This is a shortcoming that needs to be addressed by package manager if we want to build reliable software.</p>
+<p>There's another problem though. Part of Python's appeal is that it makes it easy to link with C code through its Foreign Function Interface (FFI). This is part of what made Python so popular, because it makes it easy for anyone to write a package to interface with commonly available C libraries and benefit from the strength of the C ecosystem. However, this convenience comes at a cost. The FFI is essentially a trap door through which software gets access to external dependencies that can't be controlled by the package manager, which vastly increases the risk of code breakage. Third party package managers such as Conda try to address this by managing the installation of external libraries as well as Python code, but this can potentially introduce conflicts with Python packages installed through other means.</p>
+<p>In my opinion, the most practical solution to manage with these problems in the real world is to take a conservative and <a href="/2018/02/18/minimalism-in-programming/">minimalistic approach</a> to software design. Purposefully minimize dependencies if possible. Don't add new dependencies unless the value added is really worth the added cost of potential code breakage down the line. Avoid external dependencies as much as it's reasonable to do so, and when you do choose to rely on external packages and libraries, pick libraries that have a long history of being stable, well-maintained, backwards compatible and easy to install. Remember that it can take just one broken dependency for your software to fail to run on a user's system, and if your software breaks, they <a href="/2019/11/02/they-might-never-tell-you-its-broken/">might not even tell you</a> it's broken.</p>
+<p>Good software engineering practices can go a long way towards minimizing the risk of code rot, but I think it's also valuable to ask ourselves what is the cause of code rot in the first place. Could we possibly build software that doesn't rot? One interesting observation is that such software does exist, in a sense. People still write software for retro gaming platforms such as the Super NES and the Atari 2600. These platforms are essentially frozen in time, with a fixed set of devices and limited I/O capabilities. The fixedness of the platform, its simplicity, and the impossibility of relying on external software packages means that any software you write for it is unlikely to be broken by changes in the platform itself.</p>
+<p>The root cause of code rot is change. The world itself is changing, and so is software. As such, the only way to be completely protected from code rot is to target a platform that never changes. Not just the platform itself, but every interface the platform has to the outside, every device, file format and networking protocol. We can't stop the world from changing, but we can try to build software on more stable foundations. Like San Francisco's <a href="https://archinect.com/news/article/150294043/san-francisco-s-infamous-millennium-tower-is-still-sinking-and-it-may-be-running-out-of-time">Millennium Tower</a>, modern software is build on soft soil that keeps shifting under our feet, but it doesn't have to be that way.</p>
+<p>Although the world does change, many elements of the computing world remain fairly stable. Computer keyboards have been around since the 1950s. Color displays have been around since the 1980s. Touch devices have been commonplace for over a decade. IPv4 was introduced in 1981 and IPv6 in 1995. If I'm writing a program that only needs to read input from a keyboard and pointer device, and display pixels on a screen, there's no real reason why that program ever needs to break. The APIs for getting input from a keyboard and rendering frames to a display can be extremely simple. The world will keep changing and new I/O devices will be invented, but even 200 years from now, the concept of a keyboard and a color display should be easy to understand and interface with.</p>
+<p>Recently, I've been thinking about the design of virtual machines. If we want to create software that doesn't break, maybe what we need is some kind of executable code archival format. A minimalistic virtual machine with a small set of I/O devices that are interfaced through a small API surface, a small RISC instruction set, and an overall design that's generally kept as simple and stable as possible. Something like the modern equivalent of a Commodore 64, with a high-resolution color display and the performance of a modern machine. I don't think something like that would be applicable for every use cases, but I surmise that much of the software we use only really needs to interface with the outside world in fairly simple ways. For example, it needs to get input from the user in terms of mouse clicks or touch devices, it needs to draw pixels to display a user interface, and it might also need to read and write files, and maybe access the network. That software doesn't fundamentally need to link to any external libraries, everything can be statically linked, it just needs simple, stable interfaces to access the outside world.</p>
+<p>The idea of a <a href="https://en.wikipedia.org/wiki/Virtual_machine">Virtual Machine (VM)</a> isn't new. The Java VM tried to achieve this but largely failed. Sun Microsystems coined the famous <a href="https://en.wikipedia.org/wiki/Write_once,_run_anywhere">"write once, run anywhere"</a> slogan, which people began to jokingly mock as "write once, debug everywhere". In my opinion, the area where most VM designers go wrong is that they tend to expose too many APIs, and each of them has an API surface that is much too large. When an API has a large surface, it's very easy for subtle bugs and corner cases to creep in. You almost inevitably end up with different implementations of the API behaving in different ways. The Web Audio and Canvas HTML APIs are good examples of this. APIs with a large surface are created because VM designers believe this is more convenient for programmers, and will yield better performance. However, this convenience has a cost, in that it makes code breakage much more likely. Fundamentally, to output audio, one should be able to output a simple list of floating-point samples, and to draw pixels, one should be able to output a grid of pixels. It doesn't have to be much more complex than that, and if the APIs were kept simpler, they would be much less likely to break.</p>
+<p>In order to minimize the risk of code breakage, API boundaries are not the only thing one has to think about. If your software interfaces with the outside world, you also need to think about file formats and networking protocols. In this area, choosing mature, stable, open standards is generally preferable. I don't know if my idea of a code archival format, or a virtual machine designed for maximum API stability will see the light of day. For the moment, it remains a thought experiment, but in the meantime, I encourage every developer to think about purposefully minimizing dependencies, about designing smaller, more stable APIs and about packaging their software in a way that will maximize its useful shelf life. Engineering more robust and durable software is one way in which you can improve the lives of a large number of people in small ways and help reduce electronic waste.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

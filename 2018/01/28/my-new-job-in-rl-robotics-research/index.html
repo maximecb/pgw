@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My new Job in RL &amp; Robotics Research</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My new Job in RL &amp; Robotics Research">
+  <meta property="og:description" content="My new Job in RL &amp; Robotics Research">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2018-01-28-my-new-job-in-rl-robotics-research/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2017/12/04/we-all-live-in-a-bubble/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2018/02/18/minimalism-in-programming/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>My new Job in RL &amp; Robotics Research</h1>
+<div class="post_date">January 28th, 2018</div>
+</div>
+<p>After I completed my PhD in early 2016, I took a job with the GPU compiler team at Apple and <a href="/2016/02/24/moving-to-the-valley/">moved from Canada to the United States</a>. I wasn't sure if Silicon Valley was for me, but I figured that if I was going to try living in another country, it was best to make that kind of move when I was young, without property, children or a life partner.</p>
+<p>My job at Apple was in many ways a dream job. It was sunny almost everyday, I worked on a small team of highly qualified friendly engineers, had an awesome boss, ate lots of insanely great organic food, and spent my work days sitting in a comfy Aeron chair. Unfortunately, I <a href="/2016/09/20/silicon-valley-six-months-later/">wasn't quite happy</a> there. For one thing, I didn't quite mesh with Apple's secretive culture. I didn't love the culture of Silicon Valley that much either, but the biggest problem was that the isolation got to me. Living in an American suburb far from everything I knew, and dealing with illness in the family back home, I ended up having to take antidepressants for the first time in my life. I decided to move back to Montreal, the city I love, in the hope of living a healthier and happier life.</p>
+<p>It's been nine months since I started my new job as a staff member slash research assistant at the <a href="https://mila.quebec/">Montreal Institute for Learning Algorithms (MILA)</a>. It's one of the biggest (if not the biggest) university research labs focused on artificial intelligence, headed by Professor Yoshua Bengio. This job doesn't come with a Silicon Valley salary, but in my view, it's a good mix of the perks I could get in an industry job, combined with the freedom that comes with academic research. The schedule is very flexible, the work is highly experimental, and best of all, as a research assistant, I have the opportunity to publish, but not the obligation.</p>
+<p>You might be surprised at the current shift in career plans. I did my PhD in compiler design, so why am I working in a deep learning lab? Obviously, there's a lot of excitement surrounding machine learning and AI right now. I, like many others, believe that this technology will transform the world in a million ways, most of which we haven't even begun to imagine. That's one reason why I'm here: I've shared that excitement for a long time. However, that's not the only reason. Fundamentally, I like research. This is a very active area of research. Compilers, as cool as they are, are not a very active research topic anymore. Most industry compiler jobs revolve around maintenance, and implementation of tried-and-tested ideas. Most academic compiler research is focused on incrementalism. There unfortunately isn't that much pioneering.</p>
+<p>I feel very fortunate that my new job has allowed me to pick which projects I would get involved in. I've chosen to focus on projects in the areas of <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">reinforcement learning</a> and robotics. Reinforcement learning holds a lot of promise as a technique for <a href="https://www.youtube.com/watch?v=gn4nRCC9TwQ">teaching algorithms new tricks</a>. Robotics has fascinated me since I was a child, and offers me the opportunity to tinker with electronics and more concrete projects. Another great perk of this new job of mine, is that being an academic lab, they fully embrace the open sharing of ideas and information. I will be allowed to blog and discuss in detail the projects that I am working on. Stay tuned!</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

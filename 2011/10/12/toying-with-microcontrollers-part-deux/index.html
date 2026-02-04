@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Toying with Microcontrollers Part Deux</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Toying with Microcontrollers Part Deux">
+  <meta property="og:description" content="Toying with Microcontrollers Part Deux">
+  <meta property="og:image" content="https://pointersgonewild.com/2011/10/12/toying-with-microcontrollers-part-deux/dsc00700.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-10-12-toying-with-microcontrollers-part-deux/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/07/optimizing-global-value-numbering/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/25/presented-at-dls-2011/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Toying with Microcontrollers Part Deux</h1>
+<div class="post_date">October 12th, 2011</div>
+</div>
+<div class="cover_image">
+<img src="dsc00700.jpg">
+</div>
+<p>I have been pursuing my work on the über alarm clock project in my spare time. For those of you wondering what the hell I'm talking about, see my <a href="/2011/10/04/toying-with-avr-microcontrollers/">original post</a> on the topic. This project is largely an excuse for me to learn more about electronics, microcontrollers and embedded development. However, it's also motivated in this reality: I have trouble falling asleep at night and I oversleep in the morning. My current alarm clock also sucks, and will sometimes not ring at all, even though I can verify it's been set in the morning (not kidding!). Hence the idea to build an alarm clock that is reliable, automatically sets itself, rings loudly, and only rings when needed.</p>
+<p>I've recently read an article about oversleeping and insomnia that lead me to believe that perhaps one of the reasons I have trouble falling asleep is ambient noise. I live on a busy street and the sound of cars outside can be heard fairly constantly (my girlfriend also has a tendency to snore). I use earplugs, but they don't block out the noise as well as I'd like them to. Hence, I've had this idea that perhaps I could build a <a href="http://en.wikipedia.org/wiki/White_noise_machine">white noise machine</a> into my ultimate alarm clock. I'll be able to tinker with the sound to make it sound just right, and as loud as I want. This will hopefully produce a pleasant sound that blocks out most of the ambient noise.</p>
+<p>The series of microcontrollers I'm using can run at up to 20MHz or so, and has PWM outputs, which make it possible to generate sound. Hence, I thougt it might be pretty easy to amplify this PWM signal using a power MOSFET and filter it out at the speaker end using a capacitor. I decided to buy an old speaker with sufficient low frequency capabilities at some used store, it cost me $5:</p>
+<figure>
+<a href="dsc00694.jpg">
+<img alt="" src="dsc00694.jpg">
+</a>
+</figure>
+<p>I was able to produce sound, some of which was pretty promising sounding. Unfortunately, however, it seems that using PWM to generate sound, even at high sampling rates, introduces too much audio glitches. Hence, I've decided to order a Digital Analog Conversion (DAC) chip and an audio amplifier chip. This should allow me to generate better quality sound.</p>
+<p>Since I've had to put this part of the project on hold, I decided to work on other basic things, like getting a display working. I owned two HD44780-compatible displays (you can find them for about $3.50 shipped on ebay). So I soldered a header to one of them that I can easily stick into a solderless breadboard:</p>
+<figure>
+<a href="dsc00696.jpg">
+<img alt="" src="dsc00696.jpg">
+</a>
+</figure>
+<p>I was able to find several <a href="http://www.pocketmagic.net/?p=447">helpful tutorials</a> on how to interface one of these with a microcontroller. The <a href="http://www.adafruit.com/datasheets/HD44780.pdf">spec sheet</a> for the HD44780 controller also proved quite useful. It took quite a bit of tinkering, but I was able to get it working in the end. Not only that, I was able to interface it with the printf/fprintf functions from avr-libc. You can see it below, displaying the time read from a DS1307 Real-Time Clock (RTC) chip:</p>
+<figure>
+<a href="dsc00700.jpg">
+<img alt="" src="dsc00700.jpg">
+</a>
+</figure>
+<p>I still have much to learn but I'm confident I can at least get a basic alarm clock working. Once I receive my audio chips, I'll look into integrating a white noise machine into this. For now, I'll need to look into what kind of casing I want to put this in, interfacing my microcontroller with push buttons, and programming some kind of menu or user interface. I might also want to acquire a bigger LCD, for comfort. I've spotted a <a href="http://www.ebay.ca/itm/160656516864?ssPageName=STRK:MEWAX:IT&_trksid=p3984.m1438.l2649#ht_2463wt_1398">nice 20x4 display</a> on ebay.</p>
+<figure>
+<a href="dsc00697.jpg">
+<img alt="" src="dsc00697.jpg">
+</a>
+</figure>
+<p>I also need to learn more about soldering. I bought myself a Komec 936 soldering station and practiced with it a little bit. I was able to solder a header to my LCD module, for example. I still clearly haven't mastered soldering, however. I tried to build myself a simple regulated DC power supply circuit on a prototype Printed Circuit Board (PCB) and the result was a complete disaster. Burn marks everywhere on the board, big blobs of solder. I think that the kind of prototype board I used was perhaps too difficult to use for a novice like me, as it requires me to make solder connections between individual circular pads, which I find quite difficult. I decided to order some <a href="http://en.wikipedia.org/wiki/Stripboard">stripboards</a>, which will hopefully be easier to work with.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

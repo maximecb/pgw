@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Why You Should be a Little Scared of Machine Learning</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why You Should be a Little Scared of Machine Learning">
+  <meta property="og:description" content="Why You Should be a Little Scared of Machine Learning">
+  <meta property="og:image" content="https://pointersgonewild.com/2015/09/12/why-you-should-be-a-little-scared-of-machine-learning/ksnnx.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-09-12-why-you-should-be-a-little-scared-of-machine-learning/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/08/20/what-killed-smalltalk/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/09/15/all-hope-is-not-lost-for-flying-cars/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Why You Should be a Little Scared of Machine Learning</h1>
+<div class="post_date">September 12th, 2015</div>
+</div>
+<div class="cover_image">
+<img src="ksnnx.png">
+</div>
+<p>I recently blogged about my thoughts on the medium-term future of the internet, and the imminent coming of the <a href="/2015/05/07/the-smart-web-is-coming/">Smart Web</a>. There's been a huge amount of progress in machine learning in the last five years, largely due to breakthroughs in <a href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>. You might not be directly aware of it, but we're at the beginning of a machine learning boom right now, a neural network renaissance. Tech companies are pouring huge amounts of money into deep learning. In the next few years, we're going to see the fruits of these investments. Self-driving cars, automatic closed captions and more accurate machine translation come to mind, but I would argue that the ramifications are going to quickly expand much beyond this. If you think computers and the internet have changed the world in the last 20 years, you should really brace yourself for what's coming, because really, that was just a warm up.</p>
+<p>A few day ago, I interviewed at a web advertisement company in New York. Let's call them Cloud7. They explained to me that they do <a href="https://en.wikipedia.org/wiki/Real-time_bidding">Real-Time Bidding</a> (RTB). According to them, every major internet ad provider does this now. When you click on a link and start loading a webpage, the ad provider gets blobs of data providing them with a rough idea of who you are (age, sex, income bracket), the websites you've been to, what you've been shopping for, etc. Many advertisers, wanting to sell you their products, then get to bid some amount (cents, fractions of cents) to buy ad spaces on the page you're loading. Multiple ad auctions are over in tens of milliseconds before the page is done loading. If you're wealthy and you've been visiting many car websites recently, then car vendors might be willing to outbid everyone to show you car ads, because they stand to make much more money selling you a car then a shoe company would selling you shoes.</p>
+<p>You'll be interested to know that the web advertisement world is already set up so that the information ad providers like Cloud7 receive about you is in part supplied by outfits referred to as <a href="http://digiday.com/platforms/what-is-third-party-data/">third party data providers</a>. There is already, as of now, a market in place for APIs that can produce information about visitors to a webpage. Information about you is already automatically gathered by multiple entities, traded for a monetary value and used to better pick the ads you see. The technology is somewhat primitive right now, but it's improving constantly. Improvements in ad targeting can translate in huge revenue increases, so there's a clear incentive to make these systems smarter. There's a huge incentive to gather a richer set of information about you, and the market to buy and sell that information is already in place.</p>
+<p>What deep learning will allow us to do is to bridge the semantic gap between the fuzzy thing that is the real world, and the symbolic world computer programs operate in. Simply put, machines will soon have much more <i>understanding</i> of the world than they currently do. A few years from now, you'll take a picture of your friend Sarah eating an ice cream cone, and some machine in the cloud will recognize Sarah in the said picture. It will know that she's eating ice cream, probably chocolate flavored by the color of it. <a href="http://www.cv-foundation.org/openaccess/content_cvpr_2014/papers/Liu_Facial_Expression_Recognition_2014_CVPR_paper.pdf">Facial expression recognition</a> will make it possible to see that she looks excited with a hint of insecurity. Combining information from multiple third party data brokers, it won't be too difficult to infer that you and Sarah are on your third date together. Looking at browsing history and social network profiles, it might be possible to have a pretty good idea how you two feel about each other, and whether this relationship is going to flourish or perish. What you yourself don't know is that Sarah wanted to impress you so much, she went out and bought a new dress to wear on this date during her lunch break. Odds are you two will see each other again.</p>
+<p>Why would tech companies care about your date with Sarah, and your feelings for each other? Because that information can be useful and valuable in the right hands, which makes that information worth money. You might be more interested in having meals at fancy restaurants near her work in the next few weeks, or in buying that PlayStation 5 game she's been talking about. Personal lubricant, scented candle and fluffy handcuff manufacturers think you might be more interested in their products than before. I don't think this is so far-fetched. Amazon and every consumer-facing company out there wants your money. The better they understand you, your life, and the world, the better chance they have at successfully getting you to hand them your cash. They might actually make your internet experience way more fun in the process. At the very least, the ads you see are going to be increasingly smart and relevant, which isn't necessarily a bad thing.</p>
+<p>Unfortunately, not everyone has "Don't Be Evil" as their company motto. There's another group of businesspeople, besides advertisers, which stands to profit hugely from machine learning. The people I'm talking about are <i>scammers</i>. Deep learning can be used to recognize people and objects, extract semantic information out of pictures, videos and tweets, but that's not all it's useful for. As illustrated in this <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">amazing blog post</a>, neural networks can also be used to <i>generate content</i>. Soon enough, scammers might be able to automatically produce content that begins to look eerily real. I don't think it's that far-fetched to think that your writing style could be imitated, complete with accurate details of your life thrown in. What if there was a program that could generate fake naked pictures of you and e-mail them to people you know? Worse, what if it were possible for a piece of software to call people you know and impersonate your voice on the phone? Sure, the machine doing the calling isn't self-aware, but if it can have some rudimentary understanding of what people say to it and follow some kind of script, that might still be enough to cause a lot of trouble.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

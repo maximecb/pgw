@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>It's Been Done Before</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="It's Been Done Before">
+  <meta property="og:description" content="It's Been Done Before">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2019-11-05-its-been-done-before/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2019/11/02/they-might-never-tell-you-its-broken/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2020/01/03/maybe-planets-are-overrated/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>It's Been Done Before</h1>
+<div class="post_date">November 5th, 2019</div>
+</div>
+<p>I'm someone who comes up with a lot of ideas. When I was a teenager, I used to constantly get excited about new projects, and I found myself often getting sidetracked, ditching existing projects before they were finished so I could start something else. It took me years to learn the discipline to choose and stick with a limited number of projects. They say that ideas are a dime a dozen, but I would say that some ideas are definitely worth much more than others. The key is in identifying which. As a creative person, the most powerful skill you can develop is the ability to recognize which of your ideas have real potential, and are truly worth spending your time on, because at the human scale, time is a finite resource.</p>
+<p>Nowadays, when I have an idea, I often write it down and set it asides. If it's a really interesting idea, I'll come back to it later, and maybe flesh it out a bit. I think it's important to figure out the details, but also to criticize your own ideas a bit, by thinking of them in adversarial terms (how could this fail?). This is a gradual, iterative process. The more fleshed out an idea, the more layers of adversarial testing it passes, the more it becomes worth spending time on. Ultimately, before you invest any real effort in a new idea, it's also worth thinking about whether you have time to do so, and how this would affect the other projects you're working on, and the people you're working with.</p>
+<p>Once I've sufficiently fleshed out and tested an idea in my head, if I'm still excited about it, I'll want to discuss it with other people. That will help me get useful advice, outside perspectives on how to improve the idea, and maybe even recruit some help. At this point though, the same thing always happens, I'm inevitably going run into one or more people who give me a variant of "it's been done before". These people will point to some existing project that they believe is similar to what I've just described. Sometimes they mean well, and are just trying to help me differentiate my project or help me avoid spending effort on what would be a dead end. Sometimes it seems like they are the kind of sad toxic people who can't stand to see others do things they wouldn't, especially if there's any chance of success. I try to avoid working with the latter kind of person.</p>
+<p>The most cynical among us would tell you that in movies, literature, and music, there are no more new ideas. It's all been done before, "what's old is new again", <a href="/2015/07/30/all-possible-thoughts/">all possible thoughts</a> have already been conceived, and we're doomed to forever rehash the same old ideas over and over again. There's some truth to it: how many songs and movies are about boy meets girl, or the feelings that follow a bad breakup? The more songs and movies are written, the more various concepts and ideas have been explored, and the harder it becomes to come up with something truly groundbreaking and innovative. There is one caveat to this, however, which is that the world is changing constantly. What will love and ating be like in the year 2073? I'm sure there will be many similarities, but it definitely won't be the same as it was in 1981. Although it would be kind of awesome if roller discos could come back into fashion.</p>
+<p>The cynics will say:</p>
+<blockquote>
+<p>Your idea isn't novel. Any software-related idea that you've ever had, someone implemented it on a <a href="https://en.wikipedia.org/wiki/Lisp_machine">Lisp Machine</a> at MIT back in 1977. Unfortunately, the magnetic tapes have been lost in a fire and there's no evidence left, and so I have no material proof to show you, so you'll just have to take my word for it, someone did beat you to the punch.</p>
+</blockquote>
+<p>It's happened many times that someone told me that "it's been done before", without being able to actually provide any reference to a similar idea. It's also happened that people did mention something similar, but after I did some digging, I found that whatever project the person cited was only superficially similar to what I had suggested if you squinted really, really hard. There's been many times where someone pointed me to an existing project that was an absolutely terrible implemenation of an idea similar to mine and basically told me that because this project had failed to take off, the idea would obviously not work. I think it's interesting to know that based on failed powered flying machine experiments, an editorial published in the New York Times in 1903 predicted it would take at least one million years for humanity to develop a working flying machine. The Wright brothers completed their historical flight just 69 days after the article was published.</p>
+<p>Before you embark on a project and really invest yourself in a new idea, you should do some research and look at what's already out there. It's quite possible that you'll find that your idea is not as novel as you thought it was. Still, I think that in the world of software, the worldwide context is always changing. It's quite possible that as you start doing some research, you'll find that others have tried to do something similar to what you want, but they didn't execute well, or they simply had the right idea at the wrong time. Just think about electric cars. There have been many failed attempts (dating as far back as the 1890s) before there were <a href="https://www.youtube.com/watch?v=xz5mV0Y1804">successful commercial products</a>. Finding such failures will provide you with an opportunity to learn from the mistakes of others.</p>
+<p>Ultimately, having a truly novel idea might not even matter. If you have an idea for some kind of accounting software, and you find that your would-be competitors are raking big profits selling something completely broken, you might be able to eat their lunch just by executing reasonably well. It can also be a fun learning experience to recreate an existing system without necessarily looking to innovate on its design. If you have an idea that really has you excited, go for it. It's important to have realistic expectations: you may not succeed, but you will definitely learn something along the way. One thing is for sure, which is that you'll never succeed if you don't even try. You might as well explore, have fun and take some calculated risks.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

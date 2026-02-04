@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Metaprogramming for JavaScript</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Metaprogramming for JavaScript">
+  <meta property="og:description" content="Metaprogramming for JavaScript">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-11-01-metaprogramming-for-javascript/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/31/what-id-like-to-know-about-javascript-programs/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/11/14/progress-on-the-uberclock/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Metaprogramming for JavaScript</h1>
+<div class="post_date">November 1st, 2011</div>
+</div>
+<p>I've mentioned before that one of the things I find is missing from JavaScript is <a href="/2011/09/27/new-x86-backend-and-javascript-macros/">a macro system</a>. More generally, is lacks a "clean" way to do metaprogramming. What I've done in Tachyon, in the cases where I needed to generate many similar pieces of code based on a template structure, is to generate code by concatenating strings, and then having the host VM compile that. In JavaScript, you can simply pass a string to the <code>Function</code> constructor, which will try to parse and compile a function definition from your string (you can also do this using <code>eval</code>). This is powerful in that you can generate arbitrary code on the fly, but generating code by string concatenations can be hard to maintain and error-prone. It makes me miss C++ templates, and pales in comparison to Scheme's macro system.</p>
+<p>For my compiler writing purposes, I would like to have a way to generate code based on some sort of template, which would be instantiated based on a set of named parameters (i.e. a dictionary of parameters). I would like to be able to:</p>
+<ul>
+<li>
+<p>Replace type declaractions in a file (as C++ templates allow).</p>
+</li>
+<li>
+<p>Replace named constants in a file (as can be done in C with #define).</p>
+</li>
+<li>
+<p>Enable or disable segments of code (as can be done in C with #ifdef).</p>
+</li>
+<li>
+<p>Unroll loops ahead of time and parameterize each iteration individually.</p>
+</li>
+<li>
+<p>Fill in lists of arguments and the likes based on parameters.</p>
+</li>
+<li>
+<p>Reorder named segments of code according to a priority system.</p>
+</li>
+</ul>
+<p>Some use cases I envision for this are things I already do using string concatenation, such as the generation of methods for object memory layouts and the generation of Foreign Function Interface (FFI) proxy functions. Other use cases would include auto-specializing primitive functions for optimization purposes.</p>
+<p>A fairly obvious way to implement this metaprogramming system is to create a specialized text preprocessor. Essentially, having a function that can instantiate template files based on a dictionary of parameters. This has the advantages that it's easy to implement and use, and the disadvantages that it's perhaps unhygienic and restrictive, because it's not that much more advanced than C's preprocessor.</p>
+<p>My research advisor has instead suggested that I implement some sort of Abstract Syntax Tree (AST) manipulation system, which would allow naming AST segments and splicing them. This is more in line with what Scheme does. The issues I see with this are that I'm not really sure how to proceed, I find the current AST rather cumbersome to manipulate, and such a system would require tighter coupling with our parser. Ideally, grammar extensions would be implemented for AST splicing, but that's also rather tricky, and perhaps best avoided at this point in Tachyon's development. Implementing an AST splicer would instead require us to disguise our spicing syntax as regular JavaScript so as to avoid having to extend the grammar.</p>
+<p>Another thing to consider is that I'd rather not reinvent the wheel twice. I've already said that I'd eventually like to implement some sort of macro system so we can properly support things like assertions. I'd rather have my template system be usable in the macro system or vice versa, instead of having two completely independent systems with similar purposes. A macro system, for our purposes, could simply be something that allows us to associate names in the parser with generator functions. When a macro name is found in the source, the parser calls the associated generator function with the AST segments corresponding to the function call arguments. The generator function is then free to manipulate those as it sees fit, and produce another piece of AST or source as output, to be spliced at the call site by the parser.</p>
+<p>The consideration that this metaprogramming framework might fit into a macro system leads me to believe that perhaps an AST splicing system is the better choice, from a technical standpoint. This requires some extensions to our parser, however, such as the ability to have named AST nodes which our macro system can identify. Another requirement is the implementation of some AST splicing operators. Finally, I would like to examine the way in which AST nodes are currently manipulated, and simplify the API, so that manipulating ASTs becomes less cumbersome.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

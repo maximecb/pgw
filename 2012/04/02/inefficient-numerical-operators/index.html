@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Inefficient Numerical Operators</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Inefficient Numerical Operators">
+  <meta property="og:description" content="Inefficient Numerical Operators">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-04-02-inefficient-numerical-operators/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/03/30/teaching-computers-about-music/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/04/11/why-lisp-never-took-off/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Inefficient Numerical Operators</h1>
+<div class="post_date">April 2nd, 2012</div>
+</div>
+<p>My Ph.D. work involves the design and implementation of a <a href="/2011/08/27/the-tachyon-javascript-compiler/">JavaScript JIT compiler</a>. As a result, I'm quite familiar with the intricacies (and the many inefficiencies) of the language. The <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMAScript 5 specification</a> specifies, among other thing, how each JavaScript primitive operator should be implemented. That is, it provides algorithms, in English prose, to specify the behavior of addition, subtraction, multiplication, division, and all the others. Unfortunately for JavaScript (and all its users), these algorithms are long, complex and unintuitive. The algorithms in question involve dynamic dispatch, conversions from strings to integers and other nasty surprises.</p>
+<p>As a programmer, I truly wish JavaScript's operators had simpler semantics. All JavaScript arithmetic operators can take any type as input, they will never throw an exception, and will possibly convert strings to integers. Any Vulcan would surely frown when realizing that in JavaScript:</p>
+<pre><code>'4' + '4' is '44'
+But...
+'4' * '4' is 16
+
+null + 1 is 1
+But...
+undefined + 1 is NaN
+
+{} + [] is 0
+But...
+[] + {} is NaN
+</code></pre>
+<p>The rules behind JavaScript's operators are unintuitive and unnecessarily complex. Let's all be honest here. There is absolutely no need for arithmetic on values that aren't numbers, an exception should be thrown if this ever occurs, and JavaScript would have been better off with a dedicated string concatenation operator, as Perl has. However, lack of intuitiveness isn't the only problem here.</p>
+<p>As a compiler writer, and someone who <a href="/2011/12/11/type-analysis-for-javascript/">studies type analyses</a> (i.e. type inference), I find that the bigger problem is inefficiency. More complex algorithms behind primitive operators means using these operators is, in general, more expensive. Dynamic type checks need to be added to handle multiple possible cases, which is inefficient. Some of these tests can be optimized away, but some can't. We're all paying a cost for JavaScript features we hardly ever use or need.</p>
+<p>Furthermore, the fact that all JavaScript operators can take any type as input and never throw exceptions means that type inference of JavaScript is slightly harder. If JavaScript operators were restricted to numbers, a type inference engine could take advantage of the fact that an expression such as <code>x + y</code> would imply that <code>x</code> and <code>y</code> must be numbers. Hence, subsequent uses of those variables could be optimized. This is obviously not the case: in JavaScript, <code>x + y</code> doesn't guarantee anything about <code>x</code> and <code>y</code>, because the programmer <i>could</i> be performing an addition on booleans or objects or arrays or strings or any other types.</p>
+<p>Another gripe I have with JavaScript is that all numbers are assumed to be 64-bit floating-point values (doubles). Integer arithmetic is still faster than floating-point arithmetic, and so all modern JavaScript JITs, behind the scenes, will try to represent numbers as integers when possible, and fall back to floating-point values when an overflow occurs or a fractional value is needed. This incurs performance costs because it means much of JavaScript's arithmetic operations need to include conditional tests checking for overflow. Again, some of these tests can be optimized away, but many can't. In general, proving that numerical values won't overflow in a type analysis only works in a limited number of cases.</p>
+<p>Why did the <a href="http://en.wikipedia.org/wiki/Brendan_Eich">creator of JavaScript</a> make this choice? Probably because he presumed it would be simpler for new programmers. It's a common belief that integer types, integer overflow and modular arithmetic in C are hard concepts to understand. Floating-point numbers are of course necessary, but they are certainly <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">not easier to understand</a> than integers. Integer values wrapping around on overflow might seem a little puzzling to some people, but I don't see how dealing with <code>NaN</code>, infinities, negative zero, rounding and precision errors is more intuitive.</p>
+<p>I believe that a better design would have been to have distinct integer and floating-point numerical types in the language. The better choice, for performance, would be to have integers operations be closed over integers. That is, adding, subtracting, multiplying and dividing integer values should only ever yield integers. If a conversion to floating-point is needed (which I believe is relatively rare), it should be done explicitly. Here are some examples of what this could look like:</p>
+<pre><code>var x = 1;   // Integer
+var y = 2;   // Integer
+var z = 4.0; // Floating-point
+
+var v0 = x + y        // v0 === 3
+var v1 = x + y + z;   // v1 === 7.0
+var v2 = x / y        // v2 === 0
+var v3 = x / z        // v3 === 0.25
+var v4 = Float(x) + y // v4 === 3.0
+</code></pre>
+<p>Such a design would give programmers access to both 64-bit integers and 64-bit floating-point values while making it possible for a type inference analysis to eliminate most type checks on arithmetic operations. Some might claim this would make the language more confusing, but I don't think this is true. This system wouldn't be any more complex than Python or Scheme's numerical tower. It would actually give programmers more control over what their code is doing, without requiring unwieldy type annotations.</p>
+<p>The more I learn about JavaScript, the more I think I want to design my own dynamic language someday. I strongly believe that there is a way to design a dynamic language that is efficient, practical, and suitable for both low-level systems programming as well as rapid prototyping. In the end, it all comes down to compromises in the design of the language. In my opinion, simpler semantics often means more intuitive and easier to optimize.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

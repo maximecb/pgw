@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Making Waves: D's GC Problem Followup</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Making Waves: D's GC Problem Followup">
+  <meta property="og:description" content="Making Waves: D's GC Problem Followup">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-09-11-making-waves-ds-gc-problem-followup/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/09/09/ds-garbage-collector-problem/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/09/17/faster-than-v8/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Making Waves: D's GC Problem Followup</h1>
+<div class="post_date">September 11th, 2014</div>
+</div>
+<h2>Front Page News</h2>
+<figure>
+<a href="reddit_no1_crop1.png">
+<img alt="" src="reddit_no1_crop1.png">
+</a>
+</figure>
+<p>Two days ago, late in the evening, I wrote <a href="/2014/09/09/ds-garbage-collector-problem/">a blog post</a> about performance issues I'd attributed to D's garbage collector. I didn't expect this blog post to draw much attention. I was hoping that some of the people working on the D runtime library might see it, but I didn't publicize it any further than tweeting the link. My goal was only to draw some amount of attention to the problem; to provide some numbers so I could quantify the GC overhead a bit.</p>
+<p>Someone decided the post was interesting enough to submit it to reddit's <a href="http://www.reddit.com/r/programming/comments/2g03af/ds_garbage_collector_problem/">r/programming</a> as well as <a href="https://news.ycombinator.com/">Hacker News</a>. It's also been discussed on the <a href="http://forum.dlang.org/thread/tzjphsukkffphepkrgyp@forum.dlang.org">D forums</a>. In total, about 18000 people ended up viewing it, and over 160 comments were posted. My main conclusion is that controversial topics are a good way to draw attention. I've succeeded in my goal of drawing attention to the problem on a much bigger scale than I'd wanted: now, everyone knows about it. I sincerely apologize for the bad publicity I may have caused D, but I'm glad that the problem has been recognized and that something will be done about it.</p>
+<p>Andrei Alexandrescu, co-creator of D, <a href="http://www.reddit.com/r/programming/comments/2g03af/ds_garbage_collector_problem/ckent8c">posted on reddit</a> to say that he wants to rewrite the GC based on his own allocator design. Dicebot of Sociomantic has also said that they are <a href="http://www.reddit.com/r/programming/comments/2g03af/ds_garbage_collector_problem/ckf3lvf">working on porting</a> their concurrent garbage collector to the current version of D. I don't how these two efforts will combine, but I'm sure that something good will come of it. A high performance language needs a high performance runtime, and with a brand new GC, the D programming language will be much more competitive.</p>
+<h2>Insightful Details</h2>
+<p>People with knowledge of the D GC internals ended up posting on the reddit thread and providing insight into why the D garbage collector is currently inefficient.</p>
+<p>thedeemon wrote the following:</p>
+<blockquote>
+<p>The main issue from the post is quite simple: if you allocate a lot of small objects, D runtime will place them inside chunks (called pools) of fixed size (like 4 MB) that it requested from the OS. Each time a pool is filled up it will do a GC cycle and only if there's still no room for new object it will allocate a new pool. That means number of GC cycles in this situation is proportional to number of objects you allocate, while each GC cycle time is proportional to the managed heap size. <i>It leads to quadratic complexity and awful slowness</i>. If runtime allocated pools not of fixed size but adapted their size to the allocation rate, this scenario could be significantly faster.</p>
+</blockquote>
+<p>deadalnix added this:</p>
+<blockquote>
+<p>There are many other problems. Among others:</p>
+<ul>
+<li>
+<p>D's GC rely on a global lock in which it goes through every time.</p>
+</li>
+<li>
+<p>D's GC scan many location even when they cannot contain pointers, which do not make any sense.</p>
+</li>
+<li>
+<p>D's GC does not take advantage of D's type system, when other experiment like OCaml's GC have shown that there is great benefit going down that road.</p>
+</li>
+</ul>
+</blockquote>
+<p>To summarize the issues outlined, the D GC:</p>
+<ol start="1">
+<li>
+<p>Has potentially quadratic complexity with respect to the number of allocated objects.</p>
+</li>
+<li>
+<p>Uses a global lock while traversing objects.</p>
+</li>
+<li>
+<p>Can only use one thread to perform collections.</p>
+</li>
+<li>
+<p>Does not take advantage of the D type system, unnecessarily scans non-pointer data.</p>
+</li>
+<li>
+<p>Does not use lazy sweeping, a common <a href="http://www.brpreiss.com/books/opus5/html/page424.html">mark & sweep</a> GC optimization.</p>
+</li>
+</ol>
+<p>Fortunately, the worst issue (quadratic growth) can be fixed without much effort.</p>
+<p>For those who are curious, or may want to help, here is a link to the <a href="https://github.com/D-Programming-Language/druntime/tree/master/src/gc">source code of the D GC</a>. If you're interested in contributing and helping to fix this problem, you should head to the <a href="http://forum.dlang.org/">D forums</a> and get in touch with the community, or try contacting Andrei directly. Even if you don't have time to contribute, your feedback may be useful in the design of a better GC.</p>
+<h2>Dismissive Criticism</h2>
+<p>Unfortunately, not everyone was welcoming of the discussion I brought forward. Criticism mostly seemed to come from developers who are fundamentally opposed to the use of garbage collection, and view the whole concept in a very negative light. These people all put forth the same dismissive and uninformed line of reasoning, which can be summarized as follows:</p>
+<ol start="1">
+<li>
+<p>Garbage collectors are inherently slow.</p>
+</li>
+<li>
+<p>Since Higgs is suffers from GC overhead, Higgs <i>must be</i> doing "too many" allocations.</p>
+</li>
+<li>
+<p>Because of #1, it's pointless to improve the D GC. It will always be slow.</p>
+</li>
+<li>
+<p>It's the responsibility of the application writer to avoid using the GC.</p>
+</li>
+</ol>
+<p>I'll say this: one of the main reasons I chose D over C++ was that D has a garbage collector. I had <a href="http://www.sable.mcgill.ca/publications/thesis/masters-maxime/mcvmthesis.pdf">written a JIT compiler in C++ previously</a> and I found it tedious to manage memory allocations manually. Compilers are inherently allocation-heavy, because they must represent and transform symbolic expression trees, graphs and a heavy amount of metadata. Having to take memory allocation and release into account every time you wish to transform such a tree or graph is highly error-prone.</p>
+<p>To avoid using the GC in Higgs, I'd basically have to implement my own specialized memory managers (my own allocation and garbage collection) for each of the data structures used in the compiler. Saying that I shouldn't use the GC is basically denying any responsibility the D GC might have and shifting the burden onto me, the application developer, to implement my own specialized memory management for the different use cases where I need dynamic memory allocation, and there are many such use cases.</p>
+<p>In my previous blog post, I've demonstrated two things:</p>
+<ol start="1">
+<li>
+<p>In a normal execution of Higgs, the GC may take more than 75% of the total execution time.</p>
+</li>
+<li>
+<p>Simple tweaking of GC parameters can reduce the GC overhead tremendously, producing a 3x speedup.</p>
+</li>
+</ol>
+<p>What's clear is that the D garbage collector <i>scales very poorly</i>. In fact, I'd say that the scaling is often pathological. Twice the allocations may mean the total collection time quadruples: a quadratic growth. This means that there's a ceiling on the number of objects the GC can be expected to reasonably manage. There's a ceiling on the scale of applications using the GC. If you go beyond this ceiling, your application will slow down to a crawl. You want to write a multithreaded web server in D? You're probably going to <i>have to</i> manage memory manually. Java doesn't suffer from this weakness, so why should D?</p>
+<p>Higgs is a program written in what I believe to be a reasonably efficient style. There aren't many layers of abstraction in the implementation. It doesn't create what I would deem to be an unreasonable number of allocations for what it does. I'm sure that if I put forth the engineering effort, I could reduce my reliance on the GC and improve performance. In fact, I already have. However, improving the D GC is something that will clearly benefit all users of the language. A future compiler update might improve the performance of some D programs by an order of magnitude. Working towards fixing poor GC performance is much more helpful than blaming those who are affected by it.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

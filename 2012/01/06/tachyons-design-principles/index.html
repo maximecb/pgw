@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tachyon's Design Principles</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Tachyon's Design Principles">
+  <meta property="og:description" content="Tachyon's Design Principles">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-01-07-tachyons-design-principles/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/12/17/tachyon-has-a-garbage-collector/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/01/12/263/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Tachyon's Design Principles</h1>
+<div class="post_date">January 7th, 2012</div>
+</div>
+<p>I have been working on the <a href="/2011/08/27/the-tachyon-javascript-compiler/">Tachyon</a> compiler for almost two years at this point. Because this compiler aims to eventually support all of the <a href="http://en.wikipedia.org/wiki/ECMAScript">ECMAScript</a> 5 specification, it has grown fairly large and complex. Its complexity will no doubt keep increasing as new features and optimizations are added to the implementation. Because of this growing complexity, there is a need to try and keep the implementation well-organized and self-consistent. In this post, I will outline the basic principles I aim to follow in the design and implementation of Tachyon. These principles are rooted in my own experience and opinions as a programmer as well as in Tachyon's design goals.</p>
+<p>The Tachyon project was originally initiated with the goal of being a flexible platform for academics to experiment with various language ideas and compiler optimizations. The choice to write the compiler itself in JavaScript was partly motivated by the perception that writing compiler algorithms in JavaScript could be done more quickly and easily than in traditional statically typed languages such as C and C++, making Tachyon more appealing as an experimental research platform. I have been aiming to use Tachyon to test <a href="/2011/12/11/type-analysis-for-javascript/">my own optimization ideas</a>. As such, it has been important for me that Tachyon should be designed with the generation of efficient machine code in mind.</p>
+<p>The design principles outlined below are based on these design goals:</p>
+<ol start="1">
+<li>
+<p>As much of Tachyon's code as possible should be written in pure JavaScript. Where low-level facilities are needed or when performance demands require it, Tachyon's <a href="dls2011.pdf">extended JavaScript dialect</a> should be used. Use of C code should be restricted, as much as possible, to low-level OS/platform/API interfaces. This will help keep the implementation minimalist and self-consistent. It should also help Tachyon optimize itself. This has motivated the implementation of <a href="/2011/12/17/tachyon-has-a-garbage-collector/">Tachyon's garbage collector</a> in extended JavaScript.</p>
+</li>
+<li>
+<p>Tachyon should be designed with ease of code analysis and optimization in mind. The Tachyon frontend should use a platform-neutral Intermediate Representation (IR) that is easy to traverse and transform.</p>
+</li>
+<li>
+<p>Analyses and optimizations that are not specific to a given platform should be implemented in Tachyon's frontend part, which uses a platform-neutral IR. This will avoid duplication of code in platform-specific backends.</p>
+</li>
+<li>
+<p>Platform-specific optimizations should be implemented in one of Tachyon's backends. The frontend's IR should be low-level enough that these platform-specific optimizations are possible, but the frontend's code should not be burdened by the specific complexities of the x86 or ARM instruction sets, for example.</p>
+</li>
+<li>
+<p>The Tachyon frontend should have as little dependencies on backend components as possible. This will help keep the code less tightly coupled and more portable.</p>
+</li>
+<li>
+<p>The stock implementation of Tachyon should be kept relatively simple and not be overburdened with low-level optimizations. This will help keep the code smaller, less tightly coupled and more maintainable.</p>
+</li>
+<li>
+<p>The algorithms used in Tachyon should be able to scale to reasonable input sizes. Compilation speed is not Tachyon's primary goal, but the compiler should be able to manage to compile real-world code within a reasonable time frame so that it is practical to study this code.</p>
+</li>
+<li>
+<p>Where performance is not critical, simpler, more concise algorithms should be preferred.</p>
+</li>
+<li>
+<p>Tachyon's code should be well-commented and self-documenting. Code, by itself, is never as intuitive and self-obvious to new users as it was to those who wrote it.</p>
+</li>
+<li>
+<p>Tachyon should be extensively tested using unit tests and self-checking test programs. It is very important to ensure that Tachyon remains a reliable compiler and as few new bugs creep in as possible.</p>
+</li>
+</ol>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
