@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Progress on the Überclock</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Progress on the Überclock">
+  <meta property="og:description" content="Progress on the Überclock">
+  <meta property="og:image" content="https://pointersgonewild.com/2011/11/14/progress-on-the-uberclock/r_dsc00778.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-11-14-progress-on-the-uberclock/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/11/01/metaprogramming-for-javascript/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/11/29/good-news-for-javascript-bad-news-for-me/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Progress on the Überclock</h1>
+<div class="post_date">November 14th, 2011</div>
+</div>
+<div class="cover_image">
+<img src="r_dsc00778.jpg">
+</div>
+<p>In the last few weeks I've been slowly but steadily advancing on my <a href="/2011/10/04/toying-with-avr-microcontrollers/">überclock project</a>. Having a limited amount of spare time, I decided to target simpler intermediate goals for my project. I have a million ideas for possible features I could add to the alarm clock, but I figure it's best to start by implementing a simple, complete, working alarm clock, and later add extra devices to it in a modular fashion. My current plan is to build a black box with configuration buttons, an LCD screen and a little speaker to act as the alarm clock, with an <a href="http://en.wikipedia.org/wiki/Atmel_AVR">AVR microcontroller</a> for brains.</p>
+<p>Alarm clock enclosure, a work in progress:</p>
+<figure>
+<a href="r_dsc00783.jpg">
+<img alt="" src="r_dsc00783.jpg">
+</a>
+</figure>
+<p>Once I have the simple clock working nicely, I'm thinking I could add infrared emitters to it so that I can have it wirelessly control other devices, such as a large time display panel (a <a href="http://evilmadscience.com/productsmenu/partsmenu/107-sevensegment">giant 7-segment display</a>), and a <a href="http://en.wikipedia.org/wiki/White_noise_machine">white noise machine</a> to help me sleep. One advantage is that this will help me avoid getting discouraging by a project of ever-increasing scope that never gets finished (I should actually be able to finish the first step pretty soon!). Another is that with a modular system, if one part breaks, the rest of the system can potentially continue functioning normally, and the broken part can more easily be fixed.</p>
+<p>I also decided to build my simple alarm clock itself using a modular design. I've been soldering individual modules on small prototype boards with molex connectors. For example, I've assembled a DS1307 Real-Time Clock (RTC) module with a battery backup, an input module (using a 74HC165 shift register), as well as some pushbuttons and a speakers with molex connectors:</p>
+<p>Real-Time Clock module with battery backup:</p>
+<figure>
+<a href="r_dsc00779.jpg">
+<img alt="" src="r_dsc00779.jpg">
+</a>
+</figure>
+<p>Input module, pushbuttons and speaker:</p>
+<figure>
+<a href="r_dsc00778.jpg">
+<img alt="" src="r_dsc00778.jpg">
+</a>
+</figure>
+<p>Once I complete a power supply module, a few extra pushbuttons with connectors and a main board for the microcontroller, the alarm clock will essentially be complete as far as the hardware goes. The modular design has been particularly advantageous so far because it means I can build and test small components one at a time. If a component is faulty, the problem is easier to track down than if the whole clock was built at once on a large board. I should also say that while my soldering skills have much improved in the last two weeks, I still want to avoid a situation where I would have to painstakingly backtrack out of a soldering mistake.</p>
+<p>Before I permanently assemble components with solder and hot glue, I try to prototype everything on a <a href="http://en.wikipedia.org/wiki/Breadboard">breadboard</a> so that I can be sure the final circuit will work properly. One issue I've had is that I often want to use a multimeter to get voltage and current readings, but it's hard to do this reliably with standard multimeter leads. The solution I found was to buy a cheap multimeter on ebay (<a href="http://www.ebay.ca/itm/New-LCD-Digital-Multimeter-DT830B-not-include-battery-/220628109061#ht_3025wt_1165">less than $3 USD shipped</a>, without the 9V battery) and modify the leads so that they can directly connect into the breadboard. I cut off the multimeter leads, soldered some <a href="http://en.wikipedia.org/wiki/Pin">sowing pins</a> at the ends of the wires instead, and wrapped the connection with shrink wrap. I've been very pleased with the result.</p>
+<p>Breadboard-ready multimeter leads:</p>
+<figure>
+<a href="r_dsc00784.jpg">
+<img alt="" src="r_dsc00784.jpg">
+</a>
+</figure>
+<p>One last thing I'd like to mention is that I found some great online supplier for electronic parts. <a href="http://www.taydaelectronics.com/">Tayda Electronics</a> is a store from Thailand which has some pretty amazing prices (2 cents for DIP8 sockets, as low as 4 cents for pushbuttons, etc.) and a very broad inventory. The shipping takes a while (around 3 weeks) but the deals are definitely worth it, especially if you want to stock up on some components. If I need to get some fairly common component quickly, I tend to order from Dipmicro Electronics. They're a Canadian (Ontario-based) store with pretty good prices, sometimes even better than Asian sellers.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

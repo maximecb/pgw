@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The AI Breakthrough that Won't Happen</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The AI Breakthrough that Won't Happen">
+  <meta property="og:description" content="The AI Breakthrough that Won't Happen">
+  <meta property="og:image" content="https://pointersgonewild.com/2015/05/10/the-ai-breakthrough-that-wont-happen/happy_terminator.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-05-10-the-ai-breakthrough-that-wont-happen/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/05/07/the-smart-web-is-coming/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/05/25/maybe-we-ought-to-have-numerical-coprocessors/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The AI Breakthrough that Won't Happen</h1>
+<div class="post_date">May 10th, 2015</div>
+</div>
+<div class="cover_image">
+<img src="happy_terminator.jpg">
+</div>
+<p>It's now been over 50 years since the birth of the AI field, and we still have no androids or sentient computers. Some believe it's because <a href="http://en.wikipedia.org/wiki/Artificial_general_intelligence">Artificial General Intelligence (AGI)</a> is simply unachievable, others say it's because we just don't have the computing capacity required yet, and then some think it's because we're lacking a fundamental breakthrough, we just haven't grokked the "general-purpose intelligence algorithm". The latter view is reflected in Jeff Hawkin's <a href="http://www.amazon.com/On-Intelligence-Jeff-Hawkins/dp/0805078533">On Intelligence</a> book.</p>
+<p>I'm currently reading Nick Bostrom's <a href="http://www.amazon.com/Superintelligence-Dangers-Strategies-Nick-Bostrom/dp/0199678111">Superintelligence</a> book (which I highly recommend), and it's got me thinking about intelligent machines, a topic that's fascinated me since childhood. My own opinion is that strong AI is almost inevitable. Assuming that humanity doesn't destroy itself or fall into a new middle age, sentient computers will happen, it's only a matter of time. I'm of course hesitant to put a time scale on this prediction, since such predictions have so often been wrong, but I'm inclined to believe that it will happen within this century.</p>
+<p>I personally don't believe that computing capacity has ever been the problem. We've had impressively powerful supercomputers for decades, we just haven't had very effective machine learning algorithms. The fact is that until recently, nobody knew how to train a neural network with 5 layers of depth short of brute forcing the problem with genetic algorithms, which is obviously not what human brains do. Now, with <a href="http://en.wikipedia.org/wiki/Deep_learning">deep learning</a>, we're finally starting to see some interesting progress in machine learning, with systems outperforming human beings in image recognition tasks.</p>
+<p>Still, I don't believe that deep learning is <i>the</i> one breakthrough that will lead to strong AI. Deep learning is impressive and cool, but it isn't strong AI, it's simply much better machine learning than what we've had until now. I simply don't think strong AI will come from one single breakthrough. We're not going to suddenly grok the one algorithm for AGI. The people who believe this, in my opinion, fail to appreciate the complexity of the human brain. Our brains are made of a multitude of components specialized to perform different tasks effectively. Hence, it would be surprising if we could obtain human level intelligence from some one single algorithm.</p>
+<p>The obsession with cracking <i>the</i> AGI algorithm, in my opinion, stems from the obsession some computer scientists have with mathematical elegance and the study of algorithms that fit within a single page of text. Algorithms short and simple enough that emergent mathematical properties can easily be proved or disproved. The human brain, however, is the result of an evolutionary process that occurred over hundreds of millions of years, and is too complex to be described by an algorithm that fits within a single page. The reason we haven't created AGI, in my opinion, is that several component parts need to be put together in non-trivial ways. At this stage, machine learning, as a field, has largely been figuring out how these individual components can be built and optimized.</p>
+<p>I think there will come a point where we begin to put different machine learning components, such as image classifiers, planners, databases, speech recognizers and theorem provers together into a coherent whole, and begin to see something resembling AGI. I don't think, however, that some computer will suddenly reach sentience at the flick of a switch. Engineering is similar to natural selection in that it's often a process of iterative refinement. It's now possible to fly anywhere on the globe in a jet-propelled airplane, but the airplanes of today are very different from the Wright brother's prototype. There's no reason to think AI is any different.</p>
+<p>The first AGIs probably won't be "superintelligent". It's likely that they will initially lag behind humans in several domains. They may show great <a href="/2015/04/15/what-is-intelligence/">intelligence</a> in some areas while failing to grasp key concepts about the world which seem obvious to us. One can simply think of dogs. They're sufficiently intelligent to be useful to us, but they can't grasp everything humans do. Provided that we do eventually create AGI, these AIs will likely reach and surpass human intelligence, but this process is could take years or even decades of iterative refinement.</p>
+<p>An interesting question, in my opinion, is whether the first AGIs will exist as agents on the internet, or whether they will come in the form of embodied robots. In the near future, I predict that we will see an increasing presence of intelligent agents online, the rise of the <a href="/2015/05/07/the-smart-web-is-coming/">smart web</a>. These agents will be used to automatically extract semantic information from web content, by doing things such as tagging videos or text with metainformation, and perhaps predicting the behavior of human individuals. This, however, is not AGI. There's an argument to be made that robots may bring forth AGI simply because the need is there. We expect robots to effectively deal with the complexities of the real world as it is, which seems to require human-level intelligence.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

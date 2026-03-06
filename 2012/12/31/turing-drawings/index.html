@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Turing Drawings</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Turing Drawings">
+  <meta property="og:description" content="Turing Drawings">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/12/31/turing-drawings/turing2d.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-12-31-turing-drawings/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/12/18/higgs-has-exceptions/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/01/03/more-fun-with-turing-machines/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Turing Drawings</h1>
+<div class="post_date">December 31th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="turing2d.png">
+</div>
+<p>After watching a documentary <a href="http://www.turingfilm.com/">about Alan Turing</a>, I started thinking about <a href="http://en.wikipedia.org/wiki/Universal_Turing_machine">Turing machines</a> again. They're a very useful tool for computer science proofs and an elegantly simple computational model. Beyond this, however, Turing machines seem relatively useless in terms of "real-world" applications. Any computable function can be computed by a Turing machine, but you probably wouldn't want to use one as a compilation target: it would be too inefficient.</p>
+<p>One possible application for Turing machines is to use them as programs to generate data <a href="http://en.wikipedia.org/wiki/Procedural_generation">procedurally</a>. Their simplicity makes it possible, for example, to create working programs randomly. Generating a random stream of x86 instructions that doesn't crash could be tricky, but with a Turing machine, it's quite easy. I decided to try something like this to produce so-called <a href="http://en.wikipedia.org/wiki/Generative_art">generative art</a>. The program I wrote generates random Turing machines that operate on a two-dimensional grid instead of a one-dimensional tape. The symbols written on the grid can be interpreted as colors, and voilà: we have procedural drawings.</p>
+<p>I prototyped this in JavaScript and named the project Turing Drawings. This is available <a href="https://github.com/maximecb/Turing-Drawings">on GitHub</a> if you're interested in seeing the source code. Better yet, I put a live demo up on <a href="http://maximecb.github.io/Turing-Drawings/">GitHub pages</a> (first time trying gh-pages, works great!) and I started collecting a list of interesting patterns produced by Turing Drawings:</p>
+<ul>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,0,1,2,3,1,0,1,1,0,2,2,1,3,2,2,0,1,3,0,2,0,1,2,2,2,2,0,0,1,3,3,1,3,2,2,0">Scan</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,3,1,1,3,0,1,1,2,1,2,2,2,2,1,2,2,1,1,3,1,1,0,2,1,1,1,2,0">Movement</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,3,2,1,2,1,2,1,0,2,1,2,1,3,1,1,1,1,2,0,1,1,3,2,2,0,0,1,1">Complex</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,2,2,1,1,0,3,1,2,2,2,1,1,1,0,3,2,3,1,1,0,0,1,1,2,2,2,1,1,2,1,2,1,2,1,3">Quads</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,0,2,3,3,1,3,2,1,0,3,1,0,3,2,3,2,1,2,0,1,3,1,1,2,1,1,0,0,1,3,2,2,0,0,2,1">Fins</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,3,1,0,1,2,2,1,2,3,1,1,3,3,1,0,3,1,3,3,1,3,2,2,3,0,1,0,3,2,0,3,2,2,2,1,0">Blades</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,3,1,0,2,2,3,1,2,0,1,1,3,0,1,3,2,1,3,2,2,3,2,1,2,2,2,3,2,2,0,1,1,2,2,2,0">Chaos</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,4,2,2,0,1,2,0,2,1,0,1,1,1,2,3,0,0,1,1,0,2,3,0,3,0,1,2,2,1,1,2,2,2,1,0,3,0">Filler</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,3,1,2,3,1,0,3,1,3,1,2,3,2,2,0,1,2,1,3,2,3,0,2,0,3,1,2,2,2,2,3,1,1,1,2,3">Seizures</a></p>
+</li>
+</ul>
+<p>Last night, by chance, I randomly generated something that looked very much like the <a href="http://en.wikipedia.org/wiki/Sierpinski_triangle">Sierpinski fractal</a>, but unfortunately lost the encoding for that one. If you happen to find fractal patterns, be sure to let me know!</p>
+<p>EDIT: seems the people on <a href="http://www.reddit.com/r/compsci/comments/15qkuk/turing_drawings_pointers_gone_wild/">reddit.com/r/compsci</a> have gotten pretty excited about this. I'm surprised at how much of a positive response I got. Here are some of the nicest patterns they've found:</p>
+<ul>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#5,4,4,2,1,1,3,2,4,3,1,2,2,3,1,2,1,3,2,0,2,2,3,2,3,0,2,3,2,4,2,2,0,2,0,1,1,0,2,3,0,1,2,1,2,3,3,3,2,0,1,1,3,2,2,0,2,2,3,3,2,0">Sierpinski-esque</a> fractal (thanks trq)</p>
+</li>
+<li>
+<p>More <a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,2,0,1,2,2,3,1,1,3,2,2,0,1,3,2,1,1,3,1,1,3,2,1,0,1,2,3,2,3,0,2,0,1,2,0">Sierpinski</a>  (thanks moyix)</p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#6,4,5,2,3,2,2,3,1,3,2,2,2,3,4,1,2,3,3,0,5,1,2,1,3,2,5,3,0,0,2,3,3,1,3,3,3,3,4,1,2,3,1,1,2,3,3,3,3,0,5,3,1,2,2,3,1,2,0,5,3,1,3,3,0,2,2,1,1,2,2,3,3,0">Sierpinski over two</a>  (thanks Peter)</p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,3,0,2,2,2,1,0,2,2,2,1,1,3,0,1,3,1,2,0,1,1,0,0,2,3,1,2,3">Sierpinski in black</a> (thanks sssh)</p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,1,2,0,3,1,1,0,1,3,1,1,3,0,2,1,0,2,3,0,1,0,0,2,3,2,1,1,0,2,0,0,2,0,2,2,1">Quad Fractal</a> (thanks Spencer)</p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,0,2,2,2,1,2,3,1,1,3,2,1,3,1,0,2,2,2,1,1,0,2,2,2,1,1,0,1,2,3,0,1,2,3,1,3">Awesome thing 1</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#2,5,1,1,0,0,1,0,0,3,1,0,3,0,1,4,2,1,4,2,1,4,3,0,1,1,1,3,0,1,2,0">Awesome thing 2</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,4,1,1,0,3,2,1,1,1,3,0,3,0,3,3,1,0,1,3,2,1,3,3,3,0,0,2,0,1,3,1,3,3,1,3,2,0,1,2,1,1,2,3,0,1,3,2,3,0">Green flashing thing</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,0,1,0,0,2,0,1,2,2,0,2,1,2,1,1,2,2,3,3,2,2,2,1,1,3,1,3,0,2,2,2,1,0,2,2,3">Creeping black and white waves</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#7,4,3,2,1,1,1,2,3,3,2,1,1,0,1,2,2,2,2,2,2,2,3,6,3,1,0,2,0,6,3,2,0,1,0,0,2,1,3,1,1,1,2,0,0,3,3,2,2,3,2,1,0,0,1,1,6,2,3,0,2,3,4,1,3,3,2,0,3,3,0,6,2,0,1,2,2,6,1,0,4,3,1,2,3,2">Critters</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#5,4,1,3,1,0,1,1,3,3,1,3,3,3,3,1,1,4,1,3,2,2,1,2,1,3,2,1,0,0,2,3,1,2,2,2,2,3,1,1,2,0,2,3,4,3,3,1,1,2,4,3,0,0,1,2,3,2,2,2,3,1">Unnamed</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,2,1,1,1,3,3,2,2,1,2,0,0,1,0,3,1,0,2,2,2,0,2,0,1,1,2,0,2,0,1,2,1,3,2,1">Spikey Flowing Thing</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,1,2,0,2,2,0,0,2,3,0,2,0,0,1,2,0,1,0,2,1,1,3,1,2,3,1,2,0,2,2,3,1,0,2,1,2">Modern art</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#6,4,4,3,0,4,1,2,3,3,2,1,3,2,3,1,1,5,2,2,1,3,3,1,1,3,3,1,2,1,2,2,3,2,2,5,1,2,1,2,2,1,3,1,1,1,2,4,2,1,2,2,1,4,1,1,1,2,2,2,3,3,0,1,0,3,1,2,5,3,2,4,1,3">Green waves</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#6,4,1,2,0,1,3,1,4,3,3,1,3,0,5,2,1,4,2,0,2,1,1,4,1,0,1,3,0,5,1,3,1,1,3,0,1,1,2,3,3,5,1,1,3,1,0,3,1,2,1,1,1,1,3,3,3,2,2,2,3,3,2,1,3,5,3,0,2,3,2,4,1,1">It's the Matrix</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#6,4,5,3,2,4,3,3,2,1,1,2,1,1,5,3,3,4,1,2,4,3,1,3,3,0,2,2,3,2,2,2,2,1,2,3,3,1,1,3,3,5,3,2,2,1,0,2,2,3,3,1,0,2,3,1,2,1,0,3,3,3,1,2,1,3,3,1,2,3,3,0,1,0">Moss vs. escalators</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,1,2,3,2,0,3,2,1,2,1,3,0,2,2,3,1,2,3,1,2,0,1,0,2,1,2,2,1,0,2,1,2,2,1,0">Rain streaks</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,3,2,1,1,2,1,1,0,1,2,2,1,2,2,2,0,1,2,0,0,2,0,1,1,2,0,1,1">Spears, roots, fins</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,4,1,1,3,3,2,1,2,3,1,2,3,0,2,2,1,0,2,0,3,1,0,3,1,2,0,3,1,3,2,2,3,3,1,2,1,3,0,3,2,0,1,2,1,2,0,1,1,1">Blow away</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#5,4,3,3,2,1,3,3,1,1,3,4,3,3,4,3,3,4,3,1,4,2,3,4,1,3,3,3,1,1,2,1,2,1,1,3,3,1,2,3,1,0,2,0,2,3,3,3,2,1,3,3,3,2,2,2,2,1,3,2,1,3">Cubes to Chaos</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,2,3,0,2,3,0,2,1,3,1,2,2,1,3,1,2,1,2,1,1,2,1,3,2,2,0,0,2,0,1,1,2,0,1,2">Different style of waves</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,0,1,1,3,1,3,1,2,0,0,1,2,3,2,0,1,2,3,0,1,3,1,2,3,1,2,0,3,1,0,3,1,2,3,2,2">Slowly moving worms</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,1,2,0,3,2,1,2,2,0,0,2,1,1,2,2,0,2,3,1,2,0,2,2,1,0,1,2,1,1,1,1,1,2,2,2,0">Compression-type waves</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,1,1,2,1,3,1,1,1,0,2,2,1,1,1,1,2,0,0,1,1,3,1,2,0,2,1,2,1,0,1,2,3,2,1,3">This one evolves interestingly</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,2,2,2,1,3,1,1,2,2,2,1,0,2,0,2,2,0,1,1,2,0,1,3,2,1,1,1,2,3,2,1,3,2,2,2">Wavy</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#12,3,0,2,0,2,1,3,8,1,2,3,1,0,11,1,1,7,1,2,5,1,0,11,2,1,9,1,3,8,1,3,0,1,0,11,1,0,4,1,3,5,2,0,9,2,0,0,2,2,0,2,0,5,2,0,3,1,3,11,2,2,10,1,3,3,1,0,9,2,1,11,2,0,6,1,3,5,2,2,6,2,3,8,1,1,3,2,0,4,2,1,0,2,2,11,2,1,6,2,0,7,2,1,5,2,2,0,2,1">Scanline</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#10,3,8,2,0,6,1,2,6,1,0,0,1,1,6,1,2,6,2,0,7,1,1,2,2,0,2,1,3,2,1,3,8,1,3,4,1,2,7,1,0,9,1,3,9,2,2,6,1,1,4,2,1,4,1,1,6,1,3,8,1,0,4,2,0,0,2,1,1,2,0,0,1,3,4,2,2,0,1,0,6,2,1,8,1,1,1,2,2,1,1,0">Bubbles</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,4,2,1,1,2,2,3,1,1,1,1,2,1,1,2,3,0,2,1,1,2,2,0,3,2,2,2,3,0,1,3,1,3,2,2,3,0">Gradual 1</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,4,1,2,1,1,1,0,0,3,0,2,2,2,2,2,1,1,1,1,1,2,2,0,2,0,2,3,0,0,2,3,1,1,0,1,2,0">Gradual 2</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,3,1,0,2,2,3,2,1,3,1,1,1,2,1,3,0,2,0,3,2,2,2,1,3,2,1,0,0,2,1,1,1,3,0,1,2">Rain on a window</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,3,2,1,0,1,2,0,2,2,0,1,2,1,1,0,2,2,3,0,1,2,0,1,1,1,1,0,0,2,0,3,1,0,3,2,1">Floor cracks, fungus rise</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#7,3,1,2,0,6,2,2,6,2,0,1,2,0,5,1,0,0,1,1,1,2,3,1,2,0,0,2,0,2,1,0,4,1,1,6,1,2,0,1,3,0,2,1,0,2,2,2,1,2,6,2,0,2,2,0,6,2,3,5,2,2,0,1,1">Stripes</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#2,5,1,2,2,0,2,1,0,4,1,1,4,0,0,1,1,0,3,2,1,3,3,0,2,1,1,3,0,0,1,3">Traveling Grass</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#2,5,1,1,2,1,3,0,1,4,2,1,2,1,1,4,2,0,2,0,0,2,2,0,3,1,1,2,3,0,3,2">Computation</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,6,2,2,3,2,4,0,0,1,0,2,1,2,1,1,0,1,2,3,2,3,0,2,1,0,2,5,3,2,5,2,2,4,1,1,5,0,2,4,3,0,4,0,0,1,1,2,1,3,2,1,0,2,2,0">Rapids</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,4,3,2,3,2,1,1,1,3,2,2,1,0,1,3,3,1,1,0,1,3,3,3,2,1,0,2,0,0,1,1,1,3,2,1,3,3,0,1,2,0,1,1,2,1,0,0,1,1">Breaking point</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#3,6,0,2,3,0,3,0,0,1,2,2,1,0,0,1,0,2,5,3,2,2,2,2,5,1,0,3,1,0,5,2,0,4,2,2,5,1,1,4,2,2,4,2,1,1,2,1,3,2,0,4,1,1,5,1">Ice lines</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#2,3,1,2,2,0,1,1,1,1,1,1,2,2,0,2,3,1,2,2">Leaky fractal</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,1,3,2,1,2,3,1,0,1,2,3,1,2,0,0,1,2,1,1,0,2,2,3,1,1,1,0,2,3,0,2,0,3,1,3">Crypto</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,2,1,1,1,1,0,3,2,0,3,1,0,1,2,0,1,2,3,3,1,1,2,2,0,3,1,1,2,2,1,0,1,0,0,2,2">Shards</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#4,3,1,2,2,2,2,0,0,1,3,0,1,3,3,1,3,3,2,2,0,1,3,1,1,2,1,1,0,1,2,2,3,1,3,0,1,2">Departure</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/Turing-Drawings/#5,4,2,2,3,1,1,0,2,2,0,2,3,0,4,3,0,4,1,0,3,3,3,3,1,0,4,1,0,0,1,0,1,2,1,0,3,3,1,2,2,0,1,1,4,2,1,2,3,2,1,1,2,4,1,0,2,2,1,3,2,3">Snakes</a></p>
+</li>
+</ul>
+<p>For future work, I'm thinking it might be interesting to try using Turing machines to generate music procedurally. Certainly, music could be represented by notes on a tape, or even multiple tapes.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

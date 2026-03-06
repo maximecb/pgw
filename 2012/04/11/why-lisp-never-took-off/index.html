@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Why LISP Never Took Off</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why LISP Never Took Off">
+  <meta property="og:description" content="Why LISP Never Took Off">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/04/11/why-lisp-never-took-off/lambda.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-04-11-why-lisp-never-took-off/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/04/02/inefficient-numerical-operators/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/04/20/the-indirection-problem/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Why LISP Never Took Off</h1>
+<div class="post_date">April 11th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="lambda.png">
+</div>
+<p><a href="http://en.wikipedia.org/wiki/Lisp_(programming_language)">LISP</a> is a programming language designed by John McCarthy in 1958 while he was at MIT. It's one of the oldest high-level programming languages. The name LISP is an acronym for LISt Processing, because linked lists are the core data structure of the language. After its inception, the language quickly gained traction in <a href="http://en.wikipedia.org/wiki/Artificial_intelligence">AI</a> research circles because of its simplicity, its mathematical elegance and its expressiveness. Today, the term LISP usually refers to languages derived from LISP, the two most famous of those being <a href="http://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a> and <a href="http://en.wikipedia.org/wiki/Common_Lisp">Common Lisp</a>.</p>
+<p>I've been exposed to Scheme and other LISP variants on several occasions during my studies. I will freely admit that I find LISP languages interesting and conceptually elegant. The Scheme philosophy is one of "less is more". The language, at its core, is very simple, but provides powerful facilities for expanding the language itself, in the form of macros. Scheme is also very consistent and logical. Its design has clearly been given careful thought.</p>
+<p>Scheme programmers seem to love the language. They praise its many qualities: its elegant syntax, its conciseness, its functional design, its expressiveness, the productivity gains it provides. It's a language so powerful, it allows you to redefine the language itself through the use of <a href="http://en.wikipedia.org/wiki/Macro_(computer_science)">macros</a>. Scheme programmers love the language so much, they almost make it sound like strong AI would have been achieved years ago, if only everyone programmed in Scheme.</p>
+<p>The question when it comes to Scheme and other LISP variants, however, is how come no LISP language ever really caught on? If everyone who gives the language any serious consideration loves it, how come so few people use it? Why are we stuck with so many flawed, inelegant, unnecessarily complex mainstream languages when there's a much cleaner, elegant and expressive alternative right there in the form of Scheme?</p>
+<p>Rudolf Winestock attempted to answer this question in his essay entitled <a href="http://www.winestockwebdesign.com/Essays/Lisp_Curse.html">The Lisp Curse</a>. His answer: LISP is just too powerful for its own good. Its expressive power is its ultimate drawback. I don't believe expressiveness is much of a downside. I agree with Winestock, however, that one of the real issues with LISP is the fragmentation of the community. In this post, I intend to look at some more concrete reasons why LISP languages, in particular Scheme, never caught on, despite their many strengths.</p>
+<h2>Fragmentation</h2>
+<p>When it comes to programming in C, there's a handful of big name compilers. <a href="http://gcc.gnu.org/">GCC</a> and <a href="http://en.wikipedia.org/wiki/Clang">Clang</a> for Mac and Linux. <a href="http://en.wikipedia.org/wiki/Visual_C%2B%2B">Visual C++</a> on Windows. These are all fully-featured and competent compilers. Choosing a C compiler isn't very difficult. They're all rather good and usually rather straightforward to install and use. When it comes to programming in Scheme, however, the choice isn't so clear. There's many Scheme implementations out there: Bigloo, Larceny, Chicken Scheme, Guile, Gambit Scheme, MIT/GNU Scheme, Chez Scheme, Scheme48, Hop and more. None of these stands out as the ideal choice. They have varied degrees of support for the language, widely varying performance, and installing some of these on your platform might well force you to take a stroll through dependency hell.</p>
+<p>Newcomers might easily be scared away from the language before they even get to try it. They might try to find a Scheme implementation and find that it's unmaintained and broken, or that it's a pain to install on their system. They might also discover that the implementation they chose doesn't fully support the latest Scheme specification, but rather some more-or-less conformant dialect of Scheme with undocumented features. You might think I'm just making up these scenarios, but they are actually part of my initial contact with Scheme. Although I haven't tried Common Lisp myself, I believe it suffers from a similar problem.</p>
+<h2>Less is Not More</h2>
+<p>Scheme follows a minimalist design philosophy. It provides a small set of constructs as well as macros, and the programmer is expected to extend the language to fit his or her needs. In theory, this sounds very nice. A minimalist, "less is more" type of design should mean less room for incompatibilities among implementations. It should mean the language is easier to implement and perhaps help it remain more semantically consistent.</p>
+<p>The problem is that Scheme provides perhaps too little. The C++ standard library provides you with standard containers, such as hash maps and binary trees, as well as algorithms operating over those containers, such as sorting algorithms. It also provides basic support for multithreading and string tokenization. The latest Scheme standard (<a href="http://www.r6rs.org/final/r6rs.pdf">R6RS</a>) doesn't specify any of this, even though these are very basic features that many if not most programmers will need at some point.</p>
+<p>Most Scheme implementations have chosen to extend the language to compensate for what the standard lacks. The issue here is that different implementations may implement these unspecified features in different ways. This causes further problems. Those who want to write Scheme code will often be forced to use non-standard features specific to whichever implementation they are working with. Sharing code then becomes problematic, because other implementations may or may not support the features needed. The limitations of the Scheme standard make it difficult to implement portable Scheme libraries.</p>
+<h2>Batteries Not Included</h2>
+<p>One of the biggest frustrations I've had when trying to write Scheme code is the poor documentation. It's not that easy to learn what you need to know about the language. Google searches will often yield irrelevant results, or results that are specific to one Scheme implementation. The official <a href="http://www.r6rs.org/final/r6rs.pdf">language specification</a> document is probably the best source of documentation, which is rather sad. What if you need to use implementation-specific features? Well, the Gambit Scheme page has a long list of undocumented extensions.</p>
+<p>Perhaps the Scheme community suffers from a lack of desire to document. From what I've seen, it's fairly typical for Scheme code to have very few comments (if any) and be full of one-letter variable names. There seems to be a prevalent assumption that the code is self-evident and doesn't need any explanation. This assumption is rather strange, because Scheme is probably the language that most needs documentation out there. In a language where you can use macros to (re)define language constructs, you should never assume that anything is self-evident.</p>
+<h2>The (Lack of) Speed</h2>
+<p>Scheme is dynamically typed. It's very much a <a href="http://en.wikipedia.org/wiki/Dynamic_programming_language">dynamic language</a>. Just like Python and JavaScript, Scheme allows you to dynamically change the type of variables at run-time. This makes it rather tricky to compile Scheme code efficiently. There's been lots of research in the past few decades on how to implement efficient JIT compilers for dynamic languages. From the work on <a href="http://dl.acm.org/citation.cfm?id=74884">SELF</a>, to Mozilla's work on <a href="http://dl.acm.org/citation.cfm?id=1542528">Tracing JITs</a>, to all the work done on <a href="http://dl.acm.org/citation.cfm?id=1565827">PyPy</a>, to all the work that's been done in the Java world.</p>
+<p>I've got bad news for you. There are no JIT compilers for Scheme. Okay, there may be some experimental Scheme JIT out there, but as far as I know, all the major Scheme compilers compile code ahead of time. This is sad, because JIT compilers are an ideal choice for dynamic language. They allow you to take advantage of type information that's only available at run-time. The Scheme community seems to think it knows better, and has decided to stick with static compilation, disregarding the last 20 years of research into dynamic languages.</p>
+<p>By default, most Scheme and Common Lisp implementations use numerical towers to represent numbers with arbitrary precision. This makes it <a href="/2012/04/02/inefficient-numerical-operators/">difficult to optimize</a> Scheme code, because overflow checks need to be inserted into the generated code.  Non-integer numbers are represented by arbitrary precision rationals if possible, which make for better precision, but terrible performance. In order to get around this, special operators need to be used to operate on machine-precision integers and floating-point numbers. Scheme has taken the view that everyone should pay for the performance cost of arbitrary precision arithmetic, rather than only those who need it, because this is more mathematically elegant.</p>
+<h2>Elitism</h2>
+<p>Some Scheme programmers seem to believe that Scheme is God's gift to the world of programming and that it's the right tool for <i>every</i> use case. Don't get me wrong, I like many things about Scheme (and other LISPs), but I'm a pragmatist, and I just don't find it all that convenient to use in practice. I also fail to understand why anyone would think Scheme is a good first language to teach a new programmer. It may be mathematically elegant, but it's certainly not the most intuitive language out there, or the best choice for new programmers, when there's alternatives like Python.</p>
+<p>My first exposure to LISP was in a first year undergraduate class on programming language semantics. In this class, we had to do the classic experiment of implementing an interpreter for a simplistic LISP dialect in Scheme. Most of my classmates, who had little programming experience, were rather confused. I was mostly confused because I didn't really get the point. In order to understand the interpreter we were writing, you needed to already understand the level of language semantics the class was teaching. In the end, the interpreter in question was trivially simplistic and predictably inefficient. They essentially showed us how not to implement an interpreter if you care about performance to any degree. Talk about unrewarding programmer masturbation.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

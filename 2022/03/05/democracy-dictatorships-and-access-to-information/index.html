@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Democracy, Dictatorships and Access to Information</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Democracy, Dictatorships and Access to Information">
+  <meta property="og:description" content="Democracy, Dictatorships and Access to Information">
+  <meta property="og:image" content="https://pointersgonewild.com/2022/03/05/democracy-dictatorships-and-access-to-information/hqdefault.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2022-03-06-democracy-dictatorships-and-access-to-information/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2022/02/18/noisecraft-project-update/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2022/05/23/minimalism-in-programming-language-design/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Democracy, Dictatorships and Access to Information</h1>
+<div class="post_date">March 6th, 2022</div>
+</div>
+<div class="cover_image">
+<img src="hqdefault.jpeg">
+</div>
+<p>The last two weeks have been a painful reminder that, as comfortable as we may have it in the west, democracy is not the default state of the world. Historically speaking, democracy has been a relatively recent and scarce concept. Even today, two of the largest countries in the world are ruled by authoritarian dictatorships. It's both scary and sad to be reminded that one person's ego, when left unchecked, can cause an incalculable amount of suffering, and the deaths of tens of thousands, or even millions.</p>
+<p>One clear similarity between authoritarian regimes is that in order to maintain their power, they limit and suppress access to information. They can't tolerate criticism, debate or dissent. They control the narrative by supplying one message and one storyline, and silencing all other voices by any means necessary. Suppressing the free flow of information has the added effect that even if people disagree with the sanctioned narrative, they may feel completely isolated, and so they are understandably too afraid to act. In a way, it's almost tautological: centralized control relies on preventing the free flow of information, because allowing multiple voices to be heard automatically takes power away from centralized control.</p>
+<p>Recently, I've been pleased to see that <a href="https://signal.org/en/">Signal</a>, the end-to-end encrypted messaging system, has gained almost mainstream popularity. People are beginning to care a little bit more about privacy. However, I don't think Signal is enough. I've heard that this is going to change, but the reliance on a phone number to identify users is anti-privacy by definition. Secondly, while Signal provides an alternative to existing messaging services, it doesn't do much to replace other uses of social media. Lastly, Signal still seems to rely on centralized servers, which makes the service inherently vulnerable to disruption.</p>
+<p>In my humble opinion, we need something more decentralized and privacy-conscious. Something like a cross between Signal and BitTorrent, with a little bit of Tor sprinkled in there. End-to-end encryption is great, but it would be nice if there was a way to implement a messaging service without relying on one centralized server to identify and connect people. BitTorrent solves this problem by having a long list of "trackers". Maybe this concept can be adapted by having many servers which act as dead drops, used by friends to exchange messages while still remaining anonymous. Possibly, this could also incorporate the peer-to-peer component of BitTorrent.</p>
+<p>I'm not a cryptography expert and I'm not the best person to solve this problem, but I tend to believe that something like this should be possible, and that it's a problem worth working on. It should be possible for each user to create a public and private key pair that lives only on a local device. Then, without needing a centralized account, each user can use their public key as their online identity, without even providing a username. Possibly, two users could become "friends" in a decentralized system by sharing a public/private key pair that only they are aware of. This shared key could be created and shared completely offline if desired, over a USB stick, over bluetooth, by tapping cellphones together in a coffee shop, or even using a QR code.</p>
+<p>A shared key pair can be used to drop messages on a server or on a peer-to-peer basis without having the users identify themselves or the intended audience when sending the messages. Alice can encrypt a message for Bob, but the encrypted message contains no visible information saying it comes from Alice, or that it's destined for Bob. Alice and Bob can download many messages from a server without letting the server know which messages they are looking for. If you think of this in a peer-to-peer context like that of BitTorrent, I think it paints an interesting picture. Alice can download many messages from peers and also upload many messages to other peers. Most of these messages are encrypted and she has no access to them. At some point, she writes a message for Bob and encrypts it using their secret key. She injects her own message in the stream and it starts to propagate among the network. Alice doesn't tell anyone that this new message is her own, but Bob will be able to identify it when he sees it.</p>
+<p>In terms of community organization, it may be possible to share details about an event, or to create something equivalent to a twitter hash tag, by broadly sharing a decryption key using a QR code. This would be the equivalent of telling many users on the network to follow your channel/feed.</p>
+<p>The system I've loosely described above has flaws and could certainly be iterated on, but the key point is, something like that should be technologically possible, and it's a problem worth solving. Access to information, freedom of expression and safe channels of communication are essential if we want to protect our democracies and the well-being of our species in general.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

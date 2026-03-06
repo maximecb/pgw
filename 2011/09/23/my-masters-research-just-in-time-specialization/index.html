@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Masters Research: Just-In-Time Specialization</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My Masters Research: Just-In-Time Specialization">
+  <meta property="og:description" content="My Masters Research: Just-In-Time Specialization">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-09-23-my-masters-research-just-in-time-specialization/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/09/20/just-passed-my-predoctoral-exam/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/09/27/new-x86-backend-and-javascript-macros/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>My Masters Research: Just-In-Time Specialization</h1>
+<div class="post_date">September 23rd, 2011</div>
+</div>
+<p>My interest in dynamic programming languages started while I was doing my M.Sc. research. I was working on a Virtual Machine (VM) for the MATLAB programming language as part of the <a href="http://www.sable.mcgill.ca/mclab">McLab project</a> at McGill. The plan was for me to implement McVM, our own custom VM for the MATLAB programming language. My supervisor, <a href="http://www.sable.mcgill.ca/~hendren/">Laurie Hendren</a>, started the project because she wanted to have more of a focus on scientific computing. One of the main goals was for us to look into how to make MATLAB programs run faster. Seeing how the MathWorks VM is closed source, and there isn't even a publicly available specification of the language, we had to figure out the language semantics and how to optimize it all on our own.</p>
+<p>I decided to start my implementation of McVM by writing data structures to represent MATLAB matrices and a simple interpreter for the language. I then started to extend this interpreter with a JIT compiler that could fall back to the interpreter when it ran into something it didn't know how to compile. This design was convenient because it allowed me to built the JIT compiler incrementally, without having to support the whole language to run our set of benchmarks. I chose LLVM to implement my JIT compiler backend, a choice I was rather pleased with, as the LLVM documentation is very nice to work with.</p>
+<p>As I progressed in my VM implementation, I began to gather performance numbers on our benchmarks, and do some profiling. The bad news is that initially, my VM performed very poorly. What quickly became obvious is that the biggest issue with McVM's performance wasn't the speed of the matrix operations or the quality of the machine code produced by LLVM, it was something much more fundamental. MATLAB is, just like Python, Ruby, PHP and others, what we call a dynamic programming language. As such, it's dynamically typed. This means that there are no type annotations, and variables can change type at any time.</p>
+<p>In implementing McVM's interpreter, I did the naive thing and made it so every primitive operation resulted in a call to a function that would implement dynamic dispatch based on the types of each operand. This was easy to implement, and it was semantically correct, but it was also terrible for performance. Another issue was that, in MATLAB, the default numeric type is a matrix of doubles. Even integers, by default, appear semantically as 1x1 double matrices. For simplicity, I represented all numeric variables as matrices in my naive implementation. This was again terrible for performance, because, as it turns out, most MATLAB programs use many integer and scalar variables. My VM simply allocated a new matrix to store the result of every primitive operation.</p>
+<p>I came to the conclusion that the key to optimizing MATLAB programs was to specialize code behind the scenes. The language was dynamically typed, and made it appear (by default) to the programmer as if every numeric variable was a matrix of doubles, but that didn't mean that all variables actually had to be implemented as matrices of doubles. If the compiler could somehow figure out that some variable would only ever store scalar values, then that variable didn't need to be dynamically allocated as a matrix object. If a variable was only going to store integers, then costly floating-point operations could be avoided. If the compiler knew the dimensions of a matrix ahead of time, other optimizations could become possible.</p>
+<p>Clearly, the more information the compiler has access to, the more it can specialize and optimize the program implementation. The big issue with MATLAB (and other dynamic languages) is that the languages are very... dynamic, and as such, make little information available to the compiler as to the precise semantics of programs. There are no explicit type annotations telling the compiler when it can use a scalar or integer variable instead of a matrix. The compiler, in order to generate efficient code, needs to be able to extract that information by itself somehow. The key to my M.Sc. thesis was coming up with a way to do that.</p>
+<p>The realization I had was that in a typical MATLAB program, most of the types in a function body are dependent on the types of the function arguments. If you know the types of the values passed as function arguments, you can logically deduce the types of most (if not all) local variables using a simple dataflow analysis. I decided to built an optimizing JIT compiler around this idea. When the first call to a given function occurred, McVM would capture the arguments to the function and extract their types. This type information was then fed into a type analysis which allowed the JIT to lazily generate a compiled version of this function that was optimized specifically for the given argument types. Future calls to the function would go through this optimized version if the argument types matched, and otherwise, another specialized version would be compiled.</p>
+<p>This scheme worked fairly well, and allowed McVM to be faster than the MathWorks JIT on many benchmarks. The McVM JIT wasn't particularly fast in terms of compilation time, but this didn't seem to be an issue for most MATLAB programs as they typically run for a while. I later learned that the optimization scheme I came up with is not 100% novel. Others had had similar ideas before me. Nevertheless, I thought it was a worthwhile concept to bring to the world of dynamic languages. It led to my <a href="mcvmthesis.pdf">M.Sc. thesis</a> and <a href="mcvmcc2010.pdf">one publication</a> at the CC2010 conference.</p>
+<p>Near the end of my masters, I went on to apply for a Ph.D. I was interested in genetic algorithms and artificial intelligence and so I approached a professor who did machine learning. I had decided that artificial intelligence was a more worthwhile research goal than compilers (it's the future!). Unfortunately, in the first semester of my Ph.D., I realized three things:</p>
+<ul>
+<li>
+<p>The prof I was working with had no interest in genetic algorithms. He was all about neural networks, and so my research would most likely have to be about neural networks.</p>
+</li>
+<li>
+<p>I didn't really care for "machine learning". I wanted to push the envelope, but machine learning, it seemed, was all about improving pattern classification performance by 0.5%, and calling it a paper.</p>
+</li>
+<li>
+<p>I didn't really know what I wanted to do. I had lofty goals, but I didn't really know how to go about implementing them. I wasn't sure I could really contribute anything to the field.</p>
+</li>
+</ul>
+<p>As I was getting progressively more disappointed at my choice to work in machine learning, I started thinking about my M.Sc. thesis. Working on McVM might not be world-shattering research, but it was fun. I was also starting to gather a list of things I could do to improve McVM. I had tons of ideas, and I became convinced that if I could go back to working on McVM, I could improve it much beyond what I had done for my masters, and blow the MathWorks compiler out of the water. The next semester, I approached another prof who did compiler research, and decided I'd change my thesis subject. If I was going to spend 5+ years working on a Ph.D., I had better be working on a topic that could keep me motivated.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

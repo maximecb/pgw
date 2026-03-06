@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Code Compactness and Optimization Levels</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Code Compactness and Optimization Levels">
+  <meta property="og:description" content="Code Compactness and Optimization Levels">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-10-31-code-compactness-and-optimization-levels/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/25/presented-at-dls-2011/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/31/what-id-like-to-know-about-javascript-programs/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Code Compactness and Optimization Levels</h1>
+<div class="post_date">October 31th, 2011</div>
+</div>
+<p>I've already mentioned how Tachyon is presently pretty slow in terms of compilation speed. It takes about 12s to compile 8000 lines of JavaScript from source to machine code, which is much too slow, I'm sure most JavaScript users would agree. One reason is probably that the implementation of the compiler itself is not as effective as it could be. I already know the backend is not that fast, and I plan to look into that some more. Something else I came to realize, however, is that Tachyon is actually compiling a lot of code.</p>
+<p>One of the benchmarks I'm compiling as part of my unit test suite is a piece of Tachyon code that deals with the Foreign Function Interface (FFI). There's this function called <code>initFFI</code> that serves to register C functions into Tachyon so that they can be used by our compiler. It's about 100 lines of code or so. Unfortunately, compiling this very function, and just that one, takes over 10 seconds! I found out that this function was triggering some kind of pathological case in the compiler. Further investigation revealed that the function in question produces a total of over 700 basic blocks in its Control Flow Graph (CFG). Furthermore, during some transformation passes, this number grows up to over 2200 basic blocks. That's one huge wad of code for Tachyon to process, much more than I expected.</p>
+<p>Why is this? Well, when I implemented the Abstract Syntax Tree (AST) to Intermediate Representation (IR) translator, I was trying to be clever. I wanted the final code to be fast. In this spirit, I decided to inline the whole sequence of low-level actions that goes on during  a JavaScript "new" operation each time the said operator was used. Unfortunately, <code>initFFI</code> has at least 50 "new" expressions. This results in very bloated code, which is slow to compile. Slow to compile, but faster, right? Well, perhaps... But then, as the name implies, <code>initFFI</code> only executes once, and it probably completes its execution in less than 10 milliseconds. Hence, <code>initFFI</code> is probably not worth optimizing, and thus, not worth spending much time compiling.</p>
+<p>My conclusion is probably that I need for Tachyon to initially compile code into a form that's less expanded, with as little inlining as possible. Something compact, that will compile fast. Only the functions that run for a long time should be optimized (and recompiled). Clearly, only those are worth spending time on. This is somewhat of a realization (or "duh!" moment), for me. The fact is, most modern Just-In-Time (JIT) compilers have more than one optimization level. Most of them incorporate a fast baseline compiler, and only optimize methods when they've been shown "hot" (they run for a long time, overall). I simply didn't realize how important this was, and that it was relevant for Tachyon.</p>
+<p>Marc Feeley, my advisor, inspired me to do a little experiment. I decided to temporarily disable the automatic inlining on much of my primitives, and to not inline the constructor calls with zero parameters (others are inlined). The result is that my unit tests (which are mostly compilation tests) run over twice as fast as before. I know I could remove even more inlining if I look into this some more. This is something I'll need to think a little more about. It seems clear to me though, that my High-Level IR (HIR) should probably be compact, minimal, and not involve any inlining. The standard, default compilation path should be made fast.</p>
+<p>The next thing I want to decide is whether or not my HIR will involve special "HIR instructions" that can map to code generators and/or primitive calls, or map directly to primitive calls. Right now, I'm thinking they are quire similar options, but the first one may be more flexible, and more practical to work with in terms of analyses. It's also possible that one HIR instruction will map to many variants of a given primitive.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

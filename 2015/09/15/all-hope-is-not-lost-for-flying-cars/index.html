@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>All Hope is Not Lost for Flying Cars</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="All Hope is Not Lost for Flying Cars">
+  <meta property="og:description" content="All Hope is Not Lost for Flying Cars">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-09-15-all-hope-is-not-lost-for-flying-cars/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/09/12/why-you-should-be-a-little-scared-of-machine-learning/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/09/24/basic-block-versioning-my-best-result-yet/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>All Hope is Not Lost for Flying Cars</h1>
+<div class="post_date">September 15th, 2015</div>
+</div>
+<p>It's a huge science fiction cliché, but it's something people seemed to actually believe back in the 1950s: in the future, there's going to be flying cars. Wouldn't that be amazing? No traffic jams, no intersections, go much faster than you could in a street vehicle. Unfortunately, it's 2015, and we're still driving around in ground cars. Population is increasing, the amount of traffic in big metropolitan areas is generally rising, and we're not getting to work any faster.</p>
+<p>Why is it that flying cars aren't a thing? You can easily point to several reasons. For one, the cost of fossil fuels is rising and current <a href="https://en.wikipedia.org/wiki/VTOL">Vertical Take-Off and Landing (VTOL) aircraft</a> are not at all energy efficient. A small two-seater helicopter can easily burn 10 gallons of fuel in just an hour. It's also difficult to imagine that the average Joe could really afford a flying car when even a small used helicopter from 1963 can cost over 130K. Then there's licensing and safety issues. Drunk driving is a problem now, just imagine if drunk people could fly over the city at high speeds. Maintenance-wise, it's one thing when your engine stalls on the highway, but imagine what would happen when poorly maintained vehicles break down in the sky.</p>
+<p>It recently dawned on me, however, that technology has in fact advanced quite a bit when it comes to flying things. Now, you can buy yourself an electrically-powered, gyro-stabilized quadcopter for <a href="http://www.amazon.com/UDI-U818A-2-4GHz-RC-Quadcopter/dp/B00D3IN11Q/ref=sr_1_2?ie=UTF8&qid=1442355219&sr=8-2&keywords=drone+toy">just over $50</a>. This wasn't possible when I was a kid. You'd have been looking at a few hundred dollars for the most basic gas-powered RC airplane (maybe $500 in 2015 dollars), it would have been a huge amount of effort to maintain, and you couldn't realistically have flown that in the city.</p>
+<p>What does that have to do with flying cars? Well, I had this thought: what if you could scale up flying electric drones? Amazon and Google want to build bigger drones that can <a href="http://news.mit.edu/2014/csail-nick-roy-google-delivery-drone">deliver packages</a>, but what if you could use drones to deliver people? Thanks to the great push for electric cars, lithium batteries are getting cheaper, lighter and ever more efficient. High-performance electric motors are getting cheaper too. Very soon, it might very well be possible to build electric vehicles that are relatively inexpensive and powerful enough to carry people.</p>
+<p>A few days ago, I found out that someone had already built such a thing. The <a href="https://www.youtube.com/watch?v=t5JgnMJzCtQ">Swarm</a> vehicle weighs just 148kg, sports 54 rotors and can deliver a whooping 22 Kilowatts of power. It's powerful enough to lift one person and cost just 6000 british pounds to build. Okay, this thing only has an autonomy of 10 minutes, poor controls, and it probably isn't really safe. It's really just a prototype, but I still think it's a great proof of concept. Battery technology is progressing constantly, so within a few years, such electric flying vehicles could likely be made smaller and have more autonomy.</p>
+<p>I believe that if such large-size electric flying drones could have just 15-20 minutes of autonomy, interesting applications would already become possible. Doing a little back-of-the-envelope math, the island of Montreal (where I live) is only about 16km wide. I myself am only about 8 kilometers away from downtown. If a flying vehicle could fly at 100 kilometers per hour, it would only need 5 minutes at cruise speed to fly me to downtown, assuming it's flying in a straight line. Make it 7 a minute flight to account for acceleration and deceleration. That probably leaves sufficient autonomy for the vehicle to return to some nearby supply station to charge.</p>
+<p>What, I think, makes such an idea much more realistic is that such drones could be computer-controlled. Completely removing the need for a human pilot makes flights faster and accidents much less likely. The possibility of having multiple independent computer-controlled rotors and multiple batteries also allows for a level of redundancy that might make such a vehicle much safer than a helicopter whose one engine failing means low survivability. If you could add a giant computer-controlled airbag to protect riders, pedestrians and infrastructure from emergency crashes, and cover the drone in flexible foam, you could possibly have a pretty safe autonomous human-delivery mechanism.</p>
+<p>The scenario I have in mind goes something like this: you dial an app on your phone, within 4 minutes a flying drone pod shows up, flashes safety lights to signal its presence, and gently lands in front of your doorstep (or perhaps at a designated landing pad). A door opens up, you hop into the single seat, the door closes shut and locks itself, and 2 minutes later you're already flying away. After a 5 to 10 minute flight, you're deposited up to 16km away from home. Would you ride inside a drone pod to work, if it could mean completely avoiding traffic and shortening your commute to mere minutes?</p>
+<p><b>EDIT 2016-01-07</b>: the Chinese firm EHang has just <a href="http://www.cbc.ca/news/technology/worlds-1st-passenger-drone-unveiled-1.3393437">unveiled the EHang 184</a>, a prototype of a computer-controlled drone meant to carry a single passenger short distances. This is pretty much exactly what I had in mind when I wrote this post four months ago.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

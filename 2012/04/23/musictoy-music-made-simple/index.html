@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MusicToy - Music Made Simple</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MusicToy - Music Made Simple">
+  <meta property="og:description" content="MusicToy - Music Made Simple">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-04-23-musictoy-music-made-simple/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/04/20/the-indirection-problem/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/05/08/we-should-be-dna-sequencing-endangered-species/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>MusicToy - Music Made Simple</h1>
+<div class="post_date">April 23rd, 2012</div>
+</div>
+<p>This weekend, I have been working on <a href="http://maximecb.github.io/MusicToy/">MusicToy</a>, a minimalist grid sequencer app. This is a very basic music editor based on an editable grid, with each grid cell corresponding to a specific note or sample being played at a given time. It has drum samples and notes in the minor pentatonic scale. The idea was to make a tool that would encourage musical experimentation with no prior musical knowledge required, so that anyone can use the tool, no training required. The <a href="http://en.wikipedia.org/wiki/Pentatonic_scale">pentatonic scale</a> is easy to compose with, as most sequences of notes in the scale sound musical. It's been used in children's songs, <a href="http://en.wikipedia.org/wiki/Pan_flute">pan flute</a> music and <a href="https://www.youtube.com/watch?v=y6120QOlsfU">Darude's sandstorm</a>, among other things.</p>
+<p>Interesting features include the ability to edit patterns as they are looping and the possibility of sharing links to patterns you create. MusicToy runs 100% on the client-side, and as such, it isn't possible to save patterns on the server side. However, I discovered that it's actually possible to generate a unique URL for each pattern by modifying the <a href="http://digitaldreamer.net/blog/2010/10/6/detect-and-change-html-named-anchor-tags-url-throu/">anchor tag</a> part of the address on the fly to encode the said patterns. This is a wonderful trick I will surely use again in future web apps I make!</p>
+<p>The app is implemented using JavaScript/HTML5. It uses the <a href="https://en.wikipedia.org/wiki/Canvas_element">canvas element</a> and the <a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html">Web Audio API</a>. It should work in recent versions of Chrome and possibly Safari (let me know).  Go ahead and <a href="http://maximecb.github.io/MusicToy/">try playing with MusicToy</a> or check out some patterns made using it:</p>
+<ul>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#ccaaaaaaaacaaaacfnbaacmfcamjmnbiiaacaacafbaacaaeacambfaiiaaaaaaaaeaaaaaaaaaaaeaaiaaaaaaajieeccbbaaaaaaaaaaaaaaaaaaaaaaaa">Example 1</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#aaabbaaaaaaeeafaaaaaaeabbaaaabaeeaaaaaaaafaaaaaaaaaffffaefbaaaaakkkffffabaeaaaifaaaaaaakfeebfeebaaaaaaaaaaaaaaaaaaaaaaaa">Example 2</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#baaaaaaaaaaaaaaibaaaaaaeaaaaaaakaaaaaaafaaaaaaecababaiabicicabeaeeeeciaaciciabaababadaaabaeacjeaababababaaaaaaaaeeeeeeee">Example 3</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiaaaaaaieaaaaaiecaaaaiecbiiiiecbaeeeecbaaccccbaaabbbbaaaabbbbbbbbaaaappppaaaaaaaaaaaaaaab">Example 4</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#aabbabaaaaeaaeaaaaaaaaaaiaaaaaaacbaaaaaaaaaiaaiaaaaeaaeaeabbiabeaaaaaaaaaaaaaaaaboeofhkhbcecebcbeiiiaajikejefkefaaaaaaaa">Example 5</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#daaaaaaaaadaamaaadamaaadaaadaamabjecbaaaaaaaaaameaaeejecaeaaaaaaeaaaejecaaaaaaaabjecbaaabbfababeababababaaaaaaaaaaaaaaaa">Example 6</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#bbcbaaaaaiaacaaafbbbbbbaaeaeaiaaeaaabbjaaaaeaaacaaaaeaaaabeabaabaeaaaaaacaaaaaeeaaaaaaaibeaeaeaaaabaaabaaaaaaaaaaaaaaaaa">Example 7</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#dbaaaaaaaeeeaaaaaaaaeeaaaaaaaanaaaaaaaaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbaaaaaaaaeeeeeeeeabababab">Example 8</a></p>
+</li>
+<li>
+<p><a href="http://maximecb.github.io/MusicToy/#aaaaaaaaaaaaaaiabaaacaaagaaabacaiaebkaecadaabkaaaaaiiaaaaaacacnaaaaeaaaeaaacaaaaaaaeaaaababababaaaaaaaaaaaaaaaaaaabaaaba">Example 9</a></p>
+</li>
+</ul>
+<p>Feedback about bugs and possible improvements is welcome :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

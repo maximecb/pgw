@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Higgs: My New Tracing JIT for JavaScript</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Higgs: My New Tracing JIT for JavaScript">
+  <meta property="og:description" content="Higgs: My New Tracing JIT for JavaScript">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/12/08/higgs-my-new-tracing-jit-for-javascript/y_iehvl-4e6gobthlnzp8q21.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-12-09-higgs-my-new-tracing-jit-for-javascript/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/11/09/static-vs-dynamic-why-not-both/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/12/13/sky-blue/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Higgs: My New Tracing JIT for JavaScript</h1>
+<div class="post_date">December 9th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="y_iehvl-4e6gobthlnzp8q21.png">
+</div>
+<p>A few months ago, I made the hard decision to change the direction of my PhD studies. I felt like I'd gotten to a point where I was stalled in my work and the goals of my thesis project had become somewhat blurred. I was experiencing the PhD blues. Something needed to be done. Rest assured, I'm still doing compiler research, I'm still studying dynamic programming languages, and I'm still working with JS (JavaScript). I'm also still part of the same research group I was previously working with. My situation isn't all that different.</p>
+<p>Two things did change, however. One is that I'm now being co-supervised by professors <a href="http://www.iro.umontreal.ca/~dufour/">Bruno Dufour</a> and <a href="http://www.iro.umontreal.ca/~feeley/">Marc Feeley.</a> The other is that I decided to begin implementing a new dynamic language compiler and give my research a more precise direction. This new compiler, named <a href="/2012/12/08/higgs-my-new-tracing-jit-for-javascript/">Higgs</a>, will have a simpler design than that of <a href="/2011/08/27/the-tachyon-javascript-compiler/">Tachyon</a> (my previous research project) and will make use of some of the key insights I acquired during the last two years. This is not a complete rewrite: I've been enthusiastically reusing code from Tachyon wherever possible, and I'm fairly confident that Higgs, now over two months in development, will reach a level of JS support better than that of Tachyon just in time for the new year.</p>
+<p>Higgs is mostly written in <a href="http://dlang.org/">D</a>, a systems programming language which resembles C++, but offers key advantages such as an even more powerful template system, garbage collection and basic type inference. As with Tachyon, most of the JS runtime and standard library are written in (extended) JS. Unlike Tachyon, Higgs is an interpreter which will soon be complemented by a <a href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">tracing JIT compiler</a> and a type profiling system. With Higgs, I intend to make some interesting technological bets and push concepts such as dynamic type-driven optimization as well as lazy compilation to their logical extremes.</p>
+<p>I made the choice to use trace compilation in Higgs for a multitude of reasons. Among the most important ones is simplicity. Interpreters make it easy to add support for new features. It's also fairly easy to incrementally extend an interpreter with a simple tracing compiler. There is no need to have compiler support for all language features from the start; the tracing JIT can support compiling only a limited subset of opcodes in traces at first. Traces also have this interesting property that they can bail out at various intermediate points and jump into the interpreter. Presumably, in a compiler which uses type information to optimize traces, it would be very easy to decide that a trace needs to be invalidated to undo some optimization, and have execution fall back to the interpreter. This seems simpler than techniques such as <a href="http://wingolog.org/archives/2011/06/20/on-stack-replacement-in-v8">on-stack replacement</a>.</p>
+<p>Trace compilation might also be seen as an extreme form of lazy compilation. Traditionally, static language compilers would compile and optimize all methods of a program and all methods of the standard library at once. In a JIT compiler, this is undesirable because compilation time usually overlaps with execution time. As such, it's useful to at least avoid compiling functions that are never called. If you have an interpreter available, you can potentially save more time by only compiling functions that run for a significant amount of time ("hot" functions), as these are usually an even smaller amount of code. In a tracing JIT, we're not even compiling whole methods, we're compiling hot paths through code. We can lazily compile only parts of functions. The <a href="http://dl.google.com/googleio/2010/android-jit-compiler-androids-dalvik-vm.pdf">Dalvik VM</a> team from Google claims that in some cases, hot traces can be as little as 2% of a program's code.</p>
+<p>I originally intended to design the Higgs interpreter to have high-level opcodes that would directly mimic JS semantics. There would have been opcodes to read and write object properties, others that implement JS arithmetic operators, and so on. This seemed like a good idea at first, until I realized that this would imply a large amount of feature duplication between the interpreter and the tracing JIT, as both would have to implement all of JS's core semantics. Furthermore, the JS operators would be impractical to directly compile into traces, as their behavior involves many special cases, which implies several conditional branches.</p>
+<p>I decided, instead, to go with an approach similar to that of the <a href="http://www.christianwimmer.at/Publications/Chang09a/Chang09a.pdf">Tamarin tracing JIT</a> from Adobe and have my interpreter implement higher-level operations in terms of low-level instructions. The opcodes supported by my interpreter are close to the raw functionality provided by modern CPUs (e.g. direct integer arithmetic). The JS operators are implemented in an extended dialect of JS that exposes the low-level semantics available in the interpreter. This allows the interpreter to remain simple, and will allow the tracing JIT to trace through JS primitives like it would through any other piece of code.</p>
+<p>There is one fairly obvious downside to my interpreter design: it's fairly slow. I chose to go with a design that's simple, straightforward and easy to build on. I also chose low-level opcodes, which means that a simple JS operator can cause the interpreter to execute several function calls and many instructions. The common wisdom in the tracing JIT world is that you need a fast interpreter because you're going to fall back to interpreted code often. I decided to make a different bet. My tracing JIT compiler will eventually compile and <a href="http://personals.ac.upc.edu/vmoya/docs/bala.pdf">link</a> any piece of code that is run a sufficient number of times. This means that in the limit, the interpreter's speed becomes irrelevant because any piece of code that is still being repeatedly run will have been compiled.</p>
+<p>The practical implication of this is that Higgs probably won't win against any JIT on the SunSpider benchmarks, some of which only run for a few milliseconds. Major browser vendors have poured millions upon millions of dollars and countless man-hours into optimizing every part of their JS engines for these benchmarks, and there's probably little hope I could single-handedly win in that race anyway. Instead, I intend to aim at optimizing longer-running programs, and focus specifically on aspects of JS code mainstream JITs have more difficulty tackling. I can imagine a compiler like Higgs being very effective at optimizing server-side JS code, for example.</p>
+<p>At this point, you might be wondering what makes Higgs an academic research project. There have, after all, been several papers published about tracing JITs. The concept is no longer new, and Mozilla actually seems to be moving back to a <a href="https://wiki.mozilla.org/Platform/Features/IonMonkey">method-based JIT</a> for Firefox. What makes Higgs interesting is the special sauce I will be adding to the mix. The third component of Higgs will be a type monitoring system that aims to extract near-perfect type information out of running programs. When compiling traces, the JIT compiler will make use of this oracle to produce highly optimized code with much fewer guards than would otherwise be possible. I aim to begin development of this very important part of Higgs as soon as next month. Stay tuned!</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

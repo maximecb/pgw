@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Maybe Planets are Overrated?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Maybe Planets are Overrated?">
+  <meta property="og:description" content="Maybe Planets are Overrated?">
+  <meta property="og:image" content="https://pointersgonewild.com/2020/01/03/maybe-planets-are-overrated/torus_cutaway_web-1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2020-01-03-maybe-planets-are-overrated/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2019/11/05/its-been-done-before/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2020/09/22/the-need-for-stable-foundations-in-software-development/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Maybe Planets are Overrated?</h1>
+<div class="post_date">January 3rd, 2020</div>
+</div>
+<div class="cover_image">
+<img src="torus_cutaway_web-1.jpg">
+</div>
+<p>If everything goes according to plan, <a href="https://www.space.com/space-missions-to-watch-2020.html">2020 should see</a> the US finally regain the ability to launch humans into space, thanks to the Boeing <a href="https://en.wikipedia.org/wiki/Boeing_CST-100_Starliner">Starliner</a> and the SpaceX <a href="https://en.wikipedia.org/wiki/Dragon_2">Crew Dragon</a> capsule. That's exciting, but what's even more exciting is that, thanks in part to NASA's decision to fund private space ventures, we're witnessing the beginning of a new space race with some ambitious goals: Elon Musk has announced plans to use SpaceX to begin colonizing Mars within the coming decade.</p>
+<p>You have plenty of reasons to be sceptical of Elon Musk's ability to start colonizing Mars within 10 years, but I think that competition to be the first to land humans on a new planet could inspire a new generation of scientists, engineers and dreamers to a degree that no other technology has done in the past several decades. I know that the new space race, and TV shows like The Expanse, already have me thinking about the next step, and the technological feasibility of humans colonizing planets outside of our solar system.</p>
+<p>There are some bad news in this area. The closest star system, <a href="https://en.wikipedia.org/wiki/Alpha_Centauri">Alpha Centauri</a>, is 4.37 light years away from Earth. That means it would take you over 40 years to reach this place if you could travel at an amazingly fast 10% of the speed of light, and it looks like it's probably not going to be possible to travel faster than light in this universe (sorry). Alpha Centauri has three stars, making it factually awesome, but only <a href="https://en.wikipedia.org/wiki/Proxima_Centauri_b">one confirmed planet</a>, which is unlikely to be habitable due to proximity to one of the stars and stellar winds blowing away any atmosphere.</p>
+<p>Thankfully, there are other nearby star systems besides Alpha Centauri, but they're farther away. We might need 50, 60 or 80 years to reach them. Because the journey will take so long, with current technology, we would need to build massive starships, on which we're able to grow food, recycle water and other waste, provide entertainment for a large crew, as well as raise children. The <a href="https://www.newscientist.com/article/dn1936-magic-number-for-space-pioneers-calculated/">minimum number of people</a> needed to maintain sufficient genetic diversity for a space colony is somewhere between 80 and 160. However, if you want to avoid psychological distress, minimize risks due to accidental deaths or murderous psychotic episodes, and bring many specialized experts, you may want to send at least a few thousand people along. Since you also need to bring propellant, food, water and equipment, we could be talking about a spaceship the size of a city or small town.</p>
+<p>In terms of equipment, if your hope, once you get to another star system is to land everyone on a foreign planet, plant a flag and setup a little base in which you will grow food, you will likely need to bring thousands of tons equipment. That will make your interstellar spaceship even bigger and heavier. Landing on a planet can require a lot of heavy equipment (heat shields, propellant, engines, space suits), and it's also very dangerous. How do you feel about riding a space capsule that's been in storage for 80 years through an unbreathable alien atmosphere at 28,000 kilometers per hour on rocky alien terrain? There are worse news still, which is that if anything goes wrong on the surface, your capsule doesn't have the propellant or ability to take off again, because weight had to be minimized.</p>
+<p>I'm sure that plenty of space nerds and technophiles will make the argument that maybe in 300 years we'll have much more advanced technology than we do now, and some of these problems will be alleviated. That's possible, but these problems can't be completely eliminated. What I want to suggest is something simple: wanting to colonize alien planets upon arriving to a new solar system might be a nearsighted idea. You might be thinking you would want to do that just because you're just used to living on planet Earth, and you're lacking the perspective of someone who's used to living in space.</p>
+<p>If you imagine that a group of 3000 people traveled from Earth to an alien solar system for 50 or 80 years aboard a large spaceship, and children were born on that spaceship during the journey there, then maybe you can also imagine that these people are actually pretty used to living in space. What if that spaceship had <a href="https://en.wikipedia.org/wiki/Artificial_gravity#Centripetal">artificial spin-gravity</a> created using centrifugal force? What if it had indoor greenhouses with fields, trees, flowers, gardens and animals? What if was its own little city with houses, movie theatres, bars, workshops, bumper cars, dance floors, romantic spots, waterfalls and zero-gravity gyms? What if there were musicians, dancers and all kinds of artists living there? Maybe it could be an ok place to live. Maybe, when you got to an alien star system, you wouldn't really want to risk your life riding a minimalistic space capsule to a cold rocky plane so you can go live in a space-tent and farm space-potatoes.</p>
+<p>I think that if we can develop the technology to sustain humans in space for 50+ years, we would also be capable of actually living in space without needing to land anywhere. Our own solar system, past Mars, has an <a href="https://en.wikipedia.org/wiki/Asteroid_belt">asteroid belt</a>, as well as very many moons. Landing on asteroids and taking off afterwards takes much less energy than landing on an Earth-sized planet, because asteroids have much weaker gravity and no atmosphere. Most asteroids are space-rocks, but some of them are rich in metals, silica and even water ice. The composition of asteroids can be evaluated from far away using fancy technology we already have such as radars and lasers. We're already be capable of building probes and sending them to the asteroid belt to catalogue and tag asteroids.</p>
+<figure>
+<a href="torus_cutaway_web-1.jpg">
+<img alt="A torus/ring space station" src="torus_cutaway_web-1.jpg">
+</a>
+<figcaption>A torus/ring space station</figcaption>
+</figure>
+<p>Interestingly, it could also be possible to land a ship on an asteroid, attach engines to the asteroid, and turn said asteroid into a spaceship or space station. Once on the asteroid, you can begin drilling to build tunnels and homes inside. This concept has been explored in the science fiction novels and TV series <a href="https://en.wikipedia.org/wiki/The_Expanse_(TV_series)">The Expanse</a>, in which a human people called the Belters are native to the asteroid belt.</p>
+<p>Once you're living in space, some things also become a lot easier to do than they are on Earth. Think about manufacturing for example. In space, with zero or very low gravity, you don't need massive cranes to lift concrete or metal beams. You don't necessarily need energy-hungry vehicles to carry people either: in zero gravity, you could conceivably fly inside a large space station by holding onto a USB fan plugged into your smartphone (or you be less lazy and use some kind of fan-bike). It's possible to create artificial spin-gravity by rotating a large ship or space station fast enough to push people to the edges (think merry go round, minus the head injuries). However, in a few centuries, we might not care about recreating gravity anymore. It's conceivable that humans could be genetically modified to live in zero gravity without <a href="https://www.space.com/23017-weightlessness.html">health risks</a> (explored in the <a href="https://en.wikipedia.org/wiki/Hyperion_(Simmons_novel)">Hyperion</a> series of novels).</p>
+<p>Maybe, just maybe, we could save a lot of weight, save energy energy and save lives by going to other solar systems without bringing terraforming equipment and landing gear. We could instead, once we're there, build bigger, prettier, cozier space stations instead. That doesn't mean we wouldn't eventually decide to colonize the local planets, but I think there's a case to be made that it could make the journey easier, safer and more comfortable for everyone involved to embrace living in space instead of making planetary colonization the priority.</p>
+<p>You might be tempted to tell me that space radiation is dangerous, and so is mining asteroids, but I'm going to respond that you might not be really thinking this through. Space radiation has to be addressed for any kind of planetary colonization, even if you're only going to Mars, since Mars has a very thin atmosphere which won't protect you. Space mining could be done using a variety of relatively safe techniques. You could park your space station 500 kilometers away from the nearest asteroid, and have robotic probes fish asteroids back by securing them with giant nets and slowly reeling them in, without any humans needing to leave the space station and without needing to accelerate the asteroids to dangerous velocities. I'm going to argue that landing humans on an alien planet and surviving there with minimal equipment and no backup is much more dangerous than having a well-equipped, trained crew mine asteroids using robots.</p>
+<p>In the near term, I believe there's a legitimate argument to be made that instead of thinking about colonizing mars, it could make more sense to think about building space stations that are completely self-sufficient and appropriately shielded from radiation. These stations would just as well, if not more effectively than Mars colonization, achieve the purpose of "backing up humanity", as Elon Musk put it. As an additional benefit, once we are able to build space stations that can fully sustain themselves long term, then we will be much closer to being able to build spaceships that can travel for decades without stopping or being restocked with new supplies, or self-sustaining Mars colonies.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

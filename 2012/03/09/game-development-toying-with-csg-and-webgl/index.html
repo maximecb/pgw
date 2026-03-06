@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Game Development: Toying with CSG and WebGL</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Game Development: Toying with CSG and WebGL">
+  <meta property="og:description" content="Game Development: Toying with CSG and WebGL">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/03/09/game-development-toying-with-csg-and-webgl/screenshot.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-03-09-game-development-toying-with-csg-and-webgl/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/02/27/are-variadic-functions-necessary/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/03/30/teaching-computers-about-music/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Game Development: Toying with CSG and WebGL</h1>
+<div class="post_date">March 9th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="screenshot.png">
+</div>
+<p>I just started experimenting with WebGL and JavaScript for game development. The possibility of developing 3D games anyone can play on any platform without installing anything, so long as they have a capable browser, is a very attractive one. Now that browsers are implementing JavaScript APIs for <a href="http://blog.tojicode.com/2011/09/state-of-javascript-fullscreen-api.html">fullscreen mode</a> and <a href="http://beautifulpixels.blogspot.com/2012/01/javascript-pointer-lock-mouse-lock-in.html">pointer capture</a>, it seems like it might finally be possible to create browser games that can compete with their desktop counterparts.</p>
+<p>You might think JavaScript is still too slow to create performance intensive 3D games like First Person Shooters (FPS). It's true that JavaScript code still isn't as fast as what you can make with C++ (perhaps by an order of magnitude or so), but I've recently seen demos of a <a href="http://media.tojicode.com/q3bsp/">Quake III</a> map renderer, a Quake II port and a 3D physics simulation that convinced me JavaScript was probably fast enough to make serious games.</p>
+<p>I've been thinking it would be nice to try and make a simple FPS game of my own. Perhaps something with entirely (or almost entirely) procedurally generated content, along the lines of <a href="http://www.youtube.com/watch?v=2NBG-sKFaB0">kkrieger</a>. Generating simple worlds, meshes and textures procedurally would free me from one of the main issues I've had in my past game development attempts. The issue being that it's very hard to recruit and motivate artists to work on your project when you're a hobbyist and can't offer them money.</p>
+<p>There are many nice tutorials out there to help you learn WebGL, which is essentially a simplified OpenGL API with less room for confusion. I was able to quickly write my own shaders for basic point/ambient lighting and vertex coloring. The next step, I figured, would be to work on tools to make procedural content generation easier. With that goal in mind, I started reading up on <a href="http://en.wikipedia.org/wiki/Constructive_solid_geometry">Constructive Solid Geometry (CSG)</a>.</p>
+<p>CSG is a technique to build 3D shapes out of combinations of simple primitives and operations such as addition, subtraction and intersection. It's fairly tricky to implement, but I find the math and algorithms involved to be fairly interesting. I found <a href="https://web.archive.org/web/20190819183728/http://mattn.ufoai.org/files/MAPFiles.pdf">this document</a> to be particularly useful in helping me to implement the generation of CSG primitives. Specifically, it's possible to fully specify a brush (<a href="http://en.wikipedia.org/wiki/Convex_polytope">convex polytope</a>) in space by its bounding planes. To render this brush, however, you need to compute its vertices and sort the said vertices in either clockwise or counterclockwise order for each face.</p>
+<p>So far, I've been able to generate cubes, convex prisms and pyramids with any number of sides. The algorithm I implemented unfortunately scales fairly poorly, however, as it tests each possible combination of 3 bounding planes for intersection to find the vertices of a given brush, which has expected O(n^3) running time. This slows down to a crawl as soon as a brush has 50 faces or more. I'm considering perhaps manually computing the vertices ahead of time in my brush generation process instead. For now, I will probably look into the computation of CSG operations and see what representation makes more sense from that point of view.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

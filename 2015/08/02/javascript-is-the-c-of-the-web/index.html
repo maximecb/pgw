@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript is the C++ of the Web</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="JavaScript is the C++ of the Web">
+  <meta property="og:description" content="JavaScript is the C++ of the Web">
+  <meta property="og:image" content="https://pointersgonewild.com/2015/08/02/javascript-is-the-c-of-the-web/tower_of_babel.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-08-02-javascript-is-the-c-of-the-web/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/07/30/all-possible-thoughts/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/08/20/what-killed-smalltalk/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>JavaScript is the C++ of the Web</h1>
+<div class="post_date">August 2nd, 2015</div>
+</div>
+<div class="cover_image">
+<img src="tower_of_babel.jpg">
+</div>
+<p>When I started <a href="/2015/02/08/my-thesis-a-clearer-picture/">my PhD</a>, back in 2009, I told my advisor I wanted to work on optimizing <a href="https://en.wikipedia.org/wiki/Dynamic_programming_language">dynamic programming languages</a>. A big part of my thesis was going to involve the implementation of a JIT compiler for some dynamic language, and so our discussion rapidly became focused on which language I should be working with. In the end, we ended up choosing JavaScript. It was a good compromise: a widely-used "real-world" programming language, warts and all, that was still small enough for one person to realistically implement a compiler for. The <a href="http://www.ecma-international.org/ecma-262/5.1/">ECMAScript 5 specification</a> was around 250 pages long, and I read the whole thing from cover to cover before I began working on <a href="https://github.com/higgsjs/Higgs">Higgs</a>.</p>
+<p>Since then, I feel I've been watching JavaScript go the way of C++, it's becoming a "kitchen sink" language. So many new features have been added that the new <a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">ES6 specification document</a> is literally twice the length of the ES5 specification. Worse yet, a year before the ES6 specification was even completed, there was already a laundry list of features scheduled for integration into ES7. They weren't nearly finished with ES6, and they were already planning ES7. There are a number of semantic inconsistencies in JavaScript that need fixing, but the ES6 and ES7 additions do nothing to fix those, they merely add new features (read: complexity) to the language.</p>
+<figure>
+<a href="multi-tool2.jpg">
+<img alt="" src="multi-tool2.jpg">
+</a>
+</figure>
+<p>Personally, I'm a big fan of simplicity and minimalism in programming language design. I think that smaller languages have the potential to be easier to implement, optimize, teach, debug and understand. The bigger your language, the more semantic warts will pop out and the more behavioral inconsistencies are going to occur between different VM implementations. If JavaScript is really <a href="http://www.hanselman.com/blog/JavaScriptisAssemblyLanguagefortheWebPart2MadnessorjustInsanity.aspx">"the assembly language of the web"</a>, then why does it need all these high-level features? The logical thing to do would have been to freeze as much of the JS semantics as possible, and focus on improving support for JS as a compiler target. I believe that the answer as to why JS keeps growing is largely <a href="https://en.wikipedia.org/wiki/Design_by_committee">design by committee</a>.</p>
+<p>Of course I'm biased. I implemented my own JavaScript JIT compiler and the fact is, I'm too busy to keep up with all these new additions. Still, it seems to me that in the web world, nobody takes the time to pause, breathe and think things out for even a moment. Case in point: Mozilla made a lot of noise with <a href="https://en.wikipedia.org/wiki/Asm.js">asm.js</a>, a standard for compiling native code to JS that was allegedly better than <a href="https://en.wikipedia.org/wiki/Google_Native_Client">Google's Native Client</a>. I think asm.js is still new enough that developers haven't really had any time to adopt it, it's only been used in tech demos, but Mozilla and Google are already working on <a href="https://en.wikipedia.org/wiki/WebAssembly">WebAssembly</a>, which in all likelihood will make asm.js irrelevant. Think about that for a second: asm.js, which is still very new (2013, it's only two years old), is already mostly irrelevant, before anyone even had time to adopt it.</p>
+<p>WebAssembly is essentially what Brendan Eich told us we didn't really want or need: a bytecode format for the web. A somewhat more neutral platform for all compilers to target. As a compiler implementer, it still seems to me like it's a bit of an unfortunate compromise: a way to retrofit a web-bytecode into JavaScript VMs. It's going to take programs encoded as <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Trees (ASTs)</a> as input, whereas GCC, clang, and other real-world compilers usually generate <a href="https://en.wikipedia.org/wiki/Control_flow_graph">Control Flow Graphs (CFGs)</a> at the output stage, not ASTs. Forcing compilers to convert CFGs back into ASTs seems like a decision made to simplify the job of WebAssembly VM implementers, at the expense of everyone else.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

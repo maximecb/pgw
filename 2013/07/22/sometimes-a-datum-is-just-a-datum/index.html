@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sometimes a datum is just a datum</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Sometimes a datum is just a datum">
+  <meta property="og:description" content="Sometimes a datum is just a datum">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-07-22-sometimes-a-datum-is-just-a-datum/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/07/19/programming-without-text-files/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/08/14/higgs-rise-of-the-ssa-jit/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Sometimes a datum is just a datum</h1>
+<div class="post_date">July 22nd, 2013</div>
+</div>
+<p>The <a href="https://en.wikipedia.org/wiki/Smalltalk">Smalltalk</a> and <a href="https://en.wikipedia.org/wiki/Self_(programming_language)">SELF</a> programming languages are famous, among other things, for pushing forward the idea that "everything is an object". That is, every value in the language behaves as if it were an object in the <a href="https://en.wikipedia.org/wiki/Object-oriented_programming">Object Oriented Programming (OOP)</a> sense. All values (integers, strings, arrays and functions included) have their own identity and methods and are potentially part of some inheritance hierarchy. The addition operator, for instance, is a method defined on integer and string objects. More recent languages such as <a href="http://www.diveintopython.net/getting_to_know_python/everything_is_an_object.html">Python</a>, <a href="http://rubylearning.com/blog/2010/09/27/almost-everything-is-an-object-and-everything-is-almost-an-object/">Ruby</a> and <a href="http://stackoverflow.com/questions/9108925/how-is-almost-everything-in-javascript-an-object">JavaScript</a> have attempted to replicate this idea with varying degrees of implementation quality.</p>
+<p>I believe the goals of the original idea are interesting ones:</p>
+<ol start="1">
+<li>
+<p>The way you manipulate and interact with all values should be as uniform as possible.</p>
+</li>
+<li>
+<p>The behavior of every operator and method should be redefinable at run time.</p>
+</li>
+</ol>
+<p>One implication of this is that in a language with a proper implementation of these concepts, you don't need to have both <code>typeof</code> and <code>instanceof</code> operators, you can use the <code>instanceof</code> operators to query the type of any value (e.g. <code>5 instanceof Number</code> would produce the <code>true</code> boolean value). Another useful consequence is that you would be able to redefine operators such as addition or multiplication on existing types to extend the behavior of the language. For example, you would be able to create your own numerical matrix class, and add support for multiplication between scalar numbers and matrices to the language.</p>
+<p>These ideas are seductive, but at the same time, one wonders how desirable they are. The fact remains that values such as integers and floating-point numbers will not be represented in the same way as objects internally: this is an illusion we try to maintain for the programmer. Implementing core language operators as methods means we're adding an additional layer of indirection which a compiler will have to work to optimize away, and may not be able to optimize away fully. Then, there's the question as to whether allowing basic operators to be redefined is even a good idea. Does it make for good programming style to allow any part of your codebase to redefine fundamental operators everything depends on?</p>
+<p>I like to think about language design issues such as these from both a usability standpoint and a compiler design perspective. As a compiler designer, I believe that optimizing away the overhead involved in everything being presented as an object adds behind-the-scenes complexity and potential overhead to a system, but is entirely feasible with modern optimization techniques. On the other hand, I'm really not sure whether the implementation costs are worthwhile, especially considering that hypothetical benefits to programmers might not really materialize if we're actually encouraging coding styles that increase entanglement and lead to reduced maintainability in the long run. I'd be curious to hear the perspective of previous or current Smalltalk/SELF users, if any of you happen to read this post.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

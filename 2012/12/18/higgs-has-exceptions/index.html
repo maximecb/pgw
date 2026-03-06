@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Higgs has Exceptions</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Higgs has Exceptions">
+  <meta property="og:description" content="Higgs has Exceptions">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-12-18-higgs-has-exceptions/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/12/13/sky-blue/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/12/31/turing-drawings/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Higgs has Exceptions</h1>
+<div class="post_date">December 18th, 2012</div>
+</div>
+<p>I just finished implementing exceptions in the <a href="/2012/12/08/higgs-my-new-tracing-jit-for-javascript/">Higgs</a> interpreter, complete with support for the <code>finally</code> block and optional <code>catch</code> clauses. The fact that Higgs is an interpreter and tracing JIT instead of a method-based compiler definitely made this process somewhat simpler. The interpreter uses a calling convention where all arguments are pushed on the stack and each stack frame has a fixed size, making stack unwinding very easy. The tracing JIT won't have to do any special treatment of exceptions: it will simply fall back to the interpreter.</p>
+<p>Unsurprisingly, one of the trickiest aspects of exception support is the <code>finally</code> block. This was difficult to implement because the semantics of JavaScript (and Java) say that every form of control flow leaving a <code>try</code> or <code>catch</code> block must execute the corresponding <code>finally</code> blocks (and there might be more than one). This means the throw, break, continue and return statements can each trigger the execution of <code>finally</code> blocks. You can hijack a return statement using a <code>finally</code> block and return a different value. Worse yet: exceptions crossing interprocedural boundaries can trigger the execution of <code>finally</code> blocks while unwinding the stack.</p>
+<p>Since my interpreter uses an intermediate representation built on basic blocks and sequences of instructions, I had to compile <code>finally</code> blocks in-line at every point where they would be run, which meant handling a multitude of corner cases. I believe this complexity reveals that <code>finally</code> blocks are a fundamentally "unnatural" language feature. I say unnatural because the control flow involved is convoluted and unintuitive to programmers. Preventing a return statement from executing seems like the kind of black magic that simply shouldn't be possible.</p>
+<p>I'm quite happy to have exception support as I believe it will make debugging the Higgs runtime and standard libraries (both written in extended JS) much easier. Now that this is done, I will be moving towards one of the biggest pieces of the puzzle: implementing a garbage collector for Higgs. Since the focus of my research isn't garbage collection, I will implement a simple and minimalist stop-the-world copying GC. Having previously implemented a <a href="/2012/01/12/about-tachyons-garbage-collector/">similar GC</a> for Tachyon, I anticipate that I should be able to complete this task within approximately two weeks. The task will be sped up by the automatic generation of code to visit heap-allocated objects.</p>
+<p>In case anyone reading this blog is interested, I could use some help on various fronts, one of which is the completion of the <a href="https://github.com/maximecb/Higgs/blob/master/source/stdlib/math.js">math library</a>. I'm missing functions such as <code>Math.ceil</code>, <code>Math.log</code>,<code>Math.exp</code> and full floating-point support in <code>Math.pow</code>. I'm also in need of code to parse and format floating-point values as strings. All of this code would be written in JavaScript. Lastly, I'm looking for a simple JavaScript FFT (fourier transform) benchmark.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Balancing Fun, Stress and Profit</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Balancing Fun, Stress and Profit">
+  <meta property="og:description" content="Balancing Fun, Stress and Profit">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2019-10-19-balancing-fun-stress-and-profit/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2019/10/06/zupiter-a-web-based-modular-synthesizer/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2019/11/02/they-might-never-tell-you-its-broken/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Balancing Fun, Stress and Profit</h1>
+<div class="post_date">October 19th, 2019</div>
+</div>
+<p>A little over a week ago I launched <a href="https://z.musictools.live/#460">Zupiter</a>, a browser-based music app I created over the last 8 months or so. It's a minimalistic modular synthesizer that runs in a web browser. It's pretty basic, and it will never replace something like Ableton Live, but the appeal is that anyone with Chrome or Firefox can make music instantly, for free, without having to download or install any software, and then share what they've created with friends online.</p>
+<p>For fun, I did the launch in two parts, online and in the real world. I started by writing a post <a href="/2019/10/06/zupiter-a-web-based-modular-synthesizer/">on this blog</a>, which someone shared on Hacker News, where it remained on the front page for about 12 hours. Zupiter was later <a href="https://hackaday.com/2019/10/09/modular-music-synthesis-on-the-web/">featured on Hackaday</a>. A few days later, in the real world, with help from multiple friends, I organized a fun little launch party, featuring a live demo and performance in conjunction with Montreal-based musician <a href="https://soundcloud.com/ferenisles">Feren Isles</a>. Since then, the app has gained a little bit of traction. The site has been visited over 29,000 times, over 260 people have created accounts, and together these people shared more than 500 projects created using Zupiter.</p>
+<figure>
+<a href="72405169_10104236966132837_3601575011090956288_o.jpg">
+<img alt="Giving a live demo" src="72405169_10104236966132837_3601575011090956288_o.jpg">
+</a>
+<figcaption>Giving a live demo</figcaption>
+</figure>
+<figure>
+<a href="72875951_10104236999815337_1585219596560891904_n.jpg">
+<img alt="Friendly crowd at the launch party" src="72875951_10104236999815337_1585219596560891904_n.jpg">
+</a>
+<figcaption>Friendly crowd at the launch party</figcaption>
+</figure>
+<p>The app got a little bit of traction, and then I couldn't help but ask myself "what's next?". I have to admit, I've fantasized about turning this into a side-business, a startup, maybe a SaaS that can bring in income. Who knows, maybe enough income that I can be my own boss one day. The only problem is, I don't think I'm anywhere close to that. In order to get there, the app needs many improvements. It also needs a massive amount of promotion. Furthermore, I started to realize something that should have been obvious from the start.</p>
+<p>I read <a href="https://blog.inkdrop.info/i-stopped-setting-a-financial-goal-for-my-saas-a92c3db65506">an article</a> a few days ago where Takuya Matsuyama, creator of the Inkdrop app, casually mentioned having made over $9K in sales after making the HN front page. I made the HN front page with my app too, and two people donated a total of $20 via PayPal. I'm thankful for those two donations, and I promise to the donors that I will spend this money wisely. However, this article made me realize that when it comes to turning in a profit, I've been doing it wrong. One important detail struck me, which should have been obvious from the start: browser-based apps are most probably not where the money is.</p>
+<p>Inkdrop sells monthly subscriptions through the Android and Apple app stores. If I want to make money with music software, I should probably be making mobile apps, because there is infrastructure set up for people to buy mobile apps, and a culture of people doing so, but that same infrastructure and culture doesn't really exist for browser-based apps. The truth is, if I want to be making money, there's a lot of things I should be optimizing for, which I totally haven't been. Thinking of all those things I maybe could, or should, or would have to do got me feeling somewhat anxious, stressed, and then sad.</p>
+<p>There's a reason why I designed Zupiter as a browser-based app. I did it because I felt there was a niche to be filled. There are a lot of music apps for mobile, but what's available in terms of browser-based music software is still fairly limited. I created Zupiter because it's a tool that I myself want to use for sound design, and I wanted to use that tool on a 32" widescreen display, with a MIDI controller, not so much on a phone or tablet. Beside that, I created Zupiter because I wanted to have fun.</p>
+<p>There's been other discussions <a href="https://news.ycombinator.com/item?id=21248914">on Hacker News</a>, relating to Takuya's article, and many of the commenters pointed out that there's often a difference between a side-project and a business. A side-project is something you do for fun in your free time. Running a business, however, requires doing a ton of extra work that isn't development, and making a lot of tiny decisions at every step of the way that result in optimizing for growth, and ultimately, for profit.</p>
+<p>To me, that seems stressful. I already have a full-time job. It's a fun, creative and interesting job. It's also demanding enough that I don't want to come home from work and start to stress about optimizing my side-project for profit and worry about missed opportunities. I don't think I have the bandwidth for a second job on top of my job. The amount of work required to get to a stage where I could support myself from this source of revenue would likely push me into a burnout. At this stage, I'd rather optimize for fun than for profit. I want to manage my side-projects in a way that I try to keep it fun and avoid having it become an extra source of stress.</p>
+<p>At this time, I don't think I can bootstrap a side-business all on my own, it seems like an unrealistic goal for me to pursue, but that doesn't mean it's impossible for Zupiter and future music apps I create to bring in revenue. One of the people who showed up at my launch party was Devine, <a href="https://twitter.com/hundredrabbits">co-creator</a> of <a href="https://hundredrabbits.itch.io/orca">Orca</a>, a nifty programming language for livecoding musical patterns. I was amazed to learn that he lives with his partner on a sailboat in Japan, and makes a living creating (very cool) content and crowdfunding.</p>
+<p>Devine's story got me thinking that maybe I can do something like this too. I don't really want to develop for mobile and optimize for profit right now. I also don't really want to quit my job and live on a sailboat, but I do want to keep creating useful software and content and share it with the world, and it would be cool if there was a way that I could save up enough to take a few months off to work on my side-projects full time someday. I went ahead and created my own <a href="https://github.com/sponsors/maximecb">GitHub sponsors</a> page so I can get the ball rolling. In the meantime, I don't want to focus on optimizing my side-projects for profit and growth, because I want to make sure that working on these remains fun.</p>
+<p>The realization that Zupiter may never turn into a profitable side-business has been a bit discouraging for me, but I think I'm being honest in saying that building Zupiter has been fun and rewarding so far. I've accomplished an important personal goal with this project: I built my dream music making tool. Others are using this tool and finding it useful. They've created <a href="https://z.musictools.live/#209">awesome</a> and <a href="https://z.musictools.live/#431">beautiful</a> things with it, things I wouldn't have built myself. Every day during the last week, I listened to the projects people shared, and found myself surprised, impressed and even a little tearful at times.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

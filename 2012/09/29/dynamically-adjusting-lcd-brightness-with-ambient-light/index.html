@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dynamically Adjusting LCD Brightness with Ambient Light</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Dynamically Adjusting LCD Brightness with Ambient Light">
+  <meta property="og:description" content="Dynamically Adjusting LCD Brightness with Ambient Light">
+  <meta property="og:image" content="https://pointersgonewild.com/2012/09/29/dynamically-adjusting-lcd-brightness-with-ambient-light/dscn0302.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-09-29-dynamically-adjusting-lcd-brightness-with-ambient-light/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/09/25/some-glues-dont-mix-with-electronics/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/10/24/debugging-by-the-seat-of-the-pants/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Dynamically Adjusting LCD Brightness with Ambient Light</h1>
+<div class="post_date">September 29th, 2012</div>
+</div>
+<div class="cover_image">
+<img src="dscn0302.jpg">
+</div>
+<p>The <a href="/2012/09/23/the-avr-alarm-clock-is-complete/">AVR Alarm Clock</a> has been working reliably for the last few days. My girlfriend, however, pointed out an annoying flaw: the LCD display is extremely bright, probably uncomfortably bright for night time, it would assuredly light up our bedroom with its blinding blue glow. I could make the backlight dimmer by adding a simple resistor, but this would make it harder to read in the daytime. Realistically, I'd like the backlight to be very dim at night time, and near full brightness during the day.</p>
+<p>The bad news is, the generic <a href="http://en.wikipedia.org/wiki/Hitachi_HD44780_LCD_controller">HD44780</a> LCD I used doesn't have any built-in mechanism to dynamically adjust brightness. Some other affordable LCDs, like the <a href="https://www.sparkfun.com/products/10168">Nokia 5110</a>, allow you to directly control the backlight using <a href="http://en.wikipedia.org/wiki/Pulse-width_modulation">Pulse Width Modulation (PWM)</a>, but not mine. Fortunately, the LCD backlight uses different power pins from the controller logic, and so, it's very easy to gate the backlight power using a small transistor or mosfet, allowing PWM control of the backlight brightness. I designed a small board to distribute power to the LCD and implement this functionality.</p>
+<figure>
+<a href="lcd_power.jpg">
+<img alt="" src="lcd_power.jpg">
+</a>
+</figure>
+<figure>
+<a href="lcd_power.png">
+<img alt="" src="lcd_power.png">
+</a>
+</figure>
+<p>This simple circuit allows easy control of the backlight brightness using a PWM output. I could simply use the time of day to decide how bright the LCD backlight should be. There are issues with this, however. The sun doesn't rise and set at the same time every day, and furthermore, the time of day says nothing about whether the lights are on or off. I decided to take this to the next level and build a light sensor for the AVR clock, so that it could dynamically react to ambient light levels.</p>
+<p>I already had several <a href="http://en.wikipedia.org/wiki/Photoresistor">photoresistors</a> on hand. The ones I have produce a resistance reading that varies all the way from ~1KOhms to ~2MOhms (sunlight vs almost complete darkness). This value can be converted to a variable voltage using a simple <a href="http://en.wikipedia.org/wiki/Voltage_divider">voltage divider</a> configuration, the voltage can then be read using an <a href="http://en.wikipedia.org/wiki/Analog-to-digital_converter">Analog to Digital Converter (ADC)</a> input. There is just one problem: the input impedance would be much too high for the ADC to get accurate readings in low light conditions, and unfortunately, low light is where we need the most precision.</p>
+<figure>
+<a href="light_sensor.png">
+<img alt="" src="light_sensor.png">
+</a>
+</figure>
+<p>The solution to this problem is to amplify the current from the photoresistor's voltage divider so as to produce a lower impedance output. This could be done with an op-amp chip, but luckily, breadboard prototyping has shown that a simpler and cheaper solution works just fine. I connected a 2N3904 transistor along with a 5K resistor in a <a href="http://en.wikipedia.org/wiki/Common_collector">common collector</a> amplifier configuration. This allows precise light readings even when all the lights are off in my living room.</p>
+<figure>
+<a href="dscn0305.jpg">
+<img alt="I promise this isn't a bomb" src="dscn0305.jpg">
+</a>
+<figcaption>I promise this isn't a bomb</figcaption>
+</figure>
+<p>I installed the photoresistor in the back-left corner of the top of the alarm clock's casing to prevent the clock's own LEDs from interfering with the light sensor. A few additions to the code and I had the backlight brightness automatically adjusting to ambient light. I made it so that the adjustment is slow and gradual so that moving obstacles (e.g. people) don't result in sudden jumps in brightness.</p>
+<p>All modifications to the code are <a href="https://github.com/maximecb/AVR-Alarm-Clock">available on github</a> :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

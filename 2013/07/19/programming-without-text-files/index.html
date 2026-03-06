@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Programming without Text Files</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Programming without Text Files">
+  <meta property="og:description" content="Programming without Text Files">
+  <meta property="og:image" content="https://pointersgonewild.com/2013/07/19/programming-without-text-files/noooo-minority.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-07-20-programming-without-text-files/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/07/20/on-holistic-programming-languages/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/07/22/sometimes-a-datum-is-just-a-datum/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Programming without Text Files</h1>
+<div class="post_date">July 20th, 2013</div>
+</div>
+<div class="cover_image">
+<img src="noooo-minority.jpg">
+</div>
+<p>When I was an undergrad, I remember losing marks on a programming assignment because the teacher didn't like that my source code spanned more than <a href="http://www.emacswiki.org/emacs/EightyColumnRule">80 columns</a>, which didn't play nicely with his <a href="https://en.wikipedia.org/wiki/Emacs">Emacs</a> setup. I also remember having arguments with people about the use of <a href="http://programmers.stackexchange.com/questions/57/tabs-versus-spaceswhat-is-the-proper-indentation-character-for-everything-in-e">tabs vs spaces</a> for indentation, or whether curly braces should be placed <a href="http://programmers.stackexchange.com/questions/2715/should-curly-braces-appear-on-their-own-line">on their own line or not</a>. It's somewhat amusing to think that in 2013, decades after the first high-level programming languages (<a href="http://en.wikipedia.org/wiki/Fortran">FORTRAN</a> and <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">LISP</a>) were invented, we're still programming by writing source code in ASCII (or UTF-8) text files. In some ways, programming hasn't changed all that much since the days of the <a href="https://en.wikipedia.org/wiki/PDP-11">PDP-11</a>.</p>
+<p>This is somewhat strange to me, because as a compiler designer, I can tell you that the first thing any compiler typically does is to parse your source code into something known as an <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> or AST for short. This step is necessary for the compiler to be able to extract any meaning out of your program. It isn't just compilers though. <a href="http://en.wikipedia.org/wiki/Static_code_analysis">Static analysis</a>, <a href="http://en.wikipedia.org/wiki/Documentation_generator">documentation generator</a> or <a href="http://en.wikipedia.org/wiki/Lint_(software)">lint</a> tools need to do the same thing: textual source can't be manipulated directly. Working with text-based source has advantages in terms of simplicity and interoperability, but I believe that it will become advantageous to move to designs where source code is represented and edited directly as a hierarchical data structure instead. What I'm proposing is that programming languages of the future shouldn't be based on text-files. I believe that working with streams of characters imposes limitations on language design, limits expressiveness and ends hurting tool support and interoperability in the long run.</p>
+<p>In terms of language design, working with linear streams of characters means we have to deal with silly things such as:</p>
+<ul>
+<li>
+<p>Designing a grammar that avoids <a href="http://en.wikipedia.org/wiki/Ambiguous_grammar">ambiguity</a></p>
+</li>
+<li>
+<p>Delimiters and operators not based on formal notation, but rather on ASCII characters</p>
+</li>
+<li>
+<p>Limiting the length of keywords to save screen real-estate</p>
+</li>
+<li>
+<p>Ambiguity in lookups and the names of symbols, name collisions, variable shadowing</p>
+</li>
+<li>
+<p>Fixed-width fonts and inconsistent source code layouts</p>
+</li>
+<li>
+<p>Significant vs insignificant whitespace</p>
+</li>
+<li>
+<p>Tacked on documentation and source annotations through special comments</p>
+</li>
+</ul>
+<p>As for expressiveness, consider one of the most powerful ideas behind <a href="https://en.wikipedia.org/wiki/Lisp">LISP</a>: that of macros. The C language has "macros", but they're based on text substitution. It's generally agreed that C's macro system is weak and error-prone, and its usage is often discouraged. In contrast, LISP macros are based on the idea that you have macro functions that are executed at compilation time. These functions generate an AST (new programming code) to be inserted into your program. The LISP macro system is very powerful because it allows you to create new language constructs that integrate relatively seamlessly into the language. These new constructs can form a <a href="http://en.wikipedia.org/wiki/Domain-specific_language">domain-specific language (DSL)</a> which you can then use to better express solutions to the problem you're trying to solve. Why don't more programming languages have a macro system like LISP's then? The problem is in large part that it's not practical to implement such a system in other languages, because they're text-based.</p>
+<figure>
+<a href="scheme.png">
+<img alt="" src="scheme.png">
+</a>
+</figure>
+<p>LISP source code is also text, but its parenthesized format is very regular: it represents an AST in the form of nested linked lists. Programmers can generate and manipulate code in the same nested representation internally, and even execute generated source code on-the-fly using the <a href="http://en.wikipedia.org/wiki/Eval">`eval`</a> function. One of the main issues people have with LISP-like languages is that of readability. I believe it should be possible to improve upon LISP by bypassing the parenthesized representation and programming by editing the underlying data structures directly instead. At this point I should clarify that when I speak of programming languages that aren't text-based, I'm not suggesting <a href="https://en.wikipedia.org/wiki/Visual_programming_language">visual languages</a> you edit using a giant touch interface as seen in minority report, nor do I mean languages based on boxes and arrows that require two dozen mouse clicks to implement one addition. I'm thinking about enhanced <a href="http://en.wikipedia.org/wiki/Integrated_development_environment">Integrated Development Environments (IDEs)</a> you can use with a good old keyboard, in a workflow fairly similar to what you're already used to.</p>
+<figure>
+<a href="noooo-minority.jpg">
+<img alt="" src="noooo-minority.jpg">
+</a>
+</figure>
+<p>What would this buy us, besides having a language that is potentially more LISP-like? For one, if such a language were to have macros, they could have an even more seamless integration into the language than what LISP allows. These constructs could have their own customized visual representations. They could also have additional semantic information attached for better integration with your IDE and compiler. Imagine being able to design a calculus-oriented DSL which is visually represented using mathematical notation, has associated error-detection and autocompletion in your IDE for quick editing and is automatically optimized based on rules you've made known to the compiler. Imagine being able to request the AST for a function so that you can transform and instrument it on the fly. Now imagine being able to visually format source code any way you want, without having to worry about tabs, spaces, curly braces, commenting styles or the width of other people's displays.</p>
+<p>In my mind, it's quite clear that there is much to gain by editing and storing source code using a data format that more directly represents its actual semantics. One of the bigger obstacles for this to work, however, is that of designing suitable editing software. People are relatively comfortable writing source code as text, but editing ASTs seems like it would be more tedious at first glance. It should be possible to make the editing easier and faster by having the editor produce accurate auto-completion suggestions. Since the editor has direct access to the AST, it would become possible for it to make better auto-completion suggestions based on knowledge of language semantics. Another possibility that opens up for speeding up editing is that of building your own pattern-based shortcuts. For example, you could have your own collection of macros (code generator functions or patterns of source trees with holes in them) to be expanded at the touch of a few keys.</p>
+<p>What about tool support? As it stands, many programming languages, even among the most popular ones, have rather poor tool support. Part of the difficulty comes from the fact that tools need to parse and generate source code. If you take a languages like C and C++, for example, it can actually be difficult to find a parser that supports the complete grammar. If you want to write a tool that does code transformations, you also have to worry about issues like preserving comments, which is sometimes difficult, especially if the parser you chose has no support for this. If source code were represented in a more uniform data structure, it might actually be easier to write tools that parse, analyze, and generate code. It would also become easier to add metadata to existing source code. In the end, I believe that transitioning to this kind of programming model would enable significant gains that would largely outweigh the disadvantages.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
