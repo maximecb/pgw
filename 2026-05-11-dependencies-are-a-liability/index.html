@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dependencies are a Liability</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Dependencies are a Liability">
+  <meta property="og:description" content="Dependencies are a Liability">
+  <meta property="og:image" content="https://pointersgonewild.com/2026-05-11-dependencies-are-a-liability/supply_chain.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2026-05-11-dependencies-are-a-liability/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2026-03-06-a-recursive-algorithm-to-render-signed-distance-fields/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2026-05-11-dependencies-are-a-liability/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Dependencies are a Liability</h1>
+<div class="post_date">May 11th, 2026</div>
+</div>
+<div class="cover_image">
+<img src="supply_chain.jpg">
+</div>
+<p>About 8 years ago, I wrote a blog post that goes over my <a href="https://pointersgonewild.com/2018/02/18/minimalism-in-programming/">minimalist philosophy</a> for developing software. One of the things I discussed in the post is that I like to minimize external dependencies. For context, when I wrote that post, I was working at the <a href="https://mila.quebec/">Mila AI research institute</a>, and there were multiple instances where I downloaded source code from an AI research paper that had been published just six months earlier, only to find that the code was broken. One of the main sources of breakage came from dependencies. There were a variety of ways in which dependencies could cause issues, including but not limited to unpinned Python packages, C code that wouldn't compile, and system packages that wouldn't install. Sometimes I would also see a dependency on some random GitHub repository with no commit specified.</p>
+<p>In the past, the main reason I wanted to minimize dependencies was to avoid breakage. It should be obvious, but if your software depends on 100 external dependencies, then in order for your software to work, you need to be able to install these 100 dependencies on every machine you want your software to run on. As such, it makes sense to carefully pick which dependencies you want to use. When I design a piece of software, I try, as much as possible, to rely on packages that have been around for some time and will likely continue to be around in a few years' time. I also make it a point to avoid introducing a dependency that only brings in a tiny amount of logic that I could easily implement myself. I generally dislike frameworks, because they tend to constrain the way you write software, and they often come with their own large set of dependencies.</p>
+<p>Today, things are different. In the past few years, there have been a number of <a href="https://en.wikipedia.org/wiki/Supply_chain_attack">supply chain attacks</a> in both the Python and npm ecosystems, as well as some very prominent Linux exploits discovered, such as <a href="https://www.openwall.com/lists/oss-security/2026/05/07/8">Dirty Frag</a> and <a href="https://copy.fail/">Copy Fail</a>. I've been wanting to play with local AI coding harnesses, but I find myself hesitating when thinking about installing code that depends on a large number of packages. OpenCode likely has hundreds of direct and indirect dependencies. In the Python world, just the LangChain package itself transitively installs <a href="https://medium.com/@engineersofai/dependency-hell-what-actually-installs-with-each-llm-framework-2821f60b1f76">around 267 packages</a>.</p>
+<p>Discussing this with a friend, he pointed out something that should be obvious but isn't talked about enough, which is that the Linux and macOS security model is very much outdated, and exposes us to unnecessary risks. The idea that when you clone some random GitHub repository and run a script, it has access to your entire home directory on a computer where you may be doing your banking, is completely insane. Realistically, we need to move to a model where every program is sandboxed by default, and any access to the filesystem or sensitive system resources requires the program to ask for permissions, like on mobile. I know there are tools to sandbox code execution, but sandboxing should be the default, not something that requires installing extra tools or writing a config file.</p>
+<p>Supply chain attacks aren't new, but today, it's possible to use LLMs to automate the discovery of security vulnerabilities. It's also possible to create bots that relentlessly try to craft and introduce malicious pull requests into open source projects. There are people unironically advocating to not even review AI-generated code. You have to wonder whether these people are carefully reviewing pull requests on their repositories, and you'll likely come to the conclusion that the answer is no.</p>
+<p>Realistically, when it comes to exploits and supply chain attacks, the use of AI creates an arms race. If AI tools make it much easier to discover and introduce security vulnerabilities, then it seems likely that better AI tools will also be created to continuously audit codebases and pull requests. The only defense against malicious AI <a href="https://pointersgonewild.com/2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/">is more AI</a>. However, even in the presence of tools that can audit code, some exploits can slip through undetected, and so maybe the best way to secure software is to make the software simpler, and to minimize unnecessary dependencies, effectively reducing the attack surface. When you run a server, you don't want unused services with exposed ports, because those services are a potential liability. When you write software, you should be careful to avoid introducing code you don't actually need.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

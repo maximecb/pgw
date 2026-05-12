@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Electric Mirror</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Electric Mirror">
+  <meta property="og:description" content="The Electric Mirror">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-12-05-the-electric-mirror/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/10/31/higgs-the-first-jit-compiler-of-its-kind/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/12/06/alan-turing-the-enigma-a-book-review/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Electric Mirror</h1>
+<div class="post_date">December 5th, 2013</div>
+</div>
+<p>I own a small Revlon branded makeup mirror with a lightbulb and reflector inside. I find it fairly convenient as I can apply makeup while sitting at my desk and listening to music or watching videos online. Unfortunately, it has issues. It's not very bright, and so doesn't really give you an accurate image of your finished look. It also generates a fair bit of heat, which makes it uncomfortable to use in the summer. Recently, I found out that there are 12V LED light strips of many colors available on eBay for cheap (usually less than $10 for a 5 meter roll, that's about 15 feet). I figured that with a cool-white LED strip, a little dimmer switch, some wire, some glue, and a source of 12V DC power, I could turn the vertical wall mirror I own into a giant lit makeup mirror.</p>
+<figure>
+<a href="img_20131119_175424.jpg">
+<img alt="My classic wall-mounted mirror" src="img_20131119_175424.jpg">
+</a>
+<figcaption>My classic wall-mounted mirror</figcaption>
+</figure>
+<p>I acquired a 5 meter cool-white LED strip with 60 LEDs per meter. The LEDs are of the "5050" variety, which are a bit more expensive but much brighter than the alternative "3528" kind. The total cost of the strip after shipping was about $9. The dimmer I bought is a digital part, that is, it controls brightness through <a href="http://en.wikipedia.org/wiki/Pulse-width_modulation">pulse-width modulation (PWM)</a>, and is specifically made for 12V LED systems. I found it on ebay for less than $2 shipped. The total cost of all the parts for this project, including the glue and wire and clamps, is about $30. It's important to note though that I still have leftover LED strip, glue, wire and of course the clamps to use on other projects.</p>
+<p>Once the strip segments were glues down, I soldered wires in the corners of the mirror, connecting the strips to each other, and also to the dimmer. I applied epoxy glue over the connections to solidify and insulate them. I also added a long wire at the back of the mirror, which goes from the dimmer's input to a female DC power jack, the kind one would connect to a typical wall-wart power adapter.</p>
+<figure>
+<a href="img_20131119_175412.jpg">
+<img alt="LED strip roll, DC jack, dimmer and wire" src="img_20131119_175412.jpg">
+</a>
+<figcaption>LED strip roll, DC jack, dimmer and wire</figcaption>
+</figure>
+<p>Assembly was more time-consuming than I expected, it took me about 4 total hours of work, and was done over 3 days, since I needed to leave time for the glue to solidify. I started by drilling a hole on the side so I could make the power input wires of the dimmer go to the back of the mirror, I then glued the dimmer over this hole. The second step was cutting the LED strips to length. These can only be cut every 3 LEDs, and so it wasn't possible to make them go exactly all around the mirror, covering the whole perimeter, I needed to leave gaps, and connect the multiple pieces of strips with wire.</p>
+<p>The LED strips found on eBay have an "auto-adhesive" backing, you're supposed to be able to just peel off the protective tape, and stick them to things. In my experience, this adhesive backing is very much worthless, the strips will peel off immediately, and so some other kind of glue is needed. I decided to go with epoxy, which is sold at the dollar stores here. I also purchased two adjustable clamps to hold the strips in place while the epoxy solidifies. Epoxy glues have several advantages: they solidify quickly, the resin they form is extremely solid, and they are not electrically conductive. In my experience, epoxy can solidify in as little as 15-20 minutes.</p>
+<figure>
+<a href="img_20130907_184420.jpg">
+<img alt="12V distribution system" src="img_20130907_184420.jpg">
+</a>
+<figcaption>12V distribution system</figcaption>
+</figure>
+<p>The total power consumption for the mirror, when on maximum brightness, is less than two amps. I hooked it to the 12V 15A DC power distribution box I already built for other LED lighting shenanigans. Your bedroom probably doesn't come with one of these, but fortunately you can get by with a good old 12V 2A DC wall-wart, which you can find on eBay for about $5 shipped. Just make sure to get one that fits your country's electrical outlets.</p>
+<figure>
+<a href="img_20131123_172049.jpg">
+<img alt="" src="img_20131123_172049.jpg">
+</a>
+</figure>
+<p>The finished product, once wired up, can put out quite a bit of light: about 3000 lumens, which is more than a 100W incandescent lightbulb. Fortunately, the dimmer allows tuning down the brightness to the point where you can look at the LEDs directly without visual discomfort. I usually just leave it on maximum brightness, however. I've found the lights are not blinding if you get up close to the mirror to look at your face. The cool-white color also seems to have a pleasant daylight-like glow. I'm actually considering buying more of this strip just to make my bedroom brighter.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

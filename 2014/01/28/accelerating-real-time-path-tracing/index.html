@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Accelerating Real-Time Path Tracing</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Accelerating Real-Time Path Tracing">
+  <meta property="og:description" content="Accelerating Real-Time Path Tracing">
+  <meta property="og:image" content="https://pointersgonewild.com/2014/01/28/accelerating-real-time-path-tracing/render21.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-01-28-accelerating-real-time-path-tracing/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/01/08/contribute-to-the-higgs-js-compiler/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/02/03/higgs-upcoming-talks-new-contributions/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Accelerating Real-Time Path Tracing</h1>
+<div class="post_date">January 28th, 2014</div>
+</div>
+<div class="cover_image">
+<img src="render21.jpg">
+</div>
+<p>We've been told that real-time <a href="http://en.wikipedia.org/wiki/Ray_tracing_(graphics)">ray tracing</a> is coming soon. It can produce superb renderings with unattained levels of realism. It works by simulating light, and leads to much more elegant architectures. It's the future, but unfortunately, it's been coming soon for several years now. Like <a href="http://en.wikipedia.org/wiki/Liquid_fluoride_thorium_reactor">thorium reactors</a>, it's one of those technologies that just seems to make so much sense, but that isn't getting adopted, probably because we already have something that works "well enough", and we aren't yet willing to invest the effort required to convert to a radically different technology. There's too much inertia, we haven't yet reached that breaking point. Still, the potential is there, and with the advent of <a href="http://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units">GPGPU</a>, real-time <a href="http://en.wikipedia.org/wiki/Global_illumination">global illumination</a> is very close to becoming a reality in the world of gaming, as demonstrated by the <a href="http://raytracey.blogspot.ca/2012/05/real-time-photorealistic-gpu-path_10.html">Brigade renderer</a>.</p>
+<p>I should point out that ray tracing, path tracing, and global illumination are not the same things. Global illumination is a simulation of the entire light transport within a scene, which accounts for the ways in which light can illuminate objects indirectly, through several reflections between multiple surfaces. It produces superior renderings because it accounts for phenomena such as soft shadows, <a href="http://en.wikipedia.org/wiki/Caustic_(optics)">caustics</a>, and <a href="http://en.wikipedia.org/wiki/Color_bleeding_(computer_graphics)">color bleeding</a>. Path tracing is an extended form of ray tracing which achieves global illumination, usually by tracing inverted light rays from the eye to the light sources in a scene. This is done through nondeterministic, approximate sampling, because there is an infinite number of paths light rays could take through a scene.</p>
+<p>The way images are currently generated with path tracing is to send many rays through each pixel of the image. These rays then randomly scatter in the scene in ways that obey the properties of the materials they encounter, and eventually reach light sources. The problem with this is that the generated images have significant visual noise (grain), and it takes a large number of rays per pixel to eliminate this noise (easily up to 256+ rays per pixel). As you can imagine, this takes a tremendous amount of computational power. Generating a 4 megapixel image could easily require tracing a billion rays, with each ray bouncing several times through the scene. This is very difficult to achieve at real-time frame rates, even with today's GPUs.</p>
+<p>Lately, I started thinking that maybe there's a more efficient way to do this. Tracing hundreds of rays per pixel seems enormously wasteful. If there's one thing I learned from my computer science education, it's that algorithmic optimizations can pay off orders of magnitude more than clever little code tweaks. We're rendering each pixel independently, when in fact, we know that the colors of pixels are <a href="/2014/01/02/tile-based-image-compression/">rarely independent variables</a>, because most images contain structured patterns. Maybe path tracing ought to take a hint from the world of <a href="http://en.wikipedia.org/wiki/Image_compression">image compression</a>, and try to generate images using less information, less samples. It's not just about the amount of data or raw computational power you have, using it intelligently matters as well. More concretely, I've been wondering if it might be possible to inspire ourselves directly from <a href="http://en.wikipedia.org/wiki/JPEG">JPEG</a> compression, and trace less rays to try and estimate <a href="http://en.wikipedia.org/wiki/Discrete_cosine_transform">DCT</a> coefficients for multi-pixel patches, instead of individual pixels. I'm speculating here, but I believe that such an approach might be able to produce less noisy images from much less samples (i.e. 20 or 50 times less).</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

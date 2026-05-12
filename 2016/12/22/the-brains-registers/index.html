@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Brain's Registers</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Brain's Registers">
+  <meta property="og:description" content="The Brain's Registers">
+  <meta property="og:image" content="https://pointersgonewild.com/2016/12/22/the-brains-registers/kraftwerk_-_the_man-machine.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-12-22-the-brains-registers/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/11/22/method-call-syntax-in-a-js-like-language/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2017/01/14/technodiversity/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Brain's Registers</h1>
+<div class="post_date">December 22nd, 2016</div>
+</div>
+<div class="cover_image">
+<img src="kraftwerk_-_the_man-machine.png">
+</div>
+<p>In the last few years, there's been a lot of impressive work done with neural networks. One of the most interesting things I've seen is <a href="https://opensource.googleblog.com/2013/08/learning-meaning-behind-words.html">Word2vec</a>, a technique to compute word embeddings, to map english words to large vectors of neural activations. This is interesting because this latent space for words <a href="https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/">has interesting properties</a>. Concepts that are semantically close end up close together in the vector space, and it's possible to do arithmetic on word vectors, giving us results such as 'queen - woman + man ≈ king'.</p>
+<p>The ability to do approximate arithmetic on word vectors is nifty, but what I think is most interesting is that Word2vec shows that we can translate fuzzy human concepts such as english words or sentences into an encoding from which computers can extract semantic information. There are now <a href="https://research.googleblog.com/2016/09/a-neural-network-for-machine.html">machine translation</a> models based on recurrent neural networks which take a sentence in a language X, generate an activation vector, and then feed that vector into another recurrent neural network trained to generate text in another language Y. These machine translation models have reached the point where they are competitive with traditional statistical models.</p>
+<p>The ability to create an intermediate representation for machine translation is quite powerful, but vectors of neural activations can be used to encode semantic information contained in many things besides written language, and also to transfer information from one modality to another. Researchers at Google have also shown that you can <a href="https://github.com/tensorflow/models/tree/master/im2txt">generate captions from images</a> by first encoding images into semantic vectors, and then feeding those vectors into a recurrent neural network which generates text. Hence, a vector of neural activations can be used to represent semantic information, meaning, maybe even concepts and ideas in an abstract space that is agnostic to input and output modalities.</p>
+<p>I hope this doesn't seem too far-fetched, but I'm going to suggest that it's highly likely that such <i>semantic vectors</i> are used to convey meaning and transfer information between different representations inside the human brain, particularly in the areas of the <a href="https://en.wikipedia.org/wiki/Prefrontal_cortex">prefrontal cortex</a> (PFC) that implement higher-level thinking. I'm going to go even further, and make the prediction that the PFC implements something analogous to the registers found in a microprocessor. Semantic registers which are used to buffer, store and transfer vectors of neural activations that encode meaning, concepts or ideas.</p>
+<p>There is obviously still a lot we don't know about the human brain, or the way in which it implements higher-level thinking, and the neurons in artificial neural networks are very loose approximations of their biological cousins. Still, bees, bats and birds use wings to fly. These are different kinds of wings, with different properties, which have evolved independently, but they are all wings nonetheless. All three have come to evolve a similar solution to the problem of flight because this solution is natural and efficient. In the same vein, I think you could make the argument that a register is a natural concept when it comes to shuffling and operating on data.</p>
+<p>The registers in a microprocessor hold small pieces of temporary data. They store vectors of bits and typically have a few input and output ports. They implement simple operations, such as the ability to reset/erase the contents stored, and the ability to open or close the flow of information to/from various components inside the processor. In digital hardware, opening and closing of data ports is accomplished by gating signals with transistors. In biology, the <a href="https://en.wikipedia.org/wiki/Synaptic_gating">gating of signals</a> is accomplished by inhibitory neurons.</p>
+<p>According to Wikipedia, <a href="https://en.wikipedia.org/wiki/Working_memory">working memory</a> is "a cognitive system with a limited capacity that is responsible for the transient holding, processing, and manipulation of information". It's believed that human beings are limited to being able to hold only about seven items at a time in working memory. Could it be that this temporary store of information is the human brain's equivalent of a CPU's <a href="https://en.wikipedia.org/wiki/Register_file">register file</a>, built out of a relatively small set of neural registers, with inhibitory neurons gating their outputs? I believe this could begin to explain our amazing (and yet limited) ability to shuffle and operate on concepts and ideas stored in our working memory.</p>
+<p>In a typical CPU, the register file is connected to components such as an <a href="https://en.wikipedia.org/wiki/Arithmetic_logic_unit">Arithmetic and Logic Unit (ALU)</a>. The ALU can read data from one or more registers, and perform operations such as addition, subtraction and multiplication between the values read, and store the result back into registers. Values can also be compared and the result of such comparisons used to decide which action the CPU should take next. Human beings are not born with the ability to compute signed integer multiplications, but there are certain high-level thinking faculties which may be innate, such as the ability to reason by analogy.</p>
+<p>One could imagine that, somewhere in the PFC, there may be a dedicated component which is able to load semantic registers and draw analogies between semantic vectors, to answer the question of whether <code>A</code> is to <code>B</code> as <code>C</code> is to <code>D</code>, and perform some action based on the result. It could be that the part of our brain that does high-level thinking contains a number of operators that connect to one or more semantic registers and perform various operations on the concepts represented. These would be our brain's ALU: the set of primitives that enable our high-level cognitive abilities.</p>
+<p>As Edsger Dijkstra famously said, "The question of whether machines can think is about as relevant as the question of whether submarines can swim." Maybe my attempt to make sense of higher-level human thinking by drawing analogies with computing hardware is misguided. Maybe working as a compiler engineer and looking at machine code for too long has warped my own cognition beyond repair. The ideas I'm proposing here are largely speculative, but maybe I'm right, and maybe, within a decade or two, someone will begin to map out the circuits that constitute the brain's registers and operators.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

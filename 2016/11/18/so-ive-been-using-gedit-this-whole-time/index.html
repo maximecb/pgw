@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>So, I've been using gedit this whole time</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="So, I've been using gedit this whole time">
+  <meta property="og:description" content="So, I've been using gedit this whole time">
+  <meta property="og:image" content="https://pointersgonewild.com/2016/11/18/so-ive-been-using-gedit-this-whole-time/troll-face1.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-11-18-so-ive-been-using-gedit-this-whole-time/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/09/24/esp8266/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/11/22/method-call-syntax-in-a-js-like-language/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>So, I've been using gedit this whole time</h1>
+<div class="post_date">November 18th, 2016</div>
+</div>
+<div class="cover_image">
+<img src="troll-face1.png">
+</div>
+<p>This is my coming out. I'm 31. I've been programming since I was 16, but all this time, I've never learned how to use a "proper" text editor.</p>
+<p>It's probably because as a teenager, I grew up with Windows 98, and on that platform, back then, command-line tools were very much second-class citizens. In university, I was introduced to Linux and somehow, over the years, I became hooked. I spent a total of 11 years in university, and over that course, I probably wrote over 400K lines of code. Most of it on Linux, and most of it using a text editor called gedit.</p>
+<p>It's the <a href="https://wiki.gnome.org/Apps/Gedit">GNOME text editor</a>. Its noteworthy features are syntax highlighting, and the ability to have multiple tabs open at once. It's a fairly shitty text editor. It will freeze up if you try to open a text file more than a few hundred kilobytes, or with lines that are too long for it to properly digest. If you were to think of emacs as a sushi meal prepared by an experienced chef, then you could think of gedit as a microwaved bowl of ramen with a half cup of sriracha sauce dumped on it. I had the ramen right here at home, no cash on hand, and well, I was hungry.</p>
+<p>I think the problem is, in university, there was never any class that was really about teaching us how to properly and effectively use tools. I learned about programming languages, operating systems, compiler design, and all those wonderful things, but all this time, I was never given the opportunity to sit down and think about the tools I was using. The craftsmanship of programming, so to speak. I started using gedit because it was the default on the Linux distro my university ran at the time. I stuck with it because of habit.</p>
+<p>During my undergrad, we were given assignments with tight deadlines. We worked our asses off. Some semesters, I remember having as much as 40 hours of homework per week. Needless to say, there was a lot of pressure. Pressure to get things done quickly given tight assignment deadlines, I didn't really feel like spending 10 or 20 hours familiarizing myself with vi or emacs, or dealing with people who would tell me to go RTFM (Read the Fucking Manual). I went with gedit because it was intuitive and comfortable, as shitty as it was.</p>
+<p>At my current workplace, we run macOS, and well, while there is a port of gedit (not even kidding), it's a fairly miserable experience. The macOS port of gedit is like one of those freak creatures in a horror movie that begs you to <code>pkill -9</code> it. Not knowing where to run, I started using the GitHub <a href="https://atom.io/">atom</a> editor. It's alright, but like gedit, it has its annoying quirks.</p>
+<p>I'm 31, and I can't help but want to take a step back. I don't know how to use vim, but I think I'd like to learn. I can appreciate that a lot of thought was put into its design. It's not a gimmicky gadget, it's a powerful tool: a programmer's text editor. I'm trying to convince myself that the time investment is worth it. At the very least, I can appreciate that vim is much more cross-platform, and stable across time, than any other text editor I've ever put up with.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Incremental JIT Lives</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Incremental JIT Lives">
+  <meta property="og:description" content="The Incremental JIT Lives">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-12-10-the-incremental-jit-lives/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/12/06/alan-turing-the-enigma-a-book-review/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/01/02/tile-based-image-compression/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Incremental JIT Lives</h1>
+<div class="post_date">December 10th, 2013</div>
+</div>
+<p>It's been about a month since I started refactoring the Higgs JIT to implement a <a href="/2013/10/31/higgs-the-first-jit-compiler-of-its-kind/">lazy/incremental compilation</a> strategy. The new JIT will combine the <a href="http://www.youtube.com/watch?v=hJUNHX0vakI&feature=youtu.be&t=14m27s">basic block versioning</a> scheme I previously implemented with lazy compilation of basic block versions and eventually incremental inlining of function calls. Higgs will also no longer have an interpreter, everything will be JIT-compiled on the first execution. This is a natural extension of basic block versioning which I believe will bring many interesting possibilities, such as the ability to recompile or invalidate code at the level of individual basic blocks. This means, for example, that function call sites, if they are executed often enough, could be recompiled so as to inline the callee, but without recompiling the entire caller function. Other possible uses include making optimistic assumptions about the types of values, such as global variables, and being able to invalidate only the blocks making these assumptions if the said assumptions are violated.</p>
+<p>This is a significant refactoring, but it's not the first time I <a href="/2013/08/14/higgs-rise-of-the-ssa-jit/">rebuild the JIT</a>, and I've gotten fairly efficient at it. I already have lazy code generation, most of the runtime library, and the Higgs REPL working. Many of the basic unit tests are working, the crucial bits are in place, but there are still many important parts missing (register allocation, garbage collection, exception hanling, and more). Since I want Higgs to eventually be considered a serious and usable compiler, I decided to create a <a href="https://github.com/maximecb/Higgs/tree/dev-maxime">dev-maxime</a> development branch and avoid feature regressions on the master branch. The new JIT will make it to the master branch once all tests and benchmarks work, which should hopefully happen within two months or so.</p>
+<p>The most difficult aspect of this work so far has been to come up with a coherent and efficient design for the incremental code generation. I decided to sketch things up and begin experimenting with the parts of the implementation that I thought would be most problematic right away, so that I could know about the problems that might arise early on. Much exploratory programming was involved, but the key design decisions have been made. Machine code is generated in one pass and directly appended to an executable heap. It's generated in multiple small fragments which all contain <a href="http://en.wikipedia.org/wiki/Position-independent_code">position-independent code</a>. The fragments may end with branches which can refer to other fragments. Each fragment keeps a closure that knows how to write its final end branch, so that these branches can be rewritten when the fragments are relocated.</p>
+<p>In other news, I'm still waiting to know if my paper about basic block versioning is accepted at <a href="http://www.etaps.org/index.php/2014/cc">Compiler Construction 2014</a>, I should have the answer by December 20th. I did get some very positive news since my last blog post, however. I've received (and accepted) an invitation to present Higgs and my research work at the <a href="http://mloc-js.com/2014/">mloc.js</a> conference, which takes place mid-February in Budapest. Like Strange Loop, this conference will be filmed and the videos will be made available online. I've also received an invitation to present at Web Directions Code 2014. I'm very much looking forward to sharing my latest research findings.</p>
+<p>My thesis advisor has recently shown more openness to the idea that I could do an industry internship before the end of my PhD, which seems like it would be a good move career wise. This would probably occur around December 2014 or January 2015, after the next round of conference deadlines. I've been approached by people from Apple (LLVM team) and IBM (JIT and dynamic language runtimes). Back at <a href="http://dconf.org/2013/">DConf 2013</a>, I also had the opportunity to meet Andrei Alexandrescu and other members of the <a href="http://www.hiphop-php.com/blog/">HipHop VM</a> team. They seemed very interested in my work on basic block versioning and in getting me to come do an internship at Facebook. Most likely, I'll try approaching people at Mozilla and Facebook to see if I could possibly work on either IonMonkey or HipHop VM as part of an internship.</p>
+<p>When I started my PhD, I originally wanted to do research in machine learning. Unfortunately, after only a few months, I discovered that field wasn't really for me. I found it to be overly theoretical, mathematical and dry for my taste. My creativity wasn't really there. Instead, I found myself thinking back to my MSc project, and having several ideas about how to improve upon the design of <a href="http://www.sable.mcgill.ca/mclab/mcvm/mcvmthesis.pdf">McVM</a>. I decided to follow my passion, change advisors and do a PhD in compiler design instead. Compilers are not really a glamorous CS subfield, but I think this may have turned out to be a good career choice. There are clearly more jobs in compilers than there are compiler experts.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

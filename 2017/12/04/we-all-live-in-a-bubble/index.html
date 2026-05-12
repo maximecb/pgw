@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>We All Live in a Bubble</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="We All Live in a Bubble">
+  <meta property="og:description" content="We All Live in a Bubble">
+  <meta property="og:image" content="https://pointersgonewild.com/2017/12/04/we-all-live-in-a-bubble/bubble-fractal.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2017-12-04-we-all-live-in-a-bubble/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2017/10/20/the-ai-risk-isnt-what-you-think/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2018/01/28/my-new-job-in-rl-robotics-research/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>We All Live in a Bubble</h1>
+<div class="post_date">December 4th, 2017</div>
+</div>
+<div class="cover_image">
+<img src="bubble-fractal.jpg">
+</div>
+<p>Almost exactly two years ago, <i>Star Wars: The Force Awakens</i> came out in theaters. Hundreds of millions of people (including several of my own friends) were eagerly awaiting this release. I, on the other hand, was completely oblivious. I only found out about the existence of this movie about a week after its release, when I overheard spoken conversations during the holidays. I was surprised and disappointed at my own ignorance. Clearly, I'd been living under a rock.</p>
+<p>I am still, in many ways, living under a rock, in my own bubble. I know quite a few things about compilers, machine learning, and the soap opera that is American politics, but I'm largely unaware of what goes on in municipal and local politics, for instance. I also know very little about local (Quebecois) artists and musicians. To tell you the truth, it's not that I don't want to know about these things, it's that this information never makes its way to me, and I don't go out of my way to find it.</p>
+<p>When I was a child and a teenager, I was in many ways more informed about what might be termed "mainstream" culture. Every night, me and my mom watched the evening news and various talk shows. Much of the information we got about our local culture was delivered to us in this form. Today, it seems we celebrate the death of television, the cutting of the cord that came with the arrival of the information age. This is the end of this dominant thread of culture that was imposed upon us, in favor of access to a seemingly unlimited amount of information.</p>
+<p>We have the freedom to choose what we're exposed to. The information doesn't come packaged and predigested in evening news bulletins ready for mass consumption. The downside of this, however, is that to some extent, we're all living in our own bubble. There is no longer a common thread of culture that I share with everyone I know. We each can pick and choose what interests us, and ignore all the rest. The thing is, to some extent, we don't even make that choice.</p>
+<p>Social media websites run some ranking algorithms which we only see the end result of. If I had some input, I would ask them to please show me more information about local news and politics, because I'd like to stay in the loop. Unfortunately, they never asked for my opinion. They're not generally in the business of making sure that I'm a well-rounded individual, they're in the business of capturing my attention, and selling some share of it to advertisers. The unfortunate truth is that in some ways, the internet isn't so different from television: which information we get or don't get to see, is a choice that's increasingly being made for us.</p>
+<p>I think the internet has brought us many wonderful things. We have more access to information than ever before. We also have the ability to reach many more people than we ever could. However, it seems to me that our ability to choose is also contributing to worsening social isolation in the modern world. We've been given the freedom to find threads of culture online that cater to our precise tastes.  That can be wonderful and enriching, but there is also a huge downside: it also means that people have the freedom to pick a cultural bubble online that is as comfortable as possible, and never make the effort of stepping out of it. The downside is the <a href="https://en.wikipedia.org/wiki/Confirmation_bias">confirmation bias</a>.</p>
+<p>Some political commenters have said that modern politics are becoming increasingly polarized. More and more, things are being spun as left versus right, liberals against conservatives. There's a lack of empathy, with each side portraying the other as morally bankrupt and unsalvageable. I think that the internet and the attention economy may be largely to blame for this situation. With the internet, no matter how radical your beliefs are, you can find people and sources online who will tell you exactly what you want to hear: that you were right all along, that those who disagree can only be disturbed individuals, and that you can rest comfortably in your sense of moral superiority.</p>
+<p>Tech companies are not concerned with your personal growth, your edification and rigorous fact-checking. They're also not concerned with your long-term well-being and whether you have healthy relationships with the people who surround you. They're happy to spoon-feed you a diet of whatever they think you like and will keep your attention the longest. I would say that it's up to you, me, and all of us to make the uncomfortable effort of standing up, and stepping outside of our cozy little bubble. However, I'm also quite worried that this simply isn't going to happen, that most of us are going to remain addicted to the informational equivalent of overcooked french fries, reconstituted chicken meat and flavored sugar-water.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

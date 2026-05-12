@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>D's Garbage Collector Problem</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="D's Garbage Collector Problem">
+  <meta property="og:description" content="D's Garbage Collector Problem">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-09-10-ds-garbage-collector-problem/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/07/19/dogfooding-higgs-with-the-turing-turtle/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/09/11/making-waves-ds-gc-problem-followup/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>D's Garbage Collector Problem</h1>
+<div class="post_date">September 10th, 2014</div>
+</div>
+<p>One of the biggest issues with Higgs, the JIT compiler I'm working on, is that the compilation times are too slow. The performance of the compiled machine code that Higgs produces is now fairly good. Still below that of V8 and SpiderMonkey, but getting closer, and orders of magnitude above what you would get from an interpreter. Unfortunately, in most benchmarks, the total execution time is now dominated by the time it takes for Higgs to compile JavaScript all the way down to x86 machine code.</p>
+<p>This is a problem that I haven't really tackled. For one, <a href="/2014/04/10/positive-results-for-higgs/">my PhD research</a> is hugely focused on the performance of the compiled code, and my advisor is always pushing me to get better results in that area. Another issue is that, quite frankly, I don't really know why Higgs is so slow to compile code. I've been relatively careful to avoid unnecessary overhead when implementing it, and my attempts at profiling have been rather unfruitful. There are no obvious low-hanging fruits. From what I'm seeing, every step in the compilation pipeline is fairly slow.</p>
+<p>I did find one thing that stood out. My implementation of a liveness analysis scales poorly with function size. It allocates a huge bit matrix (vector of bit sets) for liveness computation. This grows quadratically with the function size, which means that in some cases, obscene amounts of memory are required, and this data structure doesn't fit in the cache. Seeing this, I did the obvious thing and rewrote the liveness analysis to use simple lists as sets of live values. The results were rather perplexing: the liveness analysis was now faster, but the rest of the compilation process had slowed down so that overall, the total compilation time was slower than before. No fair.</p>
+<p>I had an inkling of what might be wrong. Turns out it's a <a href="http://dlang.org/">D</a> garbage collector issue I've already run into and <a href="https://www.youtube.com/watch?v=FGgFMZhnXvU&feature=youtu.be&t=32m36s">talked about in my DConf 2014 talk</a>.</p>
+<p>To assess performance, I wrote a <code>test.js</code> program which assigns to a global variable and then simply reads from it 60,000 times:</p>
+<pre><code>a = 0;
+a;
+a;
+...
+a;
+</code></pre>
+<p>The sad news is, compiling this program is unreasonably slow at over 4.5 seconds:</p>
+<pre><code>./higgs --perf_stats --nostdlib test.js
+
+comp time (ms): 4504
+exec time (ms): 2
+total time (ms): 4507
+code size (bytes): 633036
+peak mem usage (KB): 443608
+</code></pre>
+<p>But now, if I add the following line to the beginning of the <code>main()</code> function:</p>
+<pre><code>// Reserve 1GB for the D GC
+GC.reserve(1024 * 1024 * 1024);
+</code></pre>
+<p>The results become very different. Preallocating a large chunk of memory for the D heap reduces the compilation time by 66%:</p>
+<pre><code>./higgs --perf_stats --nostdlib test.js
+
+comp time (ms): 1570
+exec time (ms): 2
+total time (ms): 1572
+code size (bytes): 633036
+peak mem usage (KB): 760828
+</code></pre>
+<p>And now if we both preallocate memory and disable the GC with the following:</p>
+<pre><code>GC.reserve(512 * 1024 * 1024);
+GC.disable();
+</code></pre>
+<p>Then we get:</p>
+<pre><code>./higgs --perf_stats --nostdlib test.js
+
+comp time (ms): 968
+exec time (ms): 2
+total time (ms): 971
+code size (bytes): 633036
+peak mem usage (KB): 798372
+</code></pre>
+<p>This is both interesting and perplexing. It tells us that originally, <i>the D GC overhead took over 75% of the total execution time</i>. By reserving memory, we can reduce the number of garbage collections and eliminate most of this overhead. What's probably happening is that my test program almost fills the heap, but doesn't cause it to expand. Then, we have a situation where the GC is "thrashing", and getting repeatedly triggered every few allocations.</p>
+<p>So, always preallocate memory then? Unfortunately, I found out through experimentation that choosing the amount of memory to preallocate requires magic voodoo. Sometimes preallocating less memory yields better performance. What seems clear is that the D GC needs better heuristics to decide when to expand the heap to avoid thrashing. This would be much more effective than me trying to guess how much memory to reserve to get around the problem.</p>
+<p>There might be another issue here as well. I suspect that D memory allocation itself is quite slow and could be further optimized. It would also be beneficial to optimize GC algorithm (potentially using multithreading) to make collections faster. In any case, it seems very clear to me that something needs to be done about GC performance in D. As it is, this performance issue stands out like a sore thumb.</p>
+<p>System programmers like myself care very much about performance, but in the current situation, it seems I can't improve Higgs compilation times without refactoring my code to avoid memory allocations at all costs. Doing so would take quite a bit of my time, and invariably make the said code much less maintainable. The point of this post isn't to point fingers and yell at people, but to highlight a very real and fundamental problem which, in my opinion, will scare away many potential D programming language adopters.</p>
+<h2>Update: September 10, 7:39 PM</h2>
+<p>This post got much more attention than I expected. It made the front page on Hacker News and <a href="http://www.reddit.com/r/programming">r/programming</a>. There have been over 11000 views at the time of this writing. Andrei Alexandrescu, co-creator of D, <a href="http://www.reddit.com/r/programming/comments/2g03af/ds_garbage_collector_problem/ckent8c">posted on reddit</a> to say that he's decided to rewrite the GC. I apologize for the bad publicity I may have caused D, but I am glad that the problem has been recognized and that something will be done about it. With a brand new GC, the D programming language will be much more competitive.</p>
+<p>For those who are curious, or may want to help, here is a link to the <a href="https://github.com/D-Programming-Language/druntime/tree/master/src/gc">source code of the D GC</a>. If you're interested in contributing and helping to fix this problem, you should head to the <a href="http://forum.dlang.org/">D forums</a> and get in touch with the community, or try contacting Andrei directly. Even if you don't have time to contribute, your feedback may be useful in the design of a better GC.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

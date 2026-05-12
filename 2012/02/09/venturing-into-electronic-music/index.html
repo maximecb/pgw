@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Venturing into Electronic Music</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Venturing into Electronic Music">
+  <meta property="og:description" content="Venturing into Electronic Music">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-02-09-venturing-into-electronic-music/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/01/31/exporting-midi-files-using-data-uris/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/02/23/stop-hating-on-c/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Venturing into Electronic Music</h1>
+<div class="post_date">February 9th, 2012</div>
+</div>
+<p>I mentioned in previous posts that I'm fiddling with procedural techniques to <a href="http://en.wikipedia.org/wiki/Algorithmic_composition">generate music</a>. I've already made some progress in implementing my own sound synthesis system and even generating very <a href="/2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/">short musical phrases</a> using the most basic music theory concepts. I'm now trying to take this to the next step and hopefully generate pieces of music I'll actually enjoy. I'm aiming for something simple, which could probably be described as minimalist techno/dance music.</p>
+<p>This kind of music will require at the very least two synthesizer programs (a lead and a bass) as well as a drum kit. Luckily, it's pretty easy to find free drum samples all around the web, and it turned out to be very simple to write some JavaScript code for a little sampler that does the job for my basic drum kit. Coming up with synthesizer patches I like is unfortunately trickier, but I've been making decent progress in that direction. I decided to try and randomly generate a simple bass riff and a random synthesizer patch to play that riff at the same time. Here's a <a href="2012-02-09.mp3">short audio fragment I generated</a> last night using this method.</p>
+<p>One of the main lessons I've learned so far is that generating coherent music is rather complex. Music theory does provide some hints as to what kinds of things may sound good together, but it leaves much left unsaid. People have often told me that "music is very mathematical", but one thing's for sure: none of the music theory books I've read were written by mathematicians. The explanations are very abstract. I found many discussions of <a href="http://www.8notes.com/school/theory/common_chord_progressions.asp">chord progressions</a>, but I've never found any clear hints on how to turn a chord progression into a melody (notes you play on an actual instrument!), I'm mostly figuring that out by myself through experimentation.</p>
+<p>At the moment, I'm thinking my music generation system will be rule-based. I'll attempt to enumerate rules for what I find sounds good together, and have the system apply these when generating music. It's still tricky to think about how I can fit this into an actual algorithm, because music has multiple levels of structure which interact with each other:</p>
+<ul>
+<li>
+<p>Simultaneous and nearby notes have to be consonant</p>
+</li>
+<li>
+<p>Different musical parts (lead, bass, drum) have to sound consonant and coherent</p>
+</li>
+<li>
+<p>Low-level repetition/variation in melodic phrases</p>
+</li>
+<li>
+<p>Medium-level repetition/variation in the alternation of musical phrases</p>
+</li>
+<li>
+<p>High-level repetition/variation in song structure</p>
+</li>
+</ul>
+<p>It will be difficult to fit all of these considerations (and more) into a coherent whole that's still easy to maintain and expand on. As usual, I'm going to experiment with simple things and try to build on. The only way to make sense of all this is to experiment.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

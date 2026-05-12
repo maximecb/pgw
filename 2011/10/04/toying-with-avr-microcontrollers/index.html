@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Toying with AVR Microcontrollers</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Toying with AVR Microcontrollers">
+  <meta property="og:description" content="Toying with AVR Microcontrollers">
+  <meta property="og:image" content="https://pointersgonewild.com/2011/10/04/toying-with-avr-microcontrollers/r_dsc00691.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-10-04-toying-with-avr-microcontrollers/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/09/27/new-x86-backend-and-javascript-macros/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/04/whats-next-for-tachyon/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Toying with AVR Microcontrollers</h1>
+<div class="post_date">October 4th, 2011</div>
+</div>
+<div class="cover_image">
+<img src="r_dsc00691.jpg">
+</div>
+<p>A while ago I ordered some <a href="http://en.wikipedia.org/wiki/Atmel_AVR">AVR microcontrollers</a> on ebay (<a href="http://www.atmel.com/dyn/resources/prod_documents/doc2486.pdf">ATmega8s</a>, ATtiny85s) for some overly ambitious robot project of mine that involved power wheelchair parts. Unfortunately, I never had the time and patience to get them working. I didn't get myself a development board like the <a href="http://www.arduino.cc/">Arduino</a>, but just the microcontroller chips, voltage regulators, and other electronic parts. I thought I would be saving money by making my own custom circuits for projects.</p>
+<p>Turns out, especially if you're an electronics newbie like me, it's just not that easy to get them working (and perhaps Arduino just is the better beginner choice!). The programmer device bought on ebay never seemed to work right with Linux. I had trouble getting my voltage regulator to supply 5V to the chips. I ended up buying two more programmers on ebay, still didn't work, I got some cryptic error message about the programmer failing to program my chips. I had no idea what was wrong with my electronic circuit, and ended up basically giving up... Until now!</p>
+<figure>
+<a href="r_dsc00691.jpg">
+<img alt="My breadboard and programmer setup" src="r_dsc00691.jpg">
+</a>
+<figcaption>My breadboard and programmer setup</figcaption>
+</figure>
+<p>I was bored this weekend, and spent some time investigating my issues. Turns out that only one of my USB programmers seems to work properly (the one branded <a href="http://www.fischl.de/usbasp/">USBasp</a>). Also turns out that the breadboards I was using are wired strangely. The power lines don't run all the way along the sides as you would expect, but in broken segments that don't match the visible layout of the dots on the surface of the boards. In the end, I was able to finally program a microcontroller using <code>avr-gcc</code> and <code>avrdude</code>.</p>
+<p>I've made great progress. I got both an ATtiny85 and an ATmega8 working. I was able to hook them up to a <a href="http://www.instructables.com/id/How-to-use-a-74HC595-Shift-Register-with-a-AVR-ATt/">74HC595 shift register</a> to control multiple LEDs. I hooked up an <a href="http://www.ftdichip.com/Products/Cables/USBTTLSerial.htm">USB-to-TTL interface</a> to the UART and got a serial terminal (GtkTerm) communicating with them, and finally, I interfaced with a <a href="http://www.glacialwanderer.com/hobbyrobotics/?p=12">DS1307 real-time-clock</a> chip through the I2C bus. I decided it would be cool to perhaps make an advanced alarm clock project out of this. Most alarm clocks are pretty lacking in functionality. Small displays you can't read with your glasses off, no option to preprogram days off so it won't wake you up at the usual work time. No option to auto turn off (or ring later) on the weekend, etc. Perhaps, with some patience, I could make an alarm clock full of feature overkill.</p>
+<p>Some ideas (and I most probably won't implement all of them) for the XTREME alarm clock:</p>
+<ul>
+<li>
+<p>Big display - Button to not-ring-tomorrow (TM)</p>
+</li>
+<li>
+<p>Different weekend alarm time</p>
+</li>
+<li>
+<p>Auto-snooze after 1 min</p>
+</li>
+<li>
+<p>Preprogrammed holidays</p>
+</li>
+<li>
+<p>Hook a motion detector to it to detect when I go to bed</p>
+</li>
+<li>
+<p>Display auto dimming when the light is off</p>
+</li>
+<li>
+<p>Ethernet connection for memo system, alarm time programming</p>
+</li>
+<li>
+<p>Temperature and humidity sensing & display</p>
+</li>
+<li>
+<p>Battery backup, keeps the time without wall power</p>
+</li>
+</ul>
+<p>To make things cooler, I've found out it's possible to <a href="http://www.serasidis.gr/circuits/AVR_VGA/avr_vga.htm">use AVR chips to produce VGA/composite signals</a>. I just happen to own a small 7" composite input LCD I could possibly use for my big alarm clock display!</p>
+<p>I also thought it might be cool to build myself a <a href="http://www.ladyada.net/make/minipov3/">persistence of vision gizmo</a> at some point, for the next time I go out dancing :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

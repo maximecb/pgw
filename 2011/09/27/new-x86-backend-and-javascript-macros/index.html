@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New x86 Backend and... JavaScript Macros?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="New x86 Backend and... JavaScript Macros?">
+  <meta property="og:description" content="New x86 Backend and... JavaScript Macros?">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-09-28-new-x86-backend-and-javascript-macros/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/09/23/my-masters-research-just-in-time-specialization/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/04/toying-with-avr-microcontrollers/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>New x86 Backend and... JavaScript Macros?</h1>
+<div class="post_date">September 28th, 2011</div>
+</div>
+<h2>New Backend</h2>
+<p>I've finally completed the rewrite of the Tachyon backend. This is the part of the compiler that takes our SSA form intermediate representation and turns it into machine code. It currently supports x86 32 and 64 bit. I decided to go for a rewrite for two reasons. The first is that there were a number of issues that bugged me about the previous backend (compilation speed, performance of the code, bugs, lack of features). The second is that I wanted to make sure that I fully understood everything that went into the backend, seeing as I will most likely have to heavily modify it during the course of my thesis. So far I'm pleased with the result. The new design seems fairly robust and extensible and I haven't encountered too many bugs.</p>
+<p>The backend is written in JavaScript from the ground up and only uses JS extensions to allocate memory blocks and write integer values into them. I wrote a custom x86 assembler based on a table of instructions that describes each supported encoding for a given instruction. It's essentially the same tables that are found in the Intel/AMD CPU manuals. This makes it very quick to add support for new instructions (just add a few lines for its encodings!). I made that choice mostly because the x86 instruction set is very ad-hoc, and only keeps being extended.</p>
+<p>The register allocation is currently done greedily and on-the-fly (interleaved with the instruction selection). I made this choice for JIT compilation speed and to keep the compiler simple. If register allocation turns out to pose a speed problem, I'm fairly confident that I can improve it by tweaking the allocation heuristics. The backend has also been designed in such a way that it would be possible to replace the register allocator without breaking the rest of the backend.</p>
+<p>Finally, the backend incorporates a peephole optimizer to try and improve the generated code. Instead of writing machine code bytes directly while the instruction selection occurs, instruction objects are queued into a list so that the instruction sequence can be optimized in a separate pass. This allows the instruction selection to remain fairly simple (no need to try and generate optimal instruction sequences in all cases). Suboptimal instruction sequences can be replaced by more efficient ones, redundant moves and other instructions can be removed. This pass takes only about 5% of the backend time so far, and removes a lot of bloat.</p>
+<h2>Performance Issues & Macros</h2>
+<p>As I was testing the backend and ironing out a few bugs, it became obvious that my new backend was much slower than the old one. Compiling the Tachyon standard library (~7000 lines of code) took over 2 minutes in total, which was unacceptable. I started looking into the cause, and it rapidly became obvious. I used a lot of assertions within the source code to help with debugging.</p>
+<p>These have the form:</p>
+<pre><code>assert(condition_expr, error_string);
+</code></pre>
+<p>For example:</p>
+<pre><code>assert(value instanceof Function, 'value is not a function: ' + value);
+</code></pre>
+<p>The problem is that these assertions were implemented in our system as function calls, and as such, the error string was always evaluated, no matter whether the condition was true or false. The result is that some (sometimes very long) error strings were generated all over the place, even if they were never going to be printed. In the example above, a string representation of value would be produced and a string concatenation would occur each time the assertion was evaluated.</p>
+<p>Replacing the worst offending assertions of the backend by if statements shortened the compilation time from above 2 minutes to about 12 seconds. I suspect it could be reduced further by eliminating more of these. Getting rid of assertions isn't really the solution I'd like, however. The conclusion I came to is that assertions really should be expressed not as function calls, but as macros.</p>
+<p>The previous example assertion, for instance, should be automatically replaced by:</p>
+<pre><code>if ((value instanceof Function) === false)
+    error('value is not a function: ' + value);
+</code></pre>
+<p>Realistically, it would be fairly easy to implement a specialized AST transformation for assertions which replaces assert function calls by inlined code of the form above. However, Tachyon also has a logging system that has calls such as "log.debug(string_expr)" which only print in debug mode. For performance reasons, those should ideally also be expressed as macros. Hence, I came to the conclusion that it would make sense to implement some kind of macro system in Tachyon.</p>
+<p>Right now, I'm trying to decide whether I want something simple like C's macro system, which does text-based replacement, or a system operating at the AST level where macros are pseudo-functions where the argument variables are replaced by the argument expressions. One annoying detail, though, is that as long as Tachyon runs under V8, I will have to implement the same macro system into both Tachyon and V8 if I want the code to work the same in both.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What's Next for Tachyon</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What's Next for Tachyon">
+  <meta property="og:description" content="What's Next for Tachyon">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-10-04-whats-next-for-tachyon/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/04/toying-with-avr-microcontrollers/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/07/optimizing-global-value-numbering/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>What's Next for Tachyon</h1>
+<div class="post_date">October 4th, 2011</div>
+</div>
+<p>Work on the Tachyon JavaScript compiler has been progressing fairly well since the project began over a year ago. Most of the ECMAScript 5 specification is currently supported. We have an almost complete standard library and a good bank of unit tests to validate that it's all working properly. Some minor language features like object property attributes (e.g. read only attributes) are not supported. We also have no explicit support for strict mode, in part because our goals involve making the language fast without relying on strict mode annotations. I don't anticipate that adding support for these features would be very difficult, as they are, to some extent, only syntactic sugar.</p>
+<p>There are some more crucial features missing from Tachyon, however, which will require fairly significant changes to the back-end to implement. These are namely a Garbage Collector (GC), exceptions and Floating-Point (FP) number support. Thus far, Tachyon has been designed with support for these features in mind, but they are not actually implemented. Tachyon can parse code with throw/catch statements and run it properly, so long as no exceptions are thrown. Objects can be allocated in memory by bumping an allocation pointer, but they are never collected. Operations on numbers also work as you would expect, so long as the results stay within the supported integer range.</p>
+<p>For Tachyon to become useful in the real-world, a GC, exceptions and FP support will need to be implemented. The GC is perhaps the most difficult of these to integrate into Tachyon. GCs are notoriously difficult to debug, for one. Another difficulty lies in the fact that the GC will need to be able to examine the contents of stack frames in order to determine what local variables point to live objects. This means, at the very least, knowing which stack slots are references, and knowing how big the stack frames are. Essentially, the GC needs to have access to meta-information about the stack frames and to be able to visit the stack from the top down. Exception support also requires being able to visit the call stack in order to unwind it, as well as access to meta-information to tell us where the current exception handler is located.</p>
+<figure>
+<a href="342px-Call_stack_layout.svg.png">
+<img alt="Typical stack frame layout (credit: Wikipedia)" src="342px-Call_stack_layout.svg.png">
+</a>
+<figcaption>Typical stack frame layout (credit: Wikipedia)</figcaption>
+</figure>
+<p>To be able to properly support a GC and exceptions, I will need to implement some sort of meta-information records for functions (function descriptors). I'm thinking that to make the runtime faster, I can implement some kind of hash map of return addresses to function/stack descriptors and exception handler addresses. This will allow me to know which functions are currently on the stack, where the local variables are currently stored, which exception handler corresponds to a return address, etc. All of this without functions having to write special bits in their stack frames to identify themselves. Note that it might come in handy to know specifically which variables are stored where on the stack if I ever want to implement a debugger, of if I decide to implement <a href="http://www.cs.ucsb.edu/~ckrintz/papers/osr.pdf">On-Stack Replacement</a> (OSR) in the back-end later on.</p>
+<p>One difficulty lies in the fact that the Tachyon backend currently allocates temporaries on the stack lazily when they need to be spilled. This means that different temporaries can be at different stack locations at different times. It makes for potentially compact stack frames, but it means that a different "function descriptor" would be needed for each return address, as it is, which could take a significant amount of memory. Another disadvantage is that control-flow join points can currently incur many memory to memory moves between stack locations. This might actually be rather problematic for performance.</p>
+<p>I'm currently trying to evaluate whether or not I should redesign the stack frame handling in the backend. I think it may be beneficial to have a system where a given temporary is always spilled to the same location, if it is spilled. This would eliminate much memory-memory move overhead and potentially minimize memory usage by function meta-information. One issue here, however, is that the Tachyon back-end currently performs its work in a single pass, interleaving register allocation and code generation. This means that while Tachyon is generating code, it doesn't know how many spill slots may need to be allocated until it's finished. This poses a slight problem because it means the stack pointer may change during the execution of the function. That would mean that records of function meta-information would have to contain information about the current stack pointer location associated with a given return address.</p>
+<p>A final problem to solve is the issue of multiplexing. Tachyon currently doesn't mind where temporaries go, so long as there is a free stack slot. This means that the number of spill slots is kept small. If I were to reserve a fixed stack slot for a each temporary, however, there could be many more stack slots. Since some big functions can have thousands of temporaries, it is clearly essential to restrict the stack slot allocation so that only temporaries that are actually spilled have a stack slot allocated to them. Whether or not it's worthwhile in terms of execution speed to have an analysis to try to perform stack slot multiplexing is another question.</p>
+<p>Right now, I'm pondering my options:</p>
+<ul>
+<li>
+<p>Perhaps I should stick with the current lazy stack frame growth scheme, and accept that there should generally be one function descriptor per return address. I could later augment this scheme with some kind of system to at least try and spill temporaries in the same location if possible, potentially reducing memory-memory moves. This is clearly the simplest option.</p>
+</li>
+<li>
+<p>Try to refactor the back-end to separate register allocation and code generation into two separate passes. This makes it possible to know the final stack frame size before code generation begins.</p>
+</li>
+<li>
+<p>Grow the stack frame lazily as I do now, but ensure that spilled temporaries always end up in the same location.</p>
+</li>
+</ul>
+<p>I must admit that I'm a perfectionist, and that I'm always dissatisfied with the current state of my code. I always want to make it better. However, seeing that I have time constraints, and that it's very hard to actually tell what the performance impact of any of the many possible design decisions are until I can run some more serious benchmarks, I think I will stick with my current system of lazy multiplexed stack-frame growth and try to expand on it. I will probably begin implementing the GC as my next task, as it is probably is the most crucial feature I'm missing. Once the GC is in place, and I have function descriptors implemented, it should actually be fairly trivial to add information in there to support stack unwinding for exceptions.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

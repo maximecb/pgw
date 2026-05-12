@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Optimizing Ray Marching through Partial Evaluation</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Optimizing Ray Marching through Partial Evaluation">
+  <meta property="og:description" content="Optimizing Ray Marching through Partial Evaluation">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-05-09-optimizing-ray-marching-through-partial-evaluation/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/03/23/sense-from-chaos-crossing-the-semantic-gap/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/09/20/silicon-valley-six-months-later/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Optimizing Ray Marching through Partial Evaluation</h1>
+<div class="post_date">May 9th, 2016</div>
+</div>
+<p>I love <a href="https://en.wikipedia.org/wiki/Ray_tracing_(graphics)">ray tracing</a> as a 3D rendering technique. I love it because in its purest form, it's very elegant and beautiful. It's a simulation of light and photons flowing through an environment. Because of its physically-based nature, ray tracing can produce very realistic images from very simple code. You can render impressive scenes with just a few hundred lines of C. This is in stark contrast with state of the art polygon <a href="https://en.wikipedia.org/wiki/Rasterisation">rasterization</a> techniques used in modern 3D engines, which make use of a huge amount of very complex hacks to get something that tries to look somewhat realistic.</p>
+<p>Traditional <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-overview/light-transport-ray-tracing-whitted">Whitted-style</a> ray tracing is done with intersection tests, that is, the scene is rendered by testing if rays coming out of the camera and going into the scene intersect with various objects. With this style of rendering, in order to be able to render a 3D object, you need to be able to write a piece of code that checks whether or not a given ray intersects with the object, and if so, where the nearest intersection occurs (there might be multiple). This is relatively straightforward if you want to render something like <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">a sphere</a>, but it quickly gets more complicated when rendering more complex parametric surfaces.</p>
+<p>Recently, I fell in love when I discovered a ray tracing technique that in many ways is even simpler yet more powerful than classical ray tracing. The technique, known as ray marching, or sphere tracing, makes it possible to render a scene that is directly defined by a <a href="http://9bitscience.blogspot.com/2013/07/raymarching-distance-fields_14.html">Signed Distance Function (SDF)</a>. This is a function that, given a point in space, returns the closest distance to any point that is part of the scene. The distance is positive if the point is outside of scene objects, zero at the boundary, and negative inside scene objects.</p>
+<p>The beauty of this is that SDFs are extremely simple to define. For instance, the signed distance from a point to a sphere is simply the distance between the point and the center of the sphere, minus the sphere's radius. Better yet, SDFs can be <a href="http://www.iquilezles.org/www/articles/distfunctions/distfunctions.htm">combined together</a> in very simple ways as well. You can produce the union of two objects by computing the minimum of both of their SDFs, and the intersection by computing the maximum. You can also do funky things such as infinitely repeating objects using modulo operators. SDFs truly have a lot of expressive power due to their combinatorial nature.</p>
+<p>The demoscene group Mercury has produced some amazing demos of 3D animations based on the rendering of SDFs on the GPU. These demos are entirely procedural and fit in a tiny 64 kilobytes! The Timeless demo, in particular, showcases the kinds of spatial transformations and deformations of space that can be done when your scene is entirely defined by a mathematical function, as opposed to polygons. There are many interesting <a href="https://www.shadertoy.com/view/Xds3zN">SDF code examples</a> on ShaderToy you're interested in playing with them.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/UnjIMd3kVf4?si=Kiiols1iCn1KDoG4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>Hopefully, by this point, I've convinced you that SDFs and ray marching are insanely cool. It's also pretty amazing that modern GPUs are now fast and flexible enough that you can render fairly interesting SDFs in real-time. Unfortunately, SDFs remain expensive enough to render that it's still tricky to render complex scenes. I think it would be great to live in a world where SDFs and real-time ray tracing could replace polygons, but it seems we aren't quite there yet.</p>
+<p>I spent some time thinking about SDFs, and it got me thinking: there's got to be a way to make these faster. If you think about it, rendering an SDF is costly because there's quite a bit of computations going on at every pixel, many evaluations of a potentially complex SDF. This computational work, however, is highly redundant. Do you really need to evaluate the entire SDF for every single pixel? Ray marching is very much a brute force technique. There just has to be a more efficient way to go about this.</p>
+<p>SDFs are mathematical functions, pieces of code that get repeatedly evaluated. I come from a compiler background, and so I started wondering if, potentially, compiler optimizations could be applied to these SDFs. What if, for instance, we could apply partial evaluation to optimize the said distance functions and make them run faster? I did some research, and it turns out, unsurprisingly, that I wasn't the first one to think of such a concept. There has already been work in <a href="http://teapot.lib.ocha.ac.jp/ocha/bitstream/10083/2369/1/KJ00004830737.pdf">applying partial evaluation to ray tracing</a> and applying <a href="http://people.csail.mit.edu/jrk/lightspeed/">partial evaluation to the optimization of shaders</a>.</p>
+<p>The work that's been done on applying partial evaluation to ray tracing, in my opinion, doesn't go far enough. The authors have essentially partially evaluated the ray tracing algorithm and specialized it in function of the objects present in a given 3D scene. What I think would be very useful, is to specialize the evaluation of SDFs in function of the camera position. What if, for instance, you could mathematically prove that certain objects in your scene are not present in the left half of the <a href="https://en.wikipedia.org/wiki/Viewing_frustum">view frustum</a>. That is, what if you could prove that most of the objects in your scene are not visible on the left half of the screen?</p>
+<p>It seems like it would be relatively straightforward to recursively subdivide the image and view frustum into multiple quadrants and determine which objects will definitely not be visible in each. I know it can be done, in fact, directly by using the definition of SDFs, without very fancy tricks. If you could do this, then you could generate a separate, optimized SDF for smaller fractions of the image to be rendered. What I'm essentially proposing is to generate optimized pieces of shader code on the fly for smaller areas of the screen, which can be evaluated much faster than the SDF for an entire scene.</p>
+<p>I don't know how viable it is to compile and run fresh shader code every time the camera moves on a GPU, but I believe it might actually be possible, using this kind of optimization, to render SDFs on a multicore desktop CPU at decent frame rates.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

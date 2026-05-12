@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Memory, Pages, mmap, and Linear Address Spaces</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Memory, Pages, mmap, and Linear Address Spaces">
+  <meta property="og:description" content="Memory, Pages, mmap, and Linear Address Spaces">
+  <meta property="og:image" content="https://pointersgonewild.com/2023/03/12/memory-pages-mmap-and-linear-address-spaces/monitors.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2023-03-12-memory-pages-mmap-and-linear-address-spaces/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2023/02/24/building-a-minimalistic-virtual-machine/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2023/05/29/software-bugs-that-cause-real-world-harm/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Memory, Pages, mmap, and Linear Address Spaces</h1>
+<div class="post_date">March 12th, 2023</div>
+</div>
+<div class="cover_image">
+<img src="monitors.jpg">
+</div>
+<p>We don't always think of it this way, but on modern machines, memory and pointers are an abstraction. Today's machines have virtual memory, divided in blocks called "pages", such that the addresses represented by pointers don't necessarily map to the same address in physical RAM. In fact, mmap even makes it possible to map files to memory, so some of these addresses aren't even mapped to RAM addresses at all.</p>
+<p>Two weeks ago, I wrote <a href="/2023/02/24/building-a-minimalistic-virtual-machine/">about UVM</a>, the small virtual machine I've been building in my spare time. This VM has a relatively low-level design where it has untyped instructions and pointers for instance. Generally speaking, I've done my best to design the VM to be fairly "conventional", in the sense that most design elements are aligned with common practice and unsurprising. In my opinion, this is important because it keeps the design approachable to newcomers. Having a design that's unsurprising means that new users don't need to read a 100-page manual and familiarize themselves with new terminology to get something done.</p>
+<p>Even though I've done what I could to keep the design of UVM unsurprising, there is one aspect that's unconventional. At the moment, UVM uses what's known as a <a href="https://en.wikipedia.org/wiki/Harvard_architecture">Harvard Architecture</a>, where code and data live in two separate linear address spaces. Essentially, code and data live in two separate arrays of bytes. There's actually a third address space too: the stack is distinct from the address space used for the heap. That means you can't directly get a pointer to something that's stored on the stack.</p>
+<p>It's maybe not that unconventional when you think about it, because WASM works the same way. <a href="https://github.com/WebAssembly/design/issues/338">You can't</a> directly get a pointer to a stack variable in WASM either, and you also can't directly read/write to code memory. Same goes for the JVM. It just seems unconventional because UVM presents itself as a fairly low-level virtual machine that gives you pointers, and yet there are restrictions on what you can do with those pointers.</p>
+<p>There's a few reasons why the stack, the heap and executable memory are separate in UVM. The main reason is performance. By creating distinct address spaces, we make accesses to these different address spaces explicit. At the moment, UVM is interpreted, but my goal is to eventually build a simple JIT compiler for it. That brings in performance considerations. If everything lived in a single address space, then potentially, every write to memory could write anywhere. Every single time that you write to memory, UVM would have to validate, somehow, that you didn't just overwrite the code that is about to be executed.</p>
+<p>There are also performance considerations for stack variable accesses. In a JIT, it can be useful for some performance optimizations to be able to assume, for instance, that you know the type of things that are stored on the stack. It can also be useful to be able to store stack elements in registers in a way that's not visible to the running program. If you can directly get pointers to stack elements, then it becomes much harder for the JIT to be able to make any kind of assumptions about what may or may not be on the stack. As an aside, to some degree, you can guard against that by using a register machine. Registers, when you think about it, are a kind of private address space accessible only to the currently running thread.</p>
+<p>I ended up having a discussion with Justine Tunney on twitter about whether UVM should use a more traditional architecture with pages and mmap instead of a Harvard Architecture:</p>
+<figure>
+<a href="twitter-screenshot.png">
+<img alt="" src="twitter-screenshot.png">
+</a>
+</figure>
+<p>Justine's Blink VM uses a <a href="https://github.com/jart/blink#self-modifying-code">SIGSEGV trick</a> in order to catch writes to executable memory without having to explicitly check for them. It leverages the hardware's page protection to do the checking. I'm not sure if this trick would be portable to a platform such as Windows, for example, but it does solve that problem on Linux/Mac and most POSIX platforms.</p>
+<p>However, I don't think that having code live in the same memory space as data is all that useful, and Justine seemed to agree. Writes to executable memory are relatively rare. They have to be, because it's an expensive operation. On modern-day systems, whenever you write to executable memory, you need to perform a system call to change memory protection twice, and you may also need to flush the instruction cache. As such, needing a system call to write to executable memory instead of being able to directly do it though a pointer is hardly an inconvenience.</p>
+<p>A more important question with regards to the design of UVM is whether it should or shouldn't have a concept of pages and a primitive like mmap, instead of a flat linear address space for code. At the moment, there are no pages in UVM's heap, just a long array of bytes, which you can extend and shrink with a primitive <a href="https://github.com/maximecb/uvm/blob/main/doc/syscalls.md#vm_resize_heap">similar to sbrk</a>. I thought that this could be problematic when it comes to freeing memory, because it means UVM can only release memory to the OS by shrinking the heap. It can't "punch holes" to release the memory of individual pages to the OS. However, Justine mentioned that the dlmalloc allocator has been designed to favor sbrk, by ensuring that the topmost memory is more likely to be empty. The conclusion of that discussion is that implementing mmap in UVM would add complexity, and probably isn't necessary.</p>
+<p>At the moment, I think that the design of UVM's memory address space seems to satisfy most of the needs I can anticipate, except for one. In the future, it seems like it would be useful to be able to share memory between different processes. The question is: how do you do that in a VM that doesn't have mmap? If you can't directly map a chunk in your memory space to be shared memory, then how do you share memory at all? There are at least three possible answers to that question. The first would be to not support shared memory, the second would be to add support for an mmap-like primitive later on (not impossible), and the last would be to share memory using a different mechanism.</p>
+<p>Ideally, if UVM supports shared memory in the future, I'd like to be able to provide strong guarantees. For example, I'd like to be able to guarantee that all reads/writes to shared memory are atomic. I think it might also be useful to be able to get a lock on a chunk of shared memory, or to implement something like transactional memory (but only within that specific shared chunk). I don't know how well that works with mmap, because we're talking about much stronger guarantees than what is normally provided by hardware. It seems it could be possible, however, to allocate shared memory blocks with a unique ID, and to provide special primitives to access these shared memory blocks. Here we're essentially talking about a 4th memory space that would have to be accessed trough a special kind of "fat pointer".</p>
+<p>In conclusion, at the moment, UVM doesn't have pages, mmap or shared memory. The design is pretty simple and it works well. I can see a path towards adding mmap support in the future if it turns out to be necessary, but I don't think that it will be. There are still some quirks that I think I may need to fix. One odd property in UVM is that address zero in the heap is a valid address, and accessing it doesn't fault. However, C, Rust and other languages tend to rely on address zero being invalid. As such, it might make sense to add that restriction to UVM as well, to be more in line with established practice. Another quirk is that at the moment, the heap can be resized to have any requested size. It might make sense to only allow the heap to have a size that is a multiple of some arbitrary "page size", such as 4KiB or 16KiB, if only to allow future optimizations.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

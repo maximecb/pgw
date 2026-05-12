@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What I'd like to Know about JavaScript Programs</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What I'd like to Know about JavaScript Programs">
+  <meta property="og:description" content="What I'd like to Know about JavaScript Programs">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-10-31-what-id-like-to-know-about-javascript-programs/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/31/code-compactness-and-optimization-levels/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/11/01/metaprogramming-for-javascript/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>What I'd like to Know about JavaScript Programs</h1>
+<div class="post_date">October 31th, 2011</div>
+</div>
+<p>The final goal of my thesis is to find ways make programs written in dynamic programming languages (like JavaScript) run faster. One way to do this is to exploit regularities in the behavior of the said programs. Dynamic languages appear to make it possible to redefine (almost) everything while a program is running. Programmers, can, for example, redefine global variables (including function bindings), add and remove properties to objects, or even call the (in)famous <code>eval</code> function to redefine the value of local variables. This makes analysis and optimization of such programs difficult.</p>
+<p>It makes sense to think however, that the dynamic features of JavaScript are not used in an unrestricted way. Programs are implementations of algorithms. They manipulate structured data in a way that makes sense to programmers. As such, the programs themselves should exhibit some predictable, regular structure in their behavior. An optimizing Just-In-Time (JIT) compiler can exploit this in multiple ways, such as predicting what a program will do next based on past behavior, and restricting the generality of the code it generates based on the extend of the dynamic behaviors exhibited by programs.</p>
+<p>At the beginning of my Ph.D., I worked with Marc Feeley on instrumenting the WebKit JavaScript interpreter (JavaScriptCore) to gather some information about the dynamic behavior of programs. The goal was to eventually use this information to better guide our attempts at optimizing JavaScript code. This effort showed promising results, but was unfortunately abandoned mid-way because of technical difficulties: JavaScriptCore is very hard to instrument thoroughly. There are many things we simply couldn't do. There was much data we didn't have access to.</p>
+<p>Thanks to a combined effort by Marc Feeley and Bruno Dufour, we now have a system that allows us to re-write JavaScript souce code directly in order to instrument it. Combined with a web proxy system, we believe that we may finally be able to get the information we want. This tool will (hopefully) be working reasonably soon, and so I have decided to begin gathering a list of metrics to profile in real-world JavaScript applications. These will be useful in guiding my optimization efforts.</p>
+<p>I would like to know:</p>
+<ol start="1">
+<li>
+<p>What is the distribution of the length (in lines of code) of JS functions?</p>
+</li>
+<li>
+<p>How often are program and library functions executed?</p>
+</li>
+<li>
+<p>What proportion of functions are never executed?</p>
+</li>
+<li>
+<p>What proportion are executed only once?</p>
+</li>
+<li>
+<p>More than K times (with K ~ 10 to 100)?</p>
+</li>
+<li>
+<p>What proportion of functions have loops?</p>
+</li>
+<li>
+<p>What is the average loop nesting depth, for functions that have loops?</p>
+</li>
+<li>
+<p>What is the distribution of the number of loop iterations?</p>
+</li>
+<li>
+<p>What types are low-level operations usually applied to?</p>
+</li>
+<li>
+<p>What is the percentage of multiplications/additions on int64 int32, int30, uint32, floating-point values?</p>
+</li>
+<li>
+<p>How often is the addition operator used for arithmetic vs. string concatenation?</p>
+</li>
+<li>
+<p>How often are bitwise operators applied to non-integer values?</p>
+</li>
+<li>
+<p>The percentage of branches always going the same way.</p>
+</li>
+<li>
+<p>How stable are the types of variables?</p>
+</li>
+<li>
+<p>How stable are function arguments, function return types?</p>
+</li>
+<li>
+<p>How stable are function return types, for a given fixed input type string?</p>
+</li>
+<li>
+<p>How stable are local variable types? What if argument types are fixed?</p>
+</li>
+<li>
+<p>How stable are global variable and closure variable types?</p>
+</li>
+<li>
+<p>How often do global variable types change?</p>
+</li>
+<li>
+<p>How often are global functions redefined (if ever?)</p>
+</li>
+<li>
+<p>How are objects typically used?</p>
+</li>
+<li>
+<p>How many objects are allocated per function call, on average?</p>
+</li>
+<li>
+<p>How many fields do objects end up having?</p>
+</li>
+<li>
+<p>What proportion of allocated objects do not escape their allocating function?</p>
+</li>
+<li>
+<p>What proportion property accesses use dynamically generated string as keys?</p>
+</li>
+<li>
+<p>The frequencies of object property read/write/deletes per allocated object.</p>
+</li>
+<li>
+<p>How is <code>eval</code> typically used?</p>
+</li>
+<li>
+<p>The frequency of <code>eval</code> calls.</p>
+</li>
+<li>
+<p>The frequency of <code>eval</code> calls redefining local/global variables.</p>
+</li>
+</ol>
+<p>I should specify that when I say "type" I don't just mean what would be returned by the JavaScript "typeof" operator. I mean the low-level type (number, array, object, function, string, boolean, null, undefined, etc.) as well as other information we may find useful in an optimizing compiler, such as whether a given value is a specific constant, whether numbers are integers, floating-point, and information about the types of properties, in the case of objects. The goal is to capture information about the nature of values which may be useful to an optimizing compiler.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>All Possible Thoughts</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="All Possible Thoughts">
+  <meta property="og:description" content="All Possible Thoughts">
+  <meta property="og:image" content="https://pointersgonewild.com/2015/07/30/all-possible-thoughts/dscn0715.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-07-30-all-possible-thoughts/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/07/27/feels-like-censorship/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/08/02/javascript-is-the-c-of-the-web/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>All Possible Thoughts</h1>
+<div class="post_date">July 30th, 2015</div>
+</div>
+<div class="cover_image">
+<img src="dscn0715.jpg">
+</div>
+<p>I've recently been thinking about the topic of originality. You'll often hear people say that "it's all been done before" and "what's old is new again". The world population has recently passed the 7 billion mark. According to some estimates, there have been up to 120 billion human beings alive since the dawn of humanity. In a world this big, it's hard to believe you're unique. It's easy to feel irrelevant and worthless. Some philosophers have even tried to make the argument that all possible thoughts have been thought of before, leaving you no chance of ever coming up with anything original. After all, modern human beings have existed for hundreds of thousands of years, and if there's been 120 billion of us so far, a lot of thinking has already happened.</p>
+<p>I think the best way to answer this question is with a thought experiment. We don't know enough about neuroscience to exactly define what a "thought" constitutes. I'll make some simplifying assumptions to give us some chance to grasp at this problem.</p>
+<p>Let's imagine that:</p>
+<ul>
+<li>
+<p>Thoughts are patterns of neural firings in a small cluster of 512 neurons in your brain.</p>
+</li>
+<li>
+<p>Every human being has this same neural cluster.</p>
+</li>
+<li>
+<p>The wiring of the thought cluster entirely fixed, and identical in every individual, not affected by environment or genetics.</p>
+</li>
+<li>
+<p>Neurons in the thought cluster fire in a synchronized manner, 1000 times per second</p>
+</li>
+</ul>
+<p>In this imagined view, each thought is representable by a boolean vector of 512 bits, and any brain can have up to 1000 thoughts per second. In our imagined, simplified world, there are <code>(2^512) ~= 1.34×10^154</code> possible thoughts in total.</p>
+<p>Using some back of the envelope math, assuming there have been 120 billion human beings alive so far, each living for 100 years, each having up to 1000 possible thoughts per second, this gives us:</p>
+<p><code>1000 * (365 * 24 * 60 * 60) * 100 ~= 3.2×10^12</code> thoughts per human being over a 100 year lifespan.</p>
+<p>Hence <code>(120 * 10^9) * (3.2 * 10^12) = 3.84×10^23</code> thoughts happened so far, out of <code>1.34×10^154</code> possible thoughts.</p>
+<p>You might be wondering what the point of this was. My example is obviously ridiculous. Human thoughts likely are not patterns of firings in a cluster of 512 neurons. We have tens of billions of neurons in our brains, each with thousands of synapses, and our neurons do not fire according to a synchronous clock like a modern silicon chip. Furthermore, each brain's connectivity is uniquely affected by a combination of both environment and genetics, and hence, no two people have exactly the same neurons and synapses in the same place.</p>
+<p>The point is that the estimate of <code>1.34×10^154</code> possible thoughts is probably off by one hundred orders of magnitude. However, the estimate of <code>3.2×10^10</code> thoughts per year per human being may actually be generous. Hence, I surmise that not every possible thought has been thought. Far from it. The universe will likely dissipate before that has any chance of happening.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

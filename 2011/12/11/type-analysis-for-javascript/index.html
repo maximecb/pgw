@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Type Analysis for JavaScript</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Type Analysis for JavaScript">
+  <meta property="og:description" content="Type Analysis for JavaScript">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-12-12-type-analysis-for-javascript/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/11/29/good-news-for-javascript-bad-news-for-me/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/12/17/tachyon-has-a-garbage-collector/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Type Analysis for JavaScript</h1>
+<div class="post_date">December 12th, 2011</div>
+</div>
+<p>A few weeks ago, I've begun working on a <a href="http://en.wikipedia.org/wiki/Type_inference">type inference</a> analysis for JavaScript based on the forward <a href="http://en.wikipedia.org/wiki/Data-flow_analysis">dataflow</a> paradigm. The goal of this analysis is to gather information about the types of variables and object fields in JavaScript programs so that they can be better optimized. More specifically, the analysis should allow a JavaScript compiler to obtain some guarantees about the behavior of programs to compile, allowing it to generate more specialized code.</p>
+<p>When compiling JavaScript code, a naive JavaScript compiler has to assume that the + operator can be either addition or string concatenation, and produce code that can handle both cases, with the associated <a href="http://en.wikipedia.org/wiki/Dynamic_dispatch">dynamic dispatch</a> overhead. This is rather problematic, because all JavaScript operators have multiple cases to handle based on the input types. The results is large amounts of inefficient code. If we have guarantees about the input types of operators, however, we can potentially generate (much) more optimized code. Optimizing dynamic languages based on type inference is the focus of <a href="/2011/09/11/predoctoral-exam/predoc.pdf">my Ph.D. thesis</a>.</p>
+<p>I recently implemented a prototype analysis that is partially flow-sensitive. The results were fairy promising, at least on simple programs. The analysis was able to successfully infer the types of most variables and object fields, and seemed to run at an acceptable speed. Another nice thing is that the analysis can be run incrementally, and doesn't need to analyze parts of programs that can be shown never to run. The main weakness so far, however, is that my analysis is still relatively weak when it comes to inferring that properties must definitely exist on objects. It also doesn't benefit very much from aliasing information that seems obvious when looking at the source code of the programs being analyzed... And my instinct tells me that if it's so plain and obvious, there should be a way to design an analysis that can infer it.</p>
+<p>Following a discussion with professor Bruno Dufour, I've decided to implement a second prototype of my analysis that will be fully flow-sensitive, and based on the <a href="http://en.wikipedia.org/wiki/Pointer_analysis">points-to analysis</a> paradigm. Such analyses are typically more costly in terms of execution time and memory usage, but I'm hoping to find simplifying assumptions that can help make the performance acceptable. In any case, a flow-sensitive analysis should provide me with some sort of upper bound on the precision of the type information that can be inferred <a href="http://en.wikipedia.org/wiki/Static_program_analysis">statically</a>, and give me more insight into how to design more precise and efficient analyses in the future.</p>
+<p>In other news, I've started working on Tachyon's Garbage Collector (GC). This will be a simple stop-and-copy semi-space collector using <a href="http://en.wikipedia.org/wiki/Cheney's_algorithm">Cheney's algorithm</a>. I'm implementing the GC itself in Tachyon's extended JavaScript dialect, as opposed to writing it in C, as I feel this will integrate better with the rest of the system. So far, I've written code to traverse objects in memory and to traverse the stack from top to bottom. The main component missing is traversal of compiled functions, which I should be implementing this week. I'm hoping all this won't be too buggy once I integrate it all together. Rumors are GCs are very hard to debug. I'll be finding out soon enough.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
