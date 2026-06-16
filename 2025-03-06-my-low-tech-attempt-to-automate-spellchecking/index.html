@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Low-Tech Attempt to Automate Spellchecking</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My Low-Tech Attempt to Automate Spellchecking">
+  <meta property="og:description" content="My Low-Tech Attempt to Automate Spellchecking">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-03-06-my-low-tech-attempt-to-automate-spellchecking/spellchecking.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-03-06-my-low-tech-attempt-to-automate-spellchecking/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2025-01-10-so-i-rolled-my-own-static-site-generator/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-04-12-yes-we-do-want-humanoid-robots/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>My Low-Tech Attempt to Automate Spellchecking</h1>
+<div class="post_date">March 6th, 2025</div>
+</div>
+<div class="cover_image">
+<img src="spellchecking.jpg">
+</div>
+<p>In my last post, I wrote about the <a href="/2025-01-10-so-i-rolled-my-own-static-site-generator">static site generator</a> I wrote for this website, mostly as a labor of love. As part of this effort, I wanted to add a number of automated checks to do things such as detecting broken links and also spellchecking.</p>
+<p>There are free command-line tools which will automatically check the spelling of words such as <code>aspell</code>, but in practice I find that they can be pretty terrible because they report too many false positives. There are many technical terms that are not in the <code>aspell</code> dictionary. Because I don't always write in a very formal style, I tend to use neologisms which are not in every dictionary. It also tends to report company names and even the last names of non-English indivuals as spelling mistakes. It's not uncommon to get something like 10 or even 20 false positives for a blog post.</p>
+<p>I have 174 markdown documents in total on this blog, and ideally I would like to be able to spellcheck them all and automate the process in such a way that my deploy script will flag errors and refuse to deploy if a spelling error is found. I could create a custom word list for <code>aspell</code> and add thousands of custom words to it, but I would probably still run into many more false positives in the future. Another issue is that <code>aspell</code> is just a spell checker. I know from experience that I often end up with unintentional word repetitions such as "the the" or "is is" as I edit text, introducing new errors without noticing.</p>
+<p>Ultimately, it's hard to completely automate spellchecking, and if you want more automated grammar checking, it feels like the best tool for the job would be a neural network. In that spirit I tried to use a smaller local llama model with a custom prompt. Unfortunately, this MacBook Air only has 16GB of RAM and the models that can fit in this much memory are not very good. The resulting output was nonsense. I could make an API call to a bigger model, but that requires a network connection and a subscription, which makes it not my favorite solution. I feel like we might see more capable LLMs that can operate with less memory in the future, but for now they're not up to this task.</p>
+<p>Something that occurred to me is that it's easy to create a list of misspelled words and patterns that should automatically be flagged. This is obviously not a perfect solution, but I thought I could pretty easily Google and find a list of common English misspellings. I could also add a list of word repetitions to be automatically flagged to this. I implemented the matching using a keyword trie, and immediately found many errors in my existing blog posts that way, including:</p>
+<pre><code>and and
+alot
+anyways
+betweeen
+cababilities
+dischordant
+does't
+espensive
+imlementation
+publically
+rythm
+unfortunatly
+logarithic
+likelyhood
+persistance
+probaby
+threadmill
+the the
+</code></pre>
+<p>I knew there were probably other errors in my blog posts that were not in my list, so I decided to compile a list of all unique words present in all of my past blog posts, sort it, and write it to a text file so that I could visually inspect everything. In total there were over 9000 words including alternate spellings, and sure enough, I found several more misspelled words in there, which I then added to my list of misspellings.</p>
+<p>As the title of this post hinted, this is pretty low-tech and it obviously won't catch all errors. However, it's nice because it can be reliably automated, it does catch many errors and it doesn't produce false positives, at least not at the scale of one single person always writing in English for a personal blog. What's also nice is that I can curate a custom list of errors I've made in the past, so that they'll be automatically flagged in the future. I'm still going to paste this post into Claude and ask it to check my grammar before publishing it, but now I have a simple tool that can guard any edits I make to all existing documents as well.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

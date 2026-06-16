@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Need for Stable Foundations in Software Development</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Need for Stable Foundations in Software Development">
+  <meta property="og:description" content="The Need for Stable Foundations in Software Development">
+  <meta property="og:image" content="https://pointersgonewild.com/2020/09/22/the-need-for-stable-foundations-in-software-development/cf2521_379571f9a6a244cdb121df27f37b39f6_mv2.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2020-09-22-the-need-for-stable-foundations-in-software-development/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2020/01/03/maybe-planets-are-overrated/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2020/12/01/combatting-pessimism-3-keys-to-innovation/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Need for Stable Foundations in Software Development</h1>
+<div class="post_date">September 22nd, 2020</div>
+</div>
+<div class="cover_image">
+<img src="cf2521_379571f9a6a244cdb121df27f37b39f6_mv2.png">
+</div>
+<p>My employer was kind enough to provide me with a top of the line MacBook Pro. It's a beautiful machine with 6 CPU cores, 32GB of RAM and a 4K display, the most powerful laptop I've ever owned and a valuable tool in working from home. However, unfortunately, the slick machine suffers from a number of software problems.</p>
+<p>For one, you can charge it using any of the 4 USB-C ports, but you really should only ever <a href="https://www.imore.com/heres-why-you-should-probably-charge-your-macbook-using-ports-its-right-side">charge it from the right</a> side. Another issue I frequently run into is that I have an external monitor, and despite configuring this as my primary display, the dock will randomly jump back to the MacBook's monitor, until I go into the settings and move the dock to the right, and to the bottom again, at which point it goes back to the external monitor, until the next time it decides to randomly jump ship. A third issue is that whenever I reboot, it stays stuck early in the boot process, displaying the white Apple logo, and does nothing. It doesn't complete the boot process until I unplug my USB-C devices. There are more problems, I could go on.</p>
+<p>Apple isn't the only one with these kinds of quality assurance problems. I recently installed Windows 8 on an older desktop computer I wanted to give to my mother (she unfortunately couldn't see herself using Linux).  The first thing I did after installing the new OS was to try and run Windows Update. However, it didn't work, and I was appalled to find that on this version of the OS, Windows Update is <a href="https://superuser.com/questions/922261/windows-8-1-stuck-on-checking-for-updates">broken out of the box</a>. I learned that there was a patch to fix the issue, but the patch didn't work, it displayed a progress bar that remained perpetually frozen. Online searches revealed that in order to get the patch to work, I had to unplug the ethernet cable.</p>
+<p>Why is it that we live in a world riddled with bugs? I think there are a few reasons for this. No doubt, part of the issue is that our competitive capitalist economy makes major software and hardware vendors want to move at breakneck speeds. Technological progress doesn't nearly justify a new generation of smartphones being released each year, but, fuck the environment, a new product needs to be released in order to maintain interest and keep sales numbers high. We move fast, and in the process, we break things.</p>
+<p>I've been a user of Ubuntu Linux for over 10 years now. I chose this distribution because, at the time, it was the most popular, and that made it easy to find software, as well as online help if anything ever went wrong. Originally, when I discovered Ubuntu, it used the GNOME desktop, and things worked fairly seamlessly. However, around 2011, Ubuntu began shipping with a different user interface which they called Unity. This new user interface was riddled with bugs, and the reception was horrible. My understanding is that this user interface change cost Ubuntu its spot as the #1 most popular Linux distribution, where it was replaced by Mint, and now MX Linux.</p>
+<p>Why did Canonical choose to replace GNOME in the first place? Probably because the first iPad was released in 2010, and at the time, people couldn't stop talking about how tablet computers were the future. Canonical wanted to capitalize on the latest trend and make Ubuntu more appealing to tablet users. This necessitated a UI redesign with large buttons, something that looked more like iOS. In the process, they seemingly forgot that at the time, there were no tablets to run Ubuntu on, introduced many new bugs, and quickly alienated their existing user base, overwhelmingly running Ubuntu on laptops and desktops.</p>
+<figure>
+<a href="magic_keyboard.webp">
+<img alt="" src="magic_keyboard.webp">
+</a>
+</figure>
+<p>As of 2020, Ubuntu is back to running GNOME, and the most innovative feature to have been introduced to tablet computers is a detachable external keyboard, effectively turning said tablets into laptops. I don't want to sound cynical and overly conservative. I love building new things, and I think that reinventing the wheel can be a valuable learning experience, but it seems obvious to me that sometimes, there's a lot of value in stability and predictability. Some things should be reinvented, but in other cases, things don't really need to change. We badly need electric cars and green energy, but maybe we don't need that user interface redesign.</p>
+<p>In software and hardware design, the things that we should be the most wary about breaking, are the interfaces that people rely on. APIs are an obvious area where stability is particularly valuable, and backward compatibility is crucial. Linus Torvalds is known to have vehemently defended a policy that the Linux kernel should <a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">never break user space</a>. This policy makes sense, considering that the interface that the kernel exposes to software is one of the most basic and foundational APIs there is. If the kernel routinely breaks programs and libraries, that makes it very difficult to build anything on the platform.</p>
+<p>It's not just APIs though, it's also programming languages. Many languages add new features all the time, and in the process, break existing software. It's hard to build something when the ground is constantly shifting. Companies large and small, as well as individual developers, spend a huge amount of effort simply reacting to change and fixing what was broken. This has made me think that, when developing and growing a programming language, you'd probably be doing your existing user base a favor by prioritizing, stability, bug fixes and performance improvements over the constant addition of new features.</p>
+<p>I think that what motivates the constant new feature additions we see in JavaScript, Python and Ruby and other languages is not purely a desire to help programmers be more productive, but also a drive to keep up with the Joneses and maintain some competitive edge over other languages. Language designers are worried that new users will flock to whichever language has the newest, trendiest features.</p>
+<p>There is probably some truth to the idea that many newcomers will go for the latest features. However, on the flip side, I've been wondering if there can't be a competitive edge in designing a language that is <a href="/2018/02/18/minimalism-in-programming/">minimalistic</a>, stable and slow to evolve by design. My personal preference is for languages that avoid hidden, complex, automagic behavior. I also think that there is value in choosing a syntax and semantics that uses broadly understood primitives. After all, the main value of a language is in being understood.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

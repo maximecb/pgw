@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Method Call Syntax in a JS-like Language</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Method Call Syntax in a JS-like Language">
+  <meta property="og:description" content="Method Call Syntax in a JS-like Language">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2016-11-23-method-call-syntax-in-a-js-like-language/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2016/11/18/so-ive-been-using-gedit-this-whole-time/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2016/12/22/the-brains-registers/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Method Call Syntax in a JS-like Language</h1>
+<div class="post_date">November 23rd, 2016</div>
+</div>
+<p>As a side-project, I'm working on a small JavaScript-like programming language called Plush. Like JavaScript, this language is going to have objects and method calls. In this blog post, I'm going to discuss some seemingly trivial aspects of method call syntax and semantics which illustrate why programming language design is difficult, and solicit your feedback as to potential solutions.</p>
+<p>Like JavaScript, plush has object literals which can be defined with the curly brace syntax. It will also have function objects, which are in fact closures. In JavaScript, you can assign a function to an object property, and it becomes callable as a method, like so:</p>
+<pre><code>o = {}; // empty object
+o.m = function (x) {...};
+o.m(2); // call the function in property m as a method
+</code></pre>
+<p>This all seems fine and dandy, but there are some issues with the way JavaScript implements this. The first is that method call syntax introduces some "hidden" semantics. When you call a JS function as a method, there is a hidden <code>this</code> argument (a reference to the object the method is called on) which gets passed to functions. This is invisible to the programmer. Hence:</p>
+<pre><code>// The statement below:
+o.m(2);
+
+// Is not equivalent to these statements:
+f = o.m;
+f(2);
+
+// But it is equivalent to these two statements:
+f = o.m;
+f.call(o, 2);
+</code></pre>
+<p>The passing of the hidden <code>this</code> argument is a little bit annoying because it breaks the programmer's intuition in a small way. JS syntax makes method calls look like regular function calls, but there is a difference. Sure, it's not a big deal, but I ran into this issue while implementing IO functions in Plush. I wanted to implement some C++ "host" functions which would allow the language to interface with the outside, as such:</p>
+<pre><code>io = import &quot;core.io&quot;; // import the IO module
+
+io.print(&quot;hello world!&quot;); // here 'print' is a host function written in C++
+</code></pre>
+<p>Maybe you see where this is going. If I implement method calls as JavaScript does, then every function, including host functions, need to take a hidden <code>this</code> argument, even if they don't need it. I can work around this by making a special case where host functions called as methods behave differently, but then I potentially have to add an extra dynamic check at every function call. This gets annoying. I can work around this issue by wrapping my C++ host functions into plush functions which handle the unneeded <code>this</code> argument.</p>
+<p>The second issue I ran into involves the way the <code>this</code> argument is handled. JavaScript has this problem where if you declare a closure inside a method, you can't directly access the parent function's <code>this</code> argument, as described in <a href="https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/">this blog post</a>. This annoying quirk of the language was "solved" by the introduction of <code>Function.prototype.bind</code>. The JS workaround seemed like an ugly kludge to me, and so I thought "why not just do it like Python"? Why not make the <code>this</code> argument explicit. Make programmers declare and name the <code>this</code> value, in the same way that Python forces you to declare the <code>self</code> argument in methods.</p>
+<p>Upon first examination, making the programmer explicitly declare the <code>this</code> argument seems like a fairy good idea. However, it does have the annoying consequence that an argument that was previously hidden is now a positional argument. Consider the following scenario:</p>
+<pre><code>// An IO module is imported, this produces an object containing IO functions
+io = import &quot;core.io&quot;;
+
+// The print method is &quot;extracted&quot;, so that we can call it with a shorthand name
+print = io.print;
+
+// This works fine. It passes a hidden `this` argument value to the print method
+io.print(2);
+
+// ERROR: we are not passing a `this` argument value
+print(2);
+</code></pre>
+<p>In the case of modules, it's clear that the <code>print</code> function shouldn't even need a <code>this</code> argument value. I pondered this problem, and had the idea that possibly, method calls could have a different syntax from property accesses. The "arrow syntax" would make explicit the passing of the <code>this</code> argument:</p>
+<pre><code>// Call of the method m of object o
+// The &quot;arrow syntax&quot; is specifically for method calls, passes a `this` argument
+o-&gt;m(2);
+
+// Equivalent function call, passing an explicit `this` argument
+o.f(o, 2);
+
+io = import &quot;core.io&quot;;
+
+// Regular function call, `print` doesn't take `this` argument, not a method
+io.print(2);
+
+// This works correctly, as one might expect
+print = io.print;
+print(2);
+</code></pre>
+<p>The solution I came up with is not perfect, it raises some potential problems. For one, with a special arrow syntax for method calls, it becomes possible to call object properties using both regular function calls, and arrow style method calls which pass a <code>this</code> argument. Experience tells me that if both styles are possible, people are going to use both, which could be messy. For example, what do you do if you have a set of methods which do not need a <code>this</code> argument? Do you declare one anyway? Would you end up with a mix of regular function calls and method calls on the same object?</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

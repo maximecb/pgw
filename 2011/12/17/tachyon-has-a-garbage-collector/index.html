@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tachyon has a Garbage Collector!</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Tachyon has a Garbage Collector!">
+  <meta property="og:description" content="Tachyon has a Garbage Collector!">
+  <meta property="og:image" content="https://pointersgonewild.com/2011/12/17/tachyon-has-a-garbage-collector/tachyon-icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-12-17-tachyon-has-a-garbage-collector/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/12/11/type-analysis-for-javascript/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/01/06/tachyons-design-principles/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Tachyon has a Garbage Collector!</h1>
+<div class="post_date">December 17th, 2011</div>
+</div>
+<div class="cover_image">
+<img src="tachyon-icon.png">
+</div>
+<p>I just completed a <a href="http://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">Garbage Collector</a> (GC) for the Tachyon JavaScript JIT compiler. This is one of the <a href="/2011/10/04/whats-next-for-tachyon/">big 3 features Tachyon had been missing</a>. A GC isn't entirely crucial for my thesis research, but Tachyon needs one to pass the stage of "toy compiler" and become usable in the Real World (TM). It's just one of those features a dynamic language compiler needs to be taken seriously. The GC is about 2000 lines of code in total and took me about two weeks to write and debug. It's a pretty simple stop-and-copy semi-space collector based on <a href="http://en.wikipedia.org/wiki/Cheney's_algorithm">Cheney's algorithm</a>. My main goal at this point was to get something working. I chose to keep the design nice and simple, to facilitate debugging.</p>
+<p>What makes this GC a little more interesting is that the GC itself, as the rest of Tachyon, is written in my extended JavaScript dialect. There isn't a single line of C code in there (not one!). The GC is entirely compiled to native x86 machine code by Tachyon. I made this choice because I felt it fit better with Tachyon's design philosophy of writing as much of the compiler as possible in JavaScript. I already had many primitives in place to access the layouts of objects in memory. It actually seemed like writing the GC in C would actually make the system more complex, as I would have had to design and implement interfaces for the C code to access all the Tachyon objects. This C code would then become out-of-sync if the memory layout of the said objects changed.</p>
+<p>I implemented a few unit tests to verify the GC's proper functioning under realistic use cases. These have predictably revealed many GC bugs. The main difficulty has been the realization that a moving GC must absolutely update <i>every single reference</i> in the system. If a single stack spill somewhere in the system is not updated and points to an old value after a collection, that's a dangling pointer which might well crash the system. This is complicated further by the fact that Tachyon has multiple function call mechanisms (regular calls, calls with apply, calls to functions using the <code>arguments</code> object). Each of these call mechanisms must encode information about the current stack frame at the moment of the call which the GC can access in order to traverse the stack roots.</p>
+<p>After much debugging, I'm proud to report that the GC now appears to work properly and its performance seems fully acceptable for my purposes, with GC times from 4ms to 20ms on the tests I ran (and this includes some debug data logging). I plan to implement a few more unit tests so that I can verify the GC's functioning even more thoroughly. I wouldn't want the GC to cause nasty unpredictable errors to pop up down the road, which is a real danger. I feel committed to ensuring that Tachyon is a reliable and well-tested compiler, if just to make my own life easier.</p>
+<p>Implementing the GC has forced me to implement a stack traversal infrastructure. This is further good news, because I can reuse this to implement exception handling in Tachyon. I don't know when exactly I'll do that, as I'll be busy in the next few weeks working on things more directly related to my thesis... But, when I get around to implementing exceptions, half the work will already be done.</p>
+<p>I would also like to announce that I've decided to make the Tachyon source publicly available. I've been hesitant to do this for a while, thinking that I should perhaps wait until Tachyon is "polished enough" for a public release, but I'm honestly not sure my perfectionist leanings will ever be fully satisfied. Hence, I've linked the GitHub URL of the <a href="https://github.com/Tachyon-Team/Tachyon">Tachyon repo</a>. If you're interested, feel free to check out the source code and give me some feedback.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

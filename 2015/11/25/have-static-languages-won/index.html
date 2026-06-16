@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Have Static Languages Won?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Have Static Languages Won?">
+  <meta property="og:description" content="Have Static Languages Won?">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-11-25-have-static-languages-won/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/11/15/why-i-chose-industry-over-a-postdoc/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/11/28/musings-on-aot-jit-and-language-design/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Have Static Languages Won?</h1>
+<div class="post_date">November 25th, 2015</div>
+</div>
+<p>A few days ago, Elben Shira <a href="https://www.reddit.com/r/programming/comments/3u0by5/the_end_of_dynamic_languages/">caught the attention</a> of the programming blogosphere with his post entitled <i><a href="http://elbenshira.com/blog/the-end-of-dynamic-languages/">The End of Dynamic Languages</a></i>. The key point from this post is in the following statement:</p>
+<blockquote>
+<p>This is my bet: <b>the age of dynamic languages is over</b>. There will be no new successful ones.</p>
+</blockquote>
+<p>Like him, I've noticed that despite the fact that there have been an <a href="/2015/10/06/theres-too-many-programming-languages/">enormous number of new programming languages</a> coming out recently, the overwhelming majority of them are statically typed. Elben and others make the argument that this is because static languages are better equipped to deal with larger projects, they have better tooling, and programmers prefer them.</p>
+<p>I'm fairly invested in dynamic languages. I happen to be completing a PhD thesis on <a href="/2015/09/24/basic-block-versioning-my-best-result-yet/">techniques for optimizing dynamic languages</a> for performance (JavaScript in particular). I've also been slowly working, in my spare time, on a dynamic language of my own. I like dynamic languages, but I think it's important, as a scientist and as a human being, not to stupidly fall into the trap of <a href="https://en.wikipedia.org/wiki/Confirmation_bias">confirmation bias</a>. I'm not going to vehemently defend dynamic languages, or claim that those who don't appreciate them are unknowing fools. Instead, I'll be honest and say that Elben's post, and the significant amount of agreement he found in online communities made me pause and question myself. Are static languages inherently superior? Are they really winning?</p>
+<p>That there are less dynamic programming languages coming out is an undeniable fact. I've written code in statically typed languages such as C, C++, D and OCaml, and I agree that their type systems help catch certain classes of bugs more easily and rapidly. When writing code in JavaScript, you can run into nasty surprises. Latent, trivial bugs that remain hidden in your code, sometimes for months, until some specific input causes them to manifest themselves.</p>
+<p>The problem here though, is that JavaScript is a badly designed programming language. The JS origin story is that Brendan Eich originally designed the language in just two weeks. As such, it has many <a href="http://wtfjs.com/">glaring flaws</a>. If you compare Haskell, a language that came out of type theoretic circles and was carefully crafted by a large research community and extensively studied, to JS, a language designed in two weeks, you find that one looks like a NASA spacecraft and the other looks like a pile of fireworks on the 4th of July in Alabama.</p>
+<p>Dynamic languages are at a disadvantage. Most of the mainstream ones out there today were designed by amateurs, people with no formal CS background, or no adequate background in compiler construction. They were designed with no regard for performance, and an impractical mash of features that often poorly work together. Most of the dynamic languages you know are simply poorly crafted. This has resulted in some backlash. I think it's pretty clear that there's some amount of prejudice when it comes to dynamic languages.</p>
+<p>In universities, computer science professors generally want little to do with dynamic languages. Compiler design courses are focused on statically typed and compiled languages. Type theoretic courses will teach you about <a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system">Hindley-Milner</a> type inference, but will leave you ill-equipped to understand dynamic typing. Students coming out of your average university compiler and <a href="https://en.wikipedia.org/wiki/Programming_language_theory">PLT</a> classes have no idea about the challenges involved in creating a JIT compiler, and know little about dynamic typing. It's no big surprise that these students would go on to create statically typed programming languages.</p>
+<p>There might be another factor at play here. Dynamic languages such as PHP, JS, Python and Ruby, in addition to being relatively poorly designed, are the languages that powered the explosion of the web. Nowadays, much (most?) of the programming happening in the world is web development. Much of this work is done by people with no formal CS background. The result is that you have millions of people with less formal education writing code in less well designed languages. JS, Python, PHP and Ruby, and by extension all dynamic languages, are seen by many academics as the programming languages of the riffraff, the unwashed masses, or maybe simply programming languages for relatively ignorant beginners.</p>
+<p>Have static languages won? It seems to me that what people really like about static languages is IDE support for things like simple refactorings and autocompletion. Program analysis that can provide some guarantees, find certain classes of bugs without having to run programs with every possible combination of inputs. It's perfectly legitimate for programmers to want these things. They help alleviate the cognitive burden of working with large (and small) codebases. But, these advantages aren't inherently advantages of statically typed programming languages. I would argue that Smalltalk had (has) some amazingly powerful tools that go way beyond what the Eclipse IDE could ever give you.</p>
+<p>I believe dynamic languages are here to stay. They can be very nimble, in ways that statically typed languages might never be able to match. We're at a point in time where static typing dominates mainstream thought in the programming world, but that doesn't mean dynamic languages are dead. So long as dynamic languages do offer advantages, either in terms of expressiveness or ease of learning, they will still be around. You should remember that, in the end, there is no war between static and dynamic languages. There are only tools and tradeoffs.</p>
+<p>I will conclude by saying that in my view, programming languages are constantly evolving and influencing each other in what seems like an organic process. Features that are viewed as good ideas tend to spread from one language to many others. Think about closures, for instance. The functional crowd has been in love with closures since the days of LISP, and now, almost all mainstream programming language have closures. Going back to Elben Shira's post, he states:</p>
+<blockquote>
+<p>We will see a flourishing of languages that <i>feel</i> like you’re writing in a Clojure, but typed. Included will be a suite of powerful tools that we’ve never seen before, tools so convincing that only ascetics will ignore.</p>
+</blockquote>
+<p>I've written, back in 2012, about my belief that <a href="/2012/11/09/static-vs-dynamic-why-not-both/">static and dynamic typing can essentially be combined</a>. You can have statically compiled languages that use type inference to realize what is effectively dynamic typing. That is, the compiler inserts union types where appropriate, and does so automatically. The <a href="http://crystal-lang.org/">Crystal programming language</a> is a realization of this idea. This isn't static languages winning a war over dynamic languages though. It's the influence of dynamic languages bleeding into static languages. The Crystal language developers are entirely honest about the fact that this language is based on Ruby. Their aim is to build a language which captures much of the flexibility of Ruby's dynamic typing and also provides you with static guarantees.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

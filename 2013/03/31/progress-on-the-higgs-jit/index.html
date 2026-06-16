@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Progress on the Higgs JIT</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Progress on the Higgs JIT">
+  <meta property="og:description" content="Progress on the Higgs JIT">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-03-31-progress-on-the-higgs-jit/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/03/04/a-simple-jit-compiler/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/05/10/presented-at-dconf-2013/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Progress on the Higgs JIT</h1>
+<div class="post_date">March 31th, 2013</div>
+</div>
+<p>I've been busy working on various aspects of the new <a href="/2013/03/04/a-simple-jit-compiler/">Higgs JIT compiler</a> in the last month or so. Among other things, I decided to expand it into a proper <a href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">tracing JIT compiler</a> complete with support for side-exit traces (or sub-traces as I like to call them). This brought some performance improvements. I'm also happy to report that the JIT compiler appears quite stable and is enabled by default. At this point, the Higgs JIT is still quite simple and primitive compared to commercial JavaScript VMs, but nevertheless provides marked speedups relative to the interpreter on every benchmark I tested it on.</p>
+<figure>
+<a href="nums.png">
+<img alt="Speedups over the interpreter" src="nums.png">
+</a>
+<figcaption>Speedups over the interpreter</figcaption>
+</figure>
+<p>I'm interested in finding the source code for the latest version of the Mozilla TraceMonkey shell (as well as instructions on how to build it) so that I can compare the performance of Higgs to another JavaScript tracing JIT. TraceMonkey is no longer maintained by Mozilla and is no longer in their main source code repository.</p>
+<p>One important optimization I added to Higgs was to implement a stack frame initialization analysis. Previously, Higgs initialized every stack slot as soon as a function was called to make sure that stack frames were always in a consistent state when the <a href="http://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">garbage collector</a> (GC) was called. As you can imagine, this is rather slow for large stack frames, and it's often a complete waste of time if the variables are going to be initialized later on. Now, a simple analysis actually checks which variables have been written to (and so may contain references to heap objects) and the GC uses this information when performing a collection. This significantly reduces the amount of work that has to be done during function calls.</p>
+<p>An important limitation of the current JIT compiler is that it directly translates the interpreter's intermediate representation into a linear list of x86 machine instructions. This is an issue because the machine code produced is of fairly poor quality and would need to be further optimized, but contains little semantic information to facilitate optimization. One of the things I plan to do is to implement a <a href="http://en.wikipedia.org/wiki/Live_variable_analysis">liveness analysis</a> to facilitate basic <a href="http://en.wikipedia.org/wiki/Register_allocation">register allocation</a> and eliminate redundant writes to the interpreter <a href="http://en.wikipedia.org/wiki/Call_stack">stack</a>. I'm unfortunately not sure what is the best data structure to use (in terms of memory usage) to store liveness information and associate it with a function's intermediate representation (if anyone has advice, please comment).</p>
+<p>Tom, a friend of mine, recently started helping with the Higgs project. Among other things, he took the time to track down and help me fix bugs that were causing crashes in various benchmarks. This process involved fixing many inaccuracies in the Higgs implementation of the JS spec. We're now at the point where all of the V8 and SunSpider benchmarks are working correctly, except for those using regular expressions. Tom has also started implementing a <a href="http://en.wikipedia.org/wiki/Foreign_function_interface">Foreign Function Interface</a> (FFI) system for Higgs. Once completed, this should allow us to add support for APIs such as <a href="http://en.wikipedia.org/wiki/OpenGL">OpenGL</a>, and <a href="http://en.wikipedia.org/wiki/Berkeley_sockets">POSIX sockets</a>. This might give Higgs some real usefulness outside of academic experiments.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

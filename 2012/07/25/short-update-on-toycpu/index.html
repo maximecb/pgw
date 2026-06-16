@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Short Update on toyCPU</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Short Update on toyCPU">
+  <meta property="og:description" content="Short Update on toyCPU">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-07-25-short-update-on-toycpu/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/07/19/toycpu-project-update/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/09/23/the-avr-alarm-clock-is-complete/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Short Update on toyCPU</h1>
+<div class="post_date">July 25th, 2012</div>
+</div>
+<p>I'm happy to say that toyCPU is still progressing rapidly. Thanks in part to a fellow redditor, Tom (thejsjunky), who has joined the effort and contributed JavaScript and assembly code. Since <a href="/2012/07/19/toycpu-project-update/">the last post</a>, several additions and improvements have been made, including:</p>
+<ul>
+<li>
+<p>A new modular, customizable UI system</p>
+</li>
+<li>
+<p>Basic keyboard and clock peripheral devices</p>
+</li>
+<li>
+<p>Support for 32-bit operations using multiple 16-bit primitives</p>
+</li>
+<li>
+<p>Auto completion for the code editor (contributed by Tom)</p>
+</li>
+<li>
+<p>Saving of current code using local storage (contributed by Tom)</p>
+</li>
+</ul>
+<p>You can see a screenshot below showing what the modular UI looks like:</p>
+<figure>
+<a href="toycpu.png">
+<img alt="" src="toycpu.png">
+</a>
+</figure>
+<p>The main idea behind the modular UI was that it would be much more productive to be able to see your code and the running program at the same time, instead of having to alternate between tabs constantly. Furthermore, the ability to minimize and reorganize modules will make it possible to enable or disable many different views of running programs as desired.</p>
+<p>Short-term priorities for toyCPU include:</p>
+<ul>
+<li>
+<p>A sound device to allow for sound effects. Particularly useful for game projects.</p>
+</li>
+<li>
+<p>Implementing a simple <a href="http://en.wikipedia.org/wiki/Linear_congruential_generator">random number generator</a> (LCG).</p>
+</li>
+<li>
+<p>Better error reporting for compilation and run-time errors.</p>
+</li>
+<li>
+<p>Various unit tests to avoid feature regression.</p>
+</li>
+<li>
+<p>Example assembler programs to help you get started.</p>
+</li>
+<li>
+<p>Completion of the instruction manual.</p>
+</li>
+<li>
+<p>Various UI improvements.</p>
+</li>
+<li>
+<p>Integration with AppEngine to allow online saving and sharing of programs.</p>
+</li>
+</ul>
+<p>Once again, if you're interested in helping, don't hesitate to contact me. We could use help from someone who has experience with the AppEngine platform, as well as help writing example programs to demo the system, such as simple 2D games.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

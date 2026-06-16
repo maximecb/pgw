@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Down the Rabbit Hole that is Inlining</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Down the Rabbit Hole that is Inlining">
+  <meta property="og:description" content="Down the Rabbit Hole that is Inlining">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-08-29-down-the-rabbit-hole-that-is-inlining/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/08/14/higgs-rise-of-the-ssa-jit/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/09/24/static-typing-may-not-scale/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Down the Rabbit Hole that is Inlining</h1>
+<div class="post_date">August 29th, 2013</div>
+</div>
+<p><a href="http://en.wikipedia.org/wiki/Inline_expansion">Inlining</a> is one of the most profitable optimizations a compiler can do. It's profitable because it eliminates call and return overhead, but also because it can expose new optimization opportunities that were previously hidden behind an opaque call. Higgs implements all JavaScript primitives as calls to runtime library functions, which means that inlining was very much necessary in order to expose code specialization opportunities and obtain performance gains. Unfortunately, inlining is a little trickier to do in a <a href="http://en.wikipedia.org/wiki/Just-in-time_compilation">Just-In-Time (JIT)</a> compiler than it is in an <a href="http://en.wikipedia.org/wiki/AOT_compiler">Ahead-Of-Time (AOT)</a> compiler. This is because inlining modifies function by substituting the bodies other functions into them, and well, in a JIT compiler, the functions being modified might be executing when this happens. That's a little bit like performing repairs on a car in the middle of a race.</p>
+<p>In order to inline code into running functions, their execution has to be momentarily suspended, the code modified, and execution resumed. In the case of Higgs, suspending and resuming execution is done simply: functions run in the <a href="http://en.wikipedia.org/wiki/Interpreter_(computing)">interpreter</a> until a counter (either at the function entry or at a loop header) hits a threshold, the JIT compiler then kicks in and does its job, and execution resumes in compiled <a href="http://en.wikipedia.org/wiki/X86">x86</a> code. The complex bit is that the compiled code is going to be very different from the original function. It will have new instructions from inlined functions, new <a href="http://en.wikipedia.org/wiki/Static_single_assignment_form">SSA</a> phi nodes, some instructions potentially removed, and most importantly: the <a href="http://en.wikipedia.org/wiki/Call_stack">stack frame</a> layout likely won't match what we had to begin with. The technique to replace stack frames of running functions is called <a href="http://www.cs.ucsb.edu/~ckrintz/papers/osr.pdf">On-Stack-Replacement (OSR)</a>, and it is notoriously difficult to implement.</p>
+<p>I decided to simplify things a little bit by restricting Higgs to only do OSR for functions that are on the very top of the stack. This prevents inlining from happening inside recursive functions, which isn't too much of an issue with the benchmarks I've been working with. Things are still not simple, however. Liveness information needs to be taken into account when doing OSR, because multiple values may map to the same stack slot, and just looking at the code doesn't tell us which values need to be written into updated stack frames: we have to know what was live before inlining, at the time the function was interrupted. Another issue is that new phi nodes may be introduced as a result of inlining, these phi nodes have no direct analog in the original function. Fortunately, one can logically conclude that these must take the value of the inlined call site they correspond to. I probably spent about 12 hours debugging this, but I eventually got it all to work.</p>
+<p>My quest did not stop once OSR was working. I wanted to be able to run a peephole optimization pass on the intermediate representation of functions after inlining was done. This is to help remove phi nodes, remove dead code, simplify control flow, and do simple constant propagation. The complexity lies in the fact that since the function we're modifying is currently executing, we can't just make any transformation we want. It's not valid, for example, to replace a value that's currently live by another value that's no longer live at the moment where the execution was stopped. A static compiler wouldn't have to worry about such execution-time constraints, but we do. Fortunately, I found that in practice such limitations don't really seem to affect the peephole optimizer much, it remains very effective.</p>
+<p>I decided to spend some time and try to improve the code generated for a very simple microbenchmark: a for-loop that increments an integer counter from zero to 2 billion. The results are very encouraging: it's over 10 times faster with inlining than without, and the code generated for the loop is fairly tight (ignoring suboptimal <a href="http://en.wikipedia.org/wiki/Register_allocation">register allocation</a>):</p>
+<pre><code>mov r8, 0;
+IF_TRUE(2EF9)(7):
+cmp r8d, 2000000000;
+jge FOR_EXIT(2DFB)(219)
+mov ebx, r8d;
+add ebx, 1;
+jo ADD_OVER(169);
+mov r8, rbx;
+</code></pre>
+<p>On my Core 2 Quad 2.4GHz, the loop executes in 3.2s, which puts it at around 625M iterations per second, or less than 4 CPU cycles per iteration, not bad! This microbenchmark is obviously a near-ideal test case, and I can't claim performance gains anywhere near 1000% on more realistic benchmarks, but every benchmark I tested so far benefits from inlining. There's still many simple things I can do to improve the speed of the generated code. For one, the heuristics I use to choose what to inline are fairly naive at the moment. Still, all of this is very good progress towards the paper I'm working on.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

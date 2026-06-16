@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Paper was Rejected Again</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="My Paper was Rejected Again">
+  <meta property="og:description" content="My Paper was Rejected Again">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-07-17-my-paper-was-rejected-again/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/07/11/the-constness-problem/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/07/19/dogfooding-higgs-with-the-turing-turtle/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>My Paper was Rejected Again</h1>
+<div class="post_date">July 17th, 2014</div>
+</div>
+<p>A month ago, I submitted an updated version of my basic block versioning paper to an academic conference (the previous version can be viewed <a href="bbv_paper.pdf">here</a>). We have an improved system, more working benchmarks and better results across all metrics. I was quite proud of this paper, and thought our odds of getting into the conference were quite high. Unfortunately, the improved paper was again rejected. Comments from the reviewers were mixed. Some quite positive, others extremely negative and harsh. Notably, the paper was shot down by a famous industry researcher who has done extensive work on trace compilation, a competing approach.</p>
+<p>Below are some excerpts of the comments from four different reviewers:</p>
+<blockquote>
+<p>The paper is well written and the examples help to understand the tradeoffs of the approach. Overall the approach seems to be sound and deserves further discussion/publication.</p>
+</blockquote>
+<blockquote>
+<p><i>I fail to see the difference to trace compilation</i> (and the predecessor of trace compilation, dynamic binary translation) [...] Constant propagation and conditional elimination in a trace compiler lead to the same type check elimination that you present.</p>
+</blockquote>
+<blockquote>
+<p>I have had a peek at the code and it very elegant. The paper is well written too. The paper has some weaknesses but I don't believe that they are show stoppers. [...] Overall this is a nice idea well worth looking at in more detail.</p>
+</blockquote>
+<blockquote>
+<p><i>The one big problem I have with the paper is that it does not motivate and put into context lazy block versioning properly.</i> The paper needs to do a better job at explaining which precise problems of current JavaScript JIT approaches that are used in production are solved by lazy basic block versioning.</p>
+</blockquote>
+<p>In this improved paper, we've managed to show that basic block versioning reduced the number of type tests much more effectively than a static analysis could, and that our approach was able to yield significant speedups. We've also addressed one of the most important criticisms of such an approach by showing that it does not result in a code size explosion in practice, but only a moderate code size increase. This, however, wasn't sufficient for some reviewers. The main criticism they raised is that basic block versioning has similarities with tracing, and that as such, we should have compared its performance against that of a tracing JIT.</p>
+<p>I have no issue with writing a detailed comparison of both approaches on paper, but it seems the only way to compare the performance of basic block versioning against that of tracing in a fair manner would be for me to implement a tracing JIT compiler in Higgs. Not only that, I'd probably be expected to implement a tracing JIT with all the latest developments in tracing technology. This could well require an entire year of work. I feel like there's an unfortunate disregard for the amount of infrastructure work required to do compiler research. It's becoming increasingly difficult to do academic research on compiler architecture. There's a high amount of pressure to publish often, but at the same time, conferences expect us to pour several human years into each publication and to immediately provide an absolute proof that ideas brought forward are better than everything else out there. Curious exploration of new ideas is systematically discouraged.</p>
+<p>I was understandably feeling quite frustrated and discouraged after this second rejection. This <a href="http://lemire.me/blog/archives/2014/07/07/true-success-is-more-than-winning-a-zero-sum-game/?utm_source=feedburner&utm_medium=twitter&utm_campaign=Feed%3A+daniel-lemire%2Fatom+%28Daniel+Lemire%27s+blog%29">blog post</a> by Daniel Lemire lifted my spirits a little. It's clear in my mind that basic block versioning has potential. We have something clearly novel, and it works! No matter what, I can at least take some comfort in the knowledge that basic block versioning has already been presented at several industry conferences, such as <a href="https://www.youtube.com/watch?v=FGgFMZhnXvU">DConf</a>, <a href="http://www.infoq.com/presentations/jit-compilation-strategies">mloc.js</a> and <a href="http://www.infoq.com/presentations/dynamic-performance">Strange Loop</a>.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/FGgFMZhnXvU?si=TE-i7bwhtMZedBK0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>I may not be doing very well at the publication game thus far, but thousands of people have watched my talks online. The idea has already been spread around, and I've gotten positive responses. I haven't put this much work into Higgs and my thesis to just give up. I've already found two conferences where I can submit further updated versions of the paper, and the deadlines are luckily coming up soon. In addition to this, I've already started work towards implementing typed shapes in Higgs, which should lead to another publication next year.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

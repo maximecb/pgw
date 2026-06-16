@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Algorithms Making Music</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Algorithms Making Music">
+  <meta property="og:description" content="Algorithms Making Music">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-01-21-algorithms-making-music/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/01/12/about-tachyons-garbage-collector/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/01/28/try-my-web-app-melodique-a-procedural-melodic-phrase-generator/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Algorithms Making Music</h1>
+<div class="post_date">January 21st, 2012</div>
+</div>
+<p>I'm someone who enjoys listening to music a lot. It's become an important part of my daily life: I listen to music almost every day while working on <a href="/2011/09/11/predoctoral-exam/">my thesis</a> or while doing things around the house. Being that I'm rather curious by nature, I've become interested in understanding music, so to speak. For slightly over a year now, I've taken a special interest in learning about music. I decided I'd like to combine my love of programming with my interest in music.</p>
+<p>I love science, programming and other technical things. I enjoy building things and solving technical puzzles. The question that started to spike my curiosity with respect to music is the following one:</p>
+<blockquote>
+<p>What is it that makes music sound "good"? What makes sound be music?</p>
+</blockquote>
+<p>It's a superficially simple question with a complicated answer, perhaps more than one answer, really. The most obvious issue with this question is that not everyone has the same musical tastes. Some people prefer musical genres that seem very different, from hip hop to dubstep to classical to jazz. Another issue is that it's perhaps difficult to even define what music is. Where does something stop being noise and start becoming music? Your grandparents might say that Aphex Twin and dubstep aren't music.</p>
+<p>Perhaps my question partly answers itself. The main appeal I find in music is that some of it is very enjoyable to me. This is probably true for everyone. Music has the power to trigger a strong emotional response within us, that's where the appeal lies, that's why movies have soundtracks. Music comes in many varieties, but it's also generally quite structured. To most people, music has rhythm, it has repetition, it has tonal color and texture. As a technically-minded person, this is what interests me most: how do you structure sounds to build music out of them?</p>
+<p>I took some piano lessons for a year or two when I was 6-7, but unfortunately, I barely remember anything besides the most basic things. In the interest of improving my musical knowledge, I bought several books about music, synthesizers and sound synthesis. Over the course of a year, by reading a little bit every day on the bus and the subway, and whenever I ended up in a waiting room, I was able to read the following books:</p>
+<ul>
+<li>
+<p><a href="http://www.amazon.ca/Theory-Computer-Musicians-Michael-Hewitt/dp/1598635034/ref=pd_sim_b_2">Music Theory for Computer Musicians</a></p>
+</li>
+<li>
+<p><a href="http://www.amazon.ca/Composition-Computer-Musicians-Michael-Hewitt/dp/1598638610">Composition for Computer Musicians</a></p>
+</li>
+<li>
+<p><a href="http://www.amazon.ca/Audio-Programming-Book-Max-Mathews/dp/0262014467/ref=sr_1_1?s=books&ie=UTF8&qid=1327172417&sr=1-1">The Audio Programming Book</a></p>
+</li>
+<li>
+<p><a href="http://www.amazon.ca/Computer-Sound-Synthesis-Electronic-Music/dp/024051517X/ref=sr_1_8?s=books&ie=UTF8&qid=1327172520&sr=1-8">Computer Sound Synthesis for the Electronic Music</a></p>
+</li>
+<li>
+<p><a href="http://www.synthesizer-cookbook.com/">Welsh's Synthesizer Cookbook</a></p>
+</li>
+<li>
+<p><a href="http://www.amazon.ca/Power-Tools-Synthesizer-Programming-Reference/dp/0879307730/ref=sr_1_3?s=books&ie=UTF8&qid=1327172362&sr=1-3">Power Tools for Synthesizer Programming</a></p>
+</li>
+<li>
+<p><a href="http://www.amazon.com/BasicSynth-Daniel-Mitchell/dp/0557022126">BasicSynth</a></p>
+</li>
+</ul>
+<p>Learning about synthesizers and sound synthesis was interesting as it gave me some understanding of how to create sounds and give them different textures. I ended up acquiring a microKORG synthesizer and installing the LMMS DAW so I could play with this first-hand. Music theory is more directly related to the question of how to build music. People have been studying what makes music music for centuries. Music theory books don't provide a magic recipe for songmaking, but they do provide some hints as to what kinds of pitches and musical structures tend to work well together.</p>
+<p>I thought it would be interesting to attempt building software that can compose music on its own. If it was possible to infuse enough musical knowledge in a piece of software, it ought to be possible to get something that sounds musical out of it. There are obviously issues when it comes to making software be "creative", but I still found the concept was interesting. What if you could at least use software to assist you in musical creation? Can't think of a melody for your song? Generate random melodies and sample them. Use them as a starting point and modify them until you get something you like. This is computer-assisted musical composition.</p>
+<p>A year ago, Dimitry Zolotaryov and I created a web application called EvoTune for a Google hackathon event. The idea was simple: create software that can generate random drum loops using samples and a pattern sequencer. The software has elementary concepts about the structure of drum loops, but it relies on users voting for the best sounding patterns, which are then mated in a genetic algorithm sort of way. We found that EvoTune worked quite well in practice and produced usable drum loops.</p>
+<p>I decided to embark on something a little more ambitious and try to create melodies using pitched instruments instead of drum samples. For the past few weeks, I've been building code for a virtual synthesizer and sequencer. I also wrote some code to generate chords and musical scales. I have a simple <a href="http://en.wikipedia.org/wiki/Analog_modeling_synthesizer">virtual analog synthesizer</a> going that can be used to synthesize piano-like sounds. Below are some samples of my early experiments with procedural melody generation:</p>
+<ul>
+<li>
+<p><a href="sample-cmajor1.mp3">Sample 1</a> (C major)</p>
+</li>
+<li>
+<p><a href="sample-cmajor2.mp3">Sample 2</a> (C major)</p>
+</li>
+<li>
+<p><a href="sample-aminor.mp3">Sample 3</a> (A minor)</p>
+</li>
+<li>
+<p><a href="sample-gminor.mp3">Sample 4</a> (G minor)</p>
+</li>
+</ul>
+<p>I'm thinking of possibly creating a GUI for my software (which is actually written in JavaScript) and package it as a web application almost as-is. I was thinking some musicians might find it interesting to be able to generate random melodic phrases based on chord progressions.</p>
+<p>Whether I do that or not, I'll probably try to generate more electronic techno/dance sounding melodies using this :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

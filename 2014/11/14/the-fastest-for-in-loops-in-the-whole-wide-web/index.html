@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Fastest For-In Loops in the Whole Wide Web</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Fastest For-In Loops in the Whole Wide Web">
+  <meta property="og:description" content="The Fastest For-In Loops in the Whole Wide Web">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-11-14-the-fastest-for-in-loops-in-the-whole-wide-web/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/11/10/pushing-higgs-to-the-limit/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/12/11/visit-to-northeastern-university/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Fastest For-In Loops in the Whole Wide Web</h1>
+<div class="post_date">November 14th, 2014</div>
+</div>
+<p>This Monday, I met with <a href="http://www.iro.umontreal.ca/~feeley/">Marc Feeley</a>, my PhD advisor. I showed him graphs comparing the performance of Higgs to that of the <a href="http://en.wikipedia.org/wiki/SpiderMonkey_(software)#TraceMonkey">TraceMonkey</a> compiler. Reviewers at conferences we've previously submitted papers to have been very skeptical, and pressed us multiple times to produce some kind of comparison of <a href="http://arxiv.org/abs/1411.0352">basic block versioning</a> against <a href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">tracing</a>. We believe that faring well against TraceMonkey could increase our odds of getting our work published.</p>
+<figure>
+<a href="speedups-log.png">
+<img alt="Speedup vs V8 baseline and TraceMonkey on a logarithmic scale (higher is better)" src="speedups-log.png">
+</a>
+<figcaption>Speedup vs V8 baseline and TraceMonkey on a logarithmic scale (higher is better)</figcaption>
+</figure>
+<p>So far, we're beating TraceMonkey on about half of our benchmark set. There are, however, cases where we're not doing well at all. The above graph compares speedups produced by Higgs relative to V8 baseline and TraceMonkey. The scale is logarithmic and higher bars are better. If you look at the last bars at the far right, you'll notice that they're actually negative. That's because our performance on that benchmark is about 100 times slower than that of TraceMonkey (ouch). The scale of this graph could be fixed so that the bars no longer show up as negative, but Marc rightly pointed out that reviewers may latch on instances like this. Does this benchmark exhibit some pathological case that basic block versioning can't handle?</p>
+<h2>What Went Wrong?</h2>
+<p>The poorly-performing benchmark is <a href="https://github.com/maximecb/Higgs/blob/dev-maxime/source/benchmarks/sunspider/string-fasta.js">string-fasta</a>, from the SunSpider suite. A little bit of digging revealed what was going wrong. The benchmark uses the JavaScript for-in loop to <a href="https://github.com/maximecb/Higgs/blob/dev-maxime/source/benchmarks/sunspider/string-fasta.js#L67">iterate through object keys</a>. The for-in loop uses reflection to iterate through the property names of an object and all of its parents. The semantics of this simple-looking construct are annoyingly complex. It deals with arrays and strings in addition to objects. If a property is deleted during iteration and hasn't been listed yet, it must never be listed. Properties of child objects must "shadow" parent properties with the same name so that duplicate property names won't show up twice.</p>
+<p>The reason my for-in loop was slow is that I never bothered to optimize it. With such complex semantics, it seemed easier to take the "comfortable" approach. I implemented the loop <a href="https://github.com/maximecb/Higgs/blob/ff82ee7faa74cea759295f577085575359f2b62c/source/runtime/runtime.js#L3045">with a closure</a> that gets generated when iteration begins. This closure is a <a href="http://en.wikipedia.org/wiki/Generator_(computer_programming)">generator</a> that returns a different property name on each call. It hides all of the iteration state and complex logic from the outside. What also added to the slowness is that this closure made multiple calls to the D part of my runtime to traverse object shapes. I wrote <a href="https://github.com/maximecb/Higgs/blob/db77ace846049a60d1e9fafd0abf49ef38d77d0a/source/benchmarks/micro/100m-for-in.js">a microbenchmark</a> to measure the speed of the for-in loop itself and sure enough, it was over 100 times slower than that of V8 and TraceMonkey.</p>
+<h2>Making it Fast</h2>
+<p>My advisor convinced me that I should address this performance problem, and to do that, I had to make for-in loops faster. It was obvious that I should probably get rid of the closure created on each traversal and eliminate the D runtime calls. I had to remove the slow things, but what would I replace them with? For the closure, it was fairly obvious: initialize the variables I need before the loop, and thread them through manually as appropriate. The bigger issue was how I would go about enumerating all the properties in an object without calling into my D runtime code, and without traversing the <a href="https://github.com/maximecb/Higgs/blob/ff82ee7faa74cea759295f577085575359f2b62c/source/runtime/object.d#L314">shape tree</a> structure at all, if possible.</p>
+<p>I knew that V8 and TraceMonkey had fast for-in loops, so surely, they must have found a way to make them fast. They must have some kind of trick that I hadn't thought of. My eureka moment came when I realized that for a given object shape (aka <a href="https://developers.google.com/v8/design#prop_access">hidden class</a>), the properties enumerated are always the same. Aha! There's an easy solution then. A list of the properties to be enumerated over can be generated per-shape. To avoid D runtime calls, this list can take the form of a JS array that can be directly accessed by my JS runtime. Furthermore, it can be lazily generated the first time a for-in loop touches a given shape, and cached for future reuse. Clever, and not too difficult to <a href="https://github.com/maximecb/Higgs/blob/db77ace846049a60d1e9fafd0abf49ef38d77d0a/source/runtime/object.d#L514">implement</a>.</p>
+<p><table style="height:72px;width:300px;" align="center"><tbody><tr><td>Higgs (old for-in)</td><td>&gt;500s</td></tr><tr><td>Higgs (new for-in)</td><td>2.91s</td></tr><tr><td>V8 3.29.66 (baseline)</td><td>4.98s</td></tr><tr><td>V8 3.29.66 (Crankshaft)</td><td>4.95s</td></tr><tr><td>TraceMonkey</td><td>4.12s</td></tr></tbody></table></p>
+<p>After a few iterations of tweaking, I was quite pleased with the performance results I got (see above). Higgs went from having a horribly slow for-in loop to having the fastest of all. Quite possibly, the precached table trick I came up with is something other engines don't have in their implementation.</p>
+<h2>The Benchmark Game</h2>
+<p>The faster for-in loop satisfied my original goal. The fasta benchmark now runs several times faster on Higgs. The performance we get is no longer abhorrent. However, we still aren't beating the other engines on that benchmark, we're about 3 times slower now. There's another detail that hinders performance in this specific benchmark. In the body of the for-in loops, properties are being <a href="https://github.com/maximecb/Higgs/blob/master/source/benchmarks/sunspider/string-fasta.js#L68">accessed with dynamic keys</a> that are only known at execution time. Higgs currently deals with that by doing a D runtime call. Clearly, again, the other engines have some better way of handling this particular case than I do.</p>
+<p>I've been working hard in the last two weeks to try and fix every obvious performance issue I could find. Among other things, I implemented <a href="http://blog.cdleary.com/2012/01/string-representation-in-spidermonkey/">ropes</a> to make string concatenation faster. Now, I made for-in loops faster. In the end though, each optimization I make is just a drop in the bucket. To compete effectively on every benchmark, there are many individual things to optimize. Everything must be made fast. The people at Google and Mozilla have had years to optimize their engines specifically so that they would perform well on the well-known sets of benchmarks. They've gone as far as implementing memoization of sine values based on the knowledge that <a href="https://github.com/maximecb/Higgs/blob/master/source/benchmarks/sunspider/3d-morph.js">this one benchmark</a> calls the sine functions with the same angle values repeatedly.</p>
+<p>What I wish conference reviewers would understand is just how high they're raising the bar by asking little me to compare the performance of Higgs to that of commercial implementations. More than two years of work went into my JIT compiler, and I'm just barely starting to have performance numbers I can be proud of. You'll notice though that I'm not comparing the performance of Higgs on benchmarks to that of <a href="http://en.wikipedia.org/wiki/SpiderMonkey_(software)#IonMonkey">IonMonkey</a>, <a href="http://blog.chromium.org/2010/12/new-crankshaft-for-v8.html">Crankshaft</a> or <a href="http://ariya.ofilabs.com/2014/08/javascript-and-v8-turbofan.html">TurboFan</a>. I simply don't think I can match the tens of man-years of (over)engineering and that went into it. It would take me several years to get anywhere close, and by then, V8 would be even faster than it is now. I've got the fastest for-in loop for the moment, but it takes a lot more than that to have a competitive JavaScript implementation.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

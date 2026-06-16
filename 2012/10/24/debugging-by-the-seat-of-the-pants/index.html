@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Debugging by the Seat of the Pants</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Debugging by the Seat of the Pants">
+  <meta property="og:description" content="Debugging by the Seat of the Pants">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-10-24-debugging-by-the-seat-of-the-pants/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/09/29/dynamically-adjusting-lcd-brightness-with-ambient-light/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/11/09/static-vs-dynamic-why-not-both/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Debugging by the Seat of the Pants</h1>
+<div class="post_date">October 24th, 2012</div>
+</div>
+<p>Two people recently asked me what <a href="http://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> or other tools I used to develop. My answer was that I only use a compiler, <a href="http://www.gnu.org/software/make/">GNU make</a> and a text editor. What seemed most surprising to these people was that I don't use a debugger. I never have. I don't even really know how to use one. This seems to really puzzle some people. I've written fairly complex software, including compilers, a <a href="http://www.cs.mcgill.ca/~mcheva/xgameproject.php">3D game engine</a> and a type analysis. As every other programmer out there, I have to find and fix bugs on a daily basis. Most of these are trivial, but others complex and hard to find. In this post, I'll discuss some of the strategies I employ to find bugs without special-purpose debugging tools.</p>
+<p>Debugging is very much detective work. Your program isn't behaving the way you expect. The goal is to find what the root cause of the problem might be, and the best way to go about this is by reasoning logically about the problem. One possible technique is to proceed by elimination, or, as Sherlock Holmes would say:</p>
+<blockquote>
+<p>"When you have eliminated the impossible, whatever remains, however improbable, must be the truth".</p>
+</blockquote>
+<p>That is, you can use your instinct, your hunches, to make an educated guess as to what parts of the program's code might be causing the problem to happen. Most of the bugs I encounter are simple, and my intuition usually leads me right to the cause. Some bugs are unfortunately trickier. One of the worst mistakes new programmers make when it comes to debugging is to assume that some part of their code is perfect and cannot possibly be the cause of a given bug. Wrongly eliminating a possible cause can cause one to search for hours in the wrong places without ever finding the said bug. Debugging can begin with a hunch, but you should never discount a possible cause until you have verified that the cause is actually elsewhere.</p>
+<p>The question, then, is how to go about narrowing down the possible cause of a bug. When using a debugger, one can install breakpoints in a program to stop the program and step through its execution, examining local variables. I simply use print statements to accomplish the same thing. By placing print statements at various points, I can see where the program execution stops (in the case of a crash) and also print local variables and data structures. By iteratively inserting and removing print statements, using my intuition in the process, I can narrow down the probable cause of a bug very quickly. The key is to determine where the state of the program stops conforming to my expectations and becomes corrupted, progressively narrowing down which piece of code caused this to happen.</p>
+<p>You might still think that not using a debugger is silly. Why not use the tool if it exists? For one, I believe I can find bugs just as fast using the techniques I developed over the years. There is also a case to be made that being able to debug without a debugger is actually very useful for someone who works in compilers, because often, there is no debugger available. I've had to debug x86 machine code generated by my own <a href="http://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a> compiler, and to use a debugger there, I would have had to write one. Instead, I implemented a system to print out numerical values, and this was enough to debug my system. Finally, debugging complex software sometimes requires special techniques that go much beyond what a debugger does.</p>
+<p>I recently worked on a <a href="http://en.wikipedia.org/wiki/Data-flow_analysis">dataflow</a> type analysis for JavaScript which involved two simultaneous, interacting <a href="http://en.wikipedia.org/wiki/Fixed_point_(mathematics)">fixed point</a> computations and millions of dataflow facts being propagated in the system. Most of the bugs I had to find in this case weren't crashes, but <a href="http://en.wikipedia.org/wiki/Type_inference">type inference</a> errors caused by complex interactions in multiple areas of the system. Sitting down and single-stepping my program in a debugger would not have revealed any useful information there. Instead, I had to write one-off, special-purpose pieces of code to detect inconsistencies as early as possible and allow me to get different views on the state of the system while it runs. Debugging complex systems can be difficult, and I often find that the best strategy is to work to prevent latent bugs using unit tests and assertions, but that's a story for another time.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

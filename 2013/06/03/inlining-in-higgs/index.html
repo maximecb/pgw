@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Inlining in Higgs</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Inlining in Higgs">
+  <meta property="og:description" content="Inlining in Higgs">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-06-03-inlining-in-higgs/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/05/28/psa-caffeine-is-a-drug/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/06/20/how-i-miss-you-dear-ssa/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Inlining in Higgs</h1>
+<div class="post_date">June 3rd, 2013</div>
+</div>
+<p>May 2013 might have been the most hectic month of my life: I presented at <a href="http://dconf.org/talks/chevalier_boisvert.html">DConf</a>, visited Mozilla in San Francisco, packed and moved into a new apartment, visited Toronto and finally went on a short trip to Florida. Things have finally settled down a bit; I'm finding time to resume work on Higgs, and the problem I'm tackling right now is that of function <a href="http://en.wikipedia.org/wiki/Inline_expansion">inlining</a>. For the unfamiliar, inlining is a compiler optimization which substitutes the body of a function we're calling (the callee) at a location we're calling it at (a call site). Because Higgs is partially <a href="http://en.wikipedia.org/wiki/Self-hosting">self-hosted</a> and its runtime is mostly implemented in JavaScript, Higgs does very many function calls, and inlining is crucial to achieve any kind of competitive performance.</p>
+<p>Inlining turns out to be more complicated to implement in a <a href="http://en.wikipedia.org/wiki/Just-in-time_compilation">Just-In-Time (JIT)</a> compiler than in an <a href="http://en.wikipedia.org/wiki/AOT_compiler">Ahead Of Time (AOT)</a> compiler. For one, transforming code for inlining takes time and so taking the time to perform inlining might actually reduce overall performance if it isn't done sparingly (there's a cost-benefit tradeoff involved). Another issue is that the program in which we're inlining function calls is currently running, and so we might be trying to modify the body of functions that are already on the stack. Reconfiguring stack frames as a program is running is called <a href="http://wingolog.org/archives/2011/06/20/on-stack-replacement-in-v8">On-Stack Replacement (OSR)</a>. It's often difficult to implement due to a variety of corner cases: stack frame layouts aren't always straightforward.</p>
+<p>I'm at the point where I just got inlining to work in Higgs. I chose to implement this at the level of the <a href="http://en.wikipedia.org/wiki/Intermediate_language#Intermediate_representation">Intermediate Representation (IR)</a> rather than directly in the backend because it seemed like this would make it easier to optimize code post-inlining. At the moment, the JIT compiler will try to do inlining only if the caller gets compiled as it's about to be called. This is because I haven't yet implemented OSR. Just getting this working required a fair bit of bugfixing as it ended up stressing parts of my backend that hadn't been tested before. Because JavaScript does late binding, the inlining is conditional, that is, a test verifies that the callee is the function we expect before jumping to the inlined body.</p>
+<p>You may be interested to know what the performance impact of this is. Some tests are slightly faster now, but at this point, most benchmarks run slightly slower with inlining enabled. This is because Higgs doesn't yet do much specialization and optimization after inlining, but also because inlining doesn't get used much. I'll need to implement at least basic support for OSR (e.g. support for replacing the topmost function on the stack) in order to make it so functions with long-running loops can benefit from inlining at all. I'll also need to implement some support for constant propagation and type specialization in order to get more performance benefits from inlined calls. Simply eliminating some amount of call overhead turns out to be insufficient.</p>
+<p>In other news, Tom (<a href="https://github.com/thejsjunky">thejsjunky</a>) is working on enhancing our <a href="http://en.wikipedia.org/wiki/Foreign_function_interface">Foreign Function Interface (FFI)</a> library to maximize its user-friendliness. He's also implementing a test harness to make it easier to add new tests to Higgs. It's very important to me that Higgs be robust and well tested. I'd like to make it easy for people to submit failed test cases when they file a bug report on GitHub. I'd also like to encourage people to contribute new libraries and FFI bindings they wrote through pull requests. My goal is that Higgs will eventually be very much of a "batteries included" JS implementation which makes it easy for people to start hacking immediately. Tom and I even have modest hopes that we may be able to compete with CPython on some fronts by the time I present at <a href="https://thestrangeloop.com/sessions/fast-and-dynamic">Strange Loop</a> in September.</p>
+<p>Andrei Alexandrescu has been posting talks from DConf 2013 on Reddit at a rate of two or three per week. A video of my talk should become available next week and will be linked on this blog as well as on my twitter feed. Stay tuned :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

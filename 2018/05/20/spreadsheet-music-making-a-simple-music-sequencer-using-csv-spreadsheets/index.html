@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets">
+  <meta property="og:description" content="(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2018-05-20-spreadsheet-music-making-a-simple-music-sequencer-using-csv-spreadsheets/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2018/02/18/minimalism-in-programming/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2018/05/21/building-a-simple-self-driving-car-simulator/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>(Spread)sheet Music: Making a Simple Music Sequencer using CSV Spreadsheets</h1>
+<div class="post_date">May 20th, 2018</div>
+</div>
+<p>On Friday night, I put together a little hack that I found quite amusing. It's a music sequencer that uses CSV spreadsheets to loop and sequence beats. It has the useful feature that you can save the spreadsheet, and it will periodically reload it, so that you can edit and jam with your sequences live. Best of all, it's around 100 lines of Python code, comments and all. I posted a video I recorded <a href="https://twitter.com/Love2Code/status/997840233730371584">on twitter</a>, and the reception was very positive, so I thought I would provide a short writeup, and make the <a href="https://gist.github.com/maximecb/f440c1db489177c1037ec4f158cf5e4f">source code available as a gist</a> for anyone interested.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/LQOFiC6YIvo?si=eyZUzDjkCJ3oX5U3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>You might wonder why I wrote this program, besides the humorous and attention-grabbing aspects. Clearly, there are already a variety of sophisticated programs (DAWs, Digital Audio Workstations) such as Ableton Live out there which can do much more complex things. Part of the motivation is that I like to play with music programming, and by writing my own code to sequence music, I can write a program that will have exactly the workflow and features that I want.</p>
+<p>One of the things that I wanted to play with, here, was the ability to create melodies using only the notes in a given scale. Ableton Live Lite, or at least the version I have here, for all its powerful features, doesn't have a mode that will highlight a given scale (at least not without plug-ins). I think there is a lot of value in being able to write software with an interface that is fully customized for the things you want to play with, and in this case, writing a music sequencer is trivially easy, so why not?</p>
+<figure>
+<a href="img-4036.jpg">
+<img alt="Synth and mixer setup" src="img-4036.jpg">
+</a>
+<figcaption>Synth and mixer setup</figcaption>
+</figure>
+<p>The spreadsheet sequencer uses the <a href="https://mido.readthedocs.io/en/latest/">mido</a> package to send <a href="https://en.wikipedia.org/wiki/MIDI">MIDI</a> output to hardware synthesizers that I have at home, namely a Novation Bass Station II and an Arturia Drumbrute. These are directly connected to my Linux PC using USB. Note that you do not need to own hardware instruments to play with Python and MIDI. I play with hardware synths because I enjoy having physical knobs I can turn, but there are many <a href="http://www.vintagesynth.com/articles/5-free-software-synths-linux">free software programs</a> that will connect via the MIDI protocol, both synthesizers and samplers.</p>
+<p>It's also possible to use MIDI for input. There are devices called MIDI controllers which can connect to your computer via USB. These can be keyboard, or boards with physical knobs you can turn to adjust parameters as you jam live. You can try searching for MIDI controller on eBay if that's something that interests you. There are some used ones you can get for very cheap.</p>
+<p>To conclude, I will note that although I came up with the idea on my own, I <a href="http://cdm.link/2012/01/spreadsheet-as-music-tracker-sequencer-with-libreoffice-nee-openoffice/">wasn't the first</a> to think of using a spreadsheet program to sequence music. I hope that this post has encouraged you to explore your musical creativity, or just to program something fun :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

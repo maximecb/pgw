@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Higgs: Upcoming Talks &amp; New Contributions</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Higgs: Upcoming Talks &amp; New Contributions">
+  <meta property="og:description" content="Higgs: Upcoming Talks &amp; New Contributions">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-02-03-higgs-upcoming-talks-new-contributions/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/01/28/accelerating-real-time-path-tracing/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/03/19/how-i-hacked-my-stationary-bike-and-voided-its-warranty/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Higgs: Upcoming Talks &amp; New Contributions</h1>
+<div class="post_date">February 3rd, 2014</div>
+</div>
+<h2>Upcoming talks about Higgs</h2>
+<p>I'll be giving a talk about my research at <a href="http://mloc-js.com/2014/">mloc.js</a> in Budapest on February 13th. This is going to be the first of my conference talks that is entirely focused on Higgs and my current research. The talk will be filmed and should appear online on InfoQ and <a href="http://www.ustream.tv/">Ustream</a>. I'll also be putting the slides online after the talk. In other news, I received an invitation from <a href="http://en.wikipedia.org/wiki/Andrei_Alexandrescu">Andrei Alexandrescu</a> to present at <a href="http://dconf.org/2014/">DConf</a>  this year again. I'm quite looking forward to this as I had a very positive experience at DConf 2013, where I met many very knowledgeable systems engineers (I may also have a crush on the SF bay area).</p>
+<p>For those who would like to see some results of my current research right away, I've <a href="http://arxiv.org/abs/1401.3041">made available</a> a paper which was recently submitted to <a href="http://www.etaps.org/index.php/2014/cc">CC 2014</a>, but unfortunately rejected. This paper explains in depth the technique of basic block versioning, and gives results comparing it to a traditional type propagation analysis. The main reason stated for rejection is that we did not provide comparisons in terms of overall running time (due to limitations of Higgs). I still believe the results are quite encouraging and make a convincing case for <a href="/2013/10/31/higgs-the-first-jit-compiler-of-its-kind/">basic block versioning</a>. My PhD advisor and I will be submitting an improved version of this paper in a few months.</p>
+<h2>New JIT online</h2>
+<p>The <a href="/2013/12/10/the-incremental-jit-lives/">lazy incremental JIT</a> I've been working on is now in the master branch. It's far from complete, but it's reached the crucial milestone where it passes all of the Higgs tests and runs all of the benchmarks. There is currently no type propagation and no register allocation, but I've already started implementing incremental inlining of primitive calls. The inlining is currently done in a rather unsophisticated manner which doesn't eliminate all call overhead, but this will be fine-tuned.</p>
+<p>Performance-wise, the new JIT is comparable to the old one. It's faster on most of the larger benchmarks, probably because there is no more interpreter and the new JIT generates machine code faster. Thus, there is less warmup time required before reaching full speed. I will be working on reintegrating the full power of basic block versioning and improving the performance within the next few months. I expect to exceed the performance of the old JIT on all benchmarks within a few weeks.</p>
+<h2>New contributions</h2>
+<p>Following our recent announcement that we were <a href="/2014/01/08/contribute-to-the-higgs-js-compiler/">looking for contributors</a>, we've started to build a Higgs <a href="https://github.com/maximecb/Higgs/wiki">wiki</a> and created a #higgsjs channel on <a href="http://freenode.net/">freenode</a> IRC. It seems that this work has paid off as we've gotten several pull requests for bug fixes and improvements.</p>
+<p>Notably, <a href="https://github.com/zimbabao">zimbabao</a> has sent us bug fixes to the runtime library, the regex engine and the standard library. Thanks to him, the SunSpider crypto-aes benchmark finally works properly. He's even fixed bugs I wasn't even aware of! <a href="https://twitter.com/nanochess">Óscar Toledo</a> has helped us find and track down two parser and two semantic bugs using his nanochess JS1K program. I've also taken the initiative of fixing several minor semantic bugs to make Higgs respect the ES5 specification more closely.</p>
+<p>My number one, Molly Everett, has completed a new test framework which will make it easy to add new functionality and regression tests by including a JS file in the <a href="https://github.com/maximecb/Higgs/tree/master/source/tests">source/tests</a> directory and sending us a pull request. She's also set up the <a href="https://travis-ci.org">travis</a> build test system to notify us if a build fails. Molly is currently working on an improved, more convenient version of our FFI library. We have plans to build bindings to SDL and network APIs, among other things.</p>
+<p>Should you wish to help, we're always looking to make Higgs more JS compliant, add new useful features and grow our collection of tests. If you find a bug in Higgs, please <a href="https://github.com/maximecb/Higgs/issues?state=open">open an issue</a> and/or send us a pull request <a href="https://github.com/maximecb/Higgs/wiki/How-to-Contribute">with a failing test</a>. You're also welcome to write useful libraries to be included with Higgs. You can help us make Higgs insanely great.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

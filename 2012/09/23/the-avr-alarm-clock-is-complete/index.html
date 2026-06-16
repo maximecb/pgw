@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The AVR Alarm Clock is Complete</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The AVR Alarm Clock is Complete">
+  <meta property="og:description" content="The AVR Alarm Clock is Complete">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-09-24-the-avr-alarm-clock-is-complete/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/07/25/short-update-on-toycpu/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/09/25/some-glues-dont-mix-with-electronics/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The AVR Alarm Clock is Complete</h1>
+<div class="post_date">September 24th, 2012</div>
+</div>
+<p>After a long pause, I finally took the time to complete my <a href="http://www.avrfreaks.net/">AVR-based</a> alarm clock project this weekend. I redesigned many parts of it in order to simplify the design, maximize robustness and minimize the amount of work required. As such, I decided to use off-the-shelf components where possible. I had <a href="/2011/10/04/toying-with-avr-microcontrollers/">a billion ideas</a> for cool features to add to this alarm clock, but since I have a tendency to get carried away, I decided to keep the plan simple: my initial goal is to complete a basic, usable alarm clock. No more, no less.</p>
+<figure>
+<a href="dscn0277.jpg">
+<img alt="" src="dscn0277.jpg">
+</a>
+</figure>
+<p>The completed clock incorporates the following modules and parts:</p>
+<ul>
+<li>
+<p><a href="http://www.aliexpress.com/item/Free-shipping-5pcs-lot-ATmega64-Mega64-ATMega64A-AVR-development-board-core-board/625207380.html">ATMega64 microcontroller board</a> running at 8 MHz ($15)</p>
+</li>
+<li>
+<p><a href="http://www.aliexpress.com/item/1pc-free-shipping-character-LCD-modules-20-char-x-4-lines-with-LED-backlight-Y-G/367674780.html">HD44780-compatible 20x4 blue LCD</a> screen ($7)</p>
+</li>
+<li>
+<p><a href="http://www.aliexpress.com/item/10pcs-Lot-4-x-4-Matrix-Keypad-Membrane-Switch-8-pins-connector-SCM-Outside-enlarge-Keypad/575506952.html">4x4 matrix keypad</a> originally intended for <a href="http://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling">DTMF</a> ($2)</p>
+</li>
+<li>
+<p><a href="http://www.aliexpress.com/item/5X-Free-shipping-DS1307-I2C-RTC-AT24C32-Real-Time-Clock-Module-For-AVR-ARM-PIC-Ar/638537631.html">DS1307 real-time clock I2C module</a> with battery backup ($3)</p>
+</li>
+<li>
+<p>Passive buzzer and red alarm status LED ($2)</p>
+</li>
+<li>
+<p>Custom output module with ULN2803 darlington array ($2)</p>
+</li>
+<li>
+<p>Custom interface modules for the keypad and LCD ($3)</p>
+</li>
+<li>
+<p>Custom built 5V switching power supply module ($4)</p>
+</li>
+<li>
+<p>Custom 10 pin in-system programmer extension/jack ($3)</p>
+</li>
+<li>
+<p>Black 8x4x2" project box ($5)</p>
+</li>
+<li>
+<p>Velcro strips to hold the modules to the inside of the project box ($4)</p>
+</li>
+<li>
+<p>Dupont jumper cables to connect the various modules together ($2)</p>
+</li>
+</ul>
+<figure>
+<a href="dscn0279.jpg">
+<img alt="" src="dscn0279.jpg">
+</a>
+</figure>
+<p>The modules are connected together using simple pin headers and dupont jumper cables. These cables are inexpensive and come pre-assembled, saving me the time and effort of crimping my own connectors. The ATMega64 board is very much overkill for this project, but the board in question is only a few dollars than weaker alternatives and has many I/O pins, leaving room for future expansion.</p>
+<p>The source code for the alarm clock is written entirely in C and compiled with <a href="http://www.nongnu.org/avr-libc/">avr-gcc</a>. I used an I2C master library written by Peter Fleury to interface with the clock module, but wrote custom drivers for the LCD and DS1307 chip, which fortunately wasn't very difficult. I used an <a href="http://www.fischl.de/usbasp/">usbasp</a> programmer with the <a href="http://www.nongnu.org/avrdude/">avrdude</a> software to flash the microcontroller. The tools worked perfectly on my Linux machines and I would recommend these to anyone who wants a cheaper (or more portable) alternative to the <a href="http://www.arduino.cc/">Arduino</a>.</p>
+<figure>
+<a href="dscn0281.jpg">
+<img alt="" src="dscn0281.jpg">
+</a>
+</figure>
+<p>The clock, as it is now, is very basic. It does, however, have a several advantages over commonly available alarm clocks, such as:</p>
+<ul>
+<li>
+<p>Keeping track of the date and weekday.</p>
+</li>
+<li>
+<p>24-hour time, avoiding AM/PM confusion</p>
+</li>
+<li>
+<p>Silencing the alarm does not turn the alarm off, it will ring again the next day</p>
+</li>
+<li>
+<p>The time and alarm can be set with the numerical keys, minimizing keypresses</p>
+</li>
+<li>
+<p>A distinctive red LED indicating when the alarm is on</p>
+</li>
+<li>
+<p>A battery backup: power outages will not cause the time to be lost</p>
+</li>
+</ul>
+<p>There are of course many possibilities for future improvement, such as supporting different alarm times on different days of the week and automatically taking holidays into account. I installed an in-system-programming port on the back of the alarm clock so that I can upgrade its firmware without needing a screwdriver. I can even reprogram it while it's running.</p>
+<figure>
+<a href="dscn0284.jpg">
+<img alt="" src="dscn0284.jpg">
+</a>
+</figure>
+<p>If you'd like to take a peek, the source code for the AVR alarm clock is <a href="https://github.com/maximecb/AVR-Alarm-Clock">available on github</a>.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

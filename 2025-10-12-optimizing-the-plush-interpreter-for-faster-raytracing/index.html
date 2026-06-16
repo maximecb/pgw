@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Optimizing the Plush Interpreter for Faster Raytracing</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Optimizing the Plush Interpreter for Faster Raytracing">
+  <meta property="og:description" content="Optimizing the Plush Interpreter for Faster Raytracing">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-10-12-optimizing-the-plush-interpreter-for-faster-raytracing/raytracer.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-10-12-optimizing-the-plush-interpreter-for-faster-raytracing/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-11-29-building-a-copying-gc-for-the-plush-programming-language/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Optimizing the Plush Interpreter for Faster Raytracing</h1>
+<div class="post_date">October 12th, 2025</div>
+</div>
+<div class="cover_image">
+<img src="raytracer.png">
+</div>
+<p>In the <a href="/2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/">last episode</a>, I wrote about a few simple optimizations that I implemented in order to increase the performance of the recursive Fibonacci microbenchmark running in the <a href="https://github.com/maximecb/plush">Plush</a> interpreter. A few relatively small changes made it possible to double the speed of that microbenchmark, and most importantly, outperform the CPython interpreter. Unfortunately, more benchmarking revealed that these changes had approximately zero impact on the speed of my <a href="https://github.com/maximecb/plush/blob/a58d90fd7d5add6744dadcbad4dbccddd5aa40ed/examples/raytracer.psh">raytracer program</a>, which is a bummer, because I had a soft goal of making this simple raytracer fast enough that it could render a sphere at real-time frame rates. I find this goal amusing because the idea of a raytracer running in an interpreted language producing real-time frame rates would have seemed ludicrous when I was a teenager in the early 2000s, but on a modern laptop, it seems very much achievable!</p>
+<p>It might feel surprising that the performance of the raytracer benchmark remains unchanged after we doubled the performance of the Fibonacci microbenchmark. What this suggests is that there are other inefficiencies hiding in the Plush VM that are significant enough that they simply dwarf the effect of the optimizations we already made. The good news is that major inefficiencies are often not so hard to address. A few big inefficiencies might just require us to find a different way of implementing things. It's much harder to improve performance if you're faced with a situation where there is a long tail of very many slightly inefficient things.</p>
+<p>A good first step to identify inefficiencies is to pull out a profiler. In this case I used the <code>perf</code> tool on my Linux desktop, which is pretty easy to use. Rust makes it possible to build a release binary with debug symbols which we can use for profiling purposes. The raytracer program allocates many intermediate <code>Vec3</code> objects as part of sphere intersection calculations, and so I would have thought that one of the main sources of overhead was GC allocations. However, what the profile showed is that the running time is still dominated by Rust hash table accesses. The interpreter is still doing a lot of string hashing when doing method calls and class field accesses, and this is very much killing performance.</p>
+<p>I started by benchmarking the raytracer in release mode using a single thread on my MacBook Air M1 so I could have a baseline against which to compare changes:</p>
+<pre><code>cargo build --release &amp;&amp; time target/release/plush examples/raytracer.psh
+Single thread render time: 700ms
+</code></pre>
+<p>I then went on to implement an <a href="https://en.wikipedia.org/wiki/Inline_caching">inline cache</a> on the <code>get_field</code> instruction. I started with this instruction because most programs do more object field reads than writes. In Plush, objects have an associated class id, which is an integer representing the class they were instantiated from, and also a flat array of slots containing values associated with each class field (instance variable). The way the inline cache works is pretty simple: it stores a class id and a slot index directly on the instruction. When we execute the instruction, we check if the class id matches what we previously saw, and if so, we use the cached slot index to access the field on the object. This is our fast path. If the class id doesn't match, we do the expensive hash lookup to get the slot index for that class, and then update the cache. In practice, most field accesses are <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">monomorphic</a>, meaning they only ever see objects of the same class, in which case the hash lookup only needs to be done once for the entire execution of the program. This simple optimization brings the rendering time down from 700ms to 410ms, which is already a big difference!</p>
+<p>After implementing the inline cache for <code>get_field</code>, I did the same thing for <code>set_field</code>. This brought the rendering time down from 410ms to 348ms. The difference is noticeable but not as marked, which confirms the empirical wisdom that like most programs, the raytracer does more instance variable reads than writes.</p>
+<p>At this point I did more profiling and was a bit surprised to realize that I had forgotten another big source of inefficiency: when we construct a class, we have to call its constructor. We can know the id of the class we're instantiating when the AST gets compiled into <a href="https://en.wikipedia.org/wiki/Bytecode">bytecode</a> instructions. However, the Plush interpreter still did a hash lookup to access said class and find out how many slots to allocate for each new object. It also does more hash lookups to locate the constructor function to call. This is again super inefficient. In theory, we could actually resolve the number of slots when generating the bytecode, and completely avoid an inline cache. However, we can't easily determine the address of the constructor function while compiling the bytecode. The simple reason is that the constructor doesn't get compiled into bytecode until it first gets called, and so we don't know which bytecode address (also known as a PC or <a href="https://en.wikipedia.org/wiki/Program_counter">Program Counter</a>) to jump to until we compile that function, and we're already in the middle of compiling another function.</p>
+<p>Since we can't resolve the PC of the constructor while compiling the <code>new</code> instruction, I opted for a simple solution. Compiling to bytecode produces a <code>new</code> instruction that only contains a class id. When this instruction is first executed, it triggers the compilation of the constructor for this class, and then it replaces itself with a <code>new_known_ctor</code> instruction which stores both the number of slots for this class and the PC of the compiled constructor. The patched instruction executes much faster. This optimization brings down the execution time of the raytracer from 348ms to 296ms.</p>
+<p>At this point I did another profiling pass and realized that there is yet more hashing overhead hiding in the program. In the last post I talked about optimizing the <code>call</code> instruction, but this is only used for calling global functions. Method calls use a <code>call_method</code> instruction which is not yet optimized. Here we can simply pull the inline caching trick again, and this finally brings the execution time to 196ms.</p>
+<p>The four optimizations I talked about in this post are all variants on inline caching and code patching. Funnily enough, they all served to basically do the same thing, which is to remove hash lookup overhead. The final impact is much bigger than I had originally anticipated, however. I was very surprised by how much overhead it was possible to shave off. The optimized interpreter can now run the raytracer program more than 3.5 times faster than before when using a single thread. Using 16 threads on my Ryzen desktop, it can render a single frame in just 17 milliseconds, oh yeah!</p>
+<p>A fun thing I wanted to mention is that since the last post, an open source contributor has helped me write a simple software rasterizer using Plush. I was then able to optimize this code with the help of Gemini Code CLI, and the final result is a 3D spinning cube that can render at over 650 frames per second at a 600x600 resolution on my MacBook Air M1. We're slightly "cheating" in the sense that it's only so fast because the polygons are flat shaded, texturing would make it much slower, but I was still impressed with the final performance. In another experiment I was able to animate a basic city skyline with 2200 polygons in real-time. This means that Plush would be fast enough to implement a full-on 3D game like a simple flight simulator, a racing game or first-person shooter (but only as long as it's flat-shaded).</p>
+<figure>
+<a href="cube.jpg">
+<img alt="" src="cube.jpg">
+</a>
+</figure>
+<p>I'd like to conclude by saying that I've very much reached my primary objective with Plush, which was to have a lot of fun coding. I'd also like to invite contributions from readers to write a more fun raytracer example. For my tests, I'm only raytracing a sphere, but it could be fun to render a scene with other shapes and reflections etc. You might even be able to vibe code this. Something else I'd love to see is a recreation of the famous <a href="https://www.youtube.com/watch?v=ws3DJF7MbMU&t=753s">Amiga Ball</a> animation in Plush. If you'd like to contribute fun example programs, check out the <a href="https://github.com/maximecb/plush">GitHub repo</a>. Bug reports are also welcome.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Software Bugs That Cause Real-World Harm</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Software Bugs That Cause Real-World Harm">
+  <meta property="og:description" content="Software Bugs That Cause Real-World Harm">
+  <meta property="og:image" content="https://pointersgonewild.com/2023/05/29/software-bugs-that-cause-real-world-harm/software_bug.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2023-05-29-software-bugs-that-cause-real-world-harm/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2023/03/12/memory-pages-mmap-and-linear-address-spaces/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2023/11/01/preparing-uvm-for-3d-graphics/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Software Bugs That Cause Real-World Harm</h1>
+<div class="post_date">May 29th, 2023</div>
+</div>
+<div class="cover_image">
+<img src="software_bug.jpeg">
+</div>
+<p>Years ago, when I was an undergraduate student at McGill, I took a software engineering class, and as part of that class, I heard the infamous story of the <a href="https://en.wikipedia.org/wiki/Therac-25">Therac-25</a> computer-controlled radiotherapy machine. Long story short: a software bug caused the machine to occasionally give radiation doses that were sometimes hundreds of times greater than normal, which could result in grave injury or death. This story gets told in class to make an important point: don't be a cowboy, if you're a software engineer and you're working on safety-critical systems, you absolutely must do due diligence and implement proper validation and testing, otherwise you could be putting human lives at risk. Unfortunately, I think the real point kind of gets lost on many people. You might hear that story and think that the lesson is that you should never ever work on safety-critical systems where such due diligence is required, and that you're really lucky to be pocketing hundreds of thousands of dollars a year working on web apps, where the outcome of your work, and all the bugs that may still remain dormant somewhere in your code, will never harm anyone. Some people work on safety-critical code, and these people bear the weight of tremendous responsibility, but not you, you're using blockchain technology to build AirBnB for dogs, which couldn't possibly harm anyone even if it tried. I'd like to share three stories with you. I've saved the best story for last.</p>
+<p>Back in 2016, I completed my PhD, and took my first "real" job, working at Apple in California. I was joining a team that was working on the GPU compiler for the iPhone and other iDevices. While getting set up in California prior to starting the job, it occurred to me that showing up to work with an Android phone, while being part of a team that was working on the iPhone, might not look so great, and so I decided to make a stop at the Apple store and bought the best iPhone that was available at the time, an iPhone 6S Plus with 128GB of storage. Overall, I was very pleased with the phone: it was lightweight, snappy and beautiful, with great battery life, and the fingerprint sensor meant I didn't have to constantly type my pin code like on my previous Android phone, a clear upgrade.</p>
+<p>Fast forward a few months and I had to catch an early morning flight for a work-related conference. I set an early alarm on my phone and went to sleep. The next day, I woke up and instantly felt like something was wrong, because I could see that it was really sunny outside. I went to check the time on my iPhone. I flipped the phone over and was instantly filled with an awful sinking sense of dread: it was already past my flight's takeoff time! The screen on my phone showed that the alarm I had set was in the process of ringing, but for some reason, the phone wasn't vibrating or making any sound. It was "ringing" completely silently, but the animation associated with a ringing alarm was active.</p>
+<p>I did manage to get another flight, but I needed my manager's approval, and so I had to call him and explain the situation, feeling ashamed the whole time (I swear it's not my fault, I swear I'm not just lazy this bug is real, I swear). Thankfully, he was a very understanding man, and I did make it to the conference, but I missed most of the first day and opening activities. It wasn't the first or the last time that I experienced this bug, it happened sporadically, seemingly randomly, over the span of several months. I couldn't help but feel angry. Someone's incompetence had caused me to experience anxiety and shame, but it had also caused several people to waste time, and the company to waste money on a missed flight. Why hadn't this bug been fixed after several months? How many <a href="https://discussions.apple.com/thread/8011297">other people</a> were impacted? I had a cushy tech job where if I show up to work late, people ask if I'm doing alright, but some people have jobs where being late can cause them to be fired on the spot, and some of these people might have a family to support, and be living paycheque to paycheque. A malfunctioning alarm clock probably isn't going to directly cause a person's death, but it definitely has the potential to cause real-world harm.</p>
+<p>The point of this blog post isn't to throw Apple under the bus, and so I'll share another story (or maybe more of a rant) about poor software design in Android OS and how it's impacted my life. About 3 years after working at Apple, when the replacement battery in my iPhone 6S Plus started to wear out, I decided to try Android again, and so I got myself a Google Pixel 3A XL. This phone also had a nice fingerprint scanner, but the best differentiating feature was of course the headphone jack. Unfortunately, Android suffers from poor user interface design in a few areas, and one of the most annoying flaws in its user interface is simply that the stock Android OS doesn't have flexible enough options when it comes to controlling when the phone rings, which is one of the most important aspects of a phone.</p>
+<p>Being a millenial, I don't particularly like phone calls. I would much prefer to be able to make appointments and file support tickets using an online system. Unfortunately, our society is still structured in such a way that sometimes, I have to receive "important" phone calls. For instance, my doctor recently placed a referral for me to see a specialist. I've been told that the hospital is going to call me some time in the next few weeks. I don't want to miss <i>that</i> phone call, and so I have to disable "do not disturb". However, because the stock Android OS has only one slider for "Ring & notification volume", disabling do not disturb means that my phone will constantly "ding" and produce annoying sounds every time I get a text message or any app produces a notification, which is very disruptive. The fact is, while I occasionally do want my phone to ring so I can receive important phone calls, I basically <i>never</i> want app notifications to produce sound. I've been told that I should go and individually disable notifications for every single app on my phone, but you tell me, why in the fuck can't there simply be two separate fucking sliders for "Ring volume" and "Notification volume"? In my opinion, the fact that there isn't simply highlights continued gross incompetence and disregard for user experience. Surely, this design flaw has caused millions of people to experience unnecessary anxiety, and should have been fixed years ago.</p>
+<figure>
+<a href="android_volume.png">
+<img alt="Android volume menu" src="android_volume.png">
+</a>
+<figcaption>Android volume menu</figcaption>
+</figure>
+<p>This is turning out to be a long-ish blog post, but as I said, I've kept the best story for last. I'm in the process of buying a new place, and I'll be moving in two weeks from now. As part of this, I've decided to do some renovations, and so I needed to get some construction materials, including sheets of drywall. This is a bit awkward, because I'm a woman living in the city. I don't have a car or a driver's license. Sheets of drywall are also quite heavy, and too big to fit in the building's elevator, meaning they have to be carried in the stairs up to the third floor. Yikes.</p>
+<p>In Montreal, where I live, there are 3 main companies selling renovation supplies: Home Depot, Rona and Reno-Depot. Home Depot is the only one that had all the things I needed to order, so I went to their website and added all the items to my cart. It took me about 45 minutes to select everything and fill the order form, but when I got to the point where I could place the order, the website gave me a message saying "An unknown error has occurred". That's it, no more details than that, no description of the cause of the error, just, sorry lol, nope, you can't place this order, and you don't get an explanation. I was really frustrated that I had wasted almost an hour trying to place that order. A friend of mine suggested that maybe she could try placing the order and it would work. I printed the page with the contents of my cart to a PDF document and sent them over. It worked for her, she was able to place the order, and so I sent her an electronic payment to cover the costs.</p>
+<p>Since my new place is on the third floor, we had some time pressure to get things done, and heavy items would have to be carried up the stairs, we paid extra specifically to have the items delivered inside the condo unit and within a fixed time period between noon and 3PM. The total cost for delivery was 90 Canadian dollars, which seems fairly outrageous, but sometimes, you just have no choice. I was expecting my delivery before 3PM, and the Home Depot website had said that I would get a text 30 minutes before delivery. At 2:59PM, I received two text messages at the same time. The first said "Your order has just been picked up". The second said "Your order has just been delivered, click here to rate your delivery experience". Again, I was filled with a sense of dread. Had they tried to reach me and failed? Had they just dumped the construction materials outside? I rushed downstairs. There was no sign of a delivery truck or any of the materials. I figured there must be another software bug, despite what the second text message said, the delivery clearly hadn't happened yet.</p>
+<p>Sure enough, at 3:27PM, 27 minutes after the end of my delivery window, I received a phone call from a delivery driver. He was downstairs, and he was about to dump the construction materials on the sidewalk. NO! I explained that I had paid extra to have the materials delivered inside the unit. I could show him the email that proved that I had paid specifically for this service. He argued back, according to his system, he was supposed to dump the materials at the curb. Furthermore, they had only sent one guy. There was no way he alone could carry 8 foot long, 56-pound sheets of drywall up to the third floor. I raised my voice, he raised his. After a few minutes, he said he would call his manager. He called back. The delivery company would send a second truck with another guy to help him carry the materials upstairs. I felt angry, but also glad that I had stood my ground in that argument.</p>
+<p>The first guy waited, sitting on the side of the curb in the heat, looking angry, doing nothing, for about 30 minutes until the second guy showed up to help. When the second delivery guy showed up, he asked to see the email. I showed him proof that I had paid to have things delivered upstairs. He also stated that their system said they only had to drop things in front of the building, but that he believed me. The delivery company was a subcontractor, and this was a software bug they had encountered before. This bug had caused multiple other customers to be extremely upset. So upset, in fact, that one customer, he said, had literally taken him hostage once, and another one had assaulted him. Gross, almost criminal incompetence on the part of one or more developers somewhere had again caused many people to waste time and to experience stress, anger, and even violence. The most infuriating part of this though, of course, is that bugs like this are known to exist, but they often go unfixed for months, sometimes even years. The people responsible have to know that their incompetence, and their inaction is causing continued real-world harm.</p>
+<p>The point of this blog post is that, although most of us don't work on software that would directly be considered safety-critical, we live in a world that's becoming increasingly automated and computerized, and sometimes, bugs in seemingly mundane pieces of code, even web apps, can cause real-world suffering and harm, particularly when they go unfixed for weeks, months or even years. Part of the problem may be that many industry players lack respect for software engineering as a craft. Programmers are seen as replaceable cogs and as "code monkeys", and not always given enough time to do due diligence. Some industry players also love the idea that you can take a random person, put them through a 3-month bootcamp, and get a useful, replaceable code monkey at the other end of that process. I want to tell you that no matter how you got to where you are today, if you do your job seriously, and you care about user experience, you could be making a real difference in the quality of life of many people. Skilled software engineers don't wear masks or capes, but they can still have cool aliases, and they truly have the power to make the world better or worse.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

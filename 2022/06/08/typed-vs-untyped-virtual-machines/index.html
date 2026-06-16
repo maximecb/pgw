@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Typed vs Untyped Virtual Machines</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Typed vs Untyped Virtual Machines">
+  <meta property="og:description" content="Typed vs Untyped Virtual Machines">
+  <meta property="og:image" content="https://pointersgonewild.com/2022/06/08/typed-vs-untyped-virtual-machines/maximalfocus-mhvvnkkloxk-unsplash.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2022-06-08-typed-vs-untyped-virtual-machines/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2022/05/23/minimalism-in-programming-language-design/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2023/02/24/building-a-minimalistic-virtual-machine/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Typed vs Untyped Virtual Machines</h1>
+<div class="post_date">June 8th, 2022</div>
+</div>
+<div class="cover_image">
+<img src="maximalfocus-mhvvnkkloxk-unsplash.jpeg">
+</div>
+<p>One of the things that's been on my mind recently is the idea of building a virtual machine for code archival purposes. Something that's optimized for long-term stability and longevity, with the goal of helping <a href="/2022/02/11/code-that-doesnt-rot/">prevent code rot</a>. This is a fundamentally hard problem to solve, because the world changes, and so software changes with it, but at the same time, there's no fundamental reason why software written 5, 10, 20 or even 50 years ago couldn't run anymore.</p>
+<p>To some extent, you can still run 50 year old software if you have the right emulator, but I think that this is going to become harder and harder to do, because modern software stacks are becoming increasingly complex and typically have a lot of external dependencies. Then there's the added problem that you also have to worry about the emulator itself suffering from code rot. A friend of mine who's learning about programming was asking me the other day why it is that iPhone apps need to be updated so often when the functionality of the apps isn't changing. It's because the foundation that these apps are sitting on keeps changing, and if said apps aren't routinely updated, they'll quickly stop working. Often, in the software world, dependencies are liabilities.</p>
+<p>Many kinds of softwares could be designed to work just fine with very limited kinds of inputs and outputs. If you think about something like a spreadsheet program, a text editor, or many kinds of 2D and 3D games, most of these programs fundamentally only need access to a keyboard, a mouse, the filesystem and a display. All of these things have been available for over 30 years, and although the fundamentals of what they do haven't really changed, the APIs to access them are changing constantly. Many software programs could be much better protected from code rot if they were written to run on a VM with stable APIs/ABIs and fully statically linked.</p>
+<p>In my opinion, to protect software from code rot, we need an approach to software design that's more intentional, minimalistic and disciplined. That approach to design should start with the VM itself. The VM should provide a stable set of API. It's easier to keep the set of APIs stable if the VM itself is minimalistic and small. Keeping the VM small makes it easier to port to new architectures, which makes keeping software running easier. A small VM is also easier to implement correctly and consistently across platforms.</p>
+<p>There are many different ways to design a VM. The design I have in mind is something like a single-threaded bytecode VM. The VM could be register-based or stack-based. I have a certain fondness for stack-based VMs because they're very simple, easy to target, and stack-based bytecode has the neat side-effect that it provides implicit liveness information (values popped off the stack are dead). At the end of the day, whether a VM is register-based or stack-based isn't very important because it's entirely possible to convert between the two.</p>
+<p>Another important design axis which is not as trivial and can have much broader implications is whether the VM is typed or untyped. The WASM and Java VMs are typed in the sense that they have a built-in notion of the type of values, functions, modules and objects. In contrast, something like a Commodore 64 emulator would emulate the instruction set of its 6510 CPU, but does so without assigning types to values in registers or in memory, treating values as bits and bytes without really tracking what they represent.</p>
+<p>There are advantages to building a type system into a VM. There's the potential for optimizations, potentially increased safety, and also the ability to more easily decompile and repair broken programs. However, on the flip side, a VM design that incorporates a type system seems inherently more complex and more constrained. Simply put, if you want to enforce rules around typing in your VM, then you have to build typing rules into your design, and that forces you to try to precisely categorize the kinds of computations your VM can perform with a lot more detail. This in turn forces the typed VM design to take on a lot more responsibilities.</p>
+<p>In order to track the types of object fields an array elements, the typed VM design has to have a notion of what is an object (or struct), of what is an array, etc. It has to have a pre-established notion of what is a function so that it can assign types to function calls. It also has to have a notion of every kind of control flow structure that is supported so that it can assign types to them. In contrast, an untyped VM design can easily represent any control flow mechanism, be it function calls, exceptions, continuations, and coroutines using simple jump instructions. The untyped VM also doesn't care about the way objects and arrays are implemented, because it treats memory as a linear array of bytes.</p>
+<p>Beyond having the ability to assign types to everything, it seems to me that a typed VM design must inherently take on more responsibilities than an untyped VM design. In order to maintain typing constraints while offering decent performance, the typed VM is forced to take the responsibility of implementing a sophisticated JIT compiler that will understand and enforce all these constraints. This is because the running program can't be trusted to implement its own JIT compiler as this can't be proven safe. Furthermore, if the typed VM wants to support garbage collection, it also has to take on the responsibility of implementing its own GC, because once again, the running program can't be trusted to manage its own memory while respecting typing constraints.</p>
+<p>An untyped VM design can be much more minimalistic. It has to enforce a small set of hard constraints, such as making sure that pointer dereferences respect valid address bounds so that the running program can't crash the host VM, but it doesn't really need to care about the types of values or enforcing typing constraints. For performance, it can implement a very barebones JIT compiler based on <a href="https://en.wikipedia.org/wiki/Binary_translation#Dynamic_binary_translation">dynamic binary translation</a>, but it doesn't have to care about optimizing type checks, and it can even allow the running program to manage its own memory and implement its own garbage collector.</p>
+<p>In summary, I think there's a strong case to be made that an untyped VM design can easily be much smaller and more minimalistic than a typed VM design. A simpler untyped VM has two major strengths. The first is that it doesn't place as many restrictions on running programs. Programs can implement their own control flow structures, their own GC, or even their own JIT. The second is that a smaller, simpler VM is much easier to port, reimplement and maintain. If you think about the amount of effort that would be required to build a new Java VM from scratch and make it perform well, you quickly realize that such an undertaking is only possible for a massive corporation. There is still no official RISC-V support by the JVM, and it's easy to understand why.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

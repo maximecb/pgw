@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Presented at DLS 2011</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Presented at DLS 2011">
+  <meta property="og:description" content="Presented at DLS 2011">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-10-25-presented-at-dls-2011/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/10/12/toying-with-microcontrollers-part-deux/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/10/31/code-compactness-and-optimization-levels/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Presented at DLS 2011</h1>
+<div class="post_date">October 25th, 2011</div>
+</div>
+<p>Today is the second day I'm attending the <a href="http://splashcon.org/2011/">SPLASH 2011 conference</a> in Portland, Oregon. This is a conference about many topics related to programming languages, virtual machines, program analysis and profiling, multi-core implementations, etc. The main reason I'm attending is that I'm actually a presenter. I gave my talk about Tachyon at the <a href="http://www.dynamic-languages-symposium.org/dls-11/">Dynamic Language Symposium (DLS) 2011</a> earlier today. I was fairly nervous, there were probably about 80 people in the room, but I think it went pretty well. Marc Feeley, my advisor, and Bruno Dufour gave me some good advice on how to make my presentation better and avoid getting out of breath or choking while presenting, which I believe helped. The audience seemed interested, and I got good feedback.</p>
+<p>I've been able to make some contacts with researchers and industry people (and it's not over yet, 3 more days to go). It was suggested I join the es-discuss (ECMAScript) mailing list and mention Tachyon on there, perhaps get some contributions. I also met up with my M.Sc. advisor, Prof. Laurie Hendren. Apparently, McVM, my M.Sc. project, is still being actively worked on, extended, and doing well at McGill. I'd say I'm having a pretty good time. As usual, going to conferences stimulates my creative thinking. I already have more ideas than I know what to do with...</p>
+<p>What if...</p>
+<ul>
+<li>
+<p>A compiler could cache snippets of compiled code to speed up compilation</p>
+</li>
+<li>
+<p>Tachyon's register allocator could precompile specialized allocators for each instruction type using run-time code generation</p>
+</li>
+<li>
+<p>Tachyon's assembler could also be optimized by precompiling instruction assembling functions</p>
+</li>
+<li>
+<p>On-stack replacement could be done purely using tail calls</p>
+</li>
+<li>
+<p>Tachyon could be made to compile faster by generating more compact code by default (I will probably do this!)</p>
+</li>
+<li>
+<p>Profiling hooks to detect hot functions and loops costed nothing, since they're removed by code patching or reoptimization</p>
+</li>
+<li>
+<p>Foreign Function Interfaces (FFIs) could be auto-generated from libraries using an elfdump style tool (based on discussions with labmate Erick Lavoie)</p>
+</li>
+</ul>
+<p>Sometimes, getting so many ideas at once can be scary, frustrating, even depressing, because I know I won't be able to try them all out, and these are only a fractions of the ideas I have for Tachyon. I also realize that I have much more work to do before Tachyon really is feature-complete. My research work is still in its infancy. At least though, I know I have interesting things to do, I just have to pick which ones I'll be doing!</p>
+<p>I'm making the <a href="dls-talk.pdf">Tachyon DLS 2011</a> slides available online for those who are interested.</p>
+<p>The corresponding paper, <a href="/2012/01/06/tachyons-design-principles/dls2011.pdf">Bootstrapping a Self-Hosted Research Virtual Machine for JavaScript</a>, is also available online. Cite us and you'll have my eternal* gratitude.</p>
+<p>* For up to 25 years.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

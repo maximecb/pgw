@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Higgs: Rise of the SSA JIT</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Higgs: Rise of the SSA JIT">
+  <meta property="og:description" content="Higgs: Rise of the SSA JIT">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-08-14-higgs-rise-of-the-ssa-jit/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/07/22/sometimes-a-datum-is-just-a-datum/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/08/29/down-the-rabbit-hole-that-is-inlining/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Higgs: Rise of the SSA JIT</h1>
+<div class="post_date">August 14th, 2013</div>
+</div>
+<p>Approximately 60 days ago, I decided to <a href="/2013/06/20/how-i-miss-you-dear-ssa/">begin refactoring</a> the Higgs compiler to use an <a href="http://en.wikipedia.org/wiki/Static_single_assignment_form">SSA</a> intermediate representation (IR) instead of one based on <a href="http://en.wikipedia.org/wiki/Three_address_code">3-address form</a>. The work has taken around twice as much time as I had originally anticipated, but is finally complete: the JIT compiler now generates machine code based on the SSA IR directly. Inlining isn't yet implemented in the refactored JIT, but I've had time to implement <a href="http://en.wikipedia.org/wiki/Peephole_optimization">peephole optimizations</a> on the SSA IR, and code generation improvements which take advantage of SSA. Most of the difficulties encountered were related to <a href="http://en.wikipedia.org/wiki/Register_allocation">register allocation</a>. Changes had to be made to deal with <a href="http://stackoverflow.com/questions/11485531/what-exactly-phi-instruction-does-and-how-to-use-it-in-llvm">phi nodes</a> and constant values appearing directly as instruction operands. I would say that register allocation, along with <a href="http://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">garbage allocation</a>, are among the hardest things to debug in a compiler.</p>
+<p>I've decided to go with an extremely naive register allocator for the moment. It seems that register allocation simply isn't where the performance bottlenecks are at this stage, there are much more obvious areas to optimize to obtain significant speedups. The good news is that the quality of the code generated by the new JIT is better than before, and the performance is again improved, sometimes by a factor of 2 or more. Since I'm working on a paper to be submitted at a compiler conference shortly, my work within the next 2-3 months will be focused on aspects of Higgs that directly tie into this, such as:</p>
+<ul>
+<li>
+<p>Eliminating known bugs, getting all V8/SunSpider benchmarks to run on Higgs</p>
+</li>
+<li>
+<p>Implementing inlining in the JIT and achieving performance gains as a result</p>
+</li>
+<li>
+<p>Implementing a "normal" mode without code replication in the JIT backend, for comparison purposes</p>
+</li>
+<li>
+<p>Implementing benchmarking and metrics gathering infrastructure to obtain tables of results</p>
+</li>
+</ul>
+<p>In terms of metrics, I already started generating stats such as the number of dynamic type tests executed. The hope here is that the code replication/specialization scheme will help reduce this number significantly. Other metrics will include execution time, compilation time and volume of machine code generated (in bytes). I'm going to need to write a script to extract all these stats and produce averages and tables. On the reliability front, I have to say I've spent several days of work fixing bugs. I feel like Higgs is always becoming more robust and complete, but in the medium and long term, it would really benefit from <a href="http://en.wikipedia.org/wiki/Fuzz_testing">fuzz testing</a>. If anyone is interested, I could definitely use help in the fuzz-testing and debugging area, as well as in profiling to find performance bottlenecks.</p>
+<p>In other news, my collaborator Molly Everett has improved the Higgs <a href="https://github.com/maximecb/Higgs/blob/master/source/lib/ffi.js">FFI library</a> further and started to implement a <a href="https://github.com/maximecb/Higgs/blob/master/source/lib/console.js">console library</a> to provide facilities similar to what the console.log function provides in web browsers. I decided to port some simple <a href="https://github.com/maximecb/Higgs/blob/master/source/lib/csv.js">CSV parsing code</a> I wrote a while back and made it tie into our <a href="https://github.com/maximecb/Higgs/blob/master/README.md#libraries">stdio bindings</a> just to dogfood our current infrastructure a little bit. At this point, Higgs could conceivably be used to do some useful processing on text files. Tom is already talking about trying to write SDL 2.0 bindings for Higgs, which would undoubtedly be very useful (and fun to play with).</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

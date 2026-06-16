@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Combatting Pessimism: 3 Keys to Innovation</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Combatting Pessimism: 3 Keys to Innovation">
+  <meta property="og:description" content="Combatting Pessimism: 3 Keys to Innovation">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2020-12-01-combatting-pessimism-3-keys-to-innovation/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2020/09/22/the-need-for-stable-foundations-in-software-development/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2021/02/07/on-insurmountable-technical-obstacles/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Combatting Pessimism: 3 Keys to Innovation</h1>
+<div class="post_date">December 1st, 2020</div>
+</div>
+<p>I strongly believe that in order to innovate, it's important to be able to play with ideas. When you're attacking a problem, it's useful to be able to brainstorm, come up with multiple alternative solutions, and weigh the pros and cons. It's also useful, in order to weigh the pros and cons, to try and imagine how a hypothetical solution can be integrated into an existing system, or how it could be extended, and what possible problems might arise.</p>
+<p>It's also very hard to innovate, to do something really new. Let's face it, the total world population close to reaching almost 8 billion people. In every field, there is competition on all sides. Whatever you're working on, there are likely other people working on it as well. Maybe someone else has already tried what you're thinking of doing. It's hard to stay relevant. If we just think about movie storylines, it almost seems as though every theme has been explored, and we're just being fed the same clichés over and over again. Why even bother?</p>
+<h2>You Can Do It Better</h2>
+<p>I think the first thing to remember is that while a lot of ideas have already been thought of, many of them haven't really been implemented properly. There are a lot of ideas that have been explored before, but poorly implemented. Coming up with an idea is the easy part, good execution is much harder. Most people give up without even trying. Some give up after they reach the first real technical obstacle. If you truly believe in the potential of an idea, you can separate yourself from the pack by going farther than the others who previously gave up.</p>
+<p>Back in 2002, young Elon Musk founded SpaceX, with the goal of perfecting reusable rockets and sending people to Mars. Many people laughed at him. He had made a few millions with Paypal, but only an arrogant and narcissistic Silicon Valley entrepreneur could possibly imagine that he could launch a rocket company and take on established players like Boeing and Lockheed Martin. Yet, here we are, 18 years later, SpaceX has perfected reusable rocket boosters that can land themselves, they've sent astronauts to the ISS, they own most of the satellite launch market, and they're now working on a fully reusable rocket.</p>
+<p>SpaceX weren't the first to work on reusable rockets. The idea wasn't remotely new. The <a href="https://en.wikipedia.org/wiki/Single-stage-to-orbit#History">earliest concepts</a> date back to the 1960s and there were many abandoned or failed projects. The competition was out there. There were a few multi-billion dollar companies already building rockets. If you'd asked me back in 2002, I would probably have said that Elon Musk had near-zero chance of succeeding. How did SpaceX manage to win? Probably, in part, because the existing players were overly comfortable. They had been fed secure government funding for decades. Why try to reinvent rockets when you can just keep doing the same thing and charge several hundreds of millions of dollars per launch? SpaceX won by executing an innovative vision to reduce cost with unwavering discipline. They went farther than everyone else, and built something much better.</p>
+<p>On a smaller scale, if you're an app developer, for example, you might be able to innovate over your competition by building an app with a simpler or more intuitive user interface. Maybe your app does nothing more than the others in terms of functionality, but it's much easier to use. Your UI doesn't require a user manual, users can figure out what to do quickly, and you reduce friction in a way that leads people to adopt your software.</p>
+<h2>Context Changes</h2>
+<p>The second thing you should know about ideas and innovation is that the world is always changing. It's not the same place that it was 30, 20 or even 5 years ago. That makes it worthwhile to re-explore old ideas and adapt them to the modern context. In fact, there is this commonly known concept of the right idea at the wrong time.</p>
+<p>There is a <a href="https://www.youtube.com/watch?v=uTdyb-RWNKo&ab_channel=GeneralMagic">great documentary</a> on a company called General Magic, who tried to build a smartphone with a touch screen too soon, before the technology was ready, and with poor, unfocused execution. There is also the story of the Apple Newton, which was also a flop. Many people believed that there was a clear future for Personal Digital Assistants (PDAs), but believing isn't enough. To make an idea come true, you need both good execution and an appropriate context.</p>
+<p>Context is always changing. Sometimes very rapidly. Hardware becomes cheaper and better. The internet of 2020 is not the same as the internet of 1998 or even that of 2015. The people of today are different from the people of 10 or 20 years ago. You yourself are also changing and learning new things. Sometimes it's worth re-examining old ideas. It's not because others tried and failed that something is inherently impossible. Maybe they didn't have the right skillset. Maybe they just weren't in the right time, place or mindset.</p>
+<h2>Iterative Refinement</h2>
+<p>If there's one thing you should believe in, as a software developer or as an engineer, it's in the tremendous power of iterative refinement. You should believe in your own ability to learn from mistakes, be they your own mistakes or those of others, and refine a concept over time. By testing a machine again and again, you can identify flaws, and eliminate them, one at a time. You can go from a system that is broken and unusable to one that is fast and reliable. You don't have to be fast, you don't have to burn yourself out, you just need to keep at it. SpaceX <a href="https://www.youtube.com/watch?v=bvim4rsNHkQ">needed many attempts</a> to figure out their rocket landing technology.</p>
+<p>Sometimes it feels like we take two steps forward and one step back. I think that in the software industry, it helps to spend time building a solid suite of tests to avoid regressions. The most important ingredient though, in order to keep refining a solution, is strong belief in the final vision that we are ultimately trying to reach.</p>
+<h2>Conclusion</h2>
+<p>The most important strength that you have is your belief in your own ability to learn and succeed. You also need to be able to filter out good ideas from bad ones, and to judge whether the context is right or not. Sometimes though, you also have to find a way to quiet your inner critic, the pessimistic voice inside yourself that is deeply afraid of failure. It's easy to come up with 1000 reasons why some idea might fail, but you'll never know if you don't give it a proper shot, and the best way to learn is by doing.</p>
+<p>With the current ongoing pandemic, it's very easy to be pessimistic right now. We're lonely, isolated, and it's easy to despair, to believe that the world is going to shit. That we'll never leave this behind. However, multiple vaccines are completing human trials with positive results. Tens of millions of doses have already been fabricated, with billions more to be produced in 2021. Vaccination is already underway in some countries, and set to begin in the US in about two weeks, and in Canada starting in January. It might feel hopeless right now, but there is light at the end of the tunnel. I choose to believe in human ingenuity.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

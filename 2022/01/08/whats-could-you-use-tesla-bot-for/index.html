@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What's Could You Use Tesla Bot For?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What's Could You Use Tesla Bot For?">
+  <meta property="og:description" content="What's Could You Use Tesla Bot For?">
+  <meta property="og:image" content="https://pointersgonewild.com/2022/01/08/whats-could-you-use-tesla-bot-for/teslabot.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2022-01-08-whats-could-you-use-tesla-bot-for/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2022/01/19/the-internet-changed-my-life/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>What's Could You Use Tesla Bot For?</h1>
+<div class="post_date">January 8th, 2022</div>
+</div>
+<div class="cover_image">
+<img src="teslabot.jpeg">
+</div>
+<p>Like many of you I'm sure, I watched the <a href="https://www.youtube.com/watch?v=HUP6Z5voiS8">TeslaBot announcement</a> and felt that this presentation was premature. They didn't even have plastic mockup of the robot to show, just some guy dancing in a costume. I'm very excited about the potential of general purpose robotics, but it seems like Elon Musk is once again underestimating the challenges in this problem space. Tesla's Full Self Driving project is <a href="https://www.youtube.com/watch?v=vNX89uqly6U">barely getting to the point</a> where it might become useful, and now they're going to attack a problem 100 times harder. Well, okay then.</p>
+<p>That being said, as an investor in Tesla, I'm still excited about the project. Tesla is profitable and has 16 billions in cash on hand at this point, which means they can throw more money at the problem than individual company or research group ever has. The company also has their own lightweight, low power neural network accelerator, and they've successfully designed high efficiency motors and battery systems. Their extensive manufacturing expertise also means that, if they were to mass produce such a thing, they really could bring the cost down.</p>
+<p>My own belief is that the only way to ever build general purpose robotics is to have engineers working on the problem. It's one thing to have academics working on toy problems in simulation, but real-world robotics is where the rubber meets the road. In my opinion, there is great power in incremental improvements. The way to bring forth general purpose robotics is build robots that can perform some basic tasks in a narrow real-world domain, and then gradually extend their abilities and circle of competence. A lot can be achieved through trial and error, and iterating on a design to keep improving it.</p>
+<p>Most engineers would probably tell you that building the Tesla bot, the physical component of it, is not the hard part. We know how to build the hardware, or at least, we can figure it out fairly quickly. The hard part is building the software that drives it. A general purpose humanoid robot will have to have a detailed understanding of the real world around it, and be able to handle many more special cases than a self driving car. Even the "simple" problem of teaching a robot how to reach and grasp teacup without spilling the tea or breaking the cup is a hard problem. Brewing the tea is even harder. Doing that in a house you've never visited before is harder than rocket science. So where does that leave us? Where do you start? What could you do with a Tesla bot?</p>
+<p>In my opinion, there are simpler, easier, better defined problems to attack before you try and put a humanoid robot in a home or office environment. It so happens that Tesla is looking at building an automated network of so called robotaxis, the self-driving equivalent of Uber and Lyft. In order to build something like that, you'll need a workforce to perform tasks like routinely cleaning both the inside and the outside of the self-driving cars. This is a simple, repetitive task that requires only limited communication, which makes it an ideal real-word use case for the first humanoid robots.</p>
+<p>Tesla could build a Tesla car wash which would gradually expand into an automated robotaxi service station. The problem domain of cleaning the inside and outside of Tesla's robotaxis is interesting because it's both challenging but also fairly repetitive and predictable. You can perform the task with a limited number of basic tools, and it's unlikely to put anyone's life in danger. The environment in which the task is performed can be somewhat controlled and the tools can be standardized, but there's also going to be an interesting amount of diversity in the scenarios encountered. Lastly, it should be fairly realistic to have humans provide a decent amount of demonstration data by remotely piloting the robot or through video footage.</p>
+<p>This thought experiment has me optimistic that even though fully general purpose robotics could take another 20 years or more to materialize, it's not impossible to think that something like a Tesla bot could start to become useful in less than 5 years. It's a narrow problem domain, but it's easy to think that you could start by having the robot wash the outside of the car, and then expand to having it clean the inside. You could start with just one model of car and then expand to more. You could gradually add new features such as inspecting cars for damage, charging cars, and eventually changing tires or even performing more advanced maintenance. You could even laterally expand to other similar domains such as cleaning Tesla's cafeterias or factory floors.</p>
+<p>This is a hard problem domain, but it's not impossible to find a starting point that we can realistically tackle, and once the robots start to become useful, a virtuous cycle can begin. As Tesla begins to mass produce and iterate on the robot's design, the cost can come down. This can allow academic partners and various startup to buy them at affordable prices and begin to do research of their own. The sophistication of the robot's understanding of the world can improve, and its circle of competence can expand. The most important part is to get the ball rolling.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

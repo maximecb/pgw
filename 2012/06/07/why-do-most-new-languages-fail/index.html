@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Why Do Most New Languages Fail?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why Do Most New Languages Fail?">
+  <meta property="og:description" content="Why Do Most New Languages Fail?">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-06-07-why-do-most-new-languages-fail/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/05/15/loebner-contest-makes-turing-roll-in-his-grave/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/06/21/an-inexpensive-robot-platform/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Why Do Most New Languages Fail?</h1>
+<div class="post_date">June 7th, 2012</div>
+</div>
+<p>New programming languages are invented everyday. Some of these try to solve domain-specific issues, but others hope to become big players among the general-purpose languages used by software developers. Perhaps it's simply human nature. There are already many general-purpose programming languages in wide use out there in the real world, but some of us are never satisfied. We can't help but see the flaws in the existing tools, and out of some OCD-like compulsion, we must attempt to create something better. Unfortunately, most of these new programming languages die shortly after birth.</p>
+<p>What makes the difference between programming languages that fail and those that succeed? Some will argue that it comes down to new languages having familiar semantics. Others will claim that it's purely down to luck. I believe the truth is rather simple: most new programming languages are impractical to use, on a variety of levels. Furthermore, for a new language to succeed, it must, as with any product we hope people will use, fill some kind of niche. It must do at least one thing that the others don't, or do some things better than the competition.</p>
+<p>I believe that most programming languages that fail do so for at least one of the following reasons:</p>
+<ol start="1">
+<li>
+<p>The language is impractical. This means highly unusual syntax, high verbosity, oddball semantics that don't work well together. It's the good old "it works well for the toy problem the inventor wanted to solve, but nothing else".</p>
+</li>
+<li>
+<p>The tools are impractical. The stock implementation of the language only runs on one platform. You have to build it from sources, and it has 50 dependencies, but you don't have 3 hours to spare just to try this out. The tools have weird command-line flags, it's unclear how to even compile/run a program written in this language.</p>
+</li>
+<li>
+<p>The language can't interface with anything. Hardly any libraries ship with it, it can't interface with C code easily. All you can easily hope to write in this language are command-line programs that use stdin and stdout, but your application requires access to a MIDI controller and OpenGL, you can't use this language.</p>
+</li>
+<li>
+<p>The language is slow as hell. The stock implementation isn't a compiler, but a very naive interpreter. The language runs slower than Python, but has none of Python's qualities. It's inventors claim it would be easy for someone else (not them) to make a fast compiler for it, but nobody is doing it.</p>
+</li>
+<li>
+<p>The stock implementation is incomplete and unmaintained. Perhaps this language was some cool academic idea. The bare minimum needed for one publication was implemented, but once this publication was accepted, the partial implementation was left to rot. This new language never got past the prototype stage, and probably never will.</p>
+</li>
+</ol>
+<p>For a new language to succeed, it has to be practical. It has to be useful. It has to have something to offer over the competition. This is very challenging because the world doesn't stay still. The landscape has changed since the invention of Python back in 1991. If you wanted to compete against Python in the dynamic language realm, for example, you'd be competing against Python itself, which is now a very mature product shipping with dozens of libraries and volumes of documentation. Since Python came around, the bar has been raised.</p>
+<p>To those who hope to eventually create a new programming language, I would give the following advice:</p>
+<ol start="1">
+<li>
+<p>Study programming languages in general, but also study languages you wish to compete against. If it's dynamic languages you're interested in, look at Python, Ruby and JavaScript. They each have glaring design flaws. To compete against them, you should take advantage of this and do better at the things they do poorly. You should also try to avoid introducing glaring design flaws of your own.</p>
+</li>
+<li>
+<p>Study compiler design. Speed matters more than you think. You would be smart to design your language in a way you know for a fact a compiler could easily optimize. This will give you a speed advantage over the competition, and probably make your language more robust as a result. Hint: nonsense, complex, unintuitive semantics tend to hinder optimization. Simple, straightforward, consistent semantics make compiler design and optimization simpler.</p>
+</li>
+<li>
+<p>Be grounded in reality. Make your implementation pragmatic. If your language is to become popular, it means you won't be the only user. Design your implementation to be portable, minimize dependencies on external libraries. Release precompiled binaries. Make sure your language can interface with C, because it is the de-facto standard systems language. Everything has C bindings, you should be able to support those.</p>
+</li>
+<li>
+<p>Eat your own dog food. You should be trying out your new language on various problems and making sure it works well for common use cases. You should be trying to anticipate the needs of future users.</p>
+</li>
+<li>
+<p>Put the work into it. Your compiler isn't gonna write itself, and nobody likes half-finished, untested products. If you want to create a successful programming language, you might well have to spend a few years polishing your implementation. It might take a large amount of effort for your project to be complete enough for people to notice this little gem of yours.</p>
+</li>
+</ol>
+<p>I would also like to add that it probably helps to prototype things. If you want to create a new programming language, it might be pretty easy for you to write a simple interpreter and prototype a version of your language that uses a LISP-like syntax. Just remember that there's often a pretty big gap between prototype and final product.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

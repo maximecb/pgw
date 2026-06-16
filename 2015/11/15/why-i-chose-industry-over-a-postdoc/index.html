@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Why I Chose Industry Over a Postdoc</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why I Chose Industry Over a Postdoc">
+  <meta property="og:description" content="Why I Chose Industry Over a Postdoc">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-11-15-why-i-chose-industry-over-a-postdoc/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/11/08/the-robotic-revolution/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/11/25/have-static-languages-won/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Why I Chose Industry Over a Postdoc</h1>
+<div class="post_date">November 15th, 2015</div>
+</div>
+<p>About a year ago, I was considering postdoc options. Two university professors had invited me to join their research groups. I wasn't quite sure what to do. I like research, and I like the work I've been doing as part of <a href="/2015/02/08/my-thesis-a-clearer-picture/">my PhD</a>. On the other hand, I've been growing increasingly <a href="/2015/07/27/feels-like-censorship/">frustrated with academia</a>, and more specifically, with the publication game. I've had papers rejected several times now. More than once, reviewers who were clearly associated with <a href="/2014/07/17/my-paper-was-rejected-again/">competing research projects</a> (and did not try to disguise this fact) have shot down my work with unfair, intellectually dishonest and sometimes hostile criticism. In general, I've come to feel that, at least in my sub-field, the exploration of new ideas is discouraged, and I'm not getting judged on the quality of my work, I'm getting judged on how well I play the publication game.</p>
+<p>The end of my PhD is just a few months away now, and I had to make a choice. I was tempted to continue my research on <a href="http://arxiv.org/abs/1411.0352">basic block versioning</a>, but the prospect of working very hard and maybe not being able to publish a single paper made me uncomfortable. Another issue is that the two professors who approached me for postdocs have made it clear that I should apply for a postdoc scholarship. They didn't have enough money to pay me, and if I didn't get this scholarship, I couldn't do a postdoc. They were also putting pressure on me to decide as fast as possible, I got to understand that postdoc positions are limited and it's a very competitive environment.</p>
+<p>Recently, I attended a conference and got to meet a researcher who's pretty well known in my field. He's someone I really look up to, someone who's name I'd seen on several papers that have shaped the development of my own research. We had dinner together a few times during the conference, and discussed various topics. One of the things that really struck me though, is that this guy is in the process of hopping from postdoc to postdoc. He's struggling to publish his research, getting many of his papers shot down, and having difficulty finding a position as a university professor. He's a much better academic than I am, and he's still struggling.</p>
+<p>In the meantime, I never really looked for a job, but I've been approached by IBM, Facebook, Microsoft, Google, Apple, Twitter, Amazon, Autodesk, AppNexus, Two Sigma, Reservoir Labs, D-Wave, and a few startups. It's been a stark contrast. On the one hand, academia is offering me a chance to maybe do a postdoc, but only if I'm deemed good enough by the people who judge scholarship applications, and I have to decide now. On the other hand, industry people are bending over backwards to try and get me to come talk to them. I decided to go out and try interviewing for some of these companies, and over a month ago, I made my decision. I signed a generous offer from a company in the bay area.</p>
+<p>I have no illusions that industry is some amazing utopia. I'm sure it will take me some time to adapt, and that I'll miss some of the perks of being an academic. I know I'll also miss Montreal, the city where I was born and raised. Still, I've been in university for over 11 years now, and I really think it's time for me to try something different. I think that if I continued on the academic path, I'd be headed for stagnation and a burnout. Industry, in contrast, seems full of opportunities to explore. And hey, it won't hurt that I'll be making over six times what I get as a PhD student. For the last two years, I've been renting a tiny bedroom with a window on a noisy street, and sleeping on an uncomfortable futon that's hurting my back. One of the first things I'm buying when I make it to California is a queen-sized bed, and the best mattress that money can buy.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

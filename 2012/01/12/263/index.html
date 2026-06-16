@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Two HDTVs for my Media PC</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Two HDTVs for my Media PC">
+  <meta property="og:description" content="Two HDTVs for my Media PC">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-01-12-263/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/01/06/tachyons-design-principles/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/01/12/about-tachyons-garbage-collector/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Two HDTVs for my Media PC</h1>
+<div class="post_date">January 12th, 2012</div>
+</div>
+<p>Three years ago, my girlfriend got home from work and turned on her laptop to look up a recipe. The image was garbled. The screen was cracked. Her laptop was now unusable. The laptop was already fairly old and she didn't want to spend several hundred dollars getting that fixed, she was going to buy a new one anyway, and so we decided to repurpose that computer.</p>
+<p>What do you do with an old laptop with a broken screen? You plug it to your TV, of course! Most TVs nowadays come with a VGA input, which makes it trivial to connect your laptop and use the TV as an external monitor. I plugged it in and slapped <a href="http://www.ubuntu.com/">Ubuntu Linux</a> on it. My girlfriend and I have been using this setup almost everyday ever since. We've watched all of Star Trek TNG, Kitchen Nightmares UK and Deep Space Nine on there, as well as many other TV series and movies. To make matters more practical, we bought a <a href="http://www.ebay.ca/itm/2-4G-2-4Ghz-RF-Wireless-Mini-Keyboard-Mouse-Touchpad-Mac-Laptop-PC-/120837134465?pt=PCA_Mice_Trackballs&hash=item1c22745881#ht_4003wt_1398">mini wireless keyboard + touchpad</a> on eBay. You can get them for as cheap as $30, and it charges through the USB port. It's not line-of-sight like a remote control, which is another plus.</p>
+<p>A few months ago, I bought another TV on sale for the bedroom (40" LCD, $400), and decided to make our setup a little more epic. I passed a VGA and an audio cable through the wall between the living room and bedroom, and got us a <a href="http://www.ebay.ca/itm/White-VGA-4-VGA-Female-PC-Computer-Splitter-Hub-Box-/330661533182?pt=AU_Components&hash=item4cfcf695fe#ht_2103wt_1141">VGA amplifier/splitter box</a>. The result? We can watch our favorite downloaded shows, listen to music or browse the web in both rooms using the same computer and media library. The mini keyboard/touchpad signal gets through the wall just fine.</p>
+<p>Unfortunately, I was a little disappointed to find out that the VGA amplifier didn't pass through the VGA monitor id, which made it a bit trickier to use the TVs at their full resolution. This is, however, nothing a soldering iron and two short pieces of wire can't fix...</p>
+<figure>
+<a href="vga-amplifier.jpg">
+<img alt="" src="vga-amplifier.jpg">
+</a>
+</figure>
+<p>Pins 12 and 15 <a href="http://en.wikipedia.org/wiki/VGA_connector">says Wikipedia</a>, easy enough, and I now get HDTV resolution without any Linux config file hackery ;)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

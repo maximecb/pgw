@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>übertechnoshoes</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="übertechnoshoes">
+  <meta property="og:description" content="übertechnoshoes">
+  <meta property="og:image" content="https://pointersgonewild.com/2013/10/21/ubertechnoshoes/dscn0954.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-10-21-ubertechnoshoes/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/09/24/static-typing-may-not-scale/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/10/31/higgs-the-first-jit-compiler-of-its-kind/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>übertechnoshoes</h1>
+<div class="post_date">October 21st, 2013</div>
+</div>
+<div class="cover_image">
+<img src="dscn0954.jpg">
+</div>
+<p>There's an amazing variety of electronic and microcontroller parts on eBay, and they're amazingly cheap. A little while back, I found out that you can get 5 meter (15ft) rolls of color-changing LED strips from China for less than $10, shipping cost included. These are flexible strips with RGB (red-green-blue) LED lights placed at regular intervals (usually 60 per meter). They are made to light up indoor spaces and produce quite a bit of light at about 800 lumens per meter, about half of what a 100W incandescent bulb puts out, meaning you could conceivably light up a room with one or two 5 meter rolls.</p>
+<p>What occurred to me was that these LED strips are flexible and light enough that they could be installed on clothing or accessories. They are extremely bright, and the ability to change color rapidly could make for a very interesting display, especially say, if the lights pulsed along with music. Coincidentally, friends visiting from out of town invited me to join them at the <a href="http://balenblanc.com/">Bal en Blanc</a> (White Ball), a huge rave party happening once a year in Montreal. I decided to try and build something extravagant to accessorize my outfit. My idea was simple: glue LED strips around the sole of a pair of running shoes and have some kind of beat detection to make them flash to music.</p>
+<figure>
+<a href="rgb-strip.jpg">
+<img alt="" src="rgb-strip.jpg">
+</a>
+</figure>
+<p>There were a few issues to overcome, however. For one, the LED strips run off of 12V, while the microcontroller I wanted to use for beat detection runs on 5V. The LED strips also draw quite a bit of power (around 2 amps at peak intensity for the length I was going to use). This means that if I were to run this setup off of say, 9V batteries, I could only expect about one hour of light. I was able to find a suitable battery on eBay: a 4800mAh rechargeable lithium-polymer battery pack intended to serve as backup power for security cameras, only about $17 shipped. Powerful enough to last through the 8-12 hours of a rave party (you can totally dance that long without drugs, right?). Unfortunately, this battery pack was clearly much too big to fit on shoes.</p>
+<figure>
+<a href="kgrhqrhjdgfhlji2qbvbr-dfr66w60_3.jpg">
+<img alt="" src="kgrhqrhjdgfhlji2qbvbr-dfr66w60_3.jpg">
+</a>
+</figure>
+<p>I decided to go for a simple solution, which was to wear the microcontroller and battery on a belt, and run cables through the legs of my pants. I lucked out and found a pair of generic white sneakers on sale for $10 at Payless. I installed connectors on the shoes so I could easily disconnect the cables when I wanted to take the shoes off, and glued the strips to the shoes using a hot glue gun. The strips can be cut to the desired length every 3 LEDs.</p>
+<figure>
+<a href="dscn0954.jpg">
+<img alt="" src="dscn0954.jpg">
+</a>
+</figure>
+<figure>
+<a href="dscn0588.jpg">
+<img alt="" src="dscn0588.jpg">
+</a>
+</figure>
+<p>For the controller, I tried both an off-the-shelf music-reactive controller, and also built my own using an atmega8, a simple <a href="http://tinkerlog.com/2007/05/20/cheap-sound-sensor-for-avr/">preamplifier circuit</a>, and some <a href="http://en.wikipedia.org/wiki/2N7000">2n7000</a> MOSFETs. The off-the-shelf controller seemed to behave well in my living room, but worked terribly in a club setting, where the volume was much louder and there were lots of people talking/shouting. It basically would hold a solid color and not react to the music anymore. The controller I built used relative measures to try and adapt to the ambient volume, and only sampled the sound a few hundred times per second, so as to use low-frequency (bass) information only.</p>
+<figure>
+<a href="dscn0977.jpg">
+<img alt="" src="dscn0977.jpg">
+</a>
+</figure>
+<figure>
+<a href="dscn0971.jpg">
+<img alt="" src="dscn0971.jpg">
+</a>
+</figure>
+<p>The shoes were very bright and got me lots of compliments. Unfortunately, they didn't quite last the whole night. The hot glue wasn't strong enough, and after a few hours of dancing, the LED strips started coming off the shoes. If I ever do this again, I'll probably use <a href="http://en.wikipedia.org/wiki/Epoxy#Adhesives">epoxy</a> to glue the strips instead, and possibly cut the strips at the middle of the shoes and connect the two parts with flexible wires. The strips don't bend very well from side to side, and I suspect this contributed to them coming off faster, as the shoes need to bend in the middle when you walk or dance.</p>
+<p>In the meantime, I've begun designing a new project in the same vein. It's going to be a glove with an LED strip and an accelerometer that can sense your movements. The big advantage here is that you'll be able to control the lights directly with your dancing, possibly even specific gestures. This has the nice added benefit that it circumvents all the complexities of beat detection, which is hard to do properly and often unreliable. I'm also thinking of installing a large 10W RGB LED in the palm (like a rainbow rave version of Iron Man's weapon). My tentative name for this project is the <a href="http://www.youtube.com/watch?v=Ya0F83Bmbl4">Power Glove</a>.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

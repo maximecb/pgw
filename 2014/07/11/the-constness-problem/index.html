@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Constness Problem</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Constness Problem">
+  <meta property="og:description" content="The Constness Problem">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-07-11-the-constness-problem/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/05/08/news-of-higgs/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/07/17/my-paper-was-rejected-again/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Constness Problem</h1>
+<div class="post_date">July 11th, 2014</div>
+</div>
+<p>These days, I spend most of my programming time working on the Higgs JavaScript JIT compiler for my thesis, and most of the code I write is in <a href="http://dlang.org/">D</a>. I don't always take the time to write the best, most carefully engineered code, especially if I know I might rework a given piece of code later. Still, I try to pay some attention to <i><a href="http://en.wikipedia.org/wiki/Best_coding_practices">generally-accepted-best-software-design-practices</a></i>. One thing I try to pay special attention to is which data should be immutable and which shouldn't. I write my code in an imperative language, but I too have come to accept that immutable data and immutable data structures can make a program safer and easier to debug.</p>
+<p>The main thing I'm working on right now, for Higgs, is a system of <a href="http://www.infoq.com/presentations/javascript-objects-spidermonkey">shapes</a> (aka <a href="http://debuggable.com/posts/understanding-hidden-classes-in-v8:4c7e81e4-1330-4398-8bd2-761bcbdd56cb">hidden classes</a>) to describe object layouts in memory. In the Higgs object system, JavaScript objects are essentially a flat list of slots which can contain values. Shapes are essentially a tree data structure, where each node describes a property in an object, and most importantly, where that property will be stored in a flat object layout (the slot index associated with that property). Each object has an associated pointer to a node in the shape tree. Through this shape node pointer, you can find the properties stored in that object, their names, and which slot you can find them at. The important thing is that the shape tree nodes are essentially immutable. Once such a node is created, the name of the property it describes, the associated slot index, and all other attributes of the node should never change.</p>
+<p>As someone who wants to write safe, descriptive code, I wanted to explicitly express those immutability constraints in my code. I wanted to use <code>const(ObjShape)</code> pointers when manipulating shapes. I also wanted to make the fields of the <code>ObjShape</code> class themselves <code>const</code>. Unfortunately, this plan didn't work out. The <a href="http://www.prowiki.org/wiki4d/wiki.cgi?D__Tutorial/CompilingLinkingD">DMD</a> compiler wasn't having it. I quickly found out that the D programming language (which is quite like C++ in this regard) just didn't offer a way to express the semantics I wanted. Introducing <code>const</code> or <code>immutable</code> keywords in the code introduced strange and unpredictable compiler errors. Struct objects that could be copied by value before couldn't anymore. Some of the errors reported were entirely nonsensical problems I never saw coming.</p>
+<p>Consider the following snippet, and the compiler error it produces</p>
+<pre><code>class A { const(A) parent; }
+
+void main()
+{
+    auto a = new A();
+    auto p = a.parent;
+    p = new A(); // test.d(7): Error: cannot modify const expression p
+}
+</code></pre>
+<p>This is complete utter nonsense, and it deeply offends me! I specified that the <code>parent</code> field of class <code>A</code> should be constant. In D, you get "constness all the way down", which means that I can't mutate the <code>parent</code> field, and I also can't mutate the object that the <code>parent</code> field points to. But, where in this program did I specify that the variable <code>p</code> was immutable and could not be redefined? Nowhere! This is problematic, because as far as I know, there is pretty much no way to write the type of <code>p</code> in such a way that <code>p</code> points to a <code>const(A)</code> object, but <code>p</code> remains mutable, not without ugly, unsafe type casting tricks. There's no way to have a mutable variable that points to an immutable object? That's insane!</p>
+<p>In my opinion, C++ and D both lack expressivity when it comes to constness. D's <code>const</code> and <code>immutable</code> keywords are is simply overpowering. It's an issue in the other direction, too, because "constness all the way down" means that I can't have a class field that's immutable without also being forced to assume that the object pointed to by the field is entirely immutable. That's not necessarily what I want. In the end, I've been forced to give up and remove <code>const</code> keywords on many occasions, because I end up fighting with the type system too much, it's getting in my way.</p>
+<p>It's good that modern imperative languages have some tools to express purity and immutability. However, I think that there's an issue of granularity. There are ways in which it makes sense to talk about constness, and ways in which it doesn't. I'd almost say that I prefer JavaScript's notion of constness, because it's much simpler. In JavaScript, you can <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">make an object property constant</a>, but what that field points to does not have to be immutable. That is all! This might seem primitive, since you're only able to painstakingly mark constness on individual object properties one at a time. It might feel like the only tool you have to deal with immutability in JavaScript is a tiny toothpick. This, however, is forgetting that JS has powerful introspection capabilities which allow to write code that makes an entire data structure immutable with a single function call. The language offers you the tools to express constness any way you want to.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>They Might Never Tell You It's Broken</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="They Might Never Tell You It's Broken">
+  <meta property="og:description" content="They Might Never Tell You It's Broken">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2019-11-02-they-might-never-tell-you-its-broken/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2019/10/19/balancing-fun-stress-and-profit/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2019/11/05/its-been-done-before/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>They Might Never Tell You It's Broken</h1>
+<div class="post_date">November 2nd, 2019</div>
+</div>
+<p>This blog post is a public service announcement (or maybe a reminder) for anyone working on a programming project that they already have, or intend to release to the public, be it as something open source, a pet project, or a startup.</p>
+<p>I've worked on a few successful open source projects over the last 10 years. I would consider these projects successful in that they got hundreds of stars on GitHub and each attracted multiple open source contributors. I actually shut down one of these project because reviewing pull requests alone was becoming a second unpaid job on top of my regular job, taking multiple hours out of my evenings after work, which became exhausting, but that's a story for another post. What I want to tell you about today is something important, that I believe any developer should know, but I personally didn't understand until I had been working on open source projects for a few years.</p>
+<p>As part of my PhD, I developed Higgs, an experimental JIT compiler for JavaScript written using the <a href="https://dlang.org/">D programming language</a>. I developed it on GitHub, completely in the open, and wrote about my progress on this blog. Pretty soon, the project had 300 stars on GitHub, a handful of open source contributors, and I was receiving some nice feedback. It made me happy to have so many people taking notice of my research work. As part of Higgs, I had written my own x86 machine code generator, which enabled it to do machine code pirouettes LLVM couldn't. I did all my development on Linux, but had done my best to keep the code as portable as possible, and so, that code would work fine on MacOS as well, I had assumed. Unfortunately, I was wrong.</p>
+<p>About a year into its development, Higgs had enough of a small community that it made sense to have create a chat room to exchange with other contributors and users. About a dozen people joined over the next two months. One day, someone I had been exchanging with on the chat room for two weeks reached out to me to signal a strange bug. They couldn't get the tests to pass and were getting a segmentation fault. I was puzzled. They asked me if Higgs had MacOS support. I explained that I'd never tested it on MacOS myself, but I couldn't see any reason why it wouldn't work. I told this person that the problem was surely on their end. Higgs had been open source for over a year. It was a pretty niche project, but I knew for a fact that at least 40-60 people must have tried it, and at least 50% of these people must have been running MacOS. I assumed that surely, if Higgs didn't run on MacOS at all, someone would have opened a GitHub issue by now. Again, I was wrong.</p>
+<p>The problem, it turned out, was that MacOS had more strict requirements for keeping the stack pointer aligned. This wasn't difficult to fix. The more important lesson, that I didn't understand until that point, is that you can't count on the people trying your project to quickly and reliably signal bugs to you. Most of the time, if it doesn't work, they won't report the problem. There are a few reasons why this might be:</p>
+<ul>
+<li>
+<p>They assume that someone else has already reported the problem, and there would be no point in saying anything. The bigger your project, the more likely people are to assume that someone else has already reported the issue.</p>
+</li>
+<li>
+<p>They think the fault might be on their end, they may be confused and feel too embarrassed to reach out for help. Nobody wants to look stupid or get told to <a href="https://en.wiktionary.org/wiki/RTFM">RTFM</a>, and so, they choose silence.</p>
+</li>
+<li>
+<p>They are just trying your project out of curiosity, and are in no way invested. They will find an alternative to your project, or go do something else.</p>
+</li>
+</ul>
+<p>It's a horrifying thought, but it could be that for every one person who opens an issue on GitHub, 100 or more people have already tried your project, run into that same bug, and simply moved on. So, what can you do? You can encourage people to report bugs. I visibly write in my GitHub README that reporting bugs is encouraged and welcome: "Please tell me if something is wrong, you're helping me make this project better." Another obvious thing that you can do is to have robust automated testing. Some continuous integration services can automatically test on both Linux and Mac.</p>
+<p>More broadly, if you want your project to be successful, I think it's important to try and put yourself in the user's shoes. Every once in a while, try installing your software from scratch, along with all the dependencies. Ideally, you want your installation process to be as simple and frictionless as possible. If your software requires the user to perform 20 steps to get it running, you'll be losing potential users even before they have a chance to figure out if it works on their system or not. In general, I find that writing software with a <a href="/2018/02/18/minimalism-in-programming/">minimalist design philosophy</a>, minimizing external dependencies as much as is reasonable to do so, will help you avoid bugs, and streamline your installation process.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

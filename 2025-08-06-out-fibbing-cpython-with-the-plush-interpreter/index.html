@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Out-Fibbing CPython with the Plush Interpreter</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Out-Fibbing CPython with the Plush Interpreter">
+  <meta property="og:description" content="Out-Fibbing CPython with the Plush Interpreter">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/bear_chess.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-08-06-out-fibbing-cpython-with-the-plush-interpreter/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2025-08-03-creating-a-toy-language-with-actor-based-parallelism/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-10-12-optimizing-the-plush-interpreter-for-faster-raytracing/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Out-Fibbing CPython with the Plush Interpreter</h1>
+<div class="post_date">August 6th, 2025</div>
+</div>
+<div class="cover_image">
+<img src="bear_chess.jpg">
+</div>
+<p>In the <a href="/2025-08-03-creating-a-toy-language-with-actor-based-parallelism/">last post</a> I talked about Plush, the toy programming language with actor-based parallelism I've been tinkering with. The implementation is still immature, but it's reached a point where I can write fun programs that produce 2D/3D graphics and parallelize things over multiple CPU cores. Something I'd like to try soon, for the fun of it, is to animate a spinning cube with software rendering (rasterization). Before I get to that though, I'd like to optimize my interpreter a little bit so that I'm not leaving too much performance on the table, which gets us to today's topic.</p>
+<p>My PhD advisor seemed to have an obsession with the recursive <a href="https://en.wikipedia.org/wiki/Fibonacci_sequence">Fibonacci</a> microbenchmark, or just <code>fib</code> for short. It was almost like a ritual. Every time he would bring up some kind of compiler or language implementation, one of his first goals was to get to the point where he could run this tiny program, and if you were working on some kind of compiler, he would ask you how fast it could run <code>fib</code>. Sometimes he would also ask to compare the performance of your compiler against his Scheme compiler on this microbenchmark, and you couldn't tell if he was making some kind of a joke or if he was trying to compete with you, or both.</p>
+<pre><code>fun fib(n)
+{
+    if (n &lt; 2)
+        return n;
+
+    return fib(n - 1) + fib(n - 2);
+}
+</code></pre>
+<p>It's well-known that microbenchmarks are not representative of the overall performance of language implementations. There are many reasons for that, the most obvious being that they tend to overemphasize certain aspects of your implementation while completely disregarding others. In this case, the <code>fib</code> microbenchmark heavily emphasizes how fast you can execute function calls. This is not a bad thing to measure though, as function calls are central to modern programming languages, and they can also be a significant source of overhead.</p>
+<p>Testing out the Plush interpreter, I found that I could run <code>fib(38)</code> in 9.10 seconds with a release build. That's over 126 million function calls, so about 14 million function calls per second. Just for fun I decided to compare it against Python 3.13.5 (released June 2025) and that ran in 5.70s, meaning Plush was about 60% slower. Ouch. CPython also uses a token-threaded interpreter, so in theory this is not an unfair comparison. This situation could not be allowed to stand, so I decided to look at whether it was possible, with a few simple tweaks, to get to the point where we could outperform CPython on <code>fib</code>.</p>
+<p>I started by dumping the bytecode instruction sequence for <code>fib</code>, which is 18 instructions long:</p>
+<pre><code># fib
+get_arg { idx: 0 }
+push { val: Int64(2) }
+lt
+if_false { target_ofs: 2 }
+get_arg { idx: 0 }
+ret
+get_arg { idx: 0 }
+push { val: Int64(1) }
+sub
+push { val: Fun(FunId(256)) }
+call { argc: 1 }
+get_arg { idx: 0 }
+push { val: Int64(2) }
+sub
+push { val: Fun(FunId(256)) }
+call { argc: 1 }
+add
+ret
+</code></pre>
+<p>Like CPython, the Plush interpreter is a stack-based bytecode VM. The <code>get_arg</code> instruction pushes the value of a function argument on the stack, <code>push</code> is used to place a constant on the stack, and <code>lt</code> performs a less-than comparison, etc. The first thing that stood out to me is that I am pushing a constant representing a function before calling it with the <code>call</code> instruction. In this case we know the function we're calling, and so it seems like it would be easy to combine the <code>push</code> and the <code>call</code> into some kind of <code>call_direct</code> instruction which embeds the function to call into the bytecode instruction. I made that change, which saves two bytecode instructions, and it got me from 9.10s to 8.44s.</p>
+<p>Some of you may be wondering why this is faster. We have less bytecode instructions but we're really doing the same computation, the same work that we were doing before. The important thing to know is that much of the performance loss incurred by an interpreter comes from the overhead of dispatching instructions. In general, bigger instructions that do more work are better for interpreter performance because they allow us to reduce dispatch overhead. Bigger instructions also give our compiler a bigger chunk of code to optimize in one piece, which could lead to more effective optimizations.</p>
+<p>For the next step I pulled out the Linux <code>perf</code> tool, a profiler, to get a better look at the main sources of overhead in my interpreter. Plush uses a system where it lazily compiles functions into bytecode. That is, when you run a script, everything gets parsed into an <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> (AST), but functions only get compiled into bytecode when you first call them. One of the main reasons to do that is that in practice, as much as 90% of the code in a program may never be run, and so saves time and memory to avoid compiling code that isn't executed. Another reason to do this is that the longer you wait to compile a function, the more information you have to potentially help you optimize it.</p>
+<p>The <code>call</code> instruction, when invoked for a function, will look up this function into a hash table to see if it's already been compiled, and if so, at which offset or <a href="https://en.wikipedia.org/wiki/Program_counter">Program Counter</a> (PC) it should jump. As I suspected, this hash lookup adds quite a bit of overhead. I didn't quite realize how much, however. I implemented a new instruction <code>call_pc</code>, which can call a function that has already been compiled into bytecode. I then made it so that the <code>call_direct</code> instruction will trigger the compilation of a function if necessary, and then overwrite itself with a <code>call_pc</code>, which doesn't need to do a hash lookup anymore. Patching instructions like this is a classic optimization technique that is sometimes referred to as <a href="https://en.wikipedia.org/wiki/Self-modifying_code">self-modifying code</a>. Amazingly, introducing <code>call_pc</code> took us all the way down to 5.13s. So removing that hash lookup with code patching had a huge amount of impact. This is already significantly faster than CPython's 5.70s, but can we do better? We certainly can.</p>
+<p>Looking back at the bytecode sequence above, there's another obvious optimization that we can make. The program computes <code>n - 1</code> and <code>n - 2</code>, and to do that, it uses 3 bytecode instructions. Something we can easily do is create a new instruction, <code>add_i64</code>, to add an integer constant to a value without needing to push the constant separately from the <code>add</code> or <code>sub</code> operation. In this case we'll be adding negative integers. Obviously, we could play all sorts of games with fusing different instructions together, and in the limit we could implement most of the benchmark into a single instruction, which would feel like cheating, but adding and subtracting integers is a fairly common operation, so this optimization should generalize pretty well to other code. This new optimization takes us from 5.13s to 4.67s.</p>
+<p>I figured out that I could do a tiny little bit more. My <code>add_i64</code> implementation would first pop the top of the stack, add the constant, and then push the new value on top of the stack. However, it's more efficient to modify the top of the stack in-place without pushing and popping. You would think that the Rust compiler would be smart enough to optimize the stack pop and push together, but it seems that it's not. Modifying the top of the stack in-place brings us from 4.67s down to 4.57s. Neat! With just a little bit of focused effort, we've made the Plush interpreter just shy of twice as fast on this microbenchmark.</p>
+<p>Out of curiosity I decided to see how much these optimizations improved the performance of my parallel raytracer program and found... Absolutely zero impact. This is a bit surprising given that the raytracer executes many function calls for each pixel. However, I did start this post by stating that microbenchmarks can overemphasize certain aspects of an implementation while disregarding others. The issue here is that there are probably other (even worse) inefficiencies that affect the raytracer program but which are not represented in <code>fib</code>. Stay tuned and find out what can be so inefficient that it renders this optimization work invisible in the next episode!</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

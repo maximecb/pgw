@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Indirection Problem</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Indirection Problem">
+  <meta property="og:description" content="The Indirection Problem">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2012-04-20-the-indirection-problem/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/04/11/why-lisp-never-took-off/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2012/04/23/musictoy-music-made-simple/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>The Indirection Problem</h1>
+<div class="post_date">April 20th, 2012</div>
+</div>
+<p>In this post I'm going to talk about a performance disadvantage inherent to most (if not all) current implementations of dynamic languages and, more generally, languages that make use of <a href="http://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">garbage collection</a>. This problem affects JavaScript, but also Python, Lua, Scheme and even Java to some extent. Surprisingly, this performance issue is one that is seldom talked about. When you ask someone why JavaScript code is slower than C, they will mention dynamic typing, run-time checks, <a href="/2012/04/02/inefficient-numerical-operators/">number types</a> and other sources of overhead, but they will seldom mention <a href="http://en.wikipedia.org/wiki/Indirection">indirection</a>.</p>
+<p>What do I mean by indirection? Why is it a problem? In JavaScript (and most other dynamic languages), objects, arrays, functions and strings are reference types rather than value types. Concretely speaking, all JavaScript objects are allocated on the heap and manipulated through pointers. This means that accessing object properties necessarily means going through one or more levels of indirection. You might think that this isn't such a big problem. Most objects in C/C++ are also heap-allocated, after all. There is one big difference, however: in C and C++, the programmer can intentionally nest (inline) objects inside of each other. In JavaScript, this cannot be done manually.</p>
+<p>As a simple example, suppose you wanted to define and instantiate an object representing a car and its 4 wheels, with each wheel having angles of direction and rotation. In C, you could do the following:</p>
+<pre><code>struct Car
+{
+    char makeModel[128]; // String for the car's make and model
+    struct Wheel
+    {
+        double direction; // Wheel direction angle
+        double rotation;  // Current angle of rotation
+    } wheels[4];
+} car;
+</code></pre>
+<p>In JavaScript, this could be done as follows:</p>
+<pre><code>// Car object literal
+var car =
+{
+    makeModel: 'make and model string',
+    wheels: [
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+        { direction: 0, rotation: 0 },
+    ]
+}
+</code></pre>
+<p>Both of these accomplish the same goal. In either language, one can write <code>car.wheels[0].direction = 0.32</code>, for example. In practice, there are several differences as to how this will be implemented, however:</p>
+<ol start="1">
+<li>
+<p>In C, the car object is explicitly allocated on the stack. In JavaScript, it is implicitly allocated on the heap.</p>
+</li>
+<li>
+<p>The C object, including the wheel objects and the rotation angles, is one contiguous piece of memory. This is not the case in JavaScript. Modern JS engines will allocate a car object, a string object, an array object to store the wheels, and individual objects for each wheel. The JS car object only contains pointers.</p>
+</li>
+<li>
+<p>In C, the rotation angles are contained within the wheel objects, in the same contiguous piece of memory.  Under Google V8, this would not be so, the rotation angles, if they are floating-point, would each be stored in objects of their own.</p>
+</li>
+</ol>
+<p>These differences have a performance impact. In C, accessing a wheel rotation angle only requires accessing the stack pointer at some fixed offset. There is only one level of indirection. In JavaScript, there is indirection from the car variable to the car object, from the car object to the wheel array, from the wheel array to the wheel objects, and potentially from the wheel objects to the rotation angles. Concretely, this means:</p>
+<ol start="1">
+<li>
+<p>Allocating all of the needed JavaScript objects will be slower. There may need to be multiple calls to the allocator. Object headers and pointers may need to be initialized.</p>
+</li>
+<li>
+<p>Accessing object properties will also be slower in JavaScript. This is not so relevant in this toy example, but you could imagine that if we were updating a list of car objects in a game engine loop there could be a significant impact on performance.</p>
+</li>
+<li>
+<p>The JavaScript representation will use more memory. In addition to storing the wheel objects, we have to store a header for these objects and pointers to the said wheels. Memory alignment constraints might impose additional memory waste as well.</p>
+</li>
+<li>
+<p>Because the JavaScript representation is larger, it will not fit in as few cache lines as the C representation, this can cause further performance losses when dealing with large sets of objects.</p>
+</li>
+<li>
+<p>In Google V8, incrementing a wheel rotation angle would cause a new floating-point object to be allocated.</p>
+</li>
+</ol>
+<p>I'm well aware that there are ways to deal with some of these issues in JavaScript. Perhaps the objects could be represented differently (we could have avoided the array). Perhaps we could have used the new <a href="https://developer.mozilla.org/en/JavaScript_typed_arrays/Float64Array">Float64Array</a> extension for rotation angles. The point is simply that often, the intuitive JavaScript representation performs worse due to the various reasons I've outlined. The programmer can do some things to recoup part of the performance, but this is often at the cost of readability. Ideally, one would want the (JIT) compiler to be able to mitigate or eliminate these performance issues without the code having to be changed.</p>
+<p>One of the main reasons why I wrote this post is because I know that compilers <i>can</i> do more in this regard, and more would probably be done if compiler writers were more aware of these issues. The Java VM can do escape analysis and automatically allocate some objects on the stack when this is found to be safe. Papers have also been published, on the topic of <a href="http://dl.acm.org/citation.cfm?id=349344">automatic object inlining</a>, that is, automatically allocating child objects inside of parent objects when possible. Such optimizations can help eliminate indirection and memory usage overhead. However, these techniques are not widespread in modern JIT compilers, and more research could be used to refine them.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

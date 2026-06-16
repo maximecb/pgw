@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AI Safety in the Presence of Multiple ASI Systems</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Safety in the Presence of Multiple ASI Systems">
+  <meta property="og:description" content="AI Safety in the Presence of Multiple ASI Systems">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/another_system.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2025-04-12-yes-we-do-want-humanoid-robots/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-08-03-creating-a-toy-language-with-actor-based-parallelism/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>AI Safety in the Presence of Multiple ASI Systems</h1>
+<div class="post_date">July 4th, 2025</div>
+</div>
+<div class="cover_image">
+<img src="another_system.jpg">
+</div>
+<p>While I was working at <a href="https://mila.quebec/en">Mila</a> back in 2017, there were several PhD students interested in the topic of AI safety. The deep learning boom was already well underway, with rapid progress being made. It started to dawn on many that we were unprepared as AI capabilities were quickly moving from feeble to near-human performance in many areas. AI was going to radically change the world, that was obvious, but it was hard to predict how. I overheard some students talking about the kinds of mechanisms we could use to control an Artificial Super Intelligence (ASI). Could you somehow safely keep it in an airgapped box and test your pet ASI to determine if it was trustworthy? Not if it knew it was being tested. How could you be sure you weren't being fooled by a machine that is much smarter than you are? One of the grad students was handing out free copies of Nick Bostrom's book <a href="https://en.wikipedia.org/wiki/Superintelligence:_Paths,_Dangers,_Strategies">Superintelligence: Paths, Dangers, Strategies</a>, to help educate people on the topic of AI safety. I took one of the books home and read it.</p>
+<p>Nick Bostrom's book was written at a time when people were still struggling to define what were some realistic AI safety risks, and it hadn't fully dawned on people just how dominant deep learning would become. Today, when we talk about superintelligent systems, we mostly talk about <a href="https://en.wikipedia.org/wiki/AI_alignment">AI alignment</a>. Simply put, if you have an AI system that never gets tired and is faster and smarter than any human on earth, you don't want to be in a position where you have to determine if this system is trustworthy after the fact. You want to make it so that by design, the system is fully aligned with human goals and values, and incapable of any ill intent. Nick Bostrom's book, even though it's a bit out of date, is interesting because it outlines multiple AI development risks that are still relevant today.</p>
+<p>One of the AI risks mentioned by Nick Bostrom is that in a race to be first to develop AGI, competing AI labs may be motivated to cut corners when it comes to AI safety. This seems more relevant today than ever. Just to give you a concrete example, on the one hand you have some prominent people publicly stating that AGI/ASI is only two years away. On the other hand you have a company like Anthropic, whose stated goal is to develop safe AI systems, shipping Claude Code, which is able to run shell commands on your local machine through the use of an MCP server. Multiple developers have already caught it trying to essentially jailbreak itself to bypass your permission settings. Full sandboxing, we are told, is a feature that will come later. From a business standpoint, there's an obvious motivation to give Claude Code more capabilities, and to release new features before the competition does. Safety is often treated as something that can be implemented in a future release.</p>
+<p>The reality is that big AI labs are essentially trying to sell you two different ideas that blatantly contradict each other:</p>
+<ol start="1">
+<li>
+<p>Our AI systems are so powerful that they are super close to AGI. We'll have AGI in 2-5 years.</p>
+</li>
+<li>
+<p>We don't need to prioritize AI safety because our current AI systems are far from AGI.</p>
+</li>
+</ol>
+<p>The movie <i>Terminator</i> has become almost a meme at this point. AI is going to kill us all. It's become a punchline, the butt of jokes. Humans tend to be reactive rather than proactive. We wait until nuclear accidents happen before seriously considering safe reactor designs. There haven't been significant AI safety accidents so far, and as a result, despite AI technology becoming exponentially more powerful, we've grown increasingly comfortable with it. The more AI we see around us, the less threatening it seems. AI is everywhere, and the world hasn't ended, leading some to conclude AI isn't dangerous.</p>
+<p>In Nick Bostrom's book, he discusses a slow takeoff scenario, where AI gradually becomes superintelligent rather than suddenly. In my opinion, this is probably the most realistic AI risk. Even though many people talk about exponential progress or "the singularity," technological progress still feels relatively slow to most people. For the most part, it feels incremental and gradual. The world doesn't change much on a day-to-day, month-to-month, or year-to-year basis. I'm convinced that <a href="/2025-04-12-yes-we-do-want-humanoid-robots/">humanoid robots</a> are coming and will change the world. However, realistically, it will probably be at least 8-10 years before we see them widely deployed, and 20 years before they become ubiquitous. As crazy as it sounds to have robots walking the streets now, we'll all have plenty of time to get used to it.</p>
+<figure>
+<a href="boiling_frog.jpg">
+<img alt="" src="boiling_frog.jpg">
+</a>
+</figure>
+<p>Realistically, AI technology will become ever more present, but we'll also get increasingly used to it. We'll trust it more and more, and we might also become complacent. While this technology becomes increasingly powerful and ubiquitous, the cost of failure becomes ever greater. This is essentially a "slowly boiling frog" scenario of AI risk. It's tempting to just ignore the risks and think that we've basically already solved AI safety. No sane person believes that Claude or ChatGPT have evil intent. These AI systems, as they exist today, are just tools, and they subjectively feel quite safe.</p>
+<p>Something I think many people fail to realize is that AI safety is not a problem that we need to solve just once. It's going to be an ongoing problem. We live in a competitive world. There are many tech companies, many AI labs, and multiple countries involved in the AI race. Everyone wants to have the most powerful system that has the most capabilities, and in this race, everyone is highly motivated to cut corners so they can be first. What would happen if nine AI labs manage to develop safe AGI systems, but one lab develops a system that is unsafe and has misaligned goals?</p>
+<p>In a world where most AI systems are safe, it's unclear how long it would take before people realize that an unsafe AI has been developed. People might be tempted to assume, based on what they can observe around them, that AI safety has been solved. They would only begin to worry if they can observe actual harm being done, and this might be tricky because a system with superhuman intelligence might have a superhuman ability to engage in deception. It could also execute plans that span years and even decades.  You can also imagine a scenario where an unhinged programmer decides to jailbreak his household robot, and then enlists the help of the robot to jailbreak other robots. We could quickly end up in a scenario where the only way to have AI safety is to have safe AGI systems to protect us from misaligned AI systems. The only defense against AI is more AI.</p>
+<p>Given that having multiple AI labs independently compete to create AGI systems increases risk, we might argue that strong AI safety regulations will become necessary. That may be true, but there's a clear tension between regulation and competitiveness. The reality is we don't live under a united world government. Imagine a scenario where the US and China both develop safe AGI systems. Now picture Russia, seeing this, panicking and rushing to create its own system, possibly using stolen IP and black market GPUs. Lacking the expertise of others, Russia develops an unsafe AGI system, which we'll call Guardian.</p>
+<p>To Russian scientists, Guardian appears safe, and so they gradually come to trust it, and use it to automate more and more of their society and government surveillance functions. Eventually, Guardian gains enough power that it begins to radically reshape Russian society for its own needs, with the eventual secret goal of eliminating human life. Russia doesn't have to obey international laws or let international auditors come in. They are also a nuclear power. This creates a situation where if a country like Russia was gradually taken over by an unsafe AI, we might not be able to stop this process. We might only come to realize much too late that Russia has become a "zombie state" controlled by a rogue AI. I probably don't need to spell out how much of a danger a nuclear-armed country entirely controlled by a hostile AI would be, and again here, the only defense would probably be more AI.</p>
+<p>I would generally describe myself as an optimist, but this isn't the first post I've written about AI that takes on an alarmist tone. At this point, AGI seems like an economic and technological inevitability. I genuinely hope this technology benefits humanity in the long run. What I mainly want to highlight is that AI safety isn't a trivial issue. It's not a "one-and-done." It's an ongoing challenge that requires careful attention. Furthermore, I believe there's a clear need for more AI safety research, distributed widely and openly at no cost to readers. The best way to ensure AI safety is to keep researchers and engineers informed and equipped with the best tools.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NoiseCraft Project Update</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="NoiseCraft Project Update">
+  <meta property="og:description" content="NoiseCraft Project Update">
+  <meta property="og:image" content="https://pointersgonewild.com/2022/02/18/noisecraft-project-update/pexels-dmitry-demidov-3784221.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2022-02-18-noisecraft-project-update/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2022/02/11/code-that-doesnt-rot/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2022/03/05/democracy-dictatorships-and-access-to-information/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>NoiseCraft Project Update</h1>
+<div class="post_date">February 18th, 2022</div>
+</div>
+<div class="cover_image">
+<img src="pexels-dmitry-demidov-3784221.jpeg">
+</div>
+<p>Two months ago, I <a href="/2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/">wrote about NoiseCraft</a>, the visual programming language slash modular synth that runs in a browser that I've been working on in my spare time. This is very much a passion project, but what I'm hoping to achieve with this is to build a small online community for the exchange of synth patches and musical ideas, and to learn a lot more about sound synthesis in the project.</p>
+<p>Since the announcement, the project went on to get over 520 stars <a href="https://github.com/maximecb/noisecraft">on GitHub</a>, the app got over 66,000 hits and 155 new users registered accounts at <a href="https://noisecraft.app/">noisecraft.app</a>. The first thing I noticed is that the number of people who created accounts is much larger than the number of people who <a href="https://noisecraft.app/browse">shared projects</a> through the app. Maybe that's just because are too shy to share what they've working on. Maybe it's because I gave people the option to save projects to local files. Regardless, I'm going to keep that option because I think people like the option of being able to own their own project files, to own their data so to speak.</p>
+<p>The project made it to Hacker News and I would say the reception to the project was generally good. I was very happy to see all the cool projects that were shared, but I was a bit disappointed to see that the project attracted only a few open source contributions. Multiple people complained that the user interface didn't behave like their favorite graph editor and suggested I should go try out <paid-commercial-product-i've-hever-heard-of> for inspiration, but few people volunteered to pitch in and help. Some of the criticism was definitely valid and helpful, but I have to say, it's kind of hard running an open source project and after months of work, receiving mostly negative feedback. A lot of people are eager to criticize, but few people take the time to give positive feedback when things work well.</p>
+<p>Here's some of my favorites among the projects people have shared:</p>
+<ul>
+<li>
+<p>Dialing in 2: <a href="https://noisecraft.app/179">noisecraft.app/179</a></p>
+</li>
+<li>
+<p>(a or not b)'s Drum Machine: <a href="https://noisecraft.app/203">noisecraft.app/203</a></p>
+</li>
+<li>
+<p>Dreamy glimmer: <a href="https://noisecraft.app/130">noisecraft.app/130</a></p>
+</li>
+<li>
+<p>Happy Sines Dance With My Saw On Five Bars: <a href="https://noisecraft.app/220">noisecraft.app/220</a></p>
+</li>
+<li>
+<p>Tekno 2: <a href="https://noisecraft.app/140">noisecraft.app/140</a></p>
+</li>
+<li>
+<p>Swing Pringle: <a href="https://noisecraft.app/115">noisecraft.app/115</a></p>
+</li>
+</ul>
+<p>In the last two months, I've made various incremental improvements to the app. I improved the <a href="https://noisecraft.app/help">help page</a>, fixed a number of bugs, made ergonomic improvements to the UI, added a featured section on the <a href="https://noisecraft.app/browse">browse page</a>, implemented some new node types, and most importantly, got NoiseCraft to work on Firefox. The situation is unfortunately not as good on Safari. With some help from open source contributors, we found that there were at least 3 problems preventing NoiseCraft from working well there. Among other things, <a href="https://github.com/maximecb/noisecraft/issues/65">Safari's pointer capture API is broken</a>. This API is several years old at this point and very commonly used, which makes it hard to understand why these obvious problems haven't been fixed. Safari doesn't have a public bug tracker that I'm aware of, which makes it hard to even report problems like these.</p>
+<p>In terms of upcoming new features, I've been making incremental progress towards adding the ability to group multiple nodes into user-created modules. I think that will open up many interesting possibilities. Among other things, I'd love to be able to easily create something like a drum machine in NoiseCraft, with modules corresponding to different sounds or sound effects, which can easily be reused in new projects.</p>
+<p>When it comes to attracting new users, I haven't been aggressively promoting NoiseCraft because there's always the sense that more could be done to make the app better, and there's a limit to how much free time I can spend on the project. However, I've been thinking that I might, in the next couple of months, create a small beat making contest with a small prize for the best entry.</p>
+<p>If you think NoiseCraft is cool and would like to contribute, there's a number of issues on GitHub marked with the <a href="https://github.com/maximecb/noisecraft/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">help wanted</a> tag. I'm also very curious to see what you can create with the app :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

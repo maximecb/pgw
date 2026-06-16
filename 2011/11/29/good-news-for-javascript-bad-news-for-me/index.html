@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Good News for JavaScript! Bad News for Me...</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Good News for JavaScript! Bad News for Me...">
+  <meta property="og:description" content="Good News for JavaScript! Bad News for Me...">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2011-11-29-good-news-for-javascript-bad-news-for-me/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2011/11/14/progress-on-the-uberclock/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2011/12/11/type-analysis-for-javascript/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Good News for JavaScript! Bad News for Me...</h1>
+<div class="post_date">November 29th, 2011</div>
+</div>
+<p>The current focus of my Ph.D. research is to build a type inference and optimization system to help better optimize JavaScript through a mix of static and dynamic analysis (I've been calling this "optimistic optimization"). I've known for a while that Brian Hackett at Mozilla is working on something <a href="https://wiki.mozilla.org/TypeInference">similar in concept</a> to my project. I found out a few days ago that their system is integrated in a <a href="http://blog.mozilla.com/futurereleases/2011/11/10/type-inference-to-firefox-beta/">beta version of Firefox</a>, and that they're getting ready to <a href="http://people.mozilla.org/~lmesa/ti-draft.pdf">publish a paper about it</a>. Their implementation gives Firefox a significant performance boost, which is good news for JavaScript.</p>
+<p>This, however, is bad news for me. I knew their approach was similar to mine, but I didn't know how much. Having taken a look at the draft version of the paper, it seems their approach is almost exactly the same as what I was going for with my research. The type analysis is extremely similar to what I started implementing. Even the terminology used to describe it is similar to what I had developed. If I didn't know better, I would think they've been spying on me. Odds are it's a pure coincidence, however. Two people, looking at the same data, came to the same conclusion as to what was the next logical step, as it's happened many times before in history.</p>
+<p>Unfortunately, I'm not at the stage where I'm ready to publish, and so they're going to beat me to the punch, and get full credit for this idea first. One positive way to look at this is that it proves my own hypothesis. It's a bit of a disillusion for me though. I view this idea as an extension of what I began working on for <a href="http://www.sable.mcgill.ca/mclab/mcvm/mcvmthesis.pdf">my M.Sc. thesis</a>. I've had this idea over two years ago. I thought it would change the way dynamic language compilers are built, and that I could get my name associated with it. It seems, however, that Mozilla will be fully credited for it. Mozilla has much more manpower than I have, and so they've had time to implement it much faster than I could hope to.</p>
+<p>I guess the truth is that this kind of thing occurs very frequently in academia. Many people come to the same conclusion and have similar ideas as to the direction research should take in a given field. Many math theorems have been independently co-discovered, for example. My Ph.D. advisor doesn't seem worried. He seems to think that as long as my research is not exactly the same as Brian Hackett's, I will be contributing something to the field. I suppose this is true, but I can't help feeling disappointed. I was hoping to be the first to bring this idea forward. Instead, my contribution will have to be more incremental. I'm forced to face the truth that academia is obviously very competitive, and I suppose I shouldn't have been so personally attached to this idea in the first place.</p>
+<p>My original Ph.D. project idea was to implement optimistic optimization techniques in a custom JIT compiler I would build for a dynamic language of my own conception, which I was then planning on naming "Go". This compiler would, as the one I had built for my M.Sc., be implemented in C++. The approach to optimization would have been two-fold: design optimizations for dynamic languages, and design my own dynamic language to be efficiently optimized. Essentially, the language would be conceived to use features I knew my techniques could optimize well, so as to maximize performance benefits. My task, for now, will be to reevaluate the direction of my research and decide what my contribution should be.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

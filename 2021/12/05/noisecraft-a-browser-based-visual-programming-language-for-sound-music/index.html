@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NoiseCraft: a Browser-Based Visual Programming Language for Sound &amp; Music</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="NoiseCraft: a Browser-Based Visual Programming Language for Sound &amp; Music">
+  <meta property="og:description" content="NoiseCraft: a Browser-Based Visual Programming Language for Sound &amp; Music">
+  <meta property="og:image" content="https://pointersgonewild.com/2021/12/05/noisecraft-a-browser-based-visual-programming-language-for-sound-music/screenshot.png">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2021-12-05-noisecraft-a-browser-based-visual-programming-language-for-sound-music/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2021/06/02/yjit-building-a-new-jit-compiler-inside-cruby/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2022/01/08/whats-could-you-use-tesla-bot-for/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>NoiseCraft: a Browser-Based Visual Programming Language for Sound &amp; Music</h1>
+<div class="post_date">December 5th, 2021</div>
+</div>
+<div class="cover_image">
+<img src="screenshot.png">
+</div>
+<p>I've recently resumed work on a side-project I started <a href="/2019/10/06/zupiter-a-web-based-modular-synthesizer/">back in 2019</a> to create a browser-based visual programming language for sound synthesis and music. I was initially hoping to make this a commercial SaaS product, but <a href="/2019/10/19/balancing-fun-stress-and-profit/">I got discouraged</a> when I realized that running and promoting a business could easily become a second job on top of my full-time day job, and suck all the fun out of the project. Thankfully, about six months ago, my motivation to work on the project came back. I decided to build an improved version of this software and make it open source.</p>
+<p><a href="https://noisecraft.app/">NoiseCraft</a> is a node-based visual programming language, loosely inspired by Max/MSP and PureData. The main goal of this project is to provide a way for people to explore musical ideas, and to enable people to share these ideas easily. It's designed to be easy to use and approachable for beginners. There's only one type, every connection has a floating-point value that changes over time. It runs in a browser and uses the Web Audio and Web MIDI APIs. This means you don't need to install anything, and you can share links to your projects just as easily as you can in Google Docs. The user interface is minimalistic and designed to be as simple as possible to facilitate learning. No cryptic shortcuts, no submenus, no esoteric terminology.</p>
+<p>I want to set realistic expectations. This is something I've been working on in my spare time. It's not trying to be Ableton Live or Reason. It's definitely not perfect and you could run into bugs. It's designed with desktop and laptop computers in mind. It might eventually work on tablets, but for the moment, it probably doesn't (unless you connect a keyboard and mouse to your tablet). It's been tested in Chrome and Edge. However, it doesn't yet work in Firefox because we're <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1572644">waiting for a bug to get fixed</a>. It also doesn't yet work in Safari. However, despite its limitations, NoiseCraft has many interesting features:</p>
+<ul>
+<li>
+<p>Easy to use sequencer node with multiple patterns</p>
+</li>
+<li>
+<p>Audio is now rendered in a background thread to avoid glitches</p>
+</li>
+<li>
+<p>You can copy and paste, even between different browser tabs</p>
+</li>
+<li>
+<p>Colorful, curved edges that are easier to follow visually</p>
+</li>
+<li>
+<p>Undo and redo</p>
+</li>
+<li>
+<p>Projects can be shared in the cloud in a few clicks</p>
+</li>
+<li>
+<p>Projects can also be saved to local files to a simple JSON format</p>
+</li>
+<li>
+<p>Ability to play notes from MIDI keyboards and devices</p>
+</li>
+<li>
+<p>Ability to map virtual knobs to knobs/sliders/mod/pitch bend on MIDI devices</p>
+</li>
+<li>
+<p>New clock divider and sample-and-hold nodes</p>
+</li>
+</ul>
+<p>I started this project to improve my understanding of synths and sound synthesis. NoiseCraft is ideally suited to explore the possibilities of additive, subtractive and FM synthesis. Most nodes are simple building blocks with a low level of granularity so that it's easy to understand how things work. By connecting oscillators, filters, delays and other basic components you can create your own synth or groovebox. I've linked some fun example projects below to showcase various possibilities:</p>
+<ul>
+<li>
+<p><a href="https://noisecraft.app/101">Detuned saw, sub osc, ping-pong echo & distortion</a></p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/59">Kaïser Clicker Clicker's FM</a> (FM synthesis example)</p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/46">Triple oscillator + delay + overdrive pedal</a> (playable with a MIDI keyboard)</p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/47">The little acid machine that could</a> (my attempt at an acid sound)</p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/50">Noise Machine / Relaxing Ocean Sounds</a></p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/23">Polyclocks v.1.0</a> (polyrhythm)</p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/26">Long Gate & Retrigger</a></p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/51">Da Wubs</a> (dubstep style wub-wub)</p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/60">andyS' DTMF synth</a></p>
+</li>
+<li>
+<p><a href="https://noisecraft.app/56">(a or not b)'s subtractive synthesizer v1.0</a></p>
+</li>
+</ul>
+<p>Many more examples can be found on NoiseCraft's <a href="https://noisecraft.app/browse">browse</a> page and some instructions are provided in the <a href="https://noisecraft.app/help">help</a> page. With this project, I hope to create a community for the open sharing of musical ideas. If this is something that interests you, I'm also hoping to find skilled, like-minded collaborators to help me improve the software. I'll keep gradually improving it on my own, but there's a limit to what a single programmer can do in their spare time. NoiseCraft could use testing, bug fixes and various improvements. Constructive feedback as well as contributions to the help page and documentation are also welcome. If you report bugs, please try to provide details on how to reproduce the issue and please be kind. The project is available <a href="https://github.com/maximecb/noisecraft">on GitHub</a> :)</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

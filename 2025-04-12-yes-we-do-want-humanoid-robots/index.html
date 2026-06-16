@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Yes, We Do Want Humanoid Robots</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Yes, We Do Want Humanoid Robots">
+  <meta property="og:description" content="Yes, We Do Want Humanoid Robots">
+  <meta property="og:image" content="https://pointersgonewild.com/2025-04-12-yes-we-do-want-humanoid-robots/humanoid_robot.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2025-04-12-yes-we-do-want-humanoid-robots/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../2025-03-06-my-low-tech-attempt-to-automate-spellchecking/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../2025-07-04-ai-safety-in-the-presence-of-multiple-asi-systems/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../about/">About</a>
+    <a href="../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Yes, We Do Want Humanoid Robots</h1>
+<div class="post_date">April 12th, 2025</div>
+</div>
+<div class="cover_image">
+<img src="humanoid_robot.jpg">
+</div>
+<p>Several American companies (Boston Dynamics, Tesla, Figure AI), and dozens of Chinese startups are currently working on creating useful humanoid robots. I personally find this to be pretty exciting because I dream of one day having a robot to do the chores at home. Doing the laundry, washing the dishes, cooking, keeping the countertops, floors and bathrooms clean. I enjoy cooking from time to time, but most household chores represent time I'd rather spent with loved ones, exercising, or working on personal projects. Our human lives are finite, and time is precious. It's not just about chores though. Many elderly people need extra help in the last decade or two of their lives. Having robotic assistants with infinite patience could mean billions of elderly people don't have to spend the precious time they have left in the confines of a hospital.</p>
+<p>General-purpose robotics is a technology that can radically transform the world in ways that we can't even imagine yet. That's not really what this post is about though. I want to discuss something more basic. Every few weeks, I see someone on reddit or X make a comment along the lines of:</p>
+<blockquote>
+<p>"Why should they be <i>humanoid</i> robots?"</p>
+<p>"The human body is clearly not the most efficient form factor."</p>
+<p>"Wheeled robots would be cheaper."</p>
+<p>"The robots would be more stable with 4 legs instead of 2."</p>
+</blockquote>
+<p>I think that all of the above opinions are fairly bad takes. The people writing things like this are really missing the point. There are several reasons why it makes perfect sense, if we are trying to build general-purpose robotic assistants, to try to build humanoid robots. Let me explain why.</p>
+<p>Let's start with the obvious: the cost. You could argue that wheeled robots are cheaper than a robot with two legs. Okay, maybe, but by how much? Your robot is going to need batteries. It's also going to need significant onboard compute because wifi/cellphone connections are too unreliable and have dead zones. It's also going to need cameras, and it's going to need arms. How much of the total cost are you saving by building your robot on a wheeled base instead of giving it two legs? Let's assume you can make your robot 20% cheaper. Great, you can pass those savings on to the customer, but how much functionality are you losing compared to a legged robot?</p>
+<p>Wheeled robots probably can't get in and out of a car unassisted. This means your robot can't take a robotaxi to move to a different location. Wheeled robots may not be able to handle steep grades outside, such as may be found on some San Francisco streets. They also can't go up or down stairs unassisted. Okay fine you say, but none of this matters if your robot only operates inside an office building. That may not be true, however. Have you ever had to plug or unplug a cable under a desk? How do you think a 140cm tall wheeled robot is going to perform at this task? What if you want your robot to clean the floor or clean behind a toilet? There are many tasks where a wheeled robot is going to struggle compared to a legged robot, even in an office building, and if the cost difference is only something like 20%, the loss of functionality makes no sense. The purpose of robot helpers is for them to help you. Ideally, you wouldn't need to go help your robot(s) because their wheels are tangled in wires or they can't navigate stairs or take a robotaxi to go get the maintenance that they need without your assistance.</p>
+<p>Another silly notion is that the human form is not the optimal form for a general-purpose robot. Okay, I guess? Maybe? In what way? One argument I've seen is that four legs is more stable than two. My first question for you then is how often do you trip over and fall down? I think it may happen to me less than twice a year on average. Now, if you want to build a robot with four legs, it's going to increase the cost of your robot. How much is that increase in stability or speed worth? You're also probably going to increase the frequency at which your robot needs maintenance, simply because you've greatly increased the number of moving parts by doubling the number of legs.</p>
+<p>The simplest reason to build humanoid robots is that our immediate environment has been designed for human beings. We've created tools, furniture and buildings that are suited for human beings. You may think that you can create a more efficient robot that can do everything that a human can and more, but this may not be as easy as you think, and it's is going to come with tradeoffs such as increased cost and increased maintenance. Not to mention, the real problem that we need to solve, the hardest problem, is not how to build the physical robot platform, it's how to create the general-purpose AI that will make this robot actually useful.</p>
+<p>Creating the AI that can power a general-purpose robot is extremely hard. There are many unknown unknowns in this area, and so it makes sense, for the physical design of the robot, to start with a form factor we know will be able to operate effectively in an environment designed for people, and that is a humanoid robot. There's one more reason why humanoid robots make a ton of sense though, and I'm surprised I haven't seen more people talk about it: our current AI training algorithms are very data-hungry, and there's a lot of data available when it comes to humanoid behavior.</p>
+<p>The most efficient way to train robots to do things is via imitation learning, meaning we train a robot to imitate the movements of a human doing something. Now, it should be pretty easy to understand why it's easier to have a robot imitate you doing a task if the robot's body and limbs are shaped like yours and the topology of its body is similar to yours. We can collect training data of humans doing tasks via motion capture, or possibly simply by filming humans doing various tasks and having a deep learning model reconstruct their body's pose. Do I need to explain why it might be easier to teach a humanoid robot to use a leaf blower than a six-legged robot with thin spider-like limbs that each have two fingers at the end? About 82 years of video gets uploaded to YouTube every day, so we have a ton of data on how humans move and interact with the world. It's much easier to leverage this data or collect new data using human operators if we build robots that can interact with the world roughly in the same way that humans do.</p>
+<p>There's one last aspect to this discussion, which is the social aspect. We're going to need to live in a world that has an increasing number of robots. General-purpose robots have so much economic value that we might see a boom in the next 10-20 years. They're going to start rapidly appearing everywhere and it's going to be a shock for many people. It makes sense to design robots in a way that they appear friendly, and not alien or scary, so that we can minimize this shock to some extent. If you try to design a superhuman robot with 4/6/7 legs, or a robot that can turn its head 180-degrees, you start to go into a zone where you might end up with something that looks uncanny, scary or creepy like an insect. Star Wars has shown us that non-humanoid robots like R2D2 can appear friendly and charming, but as previously stated, a real-world R2D2 probably struggles with stairs. So, if we want to design robots to live and help in a human world, why not start with something we know has a very good chance of working well?</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

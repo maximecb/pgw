@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contribute to the Higgs JS Compiler</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Contribute to the Higgs JS Compiler">
+  <meta property="og:description" content="Contribute to the Higgs JS Compiler">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2014-01-08-contribute-to-the-higgs-js-compiler/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2014/01/02/tile-based-image-compression/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2014/01/28/accelerating-real-time-path-tracing/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Contribute to the Higgs JS Compiler</h1>
+<div class="post_date">January 8th, 2014</div>
+</div>
+<p>Higgs is an open source JIT compiler for JavaScript targeting x86-64 platforms. It's also the main piece of infrastructure I'm working on as part of my PhD in compiler design at the Université de Montréal. I've been working on Higgs for about a year now, and it's gotten to the point where <a href="https://github.com/maximecb/Higgs/wiki/JavaScript-Language-Support">most of JavaScript ES5</a> is supported. Along the way, I received help, notably from Molly Everett, who implemented a user-friendly FFI library to interface with C code, along with proxies for standard C libraries. I'd like to keep making Higgs more complete and useful. This post is an invitation: we're looking looking for contributors.</p>
+<h2>The Higgs Roadmap</h2>
+<p>In the long run, I'd like for Higgs to become useful both inside and outside of the academic community. It's probably not going to be able to compete on performance with commercial JS engines like V8 and IonMonkey, at least not in the short term, but I believe Higgs can fill a different niche. On the academic side, it's a simple JIT compiler that's easy to modify and experiment with. On the practical side, Higgs can be used as a JavaScript VM that can be embedded into existing software, or extended with new features that aren't part of standard JavaScript.</p>
+<p>I 'd like for Higgs to become a "batteries-included" programming environment that hobbyist programmers can use to run JavaScript code outside of the browser. I believe there is a niche to be filled. It should be trivial to do things like open a window and begin producing graphics and sound with only a few lines of code, using simple and user-friendly APIs, no special configuration required. It should be trivial, yet this is something you can't easily do in Python or Ruby, for example. You usually need to install/compile extra packages, and the GUI libraries require much boilerplate code.</p>
+<h2>How You Can Help</h2>
+<p>There are a number of areas where help is needed on the Higgs project, for example:</p>
+<ul>
+<li>
+<p>Trying out Higgs, finding and reporting bugs</p>
+</li>
+<li>
+<p>Finding new benchmarks for Higgs</p>
+</li>
+<li>
+<p>Writing useful libraries</p>
+</li>
+<li>
+<p>Repackaging existing JS libraries</p>
+</li>
+<li>
+<p>Profiling to improve compilation time</p>
+</li>
+<li>
+<p>Implementing support for ES6 features</p>
+</li>
+</ul>
+<p>We've opened several <a href="https://github.com/maximecb/Higgs/issues?state=open">issues on GitHub</a> detailing specific tasks that you could contribute to. Some of these are tagged as "easy" as they don't require much knowledge of the existing Higgs system, and are a good starting point for newcomers. If you're interested in contributing, we encourage you to take a look at the issues list, as well as the <a href="https://github.com/maximecb/Higgs/wiki/How-to-Contribute">How to Contribute</a> page. I'd also like to say that if you have a specific idea you'd like to implement in Higgs, a specific feature you've thought of, we're open to that too. You're welcome to pitch us your own ideas.</p>
+<h2>More about Higgs</h2>
+<p>We've started to document Higgs in <a href="https://github.com/maximecb/Higgs/wiki">Higgs Wiki</a>. For instructions on how to install Higgs, see the <a href="https://github.com/maximecb/Higgs/wiki/Quickstart">Quickstart</a> page. I also will be giving a new talk at <a href="http://mloc-js.com/2014/">mloc.js</a> in mid-February. This talk will detail some of the novel compilation techniques I'm implementing in Higgs, such as <a href="/2013/10/31/higgs-the-first-jit-compiler-of-its-kind/">basic block versioning</a> and <a href="/2013/12/10/the-incremental-jit-lives/">incremental compilation</a>. This talk will be filmed and made available on InfoQ. In the meantime, you can watch my talks from <a href="http://www.infoq.com/presentations/dynamic-performance">Strange Loop</a>, <a href="http://www.youtube.com/watch?v=hJUNHX0vakI">DConf</a> and <a href="https://air.mozilla.org/higgs-jit/">Air Mozilla</a>.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

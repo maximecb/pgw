@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>More Fun with Turing Machines</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="More Fun with Turing Machines">
+  <meta property="og:description" content="More Fun with Turing Machines">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-01-03-more-fun-with-turing-machines/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2012/12/31/turing-drawings/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/01/22/higgs-has-a-garbage-collector/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>More Fun with Turing Machines</h1>
+<div class="post_date">January 3rd, 2013</div>
+</div>
+<p>I have to admit I'm surprised at how nice a reception <a href="/2012/12/31/turing-drawings/">Turing Drawings</a> received when I linked to my last blog post <a href="http://www.reddit.com/r/compsci/comments/15qkuk/turing_drawings_pointers_gone_wild/">on Reddit</a>. In only a few days, my blog received over 10K hits, and dozens of redditors shared <a href="http://maximecb.github.io/Turing-Drawings/#4,3,1,2,0,3,1,1,0,1,3,1,1,3,0,2,1,0,2,3,0,1,0,0,2,3,2,1,1,0,2,0,0,2,0,2,2,1">interesting patterns</a> they had found, <a href="http://maximecb.github.io/Turing-Drawings/#2,5,1,1,2,1,3,0,1,4,2,1,2,1,1,4,2,0,2,0,0,2,2,0,3,1,1,2,3,0,3,2">some</a> of which were quite <a href="http://maximecb.github.io/Turing-Drawings/#3,6,2,2,3,2,4,0,0,1,0,2,1,2,1,1,0,1,2,3,2,3,0,2,1,0,2,5,3,2,5,2,2,4,1,1,5,0,2,4,3,0,4,0,0,1,1,2,1,3,2,1,0,2,2,0">amazing</a>.  One thing is clear: without publicly available URLs, this experiment wouldn't have been nearly as successful. I added many more links to user creations in my <a href="/2012/12/31/turing-drawings/">previous post</a> for those who might be interested.</p>
+<h2>Clarifications About Turing Drawings</h2>
+<p>Some readers asked for better explanations of how Turing Drawings works. The following might clarify some important points:</p>
+<blockquote>
+<p>It's a Turing machine with a finite 2D grid instead of a linear one-dimensional tape. The machine can only read/write one grid cell (one pixel) at a time. It can also only move left/right/up/down one pixel at each time step (four possible actions). Each cell of the grid directly corresponds to a pixel in the canvas. As the Turing machine runs, it produces something we can interpret as a 2D animation (the symbols written are encoded as pre-selected colors).</p>
+<p>The grid is initialized with all cells set to the symbol zero (red color). There are no halting states, as I thought having halting states would cause too many machines to halt very early. Machines technically can't write the zero symbol, only read it. This constraint is not necessary, but it makes it possible to see where the machine has written (red areas are untouched).</p>
+</blockquote>
+<p>Since the machines are randomly generated, it makes sense that most of them wouldn't produce interesting patterns. Indeed, if you tried Turing Drawings, you might have had to press the "random" button many times before you saw anything interesting happen. I'm actually quite pleased with how many of them do produce visually interesting things though. This is the reason I chose to use Turing machines for this project: to maximize the likelihood of visually interesting things happening.</p>
+<p>Turing machines are a very simple model of computation. This model was easy to tailor for my purposes: with a 2D tape mapping to a pixel array instead of a linear tape. It was also easy to make sure the Turing machines wouldn't terminate by construction by giving them no halting states. Unfortunately, I can't design an algorithm that generates interesting visuals "by construction", because I really have no way of mathematically quantifying what will please your eyes, but by restricting ourselves to smaller programs with few transition rules, we make it fairly likely that some order will emerge out of the chaos that created the machines. This is really what Turing Drawings is all about: order and complexity emerging out of a few simple (transition) rules chosen at random.</p>
+<h2>Turing Tunes</h2>
+<p>I've been interested in procedural generation of music for <a href="/2012/03/30/teaching-computers-about-music/">some time</a>, and as soon as I saw how well Turing Drawings worked out, I immediately started planning another project: Turing Tunes. I believe that generating music procedurally is probably trickier than generating visuals, because while visuals may seem plain or uninteresting, many sounds are actually irritating to the human ear. Fortunately, there are some tricks we can employ to reduce the probability of cacophony. By default, Turing Tunes will generate musical notes in a <a href="http://en.wikipedia.org/wiki/Pentatonic_scale">pentatonic scale</a>. This type of scale is known for its lack of dissonant intervals and is particularly suitable for improvised music.</p>
+<p>My current plan is to use a Turing machine with two tapes. A one-dimensional bidirectional working tape (hidden internal memory, scratch space), and a unidirectional output tape where musical notes are written. The memory tape will have a fixed size and loop over on overflow. The output tape will receive musical notes/duration pairs and will not be erasable. The machine will only be able to write new notes, but never remove them. This ensures, by construction, that machines can only produce more musical notes over time.</p>
+<figure>
+<a href="turing-tunes.png">
+<img alt="" src="turing-tunes.png">
+</a>
+</figure>
+<p>I should mention that I already have a prototype of Turing Tunes working and generating musical notes, but I'm trying to polish this a little more before I make it available on github. I'm not sure what's the best sounding musical instrument to use for this. For now, I'm using the plucked lead instrument from my <a href="http://maximecb.github.io/MusicToy/">MusicToy</a> app. I want to add a streaming piano roll animation that shows the notes generated.</p>
+<p>I also plan on implementing some kind of automated filter to quickly reject tunes that don't work out. I mentioned earlier that you might need to generate many machines in Turing Drawings before anything interesting happens. The same is true in Turing Tunes, but listening to tunes takes longer than looking at 2D pictures, and so filtering through dull one or two note loops by hand is rather tiring.</p>
+<p>I have a few strategies I plan to use for filtering:</p>
+<ul>
+<li>
+<p>Filtering out machines that only produce a few notes and then get stuck in a loop</p>
+</li>
+<li>
+<p>Filtering out machines that produce short repeating loops</p>
+</li>
+<li>
+<p>Computing the Shannon entropy of the output</p>
+</li>
+</ul>
+<p>None of these strategies are perfect, they will all be approximations, but I believe it should be possible to filter out most "duds" and make it so the user is exposed to less junk and more interesting output.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

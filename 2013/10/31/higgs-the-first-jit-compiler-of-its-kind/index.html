@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Higgs: the First JIT Compiler of its Kind</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Higgs: the First JIT Compiler of its Kind">
+  <meta property="og:description" content="Higgs: the First JIT Compiler of its Kind">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2013-10-31-higgs-the-first-jit-compiler-of-its-kind/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2013/10/21/ubertechnoshoes/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2013/12/05/the-electric-mirror/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>Higgs: the First JIT Compiler of its Kind</h1>
+<div class="post_date">October 31th, 2013</div>
+</div>
+<p>I submitted a conference paper to <a href="http://www.etaps.org/index.php/2014/cc">Compiler Construction 2014</a> (part of <a href="http://www.etaps.org/">ETAPS</a>) just two weeks ago. This paper details my recent work on compilation with the basic block versioning algorithm, an alternative to tracing. This work was briefly explained in my <a href="http://dconf.org/talks/chevalier_boisvert.html">DConf 2013</a> presentation, as well as the talk I gave at <a href="https://thestrangeloop.com/sessions/fast-and-dynamic">Strange Loop</a>, which should hopefully be made available online on <a href="http://www.infoq.com/strange-loop-2013/">InfoQ</a> within a few weeks. I unfortunately won't know if my paper makes it into CC 2014 until mid-late December, but in the meantime, while keeping my fingers crossed, I'm already planning the third iteration of the Higgs JIT compiler.</p>
+<p>Basic block versioning can compile multiple versions of a given <a href="http://en.wikipedia.org/wiki/Basic_block">basic block</a> based on context information (e.g. type information) accumulated during compilation. It's a formalized algorithm for tail duplication which allows a compiler to eliminate type tests, hoist type tests out of loops, and duplicate code paths where multiple types are possible at run time. This approach is similar to <a href="http://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">tracing JIT compilation</a> in that, like tracing, it's preoccupied with accumulating type information along linear sequences of code, and using this accumulated information to specialize code farther along, with the important difference that we're working at a lower granularity, that of basic blocks, instead of traces. I believe that the paper on basic block versioning my advisor and I submitted is an original and interesting contribution, but I'm not stopping there, I already have many improvements planned.</p>
+<p>The basic block versioning algorithm as implemented in the current version of Higgs (as available <a href="https://github.com/maximecb/Higgs">on GitHub</a>) works at the intraprocedural level, and one function at a time. Type information does not currently propagate past function call boundaries. This means that Higgs must do aggressive <a href="http://en.wikipedia.org/wiki/Inline_expansion">inlining</a> of function calls in order to eliminate type tests with any amount of success. The runtime library primitives are written as JavaScript functions, which must also be inlined for performance, but inlining, as is currently done in Higgs, is unfortunately rather expensive. The code for most JavaScript primitives must deal with many possible input types, and so primitives end up being relatively large functions. Inlining large functions takes time, but most of the code being inlined is actually useless as most JavaScript operators are not used in a polymorphic way.</p>
+<p>The next iteration of Higgs will try to solve this problem by moving away from method-based compilation. The new Higgs JIT will <a href="http://en.wikipedia.org/wiki/Lazy_evaluation">lazily</a> and incrementally compile functions one basic block at a time. Parts of functions that are not executed will never be compiled. I intend to push this approach further, and inline function calls incrementally as well, which means that in many cases, only small parts of functions will actually be inlined. There is significant potential for compilation time savings. There is also the potential for making better inlining and optimization decisions, through smart use of profiling during incremental compilation. Basic blocks, when first compiled, can be made to collect profiling information. These same blocks can then trigger recompilation later to produce more efficient code.</p>
+<p>Won't incremental compilation result in a horrible mess of machine code, you ask? I devised a scheme where blocks can be recompiled, garbage collected and relocated so as to make the machine code more efficient. I won't get into all the details just yet, but I've started examining the technical challenges and I'm quite convinced this is possible. Not only is it possible, it will mesh with basic block versioning in very interesting ways, and open up many possibilities. As far as I know, Higgs is going to be the first compiler to feature incremental lazy compilation of functions and incremental inlining (if anyone has references to prior art, please let me know). Even if Higgs isn't the first at this though, the combination of lazy incremental compilation and basic block versioning will make it a truly unique beast.</p>
+<p>A special thanks to Marc Feeley, Paul Khuong, Luke Wagner, Benjamin Cerat, Molly Everett and Erinn Di Staulo for helping me review my CC 2014 paper prior to submission.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>There's Too Many Programming Languages!</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="There's Too Many Programming Languages!">
+  <meta property="og:description" content="There's Too Many Programming Languages!">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-10-06-theres-too-many-programming-languages/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/09/24/basic-block-versioning-my-best-result-yet/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/11/08/the-robotic-revolution/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>There's Too Many Programming Languages!</h1>
+<div class="post_date">October 6th, 2015</div>
+</div>
+<p>It's an opinion that often comes up in development circles. We're in the middle of a sort of language boom right now, and every time someone comes along and announces a new language, other people suggest that we should all stop creating new programming languages, because there's already <a href="http://www.utopiamechanicus.com/article/why-so-many-computer-languages/">too many</a> out there. Common complaints include the amount of effort needed to constantly learn new languages, the fragmentation caused by the constant introduction of new languages and the lack of innovation in these.</p>
+<p>If you feel that new languages require too much effort to learn, the first thing I have to say is: tough luck. Programming is very much about constantly learning new things and being able to learn on your own. Once you've mastered a few programming languages, you should begin to see repeating patterns and find that the skills you've already acquired are very transferable. For instance, I've never written a single line of Go, but I've used C, C++ and D. I'm sure I could get started writing Go code within a few hours, and become reasonably proficient within a week. Go doesn't scare me. Another important thing to realize is that not knowing a programming language isn't necessarily a flaw you have to correct. Case in point: there are still many job postings out there for <a href="http://jobsearch.monster.ca/jobs/?q=cobol">COBOL programmers</a>. It's perfectly acceptable to specialize in one or a few languages of your choosing.</p>
+<p>As for the issue of fragmentation, I think there's truth to it, but it's not as bad as people imagine. There are <a href="http://spectrum.ieee.org/computing/software/the-2015-top-ten-programming-languages">only a few</a> languages out there which are truly mainstream. These have existed for years, and if you know just 3 out of the top 10, you'll be well equipped to realize personal projects or land yourself a development job somewhere. The new programming languages that come out, for the most part, remain relatively fringe and are used mostly by hobbyists. Most of them will likely die out. I've written my <a href="https://github.com/higgsjs/Higgs">PhD project</a> in <a href="http://dlang.org/">D</a>, and I've found that surprisingly few programmers have ever written code in that language. In fact, none of the programmers I've met in person outside of <a href="http://dconf.org/2015/">DConf</a> had ever used D.</p>
+<p>The biggest kind of fragmentation problem, in my opinion, is self-inflicted. I've spoken to people at various companies who told me that their architecture was made of some mishmash of parts written in five or six different languages. That seems like an issue to me, if only because more languages means more dependencies, more breakage, more interoperability problems and more code maintenance issues. That's not the fault of all these languages for existing though, it's simply bad planning. The administration there let some capricious programmers get their wish and include new code written in their pet language in the system, with little regard for the added complexity this language soup would introduce.</p>
+<p>There's some argument to be made that many of the new languages coming out lack originality. At the moment, most of them are statically typed and compiled ahead of time and most of them have similar syntax. It's true that there isn't a lot of innovation overall, but I don't think that's a reason to stop creating new programming languages. The design space is huge, infinite in fact, and we're only beginning to explore it, in my opinion. Consider that even to this day, all the commonly used languages are based on the <a href="/2013/07/19/programming-without-text-files/">editing of text files</a>. Also remember that even the languages which <a href="/2012/04/11/why-lisp-never-took-off/">don't succeed</a> on a large scale, such as LISP, can have a tremendous impact on other languages down the road. Imagine a world where there were only two programming languages in existence: COBOL and Fortran. Is that a world you would like to live in? I would argue that there is a need for new languages to solve new problems.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>

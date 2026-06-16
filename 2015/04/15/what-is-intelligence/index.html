@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>What is Intelligence?</title>
+  <link rel="stylesheet" href="../../../../style.css">
+  <link rel="alternate" type="application/rss+xml" title="Pointers Gone Wild RSS Feed" href="/rss.xml">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Social media card -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What is Intelligence?">
+  <meta property="og:description" content="What is Intelligence?">
+  
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DC24K385F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DC24K385F8');
+</script>
+
+<script>
+document.addEventListener('keydown', (e) => {
+    let ctrlDown = e.ctrlKey || e.metaKey;
+
+    // Ctrl + C
+    if (ctrlDown && e.key.toUpperCase() === 'C') {
+        if (window.getSelection().toString().length == 0) {
+            navigator.clipboard.writeText("open site/2015-04-15-what-is-intelligence/index.md");
+        }
+    }
+
+    // Shift + left arrow
+    if (e.shiftKey && event.keyCode === 37) {
+        window.location.href = "../../../../2015/03/18/basic-block-versioning-published-at-last/";
+    }
+
+    // Shift + right arrow
+    if (e.shiftKey && event.keyCode === 39) {
+        window.location.href = "../../../../2015/04/16/the-problem-with-html/";
+    }
+});
+
+function share_nav_api()
+{
+    const shareData = {
+      title: document.title,
+      text: 'Check out this awesome blog post!',
+      url: window.location.href
+    };
+    navigator.share(shareData);
+}
+
+function share_hn() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://news.ycombinator.com/submitlink?u=' + url + '&t=' + title, '_blank');
+}
+
+function share_reddit() {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    window.open('https://www.reddit.com/submit?url=' + url + '&title=' + title, '_blank');
+}
+
+function share_linkedin() {
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank');
+}
+
+function share_fb() {
+    const url = encodeURIComponent(window.location.href);
+    const quote = encodeURIComponent(document.title);
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + url + '&quote=' + quote, '_blank');
+}
+
+function share_bsky() {
+    const text = encodeURIComponent(document.title + " " + window.location.href);
+    window.open('https://bsky.app/intent/compose?text=' + text, '_blank');
+}
+
+function share_x() {
+    const text = encodeURIComponent(document.title);
+    const url = encodeURIComponent(window.location.href);
+    window.open('https://x.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (true) {
+        const socialDiv = document.querySelector('.footer_social');
+        if (socialDiv) {
+            socialDiv.style.display = 'block';
+        }
+    }
+});
+</script>
+
+<body>
+<div class="container">
+
+<div class="top_bar">
+  <div class="pgw">
+    <a href="../../../..">Pointers Gone Wild</a>
+  </div>
+  <nav>
+    <a href="../../../../about/">About</a>
+    <a href="https://github.com/maximecb">GitHub</a>
+    <a href="https://x.com/love2code">x.com</a>
+
+    <!--
+    <a href="../../../../about/">About</a>
+    <a href="../../../../about/">Projects</a>
+    <a href="https://github.com/maximecb"><img style="width: 1.2rem;" src="/icon_github.svg" alt="GitHub account"/></a>
+    <a href="https://x.com/love2code"><img style="width: 1.2rem;" src="/images/icon_x.svg" alt="x.com account"/></a>
+    <a href="/feed.xml"><img style="width: 1.2rem;" src="/images/icon_rss.svg" alt="RSS feed"/></a>
+    -->
+  </nav>
+</div>
+
+<div class="contents">
+<div class="page_title">
+<h1>What is Intelligence?</h1>
+<div class="post_date">April 15th, 2015</div>
+</div>
+<p><a href="http://en.wikipedia.org/wiki/Intelligence">Intelligence</a> is a hard thing to define. The running joke in <a href="http://en.wikipedia.org/wiki/Artificial_intelligence">AI</a> circles that every time a computer manages to do something we previously thought required human-level intelligence, we raise the bar and define this something to be what intelligence is not. A good example of this is the game of chess. Not long ago, many thought that computers could never equal chess grandmasters. They believed being a chess grandmaster required a powerful intuition, a kind of magic that only humans could ever possess. In 1997, the efforts of the <a href="http://en.wikipedia.org/wiki/Deep_Blue_%28chess_computer%29">Deep Blue</a> team at IBM <a href="https://www.youtube.com/watch?v=NJarxpYyoFI&feature=youtu.be&t=29s">demonstrated</a> that this belief was quite mistaken.</p>
+<p>Today, chess-playing computers are usually not thought of as intelligent machines. We tend to believe intelligence is something only humans are capable of. We see human intelligence as fundamentally different from what animals and computers do. Animals may not be able to build computers or write poems, but a quick examination of the world around us reveals that many animals have emotions, complex <a href="http://www.monkeyworlds.com/monkey-social-structure/">social dynamics</a>, puzzle-solving abilities, the capability to fashion and <a href="http://en.wikipedia.org/wiki/Tool_use_by_animals">use tools</a> as well as some degree of <a href="http://en.wikipedia.org/wiki/Self-awareness#Animals">self-awareness</a>.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/JYFIV5NV7m4?si=BKqLGlOnvFjWWpXy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>I don't view intelligence as exclusively human. Fundamentally, I believe that intelligence is the capability of a system (biological or computerized) to dynamically adapt to its environment. One thing that greatly enhances the survivability of lifeforms is to be able to dynamically adapt their behavior in response to changing environmental conditions. Humans are an extreme example of this: our brains and nervous systems allow us see with our eyes and interpret images, to move very rapidly, to understand our environment and devise elaborate plans going far into the future.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/DDmCxUncIyc?si=Sl4tF1QPJn_iC7ib" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>I believe that intelligence exists on a spectrum, or in varying degrees. Cats have a fairly powerful understanding of their environment too. They understand their own movements very well. They can predict the behavior of physical objects and their own body as a part of the physical world. Bees can see flowers, avoid obstacles and navigate based on <a href="http://link.springer.com/article/10.1007%2FBF01350213">light polarization patterns</a> in the sky. Plants change the direction of their growth so they can more efficiently capture sunlight. Jellyfish have no brains, but they have a network of nerves which controls their swimming according to factors such as the day/night cycle.</p>
+<p>At an even lower level, <a href="http://en.wikipedia.org/wiki/Paramecium">paramecium</a> are unicellular organisms which can move around water using cilia. Being just one cell, they have no neurons. Nevertheless, they can sense chemicals in the water surrounding them, detect obstacles, eat smaller prey organisms, reproduce sexually and have even shown some ability to learn. What is obvious is that even though paramecium have no brains or neurons, they contain chemical and genetic machinery that implements some kind of algorithmic process which changes their behavior based on environmental conditions.</p>
+<p><p align="center"> <iframe width="560" height="315" src="https://www.youtube.com/embed/QGAm6hMysTA?si=XX4uZISY7FF-6fYQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </p></p>
+<p>You might be surprised to find out that some viruses are able to <a href="http://jonlieffmd.com/blog/are-viruses-alive-are-viruses-sentient-virus-intelligence">navigate inside host cells</a> and express different genes (change their behavior) based on where they are inside these host cells. Viruses are thought of as non-lifeforms by many scientists, but they are definitely able to adapt. In fact, without even getting into dynamic changes in the expression of viral DNA, one could say that the fast <a href="http://en.wikipedia.org/wiki/Virus#Genetic_mutation">mutation</a> of viruses constitutes a form of adaptation in itself. Viruses reproduce so fast and in such large numbers, that they are able to do a <a href="http://en.wikipedia.org/wiki/Brute-force_search">brute-force search</a> for new attack vectors on host organisms.</p>
+<p>At the root of it all, <a href="http://en.wikipedia.org/wiki/Natural_selection">natural selection</a> is an optimization process that helps lifeforms adapt to their environment. One could argue that natural selection, a force of nature, is a kind of intelligence in and of itself. There is no intelligent design, but nature finds a way to make things more efficient through trial and error. I would argue that in a way, natural selection is a process that has been optimizing itself to help life spread and adapt more effectively. In the beginning, there were only unicellular organisms, and they reproduced through mutation only. Mutations are a very slow and inefficient way to adapt. Then came sexual reproduction. This allowed genes from multiple viable individuals to be recombined, increasing rate at which viable genetic combinations can be explored, thus increasing adaptability.</p>
+<p>Multicellular organisms arose. This gave rise to inter-cellular communication and nervous systems which allowed rapid movements. Nervous systems gave rise to centralized brains which could perform computations of ever-increasing complexity. Eventually, organisms came which had such complete models of their environment that they understood their own existence and wondered about the origin of life itself. Today, humans are intelligent enough that they are beginning to understand their own DNA. Soon, humans will be using their intelligence to make conscious choices about their own evolutionary destiny. This will allow us, as a species, to make evolutionary leaps that no other species ever has.</p>
+<div class="footer_social">
+Enjoyed this post? Share it with your online community!<br>
+<img src="/images/social_hn.svg" alt="Share to Hacker News" onclick="share_hn()" style="width: 2.2rem;"/>
+<img src="/images/social_reddit.svg" alt="Share to Reddit" onclick="share_reddit()" style="width: 2.2rem;"/>
+<img src="/images/social_bsky.svg" alt="Share to Bluesky" onclick="share_bsky()" style="width: 2.2rem;"/>
+<img src="/images/social_x.svg" alt="Share to X" onclick="share_x()" style="width: 2.2rem;"/>
+<img src="/images/social_linkedin.svg" alt="Share to LinkedIn" onclick="share_linkedin()" style="width: 2.2rem;"/>
+<img src="/images/social_fb.svg" alt="Share to Facebook" onclick="share_fb()" style="width: 2.2rem;"/>
+<img src="/images/social_share.svg" alt="Share using browser API" onclick="share_nav_api()" style="width: 2.2rem;"/>
+</div>
+
+<div class="copyright">
+    Copyright &copy; 2011&ndash;2026 Maxime Chevalier-Boisvert. All rights reserved.
+</div>
+
+</div> <!-- contents -->
+</div> <!-- container -->
+
+</body>
+</html>
