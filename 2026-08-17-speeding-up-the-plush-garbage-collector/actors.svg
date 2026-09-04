@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="772" height="310" viewBox="0 0 772 310">
+<rect width="772" height="310" fill="#fff"/>
+<text x="14.0" y="20.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#111" text-anchor="start" font-weight="bold">Each actor owns two allocators, and a message is copied across the boundary</text>
+<rect x="14.0" y="40.0" width="336.0" height="196.0" fill="#fff" rx="6" stroke="#777" stroke-width="1.6"/>
+<text x="26.0" y="62.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#111" text-anchor="start" font-weight="bold">Actor A</text>
+<rect x="422.0" y="40.0" width="336.0" height="196.0" fill="#fff" rx="6" stroke="#777" stroke-width="1.6"/>
+<text x="434.0" y="62.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#111" text-anchor="start" font-weight="bold">Actor B</text>
+<text x="26.0" y="86.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="start">message allocator, locked while written</text>
+<rect x="26.0" y="92.0" width="312.0" height="40.0" fill="#f7f9fb" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<rect x="26.0" y="92.0" width="52.0" height="40.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<rect x="26.0" y="92.0" width="312.0" height="40.0" fill="none" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<text x="26.0" y="174.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="start">private heap, never locked</text>
+<rect x="26.0" y="180.0" width="312.0" height="40.0" fill="#f7f9fb" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<rect x="26.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="65.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="104.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="143.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="182.0" y="180.0" width="39.0" height="40.0" fill="#0e8a52" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="221.0" y="180.0" width="39.0" height="40.0" fill="#0e8a52" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="26.0" y="180.0" width="312.0" height="40.0" fill="none" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<rect x="434.0" y="92.0" width="312.0" height="40.0" fill="#f7f9fb" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<rect x="434.0" y="92.0" width="48.0" height="40.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<rect x="482.0" y="92.0" width="48.0" height="40.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<rect x="530.0" y="92.0" width="48.0" height="40.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<rect x="578.0" y="92.0" width="39.0" height="40.0" fill="#0e8a52" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="617.0" y="92.0" width="39.0" height="40.0" fill="#0e8a52" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="434.0" y="92.0" width="312.0" height="40.0" fill="none" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<rect x="434.0" y="180.0" width="312.0" height="40.0" fill="#f7f9fb" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<rect x="434.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="473.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="512.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="551.0" y="180.0" width="39.0" height="40.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="590.0" y="180.0" width="39.0" height="40.0" fill="#0e8a52" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="629.0" y="180.0" width="39.0" height="40.0" fill="#0e8a52" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="434.0" y="180.0" width="312.0" height="40.0" fill="none" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<path d="M 221.0 180.0 C 360.0 178.0 430.0 10.0 607.8 88.0" fill="none" stroke="#cc2222" stroke-width="2.2"/>
+<path d="M 606.2 91.8 L 617.0 92.0 L 609.5 84.1 Z" fill="#cc2222"/>
+<circle cx="386.0" cy="140.0" r="9.5" fill="#cc2222"/>
+<text x="386.0" y="144.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">1</text>
+<line x1="617.0" y1="132.0" x2="626.6" y2="170.3" stroke="#1560c0" stroke-width="2.2"/>
+<path d="M 622.5 171.3 L 629.0 180.0 L 630.6 169.3 Z" fill="#1560c0"/>
+<circle cx="650.0" cy="152.0" r="9.5" fill="#1560c0"/>
+<text x="650.0" y="156.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">2</text>
+<circle cx="23.0" cy="266.0" r="9.5" fill="#cc2222"/>
+<text x="23.0" y="270.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">1</text>
+<text x="40.0" y="270.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">The sender writes into the receiver's buffer, reading out of a heap that has to stay live</text>
+<circle cx="23.0" cy="292.0" r="9.5" fill="#1560c0"/>
+<text x="23.0" y="296.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">2</text>
+<text x="40.0" y="296.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">The receiver copies the message into its own heap, and the buffer is reset once the queue drains</text>
+</svg>

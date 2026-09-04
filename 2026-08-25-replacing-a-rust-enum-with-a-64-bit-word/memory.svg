@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="772" height="462" viewBox="0 0 772 462">
+<rect width="772" height="462" fill="#fff"/>
+<text x="14.0" y="25.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#111" text-anchor="start" font-weight="bold">Peak RSS, boxed representation against the tagged enum</text>
+<text x="14.0" y="43.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">Median of the same rounds. Lower is less memory used.</text>
+<line x1="127.9" y1="63.0" x2="127.9" y2="429.0" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="127.9" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="middle">0.00x</text>
+<line x1="204.5" y1="63.0" x2="204.5" y2="429.0" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="204.5" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="middle">0.20x</text>
+<line x1="281.2" y1="63.0" x2="281.2" y2="429.0" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="281.2" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="middle">0.40x</text>
+<line x1="357.9" y1="63.0" x2="357.9" y2="429.0" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="357.9" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="middle">0.60x</text>
+<line x1="434.5" y1="63.0" x2="434.5" y2="429.0" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="434.5" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="middle">0.80x</text>
+<line x1="587.9" y1="63.0" x2="587.9" y2="429.0" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="587.9" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="middle">1.20x</text>
+<line x1="664.5" y1="63.0" x2="664.5" y2="429.0" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="664.5" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#777" text-anchor="middle">1.40x</text>
+<rect x="127.9" y="71.0" width="240.9" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="82.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">mlp</text>
+<rect x="127.9" y="89.5" width="255.5" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="101.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">matrix_vec_mult</text>
+<rect x="127.9" y="108.0" width="267.0" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="119.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">gc_many_objs</text>
+<rect x="127.9" y="126.5" width="356.7" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="138.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">binary_tree</text>
+<rect x="127.9" y="145.0" width="370.9" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="156.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">linked_list</text>
+<rect x="127.9" y="163.5" width="380.7" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="175.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">arr_get</text>
+<rect x="127.9" y="182.0" width="380.7" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="193.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">for_loop</text>
+<rect x="127.9" y="200.5" width="380.7" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="212.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">fib</text>
+<rect x="127.9" y="219.0" width="381.4" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="230.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">fft</text>
+<rect x="127.9" y="237.5" width="381.9" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="249.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">alloc_objs</text>
+<rect x="127.9" y="256.0" width="382.0" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="267.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">obj_get</text>
+<rect x="127.9" y="274.5" width="382.0" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="286.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">host_calls</text>
+<rect x="127.9" y="293.0" width="382.1" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="304.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">nbody</text>
+<rect x="127.9" y="311.5" width="382.3" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="323.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">gc_alloc_speed</text>
+<rect x="127.9" y="330.0" width="382.4" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="341.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">sha256_fixed</text>
+<rect x="127.9" y="348.5" width="382.4" height="15.0" fill="#d6ece0" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="360.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">ping_pong</text>
+<rect x="127.9" y="367.0" width="395.3" height="15.0" fill="#f6dada" stroke="#cc2222" stroke-width="1.2"/>
+<text x="117.9" y="378.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">quicksort</text>
+<rect x="127.9" y="385.5" width="566.8" height="15.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<text x="117.9" y="397.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#777" text-anchor="end">sha256_unfixed</text>
+<line x1="14.0" y1="406.0" x2="758.0" y2="406.0" stroke="#bbb" stroke-width="1.2"/>
+<rect x="127.9" y="414.0" width="354.0" height="15.0" fill="#0e8a52" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="117.9" y="425.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end" font-weight="bold">geomean</text>
+<line x1="511.2" y1="63.0" x2="511.2" y2="433.0" stroke="#111" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="511.2" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#111" text-anchor="middle" font-weight="bold">1.00x</text>
+<rect x="372.7" y="72.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="374.7" y="82.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.63x</text>
+<rect x="387.4" y="91.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="389.4" y="101.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.67x</text>
+<rect x="398.8" y="109.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="400.8" y="119.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.70x</text>
+<rect x="488.5" y="128.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="490.5" y="138.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.93x</text>
+<rect x="502.7" y="146.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="504.7" y="156.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.97x</text>
+<rect x="512.6" y="165.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="514.6" y="175.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.99x</text>
+<rect x="512.6" y="183.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="514.6" y="193.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.99x</text>
+<rect x="512.6" y="202.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="514.6" y="212.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">0.99x</text>
+<rect x="513.3" y="220.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="515.3" y="230.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="513.8" y="239.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="515.8" y="249.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="513.9" y="257.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="515.9" y="267.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="513.9" y="276.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="515.9" y="286.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="513.9" y="294.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="515.9" y="304.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="514.2" y="313.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="516.2" y="323.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="514.2" y="331.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="516.2" y="341.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="514.3" y="350.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="516.3" y="360.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start">1.00x</text>
+<rect x="527.2" y="368.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="529.2" y="378.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#cc2222" text-anchor="start">1.03x</text>
+<rect x="698.7" y="387.0" width="38.6" height="13.5" fill="#fff"/>
+<text x="700.7" y="397.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#777" text-anchor="start">1.48x</text>
+<rect x="485.9" y="415.5" width="38.6" height="13.5" fill="#fff"/>
+<text x="487.9" y="425.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#0a6b40" text-anchor="start" font-weight="bold">0.92x</text>
+<text x="14.0" y="443.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">The geomean covers the 17 benchmarks, not sha256_unfixed.</text>
+</svg>

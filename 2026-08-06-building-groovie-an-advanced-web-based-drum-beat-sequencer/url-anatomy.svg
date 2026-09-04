@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="140" viewBox="0 0 780 140">
+<rect width="780" height="140" fill="#fff"/>
+<text x="20.6" y="50.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="15" fill="#444" text-anchor="start" textLength="320.4" lengthAdjust="spacingAndGlyphs">https://maximecb.github.io/groovie/#</text>
+<text x="341.1" y="50.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="15" fill="#000" text-anchor="start" font-weight="bold" textLength="124.6" lengthAdjust="spacingAndGlyphs">the_amen_break</text>
+<text x="465.7" y="50.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="15" fill="#777" text-anchor="start" textLength="8.9" lengthAdjust="spacingAndGlyphs">/</text>
+<text x="474.6" y="50.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="15" fill="#a00" text-anchor="start" font-weight="bold" textLength="284.8" lengthAdjust="spacingAndGlyphs">BgBA_MEUQOLAXGGsElCXs4a1qAwaDUHg</text>
+<line x1="20.6" y1="66.0" x2="341.1" y2="66.0" stroke="#777" stroke-width="1.6"/>
+<line x1="20.6" y1="61.0" x2="20.6" y2="71.0" stroke="#777" stroke-width="1.6"/>
+<line x1="341.1" y1="61.0" x2="341.1" y2="71.0" stroke="#777" stroke-width="1.6"/>
+<text x="180.8" y="85.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#444" text-anchor="middle">static host, no backend</text>
+<line x1="341.1" y1="66.0" x2="465.7" y2="66.0" stroke="#777" stroke-width="1.6"/>
+<line x1="341.1" y1="61.0" x2="341.1" y2="71.0" stroke="#777" stroke-width="1.6"/>
+<line x1="465.7" y1="61.0" x2="465.7" y2="71.0" stroke="#777" stroke-width="1.6"/>
+<text x="403.4" y="85.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#444" text-anchor="middle">song title</text>
+<line x1="474.6" y1="66.0" x2="759.4" y2="66.0" stroke="#777" stroke-width="1.6"/>
+<line x1="474.6" y1="61.0" x2="474.6" y2="71.0" stroke="#777" stroke-width="1.6"/>
+<line x1="759.4" y1="61.0" x2="759.4" y2="71.0" stroke="#777" stroke-width="1.6"/>
+<text x="617.0" y="85.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#444" text-anchor="middle">the entire project</text>
+<text x="390.0" y="118.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#000" text-anchor="middle">no server, no account, no database: the link is the file</text>
+</svg>

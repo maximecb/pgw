@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="772" height="386" viewBox="0 0 772 386">
+<rect width="772" height="386" fill="#fff"/>
+<text x="14.0" y="25.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">Median of 11 interleaved runs, same machine. Higher is better. Values are normalized with CPython at 1.00x.</text>
+<rect x="51.1" y="36.0" width="10.0" height="10.0" fill="#c1c5c9" stroke="#5b6672" stroke-width="1.2"/>
+<text x="66.1" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">CPython 3.14.6</text>
+<rect x="180.8" y="36.0" width="10.0" height="10.0" fill="#cfaee5" stroke="#6b3fa0" stroke-width="1.2"/>
+<text x="195.8" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">CRuby 4.0.6</text>
+<rect x="290.7" y="36.0" width="10.0" height="10.0" fill="#a6dcc5" stroke="#0a6b40" stroke-width="1.2"/>
+<text x="305.7" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">Lua 5.5.1</text>
+<rect x="387.3" y="36.0" width="10.0" height="10.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="402.3" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">Plush stack</text>
+<rect x="497.2" y="36.0" width="10.0" height="10.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="512.2" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">Plush register</text>
+<rect x="626.9" y="36.0" width="10.0" height="10.0" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="641.9" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">Plush optimized</text>
+<line x1="51.1" y1="307.0" x2="758.0" y2="307.0" stroke="#c9c9c9" stroke-width="1.2"/>
+<text x="44.1" y="310.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">0.00x</text>
+<line x1="51.1" y1="266.6" x2="758.0" y2="266.6" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="44.1" y="270.1" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">0.50x</text>
+<text x="44.1" y="229.7" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">1.00x</text>
+<line x1="51.1" y1="185.9" x2="758.0" y2="185.9" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="44.1" y="189.4" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">1.50x</text>
+<line x1="51.1" y1="145.5" x2="758.0" y2="145.5" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="44.1" y="149.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">2.00x</text>
+<line x1="51.1" y1="105.1" x2="758.0" y2="105.1" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="44.1" y="108.6" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">2.50x</text>
+<line x1="51.1" y1="64.7" x2="758.0" y2="64.7" stroke="#c9c9c9" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="44.1" y="68.2" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">3.00x</text>
+<rect x="66.6" y="226.2" width="48.0" height="80.8" fill="#c1c5c9" stroke="#5b6672" stroke-width="1.2"/>
+<rect x="119.6" y="251.5" width="48.0" height="55.5" fill="#cfaee5" stroke="#6b3fa0" stroke-width="1.2"/>
+<rect x="172.6" y="219.4" width="48.0" height="87.6" fill="#a6dcc5" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="225.6" y="214.7" width="48.0" height="92.3" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<rect x="278.6" y="199.7" width="48.0" height="107.3" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<rect x="331.6" y="170.7" width="48.0" height="136.3" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="223.1" y="323.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="middle">binary_tree</text>
+<rect x="429.6" y="226.2" width="48.0" height="80.8" fill="#c1c5c9" stroke="#5b6672" stroke-width="1.2"/>
+<rect x="482.6" y="215.0" width="48.0" height="92.0" fill="#cfaee5" stroke="#6b3fa0" stroke-width="1.2"/>
+<rect x="535.6" y="116.2" width="48.0" height="190.8" fill="#a6dcc5" stroke="#0a6b40" stroke-width="1.2"/>
+<rect x="588.6" y="193.4" width="48.0" height="113.6" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<rect x="641.6" y="156.4" width="48.0" height="150.6" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<rect x="694.6" y="71.2" width="48.0" height="235.8" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="586.1" y="323.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="middle">fib(38)</text>
+<line x1="51.1" y1="226.2" x2="758.0" y2="226.2" stroke="#111" stroke-width="1.6" stroke-dasharray="5 4"/>
+<text x="90.6" y="220.2" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#5b6672" text-anchor="middle" font-weight="bold">1.00x</text>
+<text x="143.6" y="245.5" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#6b3fa0" text-anchor="middle" font-weight="bold">0.69x</text>
+<text x="196.6" y="213.4" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#0a6b40" text-anchor="middle" font-weight="bold">1.09x</text>
+<text x="249.6" y="208.7" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#2a5db0" text-anchor="middle" font-weight="bold">1.14x</text>
+<text x="302.6" y="193.7" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#a87908" text-anchor="middle" font-weight="bold">1.33x</text>
+<text x="355.6" y="164.7" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#c2451f" text-anchor="middle" font-weight="bold">1.69x</text>
+<text x="453.6" y="220.2" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#5b6672" text-anchor="middle" font-weight="bold">1.00x</text>
+<text x="506.6" y="209.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#6b3fa0" text-anchor="middle" font-weight="bold">1.14x</text>
+<text x="559.6" y="110.2" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#0a6b40" text-anchor="middle" font-weight="bold">2.36x</text>
+<text x="612.6" y="187.4" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#2a5db0" text-anchor="middle" font-weight="bold">1.41x</text>
+<text x="665.6" y="150.4" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#a87908" text-anchor="middle" font-weight="bold">1.86x</text>
+<text x="718.6" y="65.2" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#c2451f" text-anchor="middle" font-weight="bold">2.92x</text>
+<text x="14.0" y="352.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">Wall clock for the whole process, so interpreter startup is included: ~14ms CPython, ~24ms CRuby,</text>
+<text x="14.0" y="367.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">~2ms Lua, ~4ms Plush. Two benchmarks that translate cleanly across four languages, not a general claim.</text>
+</svg>
