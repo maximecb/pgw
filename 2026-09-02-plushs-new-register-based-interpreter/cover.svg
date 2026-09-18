@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1260" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fff"/>
+<rect x="0.0" y="0.0" width="1200.0" height="630.0" fill="#0b0e14"/>
+<rect x="0.0" y="0.0" width="301.0" height="9.0" fill="#9aa5b1"/>
+<rect x="300.0" y="0.0" width="301.0" height="9.0" fill="#c99cff"/>
+<rect x="600.0" y="0.0" width="301.0" height="9.0" fill="#3fdd9e"/>
+<rect x="900.0" y="0.0" width="301.0" height="9.0" fill="#ff7a4d"/>
+<text x="60.0" y="112.0" font-family="Menlo" font-size="46" fill="#e6edf3" text-anchor="start" font-weight="bold">My New Register-Based Interpreter</text>
+<text x="60.0" y="170.0" font-family="Menlo" font-size="46" fill="#ff7a4d" text-anchor="start" font-weight="bold">can now beat Lua</text>
+<rect x="60.0" y="395.2" width="112.0" height="74.8" fill="#9aa5b1"/>
+<text x="116.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">CPython</text>
+<rect x="186.0" y="418.5" width="112.0" height="51.5" fill="#c99cff"/>
+<text x="242.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">CRuby</text>
+<rect x="312.0" y="388.8" width="112.0" height="81.2" fill="#3fdd9e"/>
+<text x="368.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">Lua</text>
+<rect x="438.0" y="343.7" width="112.0" height="126.3" fill="#ff7a4d"/>
+<text x="494.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">Plush</text>
+<text x="305.0" y="530.0" font-family="Menlo" font-size="22" fill="#e6edf3" text-anchor="middle" font-weight="bold">binary_tree</text>
+<rect x="650.0" y="395.2" width="112.0" height="74.8" fill="#9aa5b1"/>
+<text x="706.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">CPython</text>
+<rect x="776.0" y="384.7" width="112.0" height="85.3" fill="#c99cff"/>
+<text x="832.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">CRuby</text>
+<rect x="902.0" y="293.2" width="112.0" height="176.8" fill="#3fdd9e"/>
+<text x="958.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">Lua</text>
+<rect x="1028.0" y="251.4" width="112.0" height="218.6" fill="#ff7a4d"/>
+<text x="1084.0" y="500.0" font-family="Menlo" font-size="20" fill="#8b949e" text-anchor="middle">Plush</text>
+<text x="895.0" y="530.0" font-family="Menlo" font-size="22" fill="#e6edf3" text-anchor="middle" font-weight="bold">fib(38)</text>
+<line x1="60.0" y1="470.0" x2="1140.0" y2="470.0" stroke="#30363d" stroke-width="2.0"/>
+<line x1="60.0" y1="395.2" x2="1140.0" y2="395.2" stroke="#8b949e" stroke-width="2.0" stroke-dasharray="8 6"/>
+<rect x="71.9" y="357.2" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="116.0" y="381.2" font-family="Menlo" font-size="26" fill="#9aa5b1" text-anchor="middle" font-weight="bold">1.00x</text>
+<rect x="197.9" y="380.5" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="242.0" y="404.5" font-family="Menlo" font-size="26" fill="#c99cff" text-anchor="middle" font-weight="bold">0.69x</text>
+<rect x="323.9" y="350.8" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="368.0" y="374.8" font-family="Menlo" font-size="26" fill="#3fdd9e" text-anchor="middle" font-weight="bold">1.09x</text>
+<rect x="449.9" y="305.7" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="494.0" y="329.7" font-family="Menlo" font-size="26" fill="#ff7a4d" text-anchor="middle" font-weight="bold">1.69x</text>
+<rect x="661.9" y="357.2" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="706.0" y="381.2" font-family="Menlo" font-size="26" fill="#9aa5b1" text-anchor="middle" font-weight="bold">1.00x</text>
+<rect x="787.9" y="346.7" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="832.0" y="370.7" font-family="Menlo" font-size="26" fill="#c99cff" text-anchor="middle" font-weight="bold">1.14x</text>
+<rect x="913.9" y="255.2" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="958.0" y="279.2" font-family="Menlo" font-size="26" fill="#3fdd9e" text-anchor="middle" font-weight="bold">2.36x</text>
+<rect x="1039.9" y="213.4" width="88.3" height="30.0" fill="#0b0e14"/>
+<text x="1084.0" y="237.4" font-family="Menlo" font-size="26" fill="#ff7a4d" text-anchor="middle" font-weight="bold">2.92x</text>
+<line x1="60.0" y1="558.0" x2="1140.0" y2="558.0" stroke="#30363d" stroke-width="1.4"/>
+<text x="60.0" y="592.0" font-family="Menlo" font-size="18" fill="#8b949e" text-anchor="start">github.com/maximecb/plush</text>
+<text x="1140.0" y="592.0" font-family="Menlo" font-size="18" fill="#8b949e" text-anchor="end">pointersgonewild.com</text>
+</svg>
