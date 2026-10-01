@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="772" height="311" viewBox="0 0 772 311">
+<rect width="772" height="311" fill="#fff"/>
+<text x="14.0" y="25.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">Bit 0 is on the left, so the opcode reads first. Lua's instruction word is drawn to the same scale.</text>
+<text x="100.2" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">0</text>
+<text x="182.4" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">8</text>
+<text x="264.6" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">16</text>
+<text x="346.9" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">24</text>
+<text x="429.1" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">32</text>
+<text x="511.3" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">40</text>
+<text x="593.5" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">48</text>
+<text x="675.8" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">56</text>
+<text x="758.0" y="45.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#444" text-anchor="middle">64</text>
+<rect x="100.2" y="51.0" width="71.9" height="30.0" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="136.2" y="70.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">OP (7)</text>
+<rect x="172.1" y="51.0" width="82.2" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="213.2" y="70.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">A (8)</text>
+<rect x="254.4" y="51.0" width="10.3" height="30.0" fill="#c1c5c9" stroke="#5b6672" stroke-width="1.2"/>
+<text x="259.5" y="70.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">k</text>
+<rect x="264.6" y="51.0" width="82.2" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="305.7" y="70.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">B (8)</text>
+<rect x="346.9" y="51.0" width="82.2" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="388.0" y="70.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">C (8)</text>
+<text x="90.2" y="70.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">Lua ADD</text>
+<line x1="429.1" y1="47.0" x2="429.1" y2="85.0" stroke="#777" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="437.1" y="70.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="start">Lua stops here, at 32 bits</text>
+<rect x="100.2" y="91.0" width="71.9" height="30.0" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="136.2" y="110.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">OP (7)</text>
+<rect x="172.1" y="91.0" width="82.2" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="213.2" y="110.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">A (8)</text>
+<rect x="254.4" y="91.0" width="174.7" height="30.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="341.7" y="110.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">Bx (17)</text>
+<text x="90.2" y="110.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">Lua LOADK</text>
+<line x1="429.1" y1="87.0" x2="429.1" y2="125.0" stroke="#777" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="100.2" y="147.0" width="82.2" height="30.0" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="141.3" y="166.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">opcode</text>
+<rect x="182.4" y="147.0" width="164.5" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="264.6" y="166.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">dst (16)</text>
+<rect x="346.9" y="147.0" width="164.5" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="429.1" y="166.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">a (16)</text>
+<rect x="511.3" y="147.0" width="82.2" height="30.0" fill="#c1c5c9" stroke="#5b6672" stroke-width="1.2"/>
+<text x="552.4" y="166.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">unused</text>
+<rect x="593.5" y="147.0" width="164.5" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="675.8" y="166.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">b (16)</text>
+<text x="90.2" y="166.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">add</text>
+<rect x="100.2" y="187.0" width="82.2" height="30.0" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="141.3" y="206.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">opcode</text>
+<rect x="182.4" y="187.0" width="164.5" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="264.6" y="206.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">a (16)</text>
+<rect x="346.9" y="187.0" width="164.5" height="30.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="429.1" y="206.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">imm (16)</text>
+<rect x="511.3" y="187.0" width="246.7" height="30.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="634.7" y="206.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">disp (24)</text>
+<text x="90.2" y="206.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">jlt_imm16</text>
+<rect x="100.2" y="227.0" width="82.2" height="30.0" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="141.3" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">opcode</text>
+<rect x="182.4" y="227.0" width="164.5" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="264.6" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">dst (16)</text>
+<rect x="346.9" y="227.0" width="164.5" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="429.1" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">a (16)</text>
+<rect x="511.3" y="227.0" width="61.7" height="30.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="542.2" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">shift (6)</text>
+<rect x="573.0" y="227.0" width="61.7" height="30.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="603.8" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">lo (6)</text>
+<rect x="634.7" y="227.0" width="61.7" height="30.0" fill="#c1c5c9" stroke="#5b6672" stroke-width="1.2"/>
+<text x="665.5" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">unused</text>
+<rect x="696.3" y="227.0" width="61.7" height="30.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="727.2" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">len (6)</text>
+<text x="90.2" y="246.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">rshift_mask</text>
+<rect x="100.2" y="267.0" width="82.2" height="30.0" fill="#f5a589" stroke="#c2451f" stroke-width="1.2"/>
+<text x="141.3" y="286.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">opcode</text>
+<rect x="182.4" y="267.0" width="164.5" height="30.0" fill="#a8c5ee" stroke="#2a5db0" stroke-width="1.2"/>
+<text x="264.6" y="286.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">dst (16)</text>
+<rect x="346.9" y="267.0" width="411.1" height="30.0" fill="#f5ca6d" stroke="#a87908" stroke-width="1.2"/>
+<text x="552.4" y="286.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#111" text-anchor="middle">imm (40)</text>
+<text x="90.2" y="286.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="end">load_imm40</text>
+</svg>
