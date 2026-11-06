@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1260" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fff"/>
+<rect x="0.0" y="0.0" width="1200.0" height="630.0" fill="#0b0e14"/>
+<rect x="0.0" y="0.0" width="301.0" height="9.0" fill="#39e97b"/>
+<rect x="300.0" y="0.0" width="301.0" height="9.0" fill="#4fc9ff"/>
+<rect x="600.0" y="0.0" width="301.0" height="9.0" fill="#ffc233"/>
+<rect x="900.0" y="0.0" width="301.0" height="9.0" fill="#c99cff"/>
+<text x="60.0" y="118.0" font-family="Menlo" font-size="46" fill="#e6edf3" text-anchor="start" font-weight="bold">I shrank values from 16 bytes to 8</text>
+<text x="60.0" y="180.0" font-family="Menlo" font-size="46" fill="#39e97b" text-anchor="start" font-weight="bold">and the interpreter is now 17% faster</text>
+<text x="217.5" y="222.0" font-family="Menlo" font-size="15" fill="#8b949e" text-anchor="start">63</text>
+<text x="1140.0" y="222.0" font-family="Menlo" font-size="15" fill="#8b949e" text-anchor="end">0</text>
+<rect x="217.5" y="236.0" width="826.5" height="62.0" fill="#161b22" stroke="#30363d" stroke-width="1.4"/>
+<rect x="1044.0" y="236.0" width="96.0" height="62.0" fill="#39e97b"/>
+<text x="60.0" y="276.0" font-family="Menlo" font-size="25" fill="#8b949e" text-anchor="start">fixnum</text>
+<text x="235.5" y="276.0" font-family="Menlo" font-size="27" fill="#e6edf3" text-anchor="start">62-bit signed integer, stored as n &lt;&lt; 2</text>
+<text x="1116.0" y="276.0" font-family="Menlo" font-size="27" fill="#0b0e14" text-anchor="end" font-weight="bold">00</text>
+<rect x="217.5" y="314.0" width="826.5" height="62.0" fill="#161b22" stroke="#30363d" stroke-width="1.4"/>
+<rect x="1044.0" y="314.0" width="96.0" height="62.0" fill="#4fc9ff"/>
+<text x="60.0" y="354.0" font-family="Menlo" font-size="25" fill="#8b949e" text-anchor="start">pointer</text>
+<text x="235.5" y="354.0" font-family="Menlo" font-size="27" fill="#e6edf3" text-anchor="start">heap block pointer</text>
+<text x="1116.0" y="354.0" font-family="Menlo" font-size="27" fill="#0b0e14" text-anchor="end" font-weight="bold">001</text>
+<rect x="217.5" y="392.0" width="826.5" height="62.0" fill="#161b22" stroke="#30363d" stroke-width="1.4"/>
+<rect x="1044.0" y="392.0" width="96.0" height="62.0" fill="#ffc233"/>
+<text x="60.0" y="432.0" font-family="Menlo" font-size="25" fill="#8b949e" text-anchor="start">immediate</text>
+<text x="235.5" y="432.0" font-family="Menlo" font-size="27" fill="#e6edf3" text-anchor="start">payload plus a 5-bit subtag</text>
+<text x="1116.0" y="432.0" font-family="Menlo" font-size="27" fill="#0b0e14" text-anchor="end" font-weight="bold">101</text>
+<rect x="217.5" y="470.0" width="826.5" height="62.0" fill="#161b22" stroke="#30363d" stroke-width="1.4"/>
+<rect x="1044.0" y="470.0" width="96.0" height="62.0" fill="#c99cff"/>
+<text x="60.0" y="510.0" font-family="Menlo" font-size="25" fill="#8b949e" text-anchor="start">flonum</text>
+<text x="235.5" y="510.0" font-family="Menlo" font-size="27" fill="#e6edf3" text-anchor="start">rotl(bits + BIAS, 4)</text>
+<text x="1116.0" y="510.0" font-family="Menlo" font-size="27" fill="#0b0e14" text-anchor="end" font-weight="bold">10</text>
+<line x1="60.0" y1="554.0" x2="1140.0" y2="554.0" stroke="#30363d" stroke-width="1.4"/>
+<text x="60.0" y="592.0" font-family="Menlo" font-size="18" fill="#8b949e" text-anchor="start">github.com/maximecb/plush</text>
+<text x="1140.0" y="592.0" font-family="Menlo" font-size="18" fill="#8b949e" text-anchor="end">pointersgonewild.com</text>
+</svg>

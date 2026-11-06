@@ -1,0 +1,268 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="772" height="374" viewBox="0 0 772 374">
+<rect width="772" height="374" fill="#fff"/>
+<text x="14.0" y="25.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#111" text-anchor="start" font-weight="bold">How a double gets a tag without losing a bit</text>
+<text x="14.0" y="43.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">Rotating left by 4 moves the top 4 bits to the bottom, and 2 of them become the tag.</text>
+<text x="67.4" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">63</text>
+<line x1="67.4" y1="62.0" x2="67.4" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="143.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">56</text>
+<line x1="143.6" y1="62.0" x2="143.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="230.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">48</text>
+<line x1="230.6" y1="62.0" x2="230.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="317.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">40</text>
+<line x1="317.6" y1="62.0" x2="317.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="404.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">32</text>
+<line x1="404.6" y1="62.0" x2="404.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="491.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">24</text>
+<line x1="491.6" y1="62.0" x2="491.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="578.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">16</text>
+<line x1="578.6" y1="62.0" x2="578.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="665.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">8</text>
+<line x1="665.6" y1="62.0" x2="665.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="676.4" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">7</text>
+<line x1="676.4" y1="62.0" x2="676.4" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="687.3" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">6</text>
+<line x1="687.3" y1="62.0" x2="687.3" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="698.2" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">5</text>
+<line x1="698.2" y1="62.0" x2="698.2" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="709.1" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">4</text>
+<line x1="709.1" y1="62.0" x2="709.1" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="719.9" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">3</text>
+<line x1="719.9" y1="62.0" x2="719.9" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="730.8" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">2</text>
+<line x1="730.8" y1="62.0" x2="730.8" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="741.7" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">1</text>
+<line x1="741.7" y1="62.0" x2="741.7" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="752.6" y="59.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.0" fill="#444" text-anchor="middle">0</text>
+<line x1="752.6" y1="62.0" x2="752.6" y2="66.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="14.0" y="102.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="start">double</text>
+<rect x="62.0" y="83.0" width="10.9" height="30.0" fill="#dde3ea" stroke="#777" stroke-width="1.2"/>
+<rect x="62.0" y="83.0" width="10.9" height="30.0" fill="none" stroke="#777" stroke-width="1.2"/>
+<text x="67.4" y="102.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#111" text-anchor="middle">s</text>
+<rect x="72.9" y="83.0" width="10.9" height="30.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<rect x="72.9" y="83.0" width="10.9" height="30.0" fill="none" stroke="#777" stroke-width="1.2"/>
+<rect x="83.8" y="83.0" width="21.8" height="30.0" fill="#e7dcf6" stroke="#57318a" stroke-width="1.2"/>
+<line x1="94.6" y1="83.0" x2="94.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="83.8" y="83.0" width="21.8" height="30.0" fill="none" stroke="#57318a" stroke-width="1.2"/>
+<rect x="105.5" y="83.0" width="87.0" height="30.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<line x1="116.4" y1="83.0" x2="116.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="127.2" y1="83.0" x2="127.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="138.1" y1="83.0" x2="138.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="149.0" y1="83.0" x2="149.0" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="159.9" y1="83.0" x2="159.9" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="170.8" y1="83.0" x2="170.8" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="181.6" y1="83.0" x2="181.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="105.5" y="83.0" width="87.0" height="30.0" fill="none" stroke="#777" stroke-width="1.2"/>
+<rect x="192.5" y="83.0" width="565.5" height="30.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<line x1="203.4" y1="83.0" x2="203.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="214.2" y1="83.0" x2="214.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="225.1" y1="83.0" x2="225.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="236.0" y1="83.0" x2="236.0" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="246.9" y1="83.0" x2="246.9" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="257.8" y1="83.0" x2="257.8" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="268.6" y1="83.0" x2="268.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="279.5" y1="83.0" x2="279.5" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="290.4" y1="83.0" x2="290.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="301.2" y1="83.0" x2="301.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="312.1" y1="83.0" x2="312.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="323.0" y1="83.0" x2="323.0" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="333.9" y1="83.0" x2="333.9" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="344.8" y1="83.0" x2="344.8" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="355.6" y1="83.0" x2="355.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="366.5" y1="83.0" x2="366.5" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="377.4" y1="83.0" x2="377.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="388.2" y1="83.0" x2="388.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="399.1" y1="83.0" x2="399.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="410.0" y1="83.0" x2="410.0" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="420.9" y1="83.0" x2="420.9" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="431.8" y1="83.0" x2="431.8" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="442.6" y1="83.0" x2="442.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="453.5" y1="83.0" x2="453.5" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="464.4" y1="83.0" x2="464.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="475.2" y1="83.0" x2="475.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="486.1" y1="83.0" x2="486.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="497.0" y1="83.0" x2="497.0" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="507.9" y1="83.0" x2="507.9" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="518.8" y1="83.0" x2="518.8" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="529.6" y1="83.0" x2="529.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="540.5" y1="83.0" x2="540.5" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="551.4" y1="83.0" x2="551.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="562.2" y1="83.0" x2="562.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="573.1" y1="83.0" x2="573.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="584.0" y1="83.0" x2="584.0" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="594.9" y1="83.0" x2="594.9" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="605.8" y1="83.0" x2="605.8" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="616.6" y1="83.0" x2="616.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="627.5" y1="83.0" x2="627.5" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="638.4" y1="83.0" x2="638.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="649.2" y1="83.0" x2="649.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="660.1" y1="83.0" x2="660.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="671.0" y1="83.0" x2="671.0" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="681.9" y1="83.0" x2="681.9" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="692.8" y1="83.0" x2="692.8" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="703.6" y1="83.0" x2="703.6" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="714.5" y1="83.0" x2="714.5" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="725.4" y1="83.0" x2="725.4" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="736.2" y1="83.0" x2="736.2" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="747.1" y1="83.0" x2="747.1" y2="113.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="192.5" y="83.0" width="565.5" height="30.0" fill="none" stroke="#777" stroke-width="1.2"/>
+<text x="475.2" y="102.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#111" text-anchor="middle">mantissa (52 bits)</text>
+<line x1="72.9" y1="78.0" x2="192.5" y2="78.0" stroke="#777" stroke-width="1.2"/>
+<line x1="72.9" y1="78.0" x2="72.9" y2="83.0" stroke="#777" stroke-width="1.2"/>
+<line x1="192.5" y1="78.0" x2="192.5" y2="83.0" stroke="#777" stroke-width="1.2"/>
+<text x="132.7" y="74.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#777" text-anchor="middle">exponent (11 bits)</text>
+<line x1="94.6" y1="113.0" x2="94.6" y2="121.0" stroke="#57318a" stroke-width="1.2"/>
+<line x1="94.6" y1="121.0" x2="203.4" y2="121.0" stroke="#57318a" stroke-width="1.2"/>
+<text x="208.4" y="125.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#57318a" text-anchor="start">exponent bits 9..8</text>
+<line x1="154.0" y1="141.0" x2="154.0" y2="152.0" stroke="#777" stroke-width="1.5"/>
+<path d="M 150.2 152.0 L 154.0 161.0 L 157.8 152.0 Z" fill="#777"/>
+<text x="166.0" y="155.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.0" fill="#444" text-anchor="start">+ BIAS (0x6810_0000_0000_0000), so those two bits read 10 for every inline double</text>
+<text x="14.0" y="188.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="start">rotl 4</text>
+<rect x="62.0" y="169.0" width="43.5" height="30.0" fill="#e7dcf6" stroke="#57318a" stroke-width="1.2"/>
+<line x1="72.9" y1="169.0" x2="72.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="83.8" y1="169.0" x2="83.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="94.6" y1="169.0" x2="94.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="62.0" y="169.0" width="43.5" height="30.0" fill="none" stroke="#57318a" stroke-width="1.2"/>
+<text x="83.8" y="188.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="9.5" fill="#111" text-anchor="middle">63..60</text>
+<rect x="105.5" y="169.0" width="652.5" height="30.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<line x1="116.4" y1="169.0" x2="116.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="127.2" y1="169.0" x2="127.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="138.1" y1="169.0" x2="138.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="149.0" y1="169.0" x2="149.0" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="159.9" y1="169.0" x2="159.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="170.8" y1="169.0" x2="170.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="181.6" y1="169.0" x2="181.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="192.5" y1="169.0" x2="192.5" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="203.4" y1="169.0" x2="203.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="214.2" y1="169.0" x2="214.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="225.1" y1="169.0" x2="225.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="236.0" y1="169.0" x2="236.0" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="246.9" y1="169.0" x2="246.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="257.8" y1="169.0" x2="257.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="268.6" y1="169.0" x2="268.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="279.5" y1="169.0" x2="279.5" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="290.4" y1="169.0" x2="290.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="301.2" y1="169.0" x2="301.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="312.1" y1="169.0" x2="312.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="323.0" y1="169.0" x2="323.0" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="333.9" y1="169.0" x2="333.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="344.8" y1="169.0" x2="344.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="355.6" y1="169.0" x2="355.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="366.5" y1="169.0" x2="366.5" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="377.4" y1="169.0" x2="377.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="388.2" y1="169.0" x2="388.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="399.1" y1="169.0" x2="399.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="410.0" y1="169.0" x2="410.0" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="420.9" y1="169.0" x2="420.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="431.8" y1="169.0" x2="431.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="442.6" y1="169.0" x2="442.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="453.5" y1="169.0" x2="453.5" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="464.4" y1="169.0" x2="464.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="475.2" y1="169.0" x2="475.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="486.1" y1="169.0" x2="486.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="497.0" y1="169.0" x2="497.0" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="507.9" y1="169.0" x2="507.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="518.8" y1="169.0" x2="518.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="529.6" y1="169.0" x2="529.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="540.5" y1="169.0" x2="540.5" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="551.4" y1="169.0" x2="551.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="562.2" y1="169.0" x2="562.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="573.1" y1="169.0" x2="573.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="584.0" y1="169.0" x2="584.0" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="594.9" y1="169.0" x2="594.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="605.8" y1="169.0" x2="605.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="616.6" y1="169.0" x2="616.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="627.5" y1="169.0" x2="627.5" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="638.4" y1="169.0" x2="638.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="649.2" y1="169.0" x2="649.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="660.1" y1="169.0" x2="660.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="671.0" y1="169.0" x2="671.0" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="681.9" y1="169.0" x2="681.9" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="692.8" y1="169.0" x2="692.8" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="703.6" y1="169.0" x2="703.6" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="714.5" y1="169.0" x2="714.5" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="725.4" y1="169.0" x2="725.4" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="736.2" y1="169.0" x2="736.2" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="747.1" y1="169.0" x2="747.1" y2="199.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="105.5" y="169.0" width="652.5" height="30.0" fill="none" stroke="#777" stroke-width="1.2"/>
+<text x="431.8" y="188.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#111" text-anchor="middle">everything else, untouched</text>
+<text x="14.0" y="258.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#111" text-anchor="start">tagged</text>
+<rect x="62.0" y="239.0" width="652.5" height="30.0" fill="#eef1f5" stroke="#777" stroke-width="1.2"/>
+<line x1="72.9" y1="239.0" x2="72.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="83.8" y1="239.0" x2="83.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="94.6" y1="239.0" x2="94.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="105.5" y1="239.0" x2="105.5" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="116.4" y1="239.0" x2="116.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="127.2" y1="239.0" x2="127.2" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="138.1" y1="239.0" x2="138.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="149.0" y1="239.0" x2="149.0" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="159.9" y1="239.0" x2="159.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="170.8" y1="239.0" x2="170.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="181.6" y1="239.0" x2="181.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="192.5" y1="239.0" x2="192.5" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="203.4" y1="239.0" x2="203.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="214.2" y1="239.0" x2="214.2" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="225.1" y1="239.0" x2="225.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="236.0" y1="239.0" x2="236.0" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="246.9" y1="239.0" x2="246.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="257.8" y1="239.0" x2="257.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="268.6" y1="239.0" x2="268.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="279.5" y1="239.0" x2="279.5" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="290.4" y1="239.0" x2="290.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="301.2" y1="239.0" x2="301.2" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="312.1" y1="239.0" x2="312.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="323.0" y1="239.0" x2="323.0" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="333.9" y1="239.0" x2="333.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="344.8" y1="239.0" x2="344.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="355.6" y1="239.0" x2="355.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="366.5" y1="239.0" x2="366.5" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="377.4" y1="239.0" x2="377.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="388.2" y1="239.0" x2="388.2" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="399.1" y1="239.0" x2="399.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="410.0" y1="239.0" x2="410.0" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="420.9" y1="239.0" x2="420.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="431.8" y1="239.0" x2="431.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="442.6" y1="239.0" x2="442.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="453.5" y1="239.0" x2="453.5" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="464.4" y1="239.0" x2="464.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="475.2" y1="239.0" x2="475.2" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="486.1" y1="239.0" x2="486.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="497.0" y1="239.0" x2="497.0" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="507.9" y1="239.0" x2="507.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="518.8" y1="239.0" x2="518.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="529.6" y1="239.0" x2="529.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="540.5" y1="239.0" x2="540.5" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="551.4" y1="239.0" x2="551.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="562.2" y1="239.0" x2="562.2" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="573.1" y1="239.0" x2="573.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="584.0" y1="239.0" x2="584.0" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="594.9" y1="239.0" x2="594.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="605.8" y1="239.0" x2="605.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="616.6" y1="239.0" x2="616.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="627.5" y1="239.0" x2="627.5" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="638.4" y1="239.0" x2="638.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="649.2" y1="239.0" x2="649.2" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="660.1" y1="239.0" x2="660.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="671.0" y1="239.0" x2="671.0" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="681.9" y1="239.0" x2="681.9" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="692.8" y1="239.0" x2="692.8" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<line x1="703.6" y1="239.0" x2="703.6" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="62.0" y="239.0" width="652.5" height="30.0" fill="none" stroke="#777" stroke-width="1.2"/>
+<text x="388.2" y="258.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#111" text-anchor="middle">everything else, shifted up by 4</text>
+<rect x="714.5" y="239.0" width="21.8" height="30.0" fill="#e7dcf6" stroke="#57318a" stroke-width="1.2"/>
+<line x1="725.4" y1="239.0" x2="725.4" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="714.5" y="239.0" width="21.8" height="30.0" fill="none" stroke="#57318a" stroke-width="1.2"/>
+<rect x="736.2" y="239.0" width="21.8" height="30.0" fill="#6b3fa0" stroke="#57318a" stroke-width="1.2"/>
+<line x1="747.1" y1="239.0" x2="747.1" y2="269.0" stroke="#c9c9c9" stroke-width="0.7"/>
+<rect x="736.2" y="239.0" width="21.8" height="30.0" fill="none" stroke="#57318a" stroke-width="1.2"/>
+<text x="747.1" y="258.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#fff" text-anchor="middle">10</text>
+<path d="M 83.8 201.0 Q 410.0 257.0 726.3 236.6" fill="none" stroke="#57318a" stroke-width="1.8"/>
+<path d="M 726.5 240.8 L 736.2 236.0 L 726.0 232.5 Z" fill="#57318a"/>
+<text x="410.0" y="221.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.5" fill="#57318a" text-anchor="middle">The top 4 bits end up at the bottom</text>
+<line x1="747.1" y1="269.0" x2="747.1" y2="277.0" stroke="#777" stroke-width="1.2"/>
+<line x1="573.1" y1="277.0" x2="747.1" y2="277.0" stroke="#777" stroke-width="1.2"/>
+<text x="568.1" y="281.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="10.0" fill="#777" text-anchor="end">bits 3..0 are the old 63..60, and 1..0 are now the tag</text>
+<text x="14.0" y="307.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">Nothing is destroyed, so the mapping is exact and decoding is a rotate and a subtract.</text>
+<text x="14.0" y="323.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">The doubles whose exponent bits do not land on 10 are the only ones that get boxed:</text>
+<text x="14.0" y="339.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">magnitudes from 3.4e38 to 5.3e269, and from 1.9e-270 to 2.9e-39. Everything else</text>
+<text x="14.0" y="355.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">stays inline: the normal float32 range, +-0.0, double subnormals, +-inf and every NaN.</text>
+</svg>

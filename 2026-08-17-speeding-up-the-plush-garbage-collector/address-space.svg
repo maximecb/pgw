@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="772" height="429" viewBox="0 0 772 429">
+<defs>
+<pattern id="reserved" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="9" height="9" fill="#fff"/>
+<line x1="0" y1="0" x2="0" y2="9" stroke="#dbe1e8" stroke-width="3.5"/>
+</pattern>
+</defs>
+<rect width="772" height="429" fill="#fff"/>
+<text x="14.0" y="20.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#111" text-anchor="start" font-weight="bold">A Vec that grows may move, and a pointer into it does not follow</text>
+<text x="149.6" y="38.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="middle">A pointer into it</text>
+<line x1="149.6" y1="44.0" x2="149.6" y2="144.0" stroke="#777" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="65.6" y="54.0" width="692.4" height="32.0" fill="none" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<rect x="65.6" y="106.0" width="692.4" height="32.0" fill="none" rx="3" stroke="#bbb" stroke-width="1.2"/>
+<text x="55.6" y="74.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#777" text-anchor="end">before</text>
+<rect x="65.6" y="54.0" width="140.0" height="32.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<text x="195.6" y="75.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#fff" text-anchor="end" font-weight="bold">2 MB</text>
+<circle cx="149.6" cy="70.0" r="5.5" fill="#0e8a52" stroke="#fff" stroke-width="1.6"/>
+<text x="55.6" y="126.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#777" text-anchor="end">grow</text>
+<rect x="65.6" y="106.0" width="140.0" height="32.0" fill="#fff" stroke="#cc2222" stroke-width="1.2"/>
+<line x1="65.6" y1="106.0" x2="205.6" y2="138.0" stroke="#cc2222" stroke-width="1.2"/>
+<line x1="65.6" y1="138.0" x2="205.6" y2="106.0" stroke="#cc2222" stroke-width="1.2"/>
+<rect x="478.0" y="106.0" width="280.0" height="32.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<text x="748.0" y="127.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#fff" text-anchor="end" font-weight="bold">4 MB</text>
+<circle cx="149.6" cy="122.0" r="5.5" fill="#cc2222" stroke="#fff" stroke-width="1.6"/>
+<text x="341.8" y="126.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11" fill="#777" text-anchor="middle">Some other address</text>
+<text x="14.0" y="166.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">The bytes are somewhere else now, so the address that was handed out points at nothing</text>
+<line x1="14.0" y1="184.0" x2="758.0" y2="184.0" stroke="#bbb" stroke-width="1.2"/>
+<text x="14.0" y="210.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#111" text-anchor="start" font-weight="bold">A reserved range grows in place, and every address in it keeps its meaning</text>
+<text x="149.6" y="228.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="middle">The same pointer</text>
+<line x1="149.6" y1="230.0" x2="149.6" y2="368.0" stroke="#777" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="65.6" y="234.0" width="692.4" height="32.0" fill="url(#reserved)" rx="3" stroke="#777" stroke-width="1.2"/>
+<text x="55.6" y="254.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#777" text-anchor="end">before</text>
+<rect x="65.6" y="234.0" width="140.0" height="32.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<text x="195.6" y="255.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#fff" text-anchor="end" font-weight="bold">2 MB</text>
+<circle cx="149.6" cy="250.0" r="5.5" fill="#0e8a52" stroke="#fff" stroke-width="1.6"/>
+<rect x="65.6" y="282.0" width="692.4" height="32.0" fill="url(#reserved)" rx="3" stroke="#777" stroke-width="1.2"/>
+<text x="55.6" y="302.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#777" text-anchor="end">grow</text>
+<rect x="65.6" y="282.0" width="420.0" height="32.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<text x="475.6" y="303.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#fff" text-anchor="end" font-weight="bold">16 MB</text>
+<circle cx="149.6" cy="298.0" r="5.5" fill="#0e8a52" stroke="#fff" stroke-width="1.6"/>
+<rect x="65.6" y="330.0" width="692.4" height="32.0" fill="url(#reserved)" rx="3" stroke="#777" stroke-width="1.2"/>
+<text x="55.6" y="350.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#777" text-anchor="end">shrink</text>
+<rect x="65.6" y="330.0" width="224.0" height="32.0" fill="#1560c0" stroke="#0f4b96" stroke-width="1.2"/>
+<text x="279.6" y="351.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="13" fill="#fff" text-anchor="end" font-weight="bold">4 MB</text>
+<circle cx="149.6" cy="346.0" r="5.5" fill="#0e8a52" stroke="#fff" stroke-width="1.6"/>
+<line x1="65.6" y1="374.0" x2="758.0" y2="374.0" stroke="#777" stroke-width="1.6"/>
+<line x1="65.6" y1="369.0" x2="65.6" y2="379.0" stroke="#777" stroke-width="1.6"/>
+<line x1="758.0" y1="369.0" x2="758.0" y2="379.0" stroke="#777" stroke-width="1.6"/>
+<text x="411.8" y="393.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="12" fill="#444" text-anchor="middle">16 GB of address space, PROT_NONE, with no RAM behind it</text>
+<text x="14.0" y="415.0" font-family="'DejaVu Sans Mono','Lucida Console',Menlo,Consolas,monospace" font-size="11.5" fill="#444" text-anchor="start">Pages are committed and released in place with mprotect, so queued messages stay put</text>
+</svg>
